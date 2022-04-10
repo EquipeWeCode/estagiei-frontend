@@ -5,7 +5,9 @@ import {
   Routes
 } from 'react-router-dom';
 
-import PaginaInicial from './components/container/pagina-inicial';
+import 'antd/dist/antd.less';
+
+import PaginaInicial from './components/pages/pagina-inicial/index';
 
 render(
   <BrowserRouter>

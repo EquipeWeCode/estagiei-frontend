@@ -1,0 +1,35 @@
+{
+  "root": true,
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": [
+      "./tsconfig.json"
+    ]
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "react"
+  ],
+  "rules": {
+    "@typescript-eslint/strict-boolean-expressions": [
+      2,
+      {
+        "allowString": false,
+        "allowNumber": false
+      }
+    ],
+    "react/no-set-state": "off"
+  },
+  "ignorePatterns": [
+    "src/**/*.test.ts",
+    "src/frontend/generated/*"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  }
+}
