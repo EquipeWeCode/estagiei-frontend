@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import "antd/dist/antd.less";
 
-import PaginaInicial from "./components/pages/pagina-inicial";
-import TelaTeste from "./components/pages/teste";
+import PaginaInicial from "./components/pages/PaginaInicial";
+import TelaTeste from "./components/pages/Teste";
 
 render(
 	<BrowserRouter>

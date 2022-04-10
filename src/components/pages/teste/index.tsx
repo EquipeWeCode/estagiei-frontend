@@ -1,5 +1,2 @@
-const Teste = () => {
-	return <div>Teste</div>;
-};
+export { default } from "./Teste";
 
-export default Teste;
