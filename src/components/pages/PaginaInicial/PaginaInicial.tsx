@@ -103,12 +103,6 @@ const PaginaInicial = (props: PaginaInicialProps): JSX.Element => {
 
 			<Row justify="space-around">
 				<Col span={6}>{`contador: ${count}`}</Col>
-
-				{/* <Col span={6}>
-					<Button>
-						<Link to={"/teste"}>Ir para teste</Link>
-					</Button>
-				</Col> */}
 			</Row>
 
 			<Row>
