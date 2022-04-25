@@ -1,2 +1,2 @@
-export { default } from "./Teste";
+// export { default } from "./Teste";
 

@@ -11,7 +11,7 @@ render(
 	<BrowserRouter>
 		<Routes>
 			<Route path="/" element={<PaginaInicial />} />
-			<Route path="/teste" element={<TelaTeste />} />
+			{/* <Route path="/teste" element={<TelaTeste />} /> */}
 		</Routes>
 	</BrowserRouter>,
 	document.getElementById("root")
