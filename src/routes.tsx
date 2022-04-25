@@ -5,7 +5,7 @@ import "antd/dist/antd.less";
 import "./loading.css";
 
 import PaginaInicial from "./components/pages/PaginaInicial";
-import TelaTeste from "./components/pages/Teste";
+// import TelaTeste from "./components/pages/Teste";
 
 render(
 	<BrowserRouter>
