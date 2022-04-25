@@ -23,11 +23,11 @@ export default defineConfig({
 	css: {
 		preprocessorOptions: {
 			less: {
-				modifyVars: getThemeVariables({
+				modifyVars: {
 					// dark: true,
 					// compact: true,
-					"primary-color": "#1890ff",
-				}),
+					"primary-color": "#000", // mudar cor das variaveis padrao do antd por aqui
+				},
 				javascriptEnabled: true,
 			},
 		},
