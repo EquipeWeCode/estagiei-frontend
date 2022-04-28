@@ -24,8 +24,6 @@ export default defineConfig({
 		preprocessorOptions: {
 			less: {
 				modifyVars: {
-					// dark: true,
-					// compact: true,
 					"primary-color": "#000", // mudar cor das variaveis padrao do antd por aqui
 				},
 				javascriptEnabled: true,

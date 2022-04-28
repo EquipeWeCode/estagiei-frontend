@@ -1,5 +1,6 @@
 import Axios from "axios";
 
+// Interceptors
 Axios.interceptors.request.use(config => {
 
   document.body.classList.add('loading-indicator');
@@ -17,5 +18,10 @@ Axios.interceptors.response.use(response => {
 }, function (error) {
   return Promise.reject(error);
 });
+
+// Resources
+export const getResource = (url, config) => {
+	return Axios.get(url, config);
+};
 
 export default Axios;
