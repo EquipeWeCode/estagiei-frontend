@@ -7,7 +7,7 @@
 ## Padrão de pastas
 * `src/commom` - Pasta com os componentes comuns a vários arquivos (Ex: Header, Footer, etc)
 * `src/components` - Pasta com os componentes do projeto (paginas, etc)
-* `routes.tsx` - Arquivo de rotas do projeto
+* `routes.tsx` - Arquivo de rotas do projeto (e principal)
 
 ## Dicas
 * Sempre formate o arquivo com o `alt + shift + F` (Escolha o Prettier como formatador padrão), isso faz com que o projeto fique mais padronizado.
