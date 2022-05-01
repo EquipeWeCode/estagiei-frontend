@@ -18,10 +18,3 @@ Axios.interceptors.response.use(response => {
 }, function (error) {
   return Promise.reject(error);
 });
-
-// Resources
-export const getResource = (url, config) => {
-	return Axios.get(url, config);
-};
-
-export default Axios;

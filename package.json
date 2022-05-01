@@ -9,10 +9,17 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
-    "antd": "^4.19.5",
+    "antd": "^4.20.2",
     "axios": "^0.26.1",
+    "dotenv": "^16.0.0",
+    "i18next": "^21.6.16",
+    "i18next-browser-languagedetector": "^6.1.4",
+    "i18next-http-backend": "^1.4.0",
+    "moment": "^2.29.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-google-login": "^5.2.2",
+    "react-i18next": "^11.16.7",
     "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
