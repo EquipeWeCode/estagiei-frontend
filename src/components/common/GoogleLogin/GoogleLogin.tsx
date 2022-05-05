@@ -7,7 +7,7 @@ import { refreshTokenSetup } from "@/utils/refreshToken";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { postLogin } from "@/services/loginGoogle";
-import { UserGoogleRequest } from "@/types/userTypes";
+import { UserGoogleRequest, UserGoogleType } from "@/types/userTypes";
 import { useAuth } from "@/contexts/auth";
 
 const GoogleLogin = () => {
@@ -33,18 +33,22 @@ const GoogleLogin = () => {
 		};
 
 		if (response.status === 200) {
-			localStorage.setItem("token", resOnline.tokenId);
-			localStorage.setItem("user", JSON.stringify(newUser));
+			// localStorage.setItem("token", resOnline.tokenId);
+			// localStorage.setItem("user", JSON.stringify(newUser));
 			setSigned(true);
 			setUser(newUser);
-			refreshTokenSetup(resOnline);
 			navigate("/");
+			refreshTokenSetup(resOnline);
 		} else {
+      setSigned(false);
+      setUser({} as UserGoogleType);
 			alert("Erro ao validar o login no servidor");
 		}
 	};
 
 	const onFailure = (res: GoogleLoginResponse) => {
+    setSigned(false);
+    setUser({} as UserGoogleType);
 		console.log("Login failed:", res);
 		alert(`Falha no login`);
 	};

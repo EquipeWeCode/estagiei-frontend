@@ -2,6 +2,7 @@ import { render } from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import "antd/dist/antd.less";
+import '@/app.css';
 import "@/loading.css";
 import "@/translations/i18n";
 
