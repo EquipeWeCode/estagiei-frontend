@@ -12,7 +12,7 @@ const GoogleLogout = () => {
 		console.log("Logout made successfully");
 		alert("Logout feito com sucesso!");
 		localStorage.removeItem("token");
-		localStorage.removeItem("user");
+		// localStorage.removeItem("user");
 		setSigned(false);
 		setUser({} as UserGoogleType);
 	};
