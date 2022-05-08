@@ -1,6 +1,6 @@
 [build]
   command = "tsc && vite build"
-  publish = "/build"
+  publish = "/dist"
   base = "/"
 
 
