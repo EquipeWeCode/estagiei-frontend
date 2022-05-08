@@ -3,6 +3,11 @@ import Axios from "axios";
 // Interceptors
 Axios.interceptors.request.use(config => {
 
+    // Add token to headers
+    // config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
+
+    //add cors to headers
+
   document.body.classList.add('loading-indicator');
   return config;
 
