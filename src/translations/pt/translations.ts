@@ -9,6 +9,6 @@ export const TRANSLATIONS_PT = {
   student_avatar: "Avatar do estudante",
   institution: "Instituição de ensino",
   student_level: "Nível de escolaridade",
-  student_experience: "Esperiencia profissional",
+  student_experience: "Experiência profissional",
   name: "Nome",
 };
