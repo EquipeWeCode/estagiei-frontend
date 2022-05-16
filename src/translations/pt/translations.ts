@@ -1,5 +1,5 @@
 export const TRANSLATIONS_PT = {
-	welcome: "Bem vindo(a) ao tutorial",
+	welcome: "Bem vindo(a)",
 	date_format: "{{-date, DD/MM/YYYY}}",
   login_with_google: "Entrar com o Google",
   logout_button: "Sair",
@@ -11,4 +11,6 @@ export const TRANSLATIONS_PT = {
   student_level: "Nível de escolaridade",
   student_experience: "Experiência profissional",
   name: "Nome",
+  user: "Usuário",
+  not_found: "Não encontrado",
 };

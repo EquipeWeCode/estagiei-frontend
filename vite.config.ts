@@ -1,13 +1,14 @@
+const path = require("path");
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import vitePluginImp from "vite-plugin-imp";
-const path = require("path");
-import { getThemeVariables } from "antd/dist/theme";
+import svgr from 'vite-plugin-svgr';
 
 // https://vitejs.dev/config/
 export default defineConfig({
 	plugins: [
 		react(),
+    svgr({exportAsDefault: true}),
 		vitePluginImp({
 			optimize: true,
 			libList: [
@@ -24,7 +25,7 @@ export default defineConfig({
 		preprocessorOptions: {
 			less: {
 				modifyVars: {
-					"primary-color": "#000", // mudar cor das variaveis padrao do antd por aqui
+					"primary-color": "#c045f4", // mudar cor das variaveis padrao do antd por aqui
 				},
 				javascriptEnabled: true,
 			},

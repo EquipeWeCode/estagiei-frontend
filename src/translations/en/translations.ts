@@ -11,4 +11,6 @@ export const TRANSLATIONS_EN = {
   student_level: "Student level",
   student_experience: "Student experience",
   name: "Name",
+  user: "user",
+  not_found: "Not found",
 };

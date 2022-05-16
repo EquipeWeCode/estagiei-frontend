@@ -9,10 +9,8 @@ const GoogleLogout = () => {
 	const { setSigned, setUser } = useAuth();
 
 	const onSuccess = () => {
-		console.log("Logout made successfully");
-		alert("Logout feito com sucesso!");
 		localStorage.removeItem("token");
-		// localStorage.removeItem("user");
+    localStorage.removeItem("authToken");
 		setSigned(false);
 		setUser({} as UserGoogleType);
 	};

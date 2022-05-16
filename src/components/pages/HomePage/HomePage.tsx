@@ -1,62 +1,74 @@
 import { useAuth } from "@/contexts/auth";
-import { getStudent } from "@/services/student";
+import { getVagas } from "@/services/vaga";
 import { StudentType } from "@/types/userTypes";
+import { VagasType } from "@/types/vagasTypes";
 import { Col, Row } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = (): JSX.Element => {
-	const { t } = useTranslation();
 	const { user, signed } = useAuth();
+	const [vagas, setVagas] = useState<VagasType[]>([]);
 	const navigate = useNavigate();
-	const [student, setStudent] = useState<StudentType>({} as StudentType);
+	const { t } = useTranslation();
+
+	// const [student, setStudent] = useState<StudentType>({} as StudentType);
 
 	useEffect((): void => {
 		if (!signed) {
 			navigate("/login");
+		} else {
+			fetchVagas();
 		}
-	}, [signed]); // melhorar isso depois
+	}, [signed]); // melhorar isso depoi
 
-	useEffect((): void => {
-		if (user.id) {
-			fetchStudent(user.id);
+	const fetchVagas = async () => {
+		const response = await getVagas({});
+		if (response.status === 200) {
+			setVagas(response.data);
 		}
-	}, [user]);
-
-	const fetchStudent = async (id: string) => {
-		const response = await getStudent(id);
-		const student = await response.data;
-		setStudent(student as StudentType);
 	};
+	// useEffect((): void => {
+	// 	if (user.id) {
+	// 		fetchStudent(user.id);
+	// 	}
+	// }, [user]);
+
+	// const fetchStudent = async (id: string) => {
+	// 	const response = await getStudent(id);
+	// 	const student = await response.data;
+	// 	setStudent(student as StudentType);
+	// };
 
 	return (
 		<>
-			<Row justify="center">
-				<Col>
-					<h1>{t("welcome") + `, ${user.name}`}</h1>
-					{t("date_format", { date: new Date() })}
+			<Row justify="space-between" style={{ padding: "2rem" }}>
+				<Col className="container-info-user" span={6}>
+					<h2>Informações de cadastro</h2>
+					<img src={user.avatar} alt={t("user")} />
+					<div className="info-user">
+						<h4>Nome: {user.name}</h4>
+						<h4>Email: {user.email}</h4>
+					</div>
+				</Col>
 
-					<ul>
-						<li>
-							{t("student_code")}: {student.codEstudante || "Não encontrado"}
-						</li>
-						<li>
-            <li>
-							{t("name")}: {student.nome || "Não encontrado"}
-						</li>
-            <li>
-							cpf: {student.cpf || "Não encontrado"}
-						</li>
-							{t("student_experience")}: {student.experienciaProfissional || "Não encontrado"}
-						</li>
-						{/* <li>
-							{t("institution")}: {student.instituicaoEnsino}
-						</li> */}
-						<li>
-							{t("student_level")}: {student.nivelEscolaridade || "Não encontrado"}
-						</li>
-					</ul>
+				<Col className="container-vagas" span={12}>
+					<h2>Vagas</h2>
+
+					{vagas.map((vaga: VagasType) => (
+						<div key={vaga.codVaga} className="container-vaga">
+							<h3>{vaga.titulo}</h3>
+							<p>{vaga.descricao}</p>
+							<p>
+								R$
+								{vaga.salario.toLocaleString("pt-BR", {
+									maximumFractionDigits: 2,
+									minimumFractionDigits: 2,
+								})}
+							</p>
+						</div>
+					))}
 				</Col>
 			</Row>
 		</>

@@ -18,7 +18,7 @@ render(
 			<Header />
 			<Routes>
 				<Route path="/" element={<HomePage />} />
-				<Route path="/login" element={<Login />} />
+				<Route path="login" element={<Login />} />
 				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</BrowserRouter>
