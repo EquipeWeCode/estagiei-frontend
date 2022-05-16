@@ -17,8 +17,9 @@ const Login = () => {
 
 	return (
 		<>
-			<Row justify="center">
-				<Col>
+			<Row className="container-login" justify="center">
+				<Col className="login">
+          <h1>Login</h1>
 					<GoogleLogin />
 				</Col>
 			</Row>
