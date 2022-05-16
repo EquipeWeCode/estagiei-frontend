@@ -8,7 +8,7 @@ import svgr from 'vite-plugin-svgr';
 export default defineConfig({
 	plugins: [
 		react(),
-    svgr({exportAsDefault: true}),
+    svgr(),
 		vitePluginImp({
 			optimize: true,
 			libList: [

@@ -1,10 +1,13 @@
+/// <reference types="vite-plugin-svgr/client" />
+
 import { useState } from "react";
 import { i18n } from "@/translations/i18n";
 import { Button, Col, Dropdown, Image, Menu, Row } from "antd";
 import { useAuth } from "@/contexts/auth";
 import GoogleLogout from "../GoogleLogout";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "@/assets/logo.svg";
+
+import {ReactComponent as Logo} from "@/assets/logo.svg";
 
 const Header = () => {
 	// const [language, setLanguage] = useState("en");
