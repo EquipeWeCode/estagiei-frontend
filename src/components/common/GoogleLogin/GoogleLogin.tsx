@@ -17,7 +17,6 @@ const GoogleLogin = () => {
 
 	const onSuccess = async (res: GoogleLoginResponse | GoogleLoginResponseOffline): Promise<any> => {
 		const resOnline = res as GoogleLoginResponse;
-		// const resOffline = res as GoogleLoginResponseOffline;
 
 		const user: UserGoogleRequest = {
 			token: resOnline.tokenId,
@@ -33,8 +32,6 @@ const GoogleLogin = () => {
 		};
 
 		if (response.status === 200) {
-			// localStorage.setItem("token", resOnline.tokenId);
-			// localStorage.setItem("user", JSON.stringify(newUser));
 			setSigned(true);
 			setUser(newUser);
 			navigate("/");
@@ -61,8 +58,6 @@ const GoogleLogin = () => {
 				onSuccess={onSuccess}
 				onFailure={onFailure}
 				cookiePolicy={"single_host_origin"}
-				// theme="dark"
-				// style={{ marginTop: "100px" }}
 				isSignedIn={true}
 			/>
 		</div>

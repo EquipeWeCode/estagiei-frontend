@@ -26,7 +26,7 @@ const Header = () => {
 					{/* <img src="#" alt="Logo" width={75} /> */}
 					<Link to="/">
 						{/* <h2 style={{ color: "#fff" }}>estagiei</h2> */}
-            <Logo width="100" height="35"/>
+            			<Logo width="100" height="35"/>
 					</Link>
 				</Col>
 
