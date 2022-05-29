@@ -12,5 +12,5 @@ export const TRANSLATIONS_EN = {
   student_experience: "Student experience",
   name: "Name",
   user: "user",
-  not_found: "Not found",
+  not_found: "The page you were searching for could not be founded...",
 };
