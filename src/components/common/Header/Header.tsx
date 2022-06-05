@@ -57,7 +57,7 @@ const Header = () => {
 
 				{user.codEstudante ? (
 					<Row gutter={12} align="middle">
-						<Col className="welcome-text">
+						<Col className="welcome-text-header">
 							{t("welcome")}: {user.nome}
 						</Col>
 						<Col>
