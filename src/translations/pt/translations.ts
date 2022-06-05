@@ -1,5 +1,6 @@
 export const TRANSLATIONS_PT = {
 	welcome: "Bem vindo(a)",
+  welcome_to: "Bem vindo ao",
 	date_format: "{{-date, DD/MM/YYYY}}",
   login_with_google: "Entrar com o Google",
   logout_button: "Sair",
@@ -15,4 +16,7 @@ export const TRANSLATIONS_PT = {
   not_found: "Não foi possivel encontrar o que você estava procurando...",
   info_registration: "Informações de cadastro",
   vacancies: "Vagas",
+  student_login_text: "Está procurando estágio? Entre com uma conta Google e deixe nosso site sugerir as vagas mais compatíveis com seu perfil!",
+  company_login_text: "Está procurando estagiários para sua empresa? Preencha nosso formulário para criarmos uma página personalizada onde poderá divulgar suas vagas e receber recomendações de candidatos.",
+  fill_form: "Preencha o formulário",
 };

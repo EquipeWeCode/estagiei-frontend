@@ -5,11 +5,9 @@ import { i18n } from "@/translations/i18n";
 import { Button, Col, Dropdown, Image, Menu, Row } from "antd";
 import { useAuth } from "@/contexts/auth";
 import GoogleLogout from "../GoogleLogout";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { ReactComponent as Logo } from "@/assets/logo.svg";
-import { SmileOutlined } from "@ant-design/icons";
-
 const Header = () => {
 	const [language, setLanguage] = useState("pt");
 
@@ -57,7 +55,7 @@ const Header = () => {
 					</Link>
 				</Col>
 
-				{user.codEstudante && (
+				{user.codEstudante ? (
 					<Row gutter={12} align="middle">
 						<Col className="welcome-text">
 							{t("welcome")}: {user.nome}
@@ -72,6 +70,19 @@ const Header = () => {
 									preview={false}
 								/>
 							</Dropdown>
+						</Col>
+					</Row>
+				) : (
+					<Row gutter={12}>
+						<Col>
+							<Button name="pt" onClick={() => changeLanguage("pt")}>
+								Português
+							</Button>
+						</Col>
+						<Col>
+							<Button name="en" onClick={() => changeLanguage("en")}>
+								English
+							</Button>
 						</Col>
 					</Row>
 				)}

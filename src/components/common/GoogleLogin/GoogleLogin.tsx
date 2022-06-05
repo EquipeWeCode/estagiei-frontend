@@ -37,7 +37,7 @@ const GoogleLogin = () => {
 			setSigned(true);
 			navigate("/");
       refreshTokenSetup(response.data.token);
-      
+
 		} else {
       setSigned(false);
       setUser({} as StudentType);
@@ -49,7 +49,6 @@ const GoogleLogin = () => {
     setSigned(false);
     setUser({} as UserGoogleType);
 		console.log("Login failed:", res);
-		alert(`Falha no login`);
 	};
 
 	return (

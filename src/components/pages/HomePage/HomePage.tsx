@@ -1,7 +1,5 @@
 import { useAuth } from "@/contexts/auth";
 import { getVagas } from "@/services/vaga";
-import { getEstudante } from "@/services/estudante";
-import { StudentType } from "@/types/userTypes";
 import { VagasType } from "@/types/vagasTypes";
 import { Col, Row } from "antd";
 import { useEffect, useState } from "react";
@@ -9,12 +7,10 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = (): JSX.Element => {
-	const { user, signed, setUser } = useAuth();
+	const { user, signed } = useAuth();
 	const [vagas, setVagas] = useState<VagasType[]>([]);
 	const navigate = useNavigate();
 	const { t } = useTranslation();
-
-	// const [estudante, setEstudante] = useState<StudentType>({} as StudentType);
 
 	useEffect((): void => {
 		if (!signed || !user) {
@@ -22,7 +18,7 @@ const HomePage = (): JSX.Element => {
 		} else {
 			fetchVagas();
 		}
-	}, [signed]); // melhorar isso depoi
+	}, [signed]); // melhorar isso depois
 
 	const fetchVagas = async () => {
 		const response = await getVagas({});
@@ -30,18 +26,6 @@ const HomePage = (): JSX.Element => {
 			setVagas(response.data);
 		}
 	};
-
-	// useEffect((): void => {
-	// 	if (user.codEstudante) {
-	// 		fetchStudent(user.codEstudante);
-	// 	}
-	// }, [user]);
-
-	// const fetchStudent = async (id: string) => {
-	// 	const response = await getEstudante(id);
-	// 	const estudante = await response.data;
-	// 	setEstudante(estudante as StudentType);
-	// };
 
 	return (
 		<>
