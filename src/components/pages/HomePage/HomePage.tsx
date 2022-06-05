@@ -1,5 +1,6 @@
 import { useAuth } from "@/contexts/auth";
 import { getVagas } from "@/services/vaga";
+import { getEstudante } from "@/services/estudante";
 import { StudentType } from "@/types/userTypes";
 import { VagasType } from "@/types/vagasTypes";
 import { Col, Row } from "antd";
@@ -8,15 +9,15 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = (): JSX.Element => {
-	const { user, signed } = useAuth();
+	const { user, signed, setUser } = useAuth();
 	const [vagas, setVagas] = useState<VagasType[]>([]);
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 
-	// const [student, setStudent] = useState<StudentType>({} as StudentType);
+	// const [estudante, setEstudante] = useState<StudentType>({} as StudentType);
 
 	useEffect((): void => {
-		if (!signed) {
+		if (!signed || !user) {
 			navigate("/login");
 		} else {
 			fetchVagas();
@@ -29,32 +30,33 @@ const HomePage = (): JSX.Element => {
 			setVagas(response.data);
 		}
 	};
+
 	// useEffect((): void => {
-	// 	if (user.id) {
-	// 		fetchStudent(user.id);
+	// 	if (user.codEstudante) {
+	// 		fetchStudent(user.codEstudante);
 	// 	}
 	// }, [user]);
 
 	// const fetchStudent = async (id: string) => {
-	// 	const response = await getStudent(id);
-	// 	const student = await response.data;
-	// 	setStudent(student as StudentType);
+	// 	const response = await getEstudante(id);
+	// 	const estudante = await response.data;
+	// 	setEstudante(estudante as StudentType);
 	// };
 
 	return (
 		<>
 			<Row justify="space-between" style={{ padding: "2rem" }}>
 				<Col className="container-info-user" span={6}>
-					<h2>Informações de cadastro</h2>
+					<h2>{t("info_registration")}</h2>
 					<img src={user.avatar} alt={t("user")} />
 					<div className="info-user">
-						<h4>Nome: {user.name}</h4>
-						<h4>Email: {user.email}</h4>
+						<h4>{t("name")}: {user.nome}</h4>
+						<h4>E-mail: {user.email}</h4>
 					</div>
 				</Col>
 
 				<Col className="container-vagas" span={12}>
-					<h2>Vagas</h2>
+					<h2>{t("vacancies")}</h2>
 
 					{vagas.map((vaga: VagasType) => (
 						<div key={vaga.codVaga} className="container-vaga">

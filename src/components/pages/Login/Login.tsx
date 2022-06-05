@@ -1,5 +1,4 @@
 import GoogleLogin from "@/components/common/GoogleLogin";
-import GoogleLogout from "@/components/common/GoogleLogout";
 import { useAuth } from "@/contexts/auth";
 import { Col, Row } from "antd";
 import { useEffect } from "react";
@@ -23,7 +22,6 @@ const Login = () => {
 					<GoogleLogin />
 				</Col>
 			</Row>
-			{/* <GoogleLogout /> */}
 		</>
 	);
 };

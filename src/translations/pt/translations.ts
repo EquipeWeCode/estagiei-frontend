@@ -13,4 +13,6 @@ export const TRANSLATIONS_PT = {
   name: "Nome",
   user: "Usuário",
   not_found: "Não foi possivel encontrar o que você estava procurando...",
+  info_registration: "Informações de cadastro",
+  vacancies: "Vagas",
 };

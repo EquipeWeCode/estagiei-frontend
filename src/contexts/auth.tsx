@@ -1,5 +1,5 @@
 import { AuthContextData } from "@/types/contextTypes";
-import { UserGoogleType } from "@/types/userTypes";
+import { StudentType } from "@/types/userTypes";
 import React, { createContext } from "react";
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -7,7 +7,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
 
-  const [user, setUser] = React.useState<UserGoogleType>({} as UserGoogleType);
+  const [user, setUser] = React.useState<StudentType>({} as StudentType);
   const [signed, setSigned] = React.useState(false);
 
 	return (
