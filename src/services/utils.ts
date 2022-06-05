@@ -1,9 +1,6 @@
-import { refreshTokenSetup } from "@/utils/refreshToken";
 import Axios, { AxiosInstance } from "axios";
-import { postLogin } from "./loginGoogle";
 
 const ROOT_URL = () => {
-	console.log(import.meta.env.VITE_SERVER_URL);
 	return import.meta.env.VITE_SERVER_URL;
 };
 
