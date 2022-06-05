@@ -11,9 +11,12 @@ export type UserGoogleType = {
 
 export type StudentType = {
   codEstudante?: string;
-  nome?: string;
+  email?: string;
+  avatar?: string;
   cpf?: string;
-  instituicaoEnsino?: string;
-  nivelEscolaridade?: string;
-  experienciaProfissional?: string;
+  rg?: string;
+  nome?: string;
+  instEnsino?: string;
+  nvlEnsino?: string;
+  expProfissional?: string;
 }

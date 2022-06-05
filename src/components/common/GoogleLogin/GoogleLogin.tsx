@@ -7,13 +7,14 @@ import { refreshTokenSetup } from "@/utils/refreshToken";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { postLogin } from "@/services/loginGoogle";
-import { UserGoogleRequest, UserGoogleType } from "@/types/userTypes";
+import { StudentType, UserGoogleRequest, UserGoogleType } from "@/types/userTypes";
 import { useAuth } from "@/contexts/auth";
+import { getEstudante } from "@/services/estudante";
 
 const GoogleLogin = () => {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
-	const { setUser, setSigned } = useAuth();
+	const { setUser, setSigned, user } = useAuth();
 
 	const onSuccess = async (res: GoogleLoginResponse | GoogleLoginResponseOffline): Promise<any> => {
 		const resOnline = res as GoogleLoginResponse;
@@ -25,20 +26,21 @@ const GoogleLogin = () => {
 		const response = await postLogin(user);
 
 		const newUser = {
-			id: resOnline.profileObj.googleId,
-			email: resOnline.profileObj.email,
-			name: resOnline.profileObj.name,
-			avatar: resOnline.profileObj.imageUrl,
+			codEstudante: resOnline.profileObj.googleId,
 		};
 
 		if (response.status === 200) {
+
+      const estudanteBuscado = await getEstudante(newUser.codEstudante);
+      const data = estudanteBuscado.data;
+			setUser(data);
 			setSigned(true);
-			setUser(newUser);
 			navigate("/");
-			refreshTokenSetup(resOnline);
+      refreshTokenSetup(response.data.token);
+
 		} else {
       setSigned(false);
-      setUser({} as UserGoogleType);
+      setUser({} as StudentType);
 			alert("Erro ao validar o login no servidor");
 		}
 	};
@@ -47,7 +49,6 @@ const GoogleLogin = () => {
     setSigned(false);
     setUser({} as UserGoogleType);
 		console.log("Login failed:", res);
-		alert(`Falha no login`);
 	};
 
 	return (
@@ -59,6 +60,7 @@ const GoogleLogin = () => {
 				onFailure={onFailure}
 				cookiePolicy={"single_host_origin"}
 				isSignedIn={true}
+        theme={"dark"}
 			/>
 		</div>
 	);
