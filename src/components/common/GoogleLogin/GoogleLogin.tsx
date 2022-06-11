@@ -30,24 +30,22 @@ const GoogleLogin = () => {
 		};
 
 		if (response.status === 200) {
-
-      const estudanteBuscado = await getEstudante(newUser.codEstudante);
-      const data = estudanteBuscado.data;
+			const estudanteBuscado = await getEstudante(newUser.codEstudante);
+			const data = estudanteBuscado.data;
 			setUser(data);
 			setSigned(true);
 			navigate("/");
-      refreshTokenSetup(response.data.token);
-
+			refreshTokenSetup(response.data.token);
 		} else {
-      setSigned(false);
-      setUser({} as StudentType);
+			setSigned(false);
+			setUser({} as StudentType);
 			alert("Erro ao validar o login no servidor");
 		}
 	};
 
 	const onFailure = (res: GoogleLoginResponse) => {
-    setSigned(false);
-    setUser({} as UserGoogleType);
+		setSigned(false);
+		setUser({} as UserGoogleType);
 		console.log("Login failed:", res);
 	};
 
@@ -60,7 +58,7 @@ const GoogleLogin = () => {
 				onFailure={onFailure}
 				cookiePolicy={"single_host_origin"}
 				isSignedIn={true}
-        theme={"dark"}
+				theme={"dark"}
 			/>
 		</div>
 	);

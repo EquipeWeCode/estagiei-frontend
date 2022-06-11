@@ -1,13 +1,15 @@
-import Axios from "axios";
+import axios from "axios";
+
+const instance = axios.create({
+  baseURL: import.meta.env.VITE_SERVER_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 // Interceptors
-Axios.interceptors.request.use(config => {
-
-    // Add token to headers
-    // config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
-
-    //add cors to headers
-
+instance.interceptors.request.use(config => {
+  console.log("Request Interceptor", config);
   document.body.classList.add('loading-indicator');
   return config;
 
@@ -15,7 +17,7 @@ Axios.interceptors.request.use(config => {
   return Promise.reject(error);
 });
 
-Axios.interceptors.response.use(response => {
+instance.interceptors.response.use(response => {
 
   document.body.classList.remove('loading-indicator');
 
@@ -23,3 +25,5 @@ Axios.interceptors.response.use(response => {
 }, function (error) {
   return Promise.reject(error);
 });
+
+export default instance;
