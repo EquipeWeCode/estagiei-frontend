@@ -9,7 +9,7 @@ const GoogleLogout = () => {
 	const { setSigned, setUser } = useAuth();
 
 	const onSuccess = () => {
-    localStorage.removeItem("authToken");
+    // localStorage.removeItem("token");
 		setSigned(false);
 		setUser({} as StudentType);
 	};
