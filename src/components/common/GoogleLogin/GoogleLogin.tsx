@@ -34,8 +34,8 @@ const GoogleLogin = () => {
 			const data = estudanteBuscado.data;
 			setUser(data);
 			setSigned(true);
+			refreshTokenSetup(resOnline);
 			navigate("/");
-			refreshTokenSetup(response.data.token);
 		} else {
 			setSigned(false);
 			setUser({} as StudentType);
