@@ -1,6 +1,6 @@
 import axios from '@/axios';
 
-export const ROOT_URL = () => {
+const ROOT_URL = () => {
 	return import.meta.env.VITE_SERVER_URL;
 };
 
