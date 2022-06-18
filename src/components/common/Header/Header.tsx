@@ -8,6 +8,7 @@ import GoogleLogout from "../GoogleLogout";
 import { Link } from "react-router-dom";
 
 import { ReactComponent as Logo } from "@/assets/logo.svg";
+import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
 const Header = () => {
 	const [language, setLanguage] = useState("pt");
 
@@ -58,7 +59,7 @@ const Header = () => {
 				{user.codEstudante ? (
 					<Row gutter={12} align="middle">
 						<Col className="welcome-text-header">
-							{t("welcome")}: {user.nome}
+							{t("welcome")}: {capitalizaPriLetraDeCadaPalavra(user.nome)}
 						</Col>
 						<Col>
 							<Dropdown overlay={menu} placement="bottomRight" trigger={["click"]}>

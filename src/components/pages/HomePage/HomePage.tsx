@@ -1,24 +1,31 @@
+import CardVagas from "@/components/common/CardVagas";
 import { useAuth } from "@/contexts/auth";
+import { getVagasRecomendadas } from "@/services/estudante";
 import { getVagas } from "@/services/vaga";
-import { VagasType } from "@/types/vagasTypes";
-import { Col, Row } from "antd";
+import { VagaType } from "@/types/vagasTypes";
+import { Col, Divider, Row, Tabs } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import InfoUsuario from "./InfoUsuario";
 
 const HomePage = (): JSX.Element => {
 	const { user, signed } = useAuth();
-	const [vagas, setVagas] = useState<VagasType[]>([]);
+	const [vagas, setVagas] = useState<VagaType[]>([]);
+  const [vagasRecomendadas, setVagasRecomendadas] = useState<VagaType[]>([]);
 	const navigate = useNavigate();
 	const { t } = useTranslation();
+
+	const { TabPane } = Tabs;
 
 	useEffect((): void => {
 		if (!signed || !user) {
 			navigate("/login");
 		} else {
 			fetchVagas();
+      fetchVagasRecomendadas();
 		}
-	}, [signed]); // melhorar isso depois
+	}, [signed]); // TODO: melhorar isso depois
 
 	const fetchVagas = async () => {
 		const response = await getVagas({});
@@ -27,35 +34,41 @@ const HomePage = (): JSX.Element => {
 		}
 	};
 
+  const fetchVagasRecomendadas = async () => {
+    const response = await getVagasRecomendadas(user.codEstudante);
+    if (response.status === 200) {
+      setVagasRecomendadas(response.data);
+    }
+  };
+
 	return (
 		<>
-			<Row justify="space-between" style={{ padding: "2rem" }}>
-				<Col className="container-info-user" span={6}>
-					<h2>{t("info_registration")}</h2>
-					<img src={user.avatar} alt={t("user")} />
-					<div className="info-user">
-						<h4>{t("name")}: {user.nome}</h4>
-						<h4>E-mail: {user.email}</h4>
-					</div>
+			<Row justify="center" style={{ padding: "2rem" }}>
+				<Col className="container-info-user" span={12}>
+					<InfoUsuario user={user} />
 				</Col>
+			</Row>
+			<Divider />
 
-				<Col className="container-vagas" span={12}>
-					<h2>{t("vacancies")}</h2>
-
-					{vagas.map((vaga: VagasType) => (
-						<div key={vaga.codVaga} className="container-vaga">
-							<h3>{vaga.titulo}</h3>
-							<p>{vaga.descricao}</p>
-							<p>
-								R$
-								{vaga.salario.toLocaleString("pt-BR", {
-									maximumFractionDigits: 2,
-									minimumFractionDigits: 2,
-								})}
-							</p>
-						</div>
-					))}
-				</Col>
+			<Row justify="center" style={{ padding: "2rem" }}>
+				<Tabs defaultActiveKey="1">
+					<TabPane tab={t("vacancies")} key="1">
+						<Row justify="center">
+							<h2>{t("vacancies")}</h2>
+						</Row>
+						<Row justify="space-evenly" className="row-vagas">
+							<CardVagas vagas={vagas} />
+						</Row>
+					</TabPane>
+					<TabPane tab={t("recommended_vacancies")} key="2">
+						<Row justify="center">
+							<h2>{t("recommended_vacancies")}</h2>
+						</Row>
+						<Row justify="space-evenly" className="row-vagas">
+							<CardVagas vagas={vagasRecomendadas} />
+						</Row>
+					</TabPane>
+				</Tabs>
 			</Row>
 		</>
 	);

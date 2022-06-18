@@ -19,4 +19,8 @@ export const TRANSLATIONS_PT = {
   student_login_text: "Está procurando estágio? Entre com uma conta Google e deixe nosso site sugerir as vagas mais compatíveis com seu perfil!",
   company_login_text: "Está procurando estagiários para sua empresa? Preencha nosso formulário para criarmos uma página personalizada onde poderá divulgar suas vagas e receber recomendações de candidatos.",
   fill_form: "Preencha o formulário",
+  education: "Ensino",
+  experience: "Experiência",
+  skills: "Habilidades",
+  recommended_vacancies: "Vagas recomendadas",
 };

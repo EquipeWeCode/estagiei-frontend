@@ -15,8 +15,12 @@ export const TRANSLATIONS_EN = {
   user: "user",
   not_found: "The page you were searching for could not be founded...",
   info_registration: "Registration information",
-  vacancies: "Vacancies",
+  vacancies: "Job vacancies",
   student_login_text: "Are you looking for a internship? Login with Google and let our site suggest the most suitable jobs for you!",
   company_login_text: "Are you seeking interns for your company? Fill our form to create a personalized page where you can publish your vacancies and receive recommendations from candidates.",
   fill_form: "Fill the form",
+  education: "Education",
+  experience: "Experience",
+  skills: "Skills",
+  recommended_vacancies: "Recommended vacancies",
 };

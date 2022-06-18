@@ -1,3 +1,5 @@
+import { CompetenciaType } from "./competenciaType";
+
 export interface UserGoogleRequest {
   token: string;
 }
@@ -19,4 +21,5 @@ export type StudentType = {
   instEnsino?: string;
   nvlEnsino?: string;
   expProfissional?: string;
+  competencias?: CompetenciaType[];
 }
