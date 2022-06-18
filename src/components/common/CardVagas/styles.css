@@ -12,3 +12,8 @@
   margin-bottom: 2rem;
   border: 1px solid var(--primary-color);
 }
+
+.vaga-titulo {
+  display: flex;
+  justify-content: space-between;
+}
