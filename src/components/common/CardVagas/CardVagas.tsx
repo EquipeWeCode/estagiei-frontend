@@ -5,9 +5,18 @@ import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
 
 interface CardVagasProps {
 	vagas: VagaType[];
+	competenciasEstudante: CompetenciaType[];
 }
 
 const CardVagas = (props: CardVagasProps): JSX.Element => {
+	const retornaCorTag = (competencia: CompetenciaType): string => {
+		return props.competenciasEstudante.find(
+			comp => comp.codCompetencia === competencia.codCompetencia
+		)
+			? "#c045f4"
+			: "#000";
+	};
+
 	return (
 		<>
 			{props.vagas.map((vaga: VagaType) => (
@@ -26,7 +35,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 					</p>
 					{vaga.competencias &&
 						vaga.competencias.map((competencia: CompetenciaType) => (
-							<Tag key={competencia.codCompetencia} color={"#c045f4"}>
+							<Tag key={competencia.codCompetencia} color={retornaCorTag(competencia)}>
 								{competencia.descricaoCompetencia}
 							</Tag>
 						))}

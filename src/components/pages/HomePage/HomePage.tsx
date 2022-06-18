@@ -12,7 +12,7 @@ import InfoUsuario from "./InfoUsuario";
 const HomePage = (): JSX.Element => {
 	const { user, signed } = useAuth();
 	const [vagas, setVagas] = useState<VagaType[]>([]);
-  const [vagasRecomendadas, setVagasRecomendadas] = useState<VagaType[]>([]);
+	const [vagasRecomendadas, setVagasRecomendadas] = useState<VagaType[]>([]);
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 
@@ -23,7 +23,7 @@ const HomePage = (): JSX.Element => {
 			navigate("/login");
 		} else {
 			fetchVagas();
-      fetchVagasRecomendadas();
+			fetchVagasRecomendadas();
 		}
 	}, [signed]); // TODO: melhorar isso depois
 
@@ -34,12 +34,12 @@ const HomePage = (): JSX.Element => {
 		}
 	};
 
-  const fetchVagasRecomendadas = async () => {
-    const response = await getVagasRecomendadas(user.codEstudante);
-    if (response.status === 200) {
-      setVagasRecomendadas(response.data);
-    }
-  };
+	const fetchVagasRecomendadas = async () => {
+		const response = await getVagasRecomendadas(user.codEstudante);
+		if (response.status === 200) {
+			setVagasRecomendadas(response.data);
+		}
+	};
 
 	return (
 		<>
@@ -57,7 +57,7 @@ const HomePage = (): JSX.Element => {
 							<h2>{t("vacancies")}</h2>
 						</Row>
 						<Row justify="space-evenly" className="row-vagas">
-							<CardVagas vagas={vagas} />
+							<CardVagas vagas={vagas} competenciasEstudante={user.competencias || []} />
 						</Row>
 					</TabPane>
 					<TabPane tab={t("recommended_vacancies")} key="2">
@@ -65,7 +65,10 @@ const HomePage = (): JSX.Element => {
 							<h2>{t("recommended_vacancies")}</h2>
 						</Row>
 						<Row justify="space-evenly" className="row-vagas">
-							<CardVagas vagas={vagasRecomendadas} />
+							<CardVagas
+								vagas={vagasRecomendadas}
+								competenciasEstudante={user.competencias || []}
+							/>
 						</Row>
 					</TabPane>
 				</Tabs>
