@@ -40,7 +40,7 @@ export function serializeObjectToParam(filtro: Record<string, any>, first: boole
 		firstParam = "";
 	}
 	for (const key in filtro) {
-		if (filtro[key] !== null && filtro[key] !== undefined) {
+		if (filtro[key] !== null && filtro[key] !== undefined && filtro[key] !== "") {
 			params += firstParam + key + "=" + filtro[key];
 			firstParam = "&";
 		}
