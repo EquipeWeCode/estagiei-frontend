@@ -22,4 +22,5 @@ export const TRANSLATIONS_PT = {
   education: "Ensino",
   experience: "Experiência",
   skills: "Habilidades",
+  recommended_vacancies: "Vagas recomendadas",
 };

@@ -41,8 +41,8 @@ const InfoUsuario = ({ user }: InfoUsuarioProps): JSX.Element => {
 				{user.competencias && (
 					<Col style={{ marginTop: "1rem" }} md={20}>
 						{user.competencias.map((competencia: CompetenciaType) => (
-							<Tag key={competencia.codCompetencia}>
-								{capitalizaPriLetraDeCadaPalavra(competencia.descricaoCompetencia)}
+							<Tag key={competencia.codCompetencia} color="#000">
+								{competencia.descricaoCompetencia}
 							</Tag>
 						))}
 					</Col>
