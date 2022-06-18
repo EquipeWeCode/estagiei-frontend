@@ -46,7 +46,7 @@ const GoogleLogin = () => {
 	const onFailure = (res: GoogleLoginResponse) => {
 		setSigned(false);
 		setUser({} as UserGoogleType);
-		console.log("Login failed:", res);
+		console.log("Login falhou:", res);
 	};
 
 	return (

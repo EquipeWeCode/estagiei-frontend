@@ -1,14 +1,16 @@
+import CardVagas from "@/components/common/CardVagas";
 import { useAuth } from "@/contexts/auth";
 import { getVagas } from "@/services/vaga";
-import { VagasType } from "@/types/vagasTypes";
-import { Col, Row } from "antd";
+import { VagaType } from "@/types/vagasTypes";
+import { Col, Divider, Row } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import InfoUsuario from "./InfoUsuario";
 
 const HomePage = (): JSX.Element => {
 	const { user, signed } = useAuth();
-	const [vagas, setVagas] = useState<VagasType[]>([]);
+	const [vagas, setVagas] = useState<VagaType[]>([]);
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 
@@ -18,7 +20,7 @@ const HomePage = (): JSX.Element => {
 		} else {
 			fetchVagas();
 		}
-	}, [signed]); // melhorar isso depois
+	}, [signed]); // TODO: melhorar isso depois
 
 	const fetchVagas = async () => {
 		const response = await getVagas({});
@@ -29,33 +31,17 @@ const HomePage = (): JSX.Element => {
 
 	return (
 		<>
-			<Row justify="space-between" style={{ padding: "2rem" }}>
-				<Col className="container-info-user" span={6}>
-					<h2>{t("info_registration")}</h2>
-					<img src={user.avatar} alt={t("user")} />
-					<div className="info-user">
-						<h4>{t("name")}: {user.nome}</h4>
-						<h4>E-mail: {user.email}</h4>
-					</div>
+			<Row justify="center" style={{ padding: "2rem" }}>
+				<Col className="container-info-user" span={12}>
+					<InfoUsuario user={user} />
 				</Col>
-
-				<Col className="container-vagas" span={12}>
-					<h2>{t("vacancies")}</h2>
-
-					{vagas.map((vaga: VagasType) => (
-						<div key={vaga.codVaga} className="container-vaga">
-							<h3>{vaga.titulo}</h3>
-							<p>{vaga.descricao}</p>
-							<p>
-								R$
-								{vaga.salario.toLocaleString("pt-BR", {
-									maximumFractionDigits: 2,
-									minimumFractionDigits: 2,
-								})}
-							</p>
-						</div>
-					))}
-				</Col>
+			</Row>
+			<Divider />
+			<Row justify="center">
+				<h2>{t("vacancies")}</h2>
+			</Row>
+			<Row justify="space-evenly" className="row-vagas">
+				<CardVagas vagas={vagas} />
 			</Row>
 		</>
 	);

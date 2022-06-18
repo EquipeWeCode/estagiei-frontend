@@ -1,7 +1,12 @@
-export type VagasType = {
+import { CompetenciaType } from "./competenciaType";
+import { EmpresaType } from "./empresaTypes";
+
+export type VagaType = {
   codVaga?: number,
 	titulo?: string,
 	descricao?: string,
 	salario: number,
-	indAtivo?: boolean
+	indAtivo?: boolean,
+  empresa?: EmpresaType,
+  competencias?: CompetenciaType[],
 }

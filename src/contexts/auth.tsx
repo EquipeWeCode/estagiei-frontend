@@ -4,11 +4,9 @@ import React, { createContext } from "react";
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
-
 export const AuthProvider: React.FC = ({ children }) => {
-
-  const [user, setUser] = React.useState<StudentType>({} as StudentType);
-  const [signed, setSigned] = React.useState(false);
+	const [user, setUser] = React.useState<StudentType>({} as StudentType);
+	const [signed, setSigned] = React.useState(false);
 
 	return (
 		<AuthContext.Provider value={{ signed, user, setUser, setSigned }}>

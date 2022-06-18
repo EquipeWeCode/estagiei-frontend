@@ -1,3 +1,7 @@
+:root {
+  --primary-color: #c045f4;
+}
+
 * {
   margin: 0;
   padding: 0;

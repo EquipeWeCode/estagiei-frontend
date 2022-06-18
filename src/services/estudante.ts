@@ -4,3 +4,7 @@ import { getResource } from "./utils";
 export const getEstudante = async (id: string) => {
 	return await getResource(`${ENDPOINT_ESTUDANTE}/${id}`, null);
 };
+
+export const getVagasRecomendadas = async (id: string) => {
+	return await getResource(`${ENDPOINT_ESTUDANTE}/${id}/recomendacao`, null);
+};
