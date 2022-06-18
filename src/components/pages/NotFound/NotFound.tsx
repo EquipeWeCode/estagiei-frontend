@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { Col, Row } from "antd";
-
 import { ReactComponent as Logo } from "@/assets/notfound.svg";
 
 const NotFound = () => {

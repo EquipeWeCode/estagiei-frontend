@@ -2,7 +2,7 @@ import { render } from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import "antd/dist/antd.less";
-import '@/app.css';
+import "@/app.css";
 import "@/loading.css";
 import "@/translations/i18n";
 
@@ -11,6 +11,7 @@ import Login from "@/components/pages/Login";
 import Header from "@/components/common/Header";
 import NotFound from "@/components/pages/NotFound";
 import { AuthProvider } from "@/contexts/auth";
+import Footer from "./components/common/Footer";
 
 render(
 	<AuthProvider>
@@ -21,6 +22,7 @@ render(
 				<Route path="login" element={<Login />} />
 				<Route path="*" element={<NotFound />} />
 			</Routes>
+			<Footer />
 		</BrowserRouter>
 	</AuthProvider>,
 	document.getElementById("root")
