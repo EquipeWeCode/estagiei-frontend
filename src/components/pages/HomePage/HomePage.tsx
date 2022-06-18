@@ -50,20 +50,14 @@ const HomePage = (): JSX.Element => {
 			</Row>
 			<Divider />
 
-			<Row justify="center" style={{ padding: "2rem" }}>
-				<Tabs defaultActiveKey="1">
+			<Row justify="start" style={{ padding: "2rem" }}>
+				<Tabs defaultActiveKey="1" style={{ width: "100%" }}>
 					<TabPane tab={t("vacancies")} key="1">
-						<Row justify="center">
-							<h2>{t("vacancies")}</h2>
-						</Row>
 						<Row justify="space-evenly" className="row-vagas">
 							<CardVagas vagas={vagas} competenciasEstudante={user.competencias || []} />
 						</Row>
 					</TabPane>
 					<TabPane tab={t("recommended_vacancies")} key="2">
-						<Row justify="center">
-							<h2>{t("recommended_vacancies")}</h2>
-						</Row>
 						<Row justify="space-evenly" className="row-vagas">
 							<CardVagas
 								vagas={vagasRecomendadas}

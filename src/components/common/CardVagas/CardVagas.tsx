@@ -1,5 +1,5 @@
 import { VagaType } from "@/types/vagasTypes";
-import { Col, Tag } from "antd";
+import { Col, Empty, Tag } from "antd";
 import { CompetenciaType } from "@/types/competenciaType";
 import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
 
@@ -19,7 +19,8 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 
 	return (
 		<>
-			{props.vagas.map((vaga: VagaType) => (
+      {props.vagas && props.vagas.length > 0 ?
+			props.vagas.map((vaga: VagaType) => (
 				<Col md={11} key={vaga.codVaga} className="container-vaga">
 					<h3 style={{ display: "inline-block" }}>
 						<strong>{vaga.titulo} </strong>
@@ -40,7 +41,10 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 							</Tag>
 						))}
 				</Col>
-			))}
+			)) : 
+      (
+        <Empty description="Nenhuma vaga a recomendar."/>
+      )}
 		</>
 	);
 };
