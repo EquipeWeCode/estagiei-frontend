@@ -29,7 +29,7 @@ i18n
 			escapeValue: false,
 		},
 		fallbackLng: "pt",
-		debug: true,
+		debug: false,
 		saveMissing: true,
 	});
 
