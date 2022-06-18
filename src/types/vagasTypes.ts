@@ -10,3 +10,8 @@ export type VagaType = {
   empresa?: EmpresaType,
   competencias?: CompetenciaType[],
 }
+
+export type FiltroVagaType = {
+  titulo?: string,
+  descricao?: string,
+}

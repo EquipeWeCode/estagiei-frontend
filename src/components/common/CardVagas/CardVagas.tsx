@@ -27,7 +27,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 					</h3>
 					{vaga.empresa && " - " + capitalizaPriLetraDeCadaPalavra(vaga.empresa.nomeFantasia)}
 					<p>{vaga.descricao}</p>
-					<p>
+					<p style={{color: "green", fontSize: "1rem"}}>
 						R$
 						{vaga.salario.toLocaleString("pt-BR", {
 							maximumFractionDigits: 2,
@@ -43,7 +43,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 				</Col>
 			)) : 
       (
-        <Empty description="Nenhuma vaga a recomendar."/>
+        <Empty description="Nenhuma vaga encontrada."/>
       )}
 		</>
 	);
