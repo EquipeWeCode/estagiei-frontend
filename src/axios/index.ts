@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_SERVER_URL,
@@ -19,8 +19,9 @@ instance.interceptors.response.use(response => {
   document.body.classList.remove('loading-indicator');
 
   return response;
-}, function (error) {
+}, function (error: AxiosResponse) {
   document.body.classList.remove('loading-indicator');
+  console.log(error.data)
   return Promise.reject(error);
 });
 
