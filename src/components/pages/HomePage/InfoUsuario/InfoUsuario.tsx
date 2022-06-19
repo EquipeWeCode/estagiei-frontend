@@ -13,46 +13,67 @@ const InfoUsuario = ({ user }: InfoUsuarioProps): JSX.Element => {
 
 	return (
 		<>
-			<h2>{t("info_registration")}</h2>
-			<img src={user.avatar} alt={t("user")} />
-			<Row className="info-user" justify="space-between">
-				<Col md={12}>
-					<strong>{t("name")}: </strong> {capitalizaPriLetraDeCadaPalavra(user.nome)}
-				</Col>
-				<Col md={12}>
-					<strong>E-mail: </strong> {user.email}
-				</Col>
-				{user.cpf && (
-					<Col md={12}>
-						<strong>CPF: </strong> {user.cpf}
-					</Col>
-				)}
-				{user.instEnsino && (
-					<Col md={12}>
-						<strong>{t("education")}: </strong>
-						{capitalizaPriLetraDeCadaPalavra(user.instEnsino)}
-					</Col>
-				)}
-				{user.rg && (
-					<Col md={11}>
-						<strong>RG:</strong> {capitalizaPriLetraDeCadaPalavra(user.rg)}
-					</Col>
-				)}
-				{user.competencias && (
-					<Col style={{ marginTop: "1rem" }} md={20}>
-            <strong>{t("skills") + ": "}</strong>
-						{user.competencias.map((competencia: CompetenciaType) => (
-							<Tag 
-                key={competencia.codCompetencia} 
-                color="#c045f4"
-                style={{borderRadius: "0.5rem", padding: "0.2rem 0.4rem"}}
-              >
-								{competencia.descricaoCompetencia}
-							</Tag>
-						))}
-					</Col>
-				)}
-			</Row>
+			<Col className="container-info-user" md={15}>
+				<h2>{t("info_registration")}</h2>
+				<img src={user.avatar} alt={t("user")} />
+				<Row className="info-user" justify="space-between">
+						<Col md={10}>
+							<span>
+								<strong>{t("name")}: </strong> {capitalizaPriLetraDeCadaPalavra(user.nome)}
+							</span>
+						</Col>
+						{user.cpf && (
+							<Col md={10}>
+								<span>
+									<strong>CPF: </strong> {user.cpf}
+								</span>
+							</Col>
+						)}
+						{user.rg && (
+							<Col md={10}>
+								<span>
+									<strong>RG:</strong> {user.rg}
+								</span>
+							</Col>
+						)}
+						{user.dataNascimento && (
+							<Col md={10}>
+								<span>
+									<strong>Data Nasc:</strong> {user.dataNascimento}
+								</span>
+							</Col>
+						)}
+						<Col md={10}>
+							<span>
+								<strong>E-mail: </strong> {user.email}
+							</span>
+						</Col>
+						{user.instEnsino && (
+							<Col md={10}>
+								<span>
+									<strong>{t("education")}: </strong>
+									{capitalizaPriLetraDeCadaPalavra(user.instEnsino)}
+								</span>
+							</Col>
+						)}
+					{user.competencias && user.competencias.length > 0 && (
+						<Row style={{ marginTop: "1rem" }} justify="start">
+							<span>
+								<strong>{t("skills") + ": "}</strong>
+								{user.competencias.map((competencia: CompetenciaType) => (
+									<Tag
+										key={competencia.codCompetencia}
+										color="#c045f4"
+										style={{ borderRadius: "0.5rem", padding: "0.2rem 0.4rem", marginBottom: "0.3rem" }}
+									>
+										{competencia.descricaoCompetencia}
+									</Tag>
+								))}
+							</span>
+						</Row>
+					)}
+				</Row>
+			</Col>
 		</>
 	);
 };

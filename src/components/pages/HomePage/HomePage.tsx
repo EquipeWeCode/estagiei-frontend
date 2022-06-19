@@ -47,16 +47,10 @@ const HomePage = (): JSX.Element => {
 		}
 	};
 
-	const limparFiltragem = () => {
-		setFiltroVaga(FILTRO_INICIAL);
-	};
-
 	return (
 		<>
 			<Row justify="center" style={{ padding: "2rem" }}>
-				<Col className="container-info-user" span={12}>
-					<InfoUsuario user={user} />
-				</Col>
+				<InfoUsuario user={user} />
 			</Row>
 			<Divider />
 
