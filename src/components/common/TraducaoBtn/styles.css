@@ -1,0 +1,7 @@
+.switch-div{
+    transform: scale(1.5)
+}
+
+.switch-div > div:first-child::before {
+    background-color: white;
+}
