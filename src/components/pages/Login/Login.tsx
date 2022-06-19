@@ -25,7 +25,9 @@ const Login = () => {
 		<>
 			<Row justify="center" align="middle">
 				<Col className="welcome-text">
-					<h1>{t("welcome_to")} <Logo className="logo-estagiei"/> </h1>
+					<h1>
+						{t("welcome_to")} <Logo className="logo-estagiei" />{" "}
+					</h1>
 				</Col>
 			</Row>
 			<Row className="container-login" justify="space-evenly">
@@ -39,7 +41,7 @@ const Login = () => {
 				<Col className="box-login">
 					<p className="texto">{t("company_login_text")}</p>
 					<div className="button-login">
-            <LogoResumida className="logo-resumida"/>
+						<LogoResumida className="logo-resumida" />
 						<button className="button-company">{t("fill_form")}</button>
 					</div>
 				</Col>
