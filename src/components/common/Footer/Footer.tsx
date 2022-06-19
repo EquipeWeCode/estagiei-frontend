@@ -1,5 +1,10 @@
+import { useTranslation } from "react-i18next";
+
 const Footer = () => {
-	return <div>EstagiEI ©2022 Created by WeCode</div>;
+
+  const { t } = useTranslation();
+
+	return <footer className="footer-title">{t("footer_title")}</footer>;
 };
 
 export default Footer;

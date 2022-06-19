@@ -40,6 +40,7 @@ const InfoUsuario = ({ user }: InfoUsuarioProps): JSX.Element => {
 				)}
 				{user.competencias && (
 					<Col style={{ marginTop: "1rem" }} md={20}>
+            <strong>{t("skills") + ": "}</strong>
 						{user.competencias.map((competencia: CompetenciaType) => (
 							<Tag key={competencia.codCompetencia} color="#c045f4">
 								{competencia.descricaoCompetencia}

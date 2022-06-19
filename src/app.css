@@ -16,3 +16,9 @@ li {
 *, html, body, #root {
   font-family: 'Roboto', 'Segoe UI', sans-serif;
 }
+
+#root {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
