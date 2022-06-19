@@ -17,7 +17,7 @@ const GoogleLogout = () => {
 	return (
 		<div>
 			<GoogLogout
-        className="google-logout"
+        		className="google-logout"
 				clientId={import.meta.env.VITE_CLIENT_ID}
 				buttonText={t("logout_button")}
 				onLogoutSuccess={onSuccess}

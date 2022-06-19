@@ -21,6 +21,10 @@ ul.itens {
   color: #fff;
 }
 
+.translate-button {
+  margin-right: 2px;
+}
+
 .user-image {
   border-radius: 50%;
   background-color: #fff;

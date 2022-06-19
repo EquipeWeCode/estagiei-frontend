@@ -1,7 +1,7 @@
 /// <reference types="vite-plugin-svgr/client" />
 
 import { i18n } from "@/translations/i18n";
-import { Button, Col, Dropdown, Image, Menu, Row } from "antd";
+import { Col, Dropdown, Image, Menu, Row, Space } from "antd";
 import { useAuth } from "@/contexts/auth";
 import GoogleLogout from "../GoogleLogout";
 import { Link } from "react-router-dom";
@@ -9,6 +9,7 @@ import TraducaoBtn from "../TraducaoBtn";
 
 import { ReactComponent as Logo } from "@/assets/logo.svg";
 import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
+
 const Header = () => {
 
 	const { user } = useAuth();
@@ -19,12 +20,6 @@ const Header = () => {
 			items={[
 				{
 					key: "1",
-					label: (
-						<TraducaoBtn />
-					),
-				},
-				{
-					key: "2",
 					label: <GoogleLogout />,
 				},
 			]}
@@ -42,20 +37,25 @@ const Header = () => {
 
 				{user.codEstudante ? (
 					<Row gutter={12} align="middle">
-						<Col className="welcome-text-header">
-							{t("welcome")}: {capitalizaPriLetraDeCadaPalavra(user.nome)}
-						</Col>
-						<Col>
-							<Dropdown overlay={menu} placement="bottomRight" trigger={["click"]}>
-								<Image
-									className="user-image"
-									src={user.avatar}
-									alt={t("user")}
-									width={35}
-									preview={false}
-								/>
-							</Dropdown>
-						</Col>
+						<Space>
+							<Col className="translate-button">
+								<TraducaoBtn />
+							</Col>					
+							<Col className="welcome-text-header">
+								{t("welcome")}: {capitalizaPriLetraDeCadaPalavra(user.nome)}
+							</Col>
+							<Col>
+								<Dropdown overlay={menu} placement="bottomRight" trigger={["click"]}>
+									<Image
+										className="user-image"
+										src={user.avatar}
+										alt={t("user")}
+										width={35}
+										preview={false}
+									/>
+								</Dropdown>
+							</Col>
+						</Space>
 					</Row>
 				) : (
 					<TraducaoBtn />
