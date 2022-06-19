@@ -11,9 +11,9 @@ import Login from "@/components/pages/Login";
 import Header from "@/components/common/Header";
 import NotFound from "@/components/pages/NotFound";
 import { AuthProvider } from "@/contexts/auth";
-import Footer from "./components/common/Footer";
-import PrivateRoute from "./components/pages/PrivateRoute";
-import CadastroEstudante from "./components/pages/CadastroEstudante";
+import Footer from "@/components/common/Footer";
+import PrivateRoute from "@/components/pages/PrivateRoute";
+import CadastroEstudante from "@/components/pages/CadastroEstudante";
 
 render(
 	<AuthProvider>

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/auth";
 import { DatePicker, Form, Row, Select } from "antd";
 import { useTranslation } from "react-i18next";
-import moment from "moment";
+import moment, { Moment } from "moment";
 import { getEstudante, putEstudante } from "@/services/estudante";
 import { StudentType } from "@/types/userTypes";
 import { CompetenciaType } from "@/types/competenciaType";
@@ -14,7 +14,7 @@ import Button from "@/components/common/Button";
 const CadastroEstudante = () => {
 	const { user, setUser } = useAuth();
 	const { t } = useTranslation();
-  const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	const [novoUser, setNovoUser] = useState<StudentType>(user);
 	const [competencias, setCompetencias] = useState<CompetenciaType[]>([]);
@@ -57,12 +57,12 @@ const CadastroEstudante = () => {
 		},
 	];
 
-  const salvaEstudante = async () => {
-    await putEstudante(user.codEstudante, novoUser);
-    const response = await getEstudante(user.codEstudante);
-    setUser(response.data);
-    navigate("/");
-  };
+	const salvaEstudante = async () => {
+		await putEstudante(user.codEstudante, novoUser);
+		const response = await getEstudante(user.codEstudante);
+		setUser(response.data);
+		navigate("/");
+	};
 
 	return (
 		<div className="container-cadastro-estudante">
@@ -72,19 +72,27 @@ const CadastroEstudante = () => {
 						<h2>{t("edit_your_profile")}</h2>
 					</Row>
 					<Form
-            onFinish={salvaEstudante}
+						onFinish={salvaEstudante}
 						name="cadastroEstudante"
 						onValuesChange={(changedValues, allValues) => {
+							console.log(changedValues);
 							setNovoUser({
 								...novoUser,
 								...allValues,
 							});
+							if (changedValues.dataNascimento) {
+								const dataNascimento: Moment | string =
+									changedValues.dataNascimento != null
+										? moment(changedValues.dataNascimento).format(dateFormatDto)
+										: "";
+								setNovoUser({ ...novoUser, dataNascimento });
+							}
 						}}
 						initialValues={INITIAL_VALUES}
 					>
 						<Form.Item>
 							<span>{t("name")}</span>
-							<Form.Item name="nome" noStyle  rules={RULES}>
+							<Form.Item name="nome" noStyle rules={RULES}>
 								<Input placeholder={t("name")} value={novoUser.nome} />
 							</Form.Item>
 						</Form.Item>
@@ -103,20 +111,22 @@ const CadastroEstudante = () => {
 							</Form.Item>
 						</Form.Item>
 
-						<span>{t("birth_date")}</span>
-						<DatePicker
-							style={{ width: "100%", marginBottom: "0.4rem", borderRadius: "0.5rem" }}
-							name="dataNascimento"
-							placeholder={t("birth_date")}
-							defaultValue={moment(novoUser.dataNascimento, dateFormatDto)}
-							format={dateFormat}
-							onChange={(date, dateString) => {
-								setNovoUser({
-									...novoUser,
-									dataNascimento: moment(dateString, dateFormat).format(dateFormatDto),
-								});
-							}}
-						/>
+						<Form.Item>
+							<span>{t("birth_date")}</span>
+							<Form.Item name="dataNascimento" noStyle rules={RULES}>
+								<DatePicker
+									style={{ width: "100%", marginBottom: "0.4rem", borderRadius: "0.5rem" }}
+									name="dataNascimento"
+									placeholder={t("birth_date")}
+									value={
+										novoUser.dataNascimento
+											? moment(novoUser.dataNascimento, dateFormatDto)
+											: undefined
+									}
+									format={dateFormat}
+								/>
+							</Form.Item>
+						</Form.Item>
 
 						<Form.Item>
 							<span>{t("education")}</span>
@@ -134,7 +144,6 @@ const CadastroEstudante = () => {
 									value={novoUser.competencias?.map(competencia => competencia.codCompetencia)}
 									placeholder={t("skills")}
 									onChange={(value: (number | undefined)[] | undefined) => {
-										console.log(value);
 										setNovoUser({
 											...novoUser,
 											competencias: value && value.map(codCompetencia => ({ codCompetencia })),
@@ -154,19 +163,15 @@ const CadastroEstudante = () => {
 							</Form.Item>
 						</Form.Item>
 
-					<Form.Item style={{marginTop: "1rem"}}>
-            <Button ghost type="primary" style={{marginRight: "2rem"}}>
-              <Link to={"/"}>
-							  {t("go_back")}
-              </Link>
-						</Button>
-						<Button htmlType="submit" type="primary" >
-							{t("save")}
-						</Button>
-					</Form.Item>
+						<Form.Item style={{ marginTop: "1rem" }}>
+							<Button ghost type="primary" style={{ marginRight: "2rem" }}>
+								<Link to={"/"}>{t("go_back")}</Link>
+							</Button>
+							<Button htmlType="submit" type="primary">
+								{t("save")}
+							</Button>
+						</Form.Item>
 					</Form>
-
-
 				</Row>
 			</Row>
 		</div>
