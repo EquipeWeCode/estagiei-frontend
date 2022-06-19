@@ -29,6 +29,8 @@
 @media(max-width: 768px) {
   .cadastro {
     width: 100%;
+    background-color: transparent;
+    border: none;
   }
   .info-dados {
     width: 100%;
