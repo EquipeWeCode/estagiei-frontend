@@ -39,16 +39,17 @@ const CadastroEstudante = () => {
 		const data: CompetenciaType[] = competencias.data;
 		setCompetencias(data);
 	};
+  
+  const dateFormat = "DD/MM/YYYY";
+  const dateFormatDto = "YYYY-MM-DD";
 
 	const INITIAL_VALUES = {
 		nome: novoUser.nome,
 		cpf: novoUser.cpf,
 		rg: novoUser.rg,
 		instEnsino: novoUser.instEnsino,
+		dataNascimento: moment(novoUser.dataNascimento, dateFormatDto),
 	};
-
-	const dateFormat = "DD/MM/YYYY";
-	const dateFormatDto = "YYYY-MM-DD";
 
 	const RULES = [
 		{
