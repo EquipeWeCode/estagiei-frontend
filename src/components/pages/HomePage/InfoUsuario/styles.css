@@ -22,3 +22,10 @@
 .ant-col-12 {
   max-width: 100%;
 }
+
+@media(max-width: 768px) {
+  .container-info-user {
+    border: none;
+    padding: 2rem 0;
+  }
+}
