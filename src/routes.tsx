@@ -15,26 +15,40 @@ import Footer from "@/components/common/Footer";
 import PrivateRoute from "@/components/pages/PrivateRoute";
 import CadastroEstudante from "@/components/pages/CadastroEstudante";
 
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
+import Notification from "@/components/common/Notification";
+
 render(
-	<AuthProvider>
-		<BrowserRouter>
-			<Header />
-			<Routes>
-				<Route path="/" element={
-          <PrivateRoute>
-            <HomePage />
-          </PrivateRoute>
-        } />
-				<Route path="login" element={<Login />} />
-        <Route path="/cadastro/estudante" element={
-          <PrivateRoute>
-            <CadastroEstudante />
-          </PrivateRoute>
-        } />
-				<Route path="*" element={<NotFound />} />
-			</Routes>
-			<Footer />
-		</BrowserRouter>
-	</AuthProvider>,
+	<Provider store={store}>
+		<Notification>
+			<AuthProvider>
+				<BrowserRouter>
+					<Header />
+					<Routes>
+						<Route
+							path="/"
+							element={
+								<PrivateRoute>
+									<HomePage />
+								</PrivateRoute>
+							}
+						/>
+						<Route path="login" element={<Login />} />
+						<Route
+							path="/cadastro/estudante"
+							element={
+								<PrivateRoute>
+									<CadastroEstudante />
+								</PrivateRoute>
+							}
+						/>
+						<Route path="*" element={<NotFound />} />
+					</Routes>
+					<Footer />
+				</BrowserRouter>
+			</AuthProvider>
+		</Notification>
+	</Provider>,
 	document.getElementById("root")
 );

@@ -40,18 +40,17 @@ const CadastroEstudante = () => {
 		setCompetencias(data);
 	};
 
-  
 	const dateFormat = "DD/MM/YYYY";
 	const dateFormatDto = "YYYY-MM-DD";
-  
+
 	const INITIAL_VALUES = {
 		nome: novoUser.nome,
 		cpf: novoUser.cpf,
 		rg: novoUser.rg,
 		instEnsino: novoUser.instEnsino,
-    dataNascimento: moment(novoUser.dataNascimento, dateFormatDto),
+		// dataNascimento: moment(novoUser.dataNascimento, dateFormatDto),
 	};
-  
+
 	const RULES = [
 		{
 			required: true,
@@ -80,14 +79,8 @@ const CadastroEstudante = () => {
 							setNovoUser({
 								...novoUser,
 								...allValues,
+								dataNascimento: moment(allValues.dataNascimento).format(dateFormatDto),
 							});
-							if (changedValues.dataNascimento) {
-								const dataNascimento: Moment | string =
-									changedValues.dataNascimento != null
-										? moment(changedValues.dataNascimento).format(dateFormatDto)
-										: "";
-								setNovoUser({ ...novoUser, dataNascimento });
-							}
 						}}
 						initialValues={INITIAL_VALUES}
 					>
@@ -165,7 +158,7 @@ const CadastroEstudante = () => {
 						</Form.Item>
 
 						<Form.Item style={{ marginTop: "1rem" }}>
-							<Button style={{ marginRight: "2rem", backgroundColor: "#000", color: "#FFF"}}>
+							<Button style={{ marginRight: "2rem", backgroundColor: "#000", color: "#FFF" }}>
 								<Link to={"/"}>{t("go_back")}</Link>
 							</Button>
 							<Button htmlType="submit" type="primary">

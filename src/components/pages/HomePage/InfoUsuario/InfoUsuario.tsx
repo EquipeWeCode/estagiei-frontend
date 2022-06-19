@@ -11,8 +11,6 @@ interface InfoUsuarioProps {
 }
 const InfoUsuario = ({ user }: InfoUsuarioProps): JSX.Element => {
   const { t } = useTranslation();
-  console.log(new Date(user.dataNascimento ? user.dataNascimento : ""));
-  console.log(user.dataNascimento ? user.dataNascimento : "");
   
 	return (
 		<>
