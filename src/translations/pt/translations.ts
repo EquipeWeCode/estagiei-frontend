@@ -29,4 +29,10 @@ export const TRANSLATIONS_PT = {
   type_job_title: "Digite o titulo da vaga",
   type_job_description: "Digite a descrição da vaga",
   search: "Buscar",
+  edit_profile: "Editar perfil",
+  edit_your_profile: "Edite seu perfil",
+  required: "Obrigatório",
+  birth_date: "Data de nascimento",
+  save: "Salvar",
+  go_back: "Voltar",
 };

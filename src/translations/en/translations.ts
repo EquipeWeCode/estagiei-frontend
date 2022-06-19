@@ -29,4 +29,10 @@ export const TRANSLATIONS_EN = {
   type_job_title: "Type job title",
   search: "Search",
   type_job_description: "Type job description",
+  edit_profile: "Edit profile",
+  edit_your_profile: "Edit your profile",
+  required: "Required",
+  birth_date: "Birth date",
+  save: "Save",
+  go_back: "Go back",
 };

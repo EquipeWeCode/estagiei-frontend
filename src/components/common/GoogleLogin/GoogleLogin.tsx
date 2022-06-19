@@ -31,7 +31,7 @@ const GoogleLogin = () => {
 
 		if (response.status === 200) {
 			const estudanteBuscado = await getEstudante(newUser.codEstudante);
-			const data = estudanteBuscado.data;
+			const data: StudentType = estudanteBuscado.data;
 			setUser(data);
 			setSigned(true);
 			refreshTokenSetup(resOnline);

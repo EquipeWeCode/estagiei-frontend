@@ -2,13 +2,15 @@
 
 import { useState } from "react";
 import { i18n } from "@/translations/i18n";
-import { Button, Col, Dropdown, Image, Menu, Row } from "antd";
+import { Col, Dropdown, Image, Menu, Row } from "antd";
 import { useAuth } from "@/contexts/auth";
 import GoogleLogout from "../GoogleLogout";
 import { Link } from "react-router-dom";
 
 import { ReactComponent as Logo } from "@/assets/logo.svg";
 import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
+import Button from "../Button";
+
 const Header = () => {
 	const [language, setLanguage] = useState("pt");
 

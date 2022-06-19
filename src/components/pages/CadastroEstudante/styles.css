@@ -1,0 +1,27 @@
+.container-cadastro-estudante {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.cadastro {
+  margin-top: 2rem;
+  width: 60%;
+  padding: 2rem;
+  border-radius: 1rem;
+  border: 1px solid var(--primary-color);
+  background-color: var(--container-color);
+}
+
+.info-dados {
+  flex-direction: column;
+  text-align: center;
+  width: 70%;
+}
+
+.ant-form-item {
+  margin-bottom: 0.4rem !important;
+}

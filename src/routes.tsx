@@ -12,14 +12,25 @@ import Header from "@/components/common/Header";
 import NotFound from "@/components/pages/NotFound";
 import { AuthProvider } from "@/contexts/auth";
 import Footer from "./components/common/Footer";
+import PrivateRoute from "./components/pages/PrivateRoute";
+import CadastroEstudante from "./components/pages/CadastroEstudante";
 
 render(
 	<AuthProvider>
 		<BrowserRouter>
 			<Header />
 			<Routes>
-				<Route path="/" element={<HomePage />} />
+				<Route path="/" element={
+          <PrivateRoute>
+            <HomePage />
+          </PrivateRoute>
+        } />
 				<Route path="login" element={<Login />} />
+        <Route path="/cadastro/estudante" element={
+          <PrivateRoute>
+            <CadastroEstudante />
+          </PrivateRoute>
+        } />
 				<Route path="*" element={<NotFound />} />
 			</Routes>
 			<Footer />
