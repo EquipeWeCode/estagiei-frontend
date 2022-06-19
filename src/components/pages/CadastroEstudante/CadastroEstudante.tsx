@@ -164,7 +164,7 @@ const CadastroEstudante = () => {
 						</Form.Item>
 
 						<Form.Item style={{ marginTop: "1rem" }}>
-							<Button ghost type="primary" style={{ marginRight: "2rem" }}>
+							<Button style={{ marginRight: "2rem", backgroundColor: "#000", color: "#FFF"}}>
 								<Link to={"/"}>{t("go_back")}</Link>
 							</Button>
 							<Button htmlType="submit" type="primary">
