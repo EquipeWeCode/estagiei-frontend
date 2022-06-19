@@ -1,24 +1,18 @@
 /// <reference types="vite-plugin-svgr/client" />
 
-import { useState } from "react";
 import { i18n } from "@/translations/i18n";
 import { Button, Col, Dropdown, Image, Menu, Row } from "antd";
 import { useAuth } from "@/contexts/auth";
 import GoogleLogout from "../GoogleLogout";
 import { Link } from "react-router-dom";
+import TraducaoBtn from "../TraducaoBtn";
 
 import { ReactComponent as Logo } from "@/assets/logo.svg";
 import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
 const Header = () => {
-	const [language, setLanguage] = useState("pt");
 
 	const { user } = useAuth();
 	const { t } = i18n;
-
-	const changeLanguage = (e: string) => {
-		setLanguage(e);
-		i18n.changeLanguage(e);
-	};
 
 	const menu = (
 		<Menu
@@ -26,21 +20,11 @@ const Header = () => {
 				{
 					key: "1",
 					label: (
-						<Button style={{ width: "100%" }} name="pt" onClick={() => changeLanguage("pt")}>
-							Português
-						</Button>
+						<TraducaoBtn />
 					),
 				},
 				{
 					key: "2",
-					label: (
-						<Button style={{ width: "100%" }} name="en" onClick={() => changeLanguage("en")}>
-							English
-						</Button>
-					),
-				},
-				{
-					key: "3",
 					label: <GoogleLogout />,
 				},
 			]}
@@ -74,18 +58,7 @@ const Header = () => {
 						</Col>
 					</Row>
 				) : (
-					<Row gutter={12}>
-						<Col>
-							<Button name="pt" onClick={() => changeLanguage("pt")}>
-								Português
-							</Button>
-						</Col>
-						<Col>
-							<Button name="en" onClick={() => changeLanguage("en")}>
-								English
-							</Button>
-						</Col>
-					</Row>
+					<TraducaoBtn />
 				)}
 			</Row>
 		</header>

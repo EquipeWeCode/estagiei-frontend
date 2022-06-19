@@ -1,0 +1,15 @@
+.switch-div{
+    
+}
+
+.switch-div > div:first-child{
+
+}
+
+.switch-div > div:first-child::before {
+    background-color: white;
+}
+
+img {
+    object-fit: fill;
+}
