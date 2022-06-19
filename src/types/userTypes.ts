@@ -21,5 +21,6 @@ export type StudentType = {
   instEnsino?: string;
   nvlEnsino?: string;
   expProfissional?: string;
+  dataNascimento?: string;
   competencias?: CompetenciaType[];
 }

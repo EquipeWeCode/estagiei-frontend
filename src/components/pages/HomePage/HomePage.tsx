@@ -1,9 +1,11 @@
+import Button from "@/components/common/Button";
 import CardVagas from "@/components/common/CardVagas";
+import Input from "@/components/common/Input";
 import { useAuth } from "@/contexts/auth";
 import { getVagasRecomendadas } from "@/services/estudante";
 import { getVagas } from "@/services/vaga";
 import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
-import { Button, Col, Divider, Input, Row, Tabs } from "antd";
+import { Col, Divider, Row, Tabs } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -47,16 +49,10 @@ const HomePage = (): JSX.Element => {
 		}
 	};
 
-	const limparFiltragem = () => {
-		setFiltroVaga(FILTRO_INICIAL);
-	};
-
 	return (
 		<>
 			<Row justify="center" style={{ padding: "2rem" }}>
-				<Col className="container-info-user" span={12}>
-					<InfoUsuario user={user} />
-				</Col>
+				<InfoUsuario user={user} />
 			</Row>
 			<Divider />
 
@@ -85,7 +81,7 @@ const HomePage = (): JSX.Element => {
 										/>
 									</Col>
 									<Col md={6}>
-										<Button type="primary" onClick={fetchVagas} style={{ borderRadius: "0.5rem" }}>
+										<Button type="primary" onClick={fetchVagas}>
 											{t("search")}
 										</Button>
 									</Col>

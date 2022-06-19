@@ -2,13 +2,14 @@
 
 import GoogleLogin from "@/components/common/GoogleLogin";
 import { useAuth } from "@/contexts/auth";
-import { Button, Col, Row } from "antd";
+import { Col, Row } from "antd";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import { ReactComponent as Logo } from "@/assets/logo.svg";
 import { ReactComponent as LogoResumida } from "@/assets/logo-resumida.svg";
+import Button from "@/components/common/Button";
 
 const Login = () => {
 	const { signed } = useAuth();
@@ -42,7 +43,7 @@ const Login = () => {
 					<p className="texto">{t("company_login_text")}</p>
 					<div className="button-login">
 						<LogoResumida className="logo-resumida" />
-						<button className="button-company">{t("fill_form")}</button>
+						<Button className="button-company">{t("fill_form")}</Button>
 					</div>
 				</Col>
 			</Row>
