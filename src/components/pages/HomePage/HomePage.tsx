@@ -67,27 +67,26 @@ const HomePage = (): JSX.Element => {
 							<Col md={24}>
 								<Row style={{ marginBottom: "1rem" }} gutter={12} justify="center" align="bottom">
 									<Col md={6}>
-										<strong>Título:</strong>
 										<Input
-											placeholder="Digite o titulo da vaga"
+											style={{ borderRadius: "0.5rem" }}
+											allowClear={true}
+											placeholder={t("type_job_title")}
 											value={filtroVaga.titulo}
 											onChange={v => setFiltroVaga({ ...filtroVaga, titulo: v.target.value })}
 										/>
 									</Col>
 									<Col md={6}>
-										<strong>Descrição:</strong>
 										<Input
-											placeholder="Digite a descrição da vaga"
+											style={{ borderRadius: "0.5rem" }}
+											allowClear={true}
+											placeholder={t("type_job_description")}
 											value={filtroVaga.descricao}
 											onChange={v => setFiltroVaga({ ...filtroVaga, descricao: v.target.value })}
 										/>
 									</Col>
 									<Col md={6}>
-										<Button type="primary" onClick={fetchVagas}>
-											Pesquisar
-										</Button>
-										<Button type="ghost" onClick={limparFiltragem}  style={{marginLeft: "0.5rem"}}>
-											Limpar
+										<Button type="primary" onClick={fetchVagas} style={{ borderRadius: "0.5rem" }}>
+											{t("search")}
 										</Button>
 									</Col>
 								</Row>
