@@ -48,7 +48,9 @@ const CadastroEstudante = () => {
 		cpf: novoUser.cpf,
 		rg: novoUser.rg,
 		instEnsino: novoUser.instEnsino,
-		dataNascimento: moment(novoUser.dataNascimento, dateFormatDto),
+		dataNascimento: novoUser.dataNascimento
+			? moment(novoUser.dataNascimento, dateFormatDto)
+			: undefined,
 	};
 
 	const RULES = [
