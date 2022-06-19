@@ -31,7 +31,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 							</span>
 						</div>
 						<p>{vaga.descricao}</p>
-						<p style={{ color: "green", fontSize: "1rem" }}>
+						<p style={{fontSize: "1rem" }}>
 							R$
 							{vaga.salario.toLocaleString("pt-BR", {
 								maximumFractionDigits: 2,
@@ -40,7 +40,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 						</p>
 						{vaga.competencias &&
 							vaga.competencias.map((competencia: CompetenciaType) => (
-								<Tag key={competencia.codCompetencia} color={retornaCorTag(competencia)}>
+								<Tag style={{borderRadius: "0.5rem", padding: "0.2rem 0.4rem"}} key={competencia.codCompetencia} color={retornaCorTag(competencia)}>
 									{competencia.descricaoCompetencia}
 								</Tag>
 							))}

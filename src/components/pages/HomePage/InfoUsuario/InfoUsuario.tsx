@@ -42,7 +42,11 @@ const InfoUsuario = ({ user }: InfoUsuarioProps): JSX.Element => {
 					<Col style={{ marginTop: "1rem" }} md={20}>
             <strong>{t("skills") + ": "}</strong>
 						{user.competencias.map((competencia: CompetenciaType) => (
-							<Tag key={competencia.codCompetencia} color="#c045f4">
+							<Tag 
+                key={competencia.codCompetencia} 
+                color="#c045f4"
+                style={{borderRadius: "0.5rem", padding: "0.2rem 0.4rem"}}
+              >
 								{competencia.descricaoCompetencia}
 							</Tag>
 						))}

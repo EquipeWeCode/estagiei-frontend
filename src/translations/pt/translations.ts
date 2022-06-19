@@ -14,7 +14,7 @@ export const TRANSLATIONS_PT = {
 	name: "Nome",
 	user: "Usuário",
 	not_found: "Não foi possivel encontrar o que você estava procurando...",
-	info_registration: "Informações de cadastro",
+	info_registration: "Perfil",
 	vacancies: "Vagas",
 	student_login_text:
 		"Está procurando estágio? Entre com uma conta Google e deixe nosso site sugerir as vagas mais compatíveis com seu perfil!",
@@ -25,5 +25,8 @@ export const TRANSLATIONS_PT = {
 	experience: "Experiência",
 	skills: "Habilidades",
 	recommended_vacancies: "Vagas recomendadas",
-	footer_title: "EstagiEI ©2022 Criado por WeCode",
+	footer_title: "Estagiei ©2022 Criado por WeCode",
+  type_job_title: "Digite o titulo da vaga",
+  type_job_description: "Digite a descrição da vaga",
+  search: "Buscar",
 };
