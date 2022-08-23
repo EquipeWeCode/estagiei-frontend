@@ -60,12 +60,14 @@ const Header = () => {
 					</Row>
 				) : (
 					<Row gutter={12} align="middle">
-						<Col>
-							<TraducaoBtn />
-						</Col>
-						<Col>
-							<VagasBtn />
-						</Col>
+						<Space>
+							<Col>
+								<TraducaoBtn />
+							</Col>
+							<Col>
+								<VagasBtn />
+							</Col>
+						</Space>
 					</Row>
 				)}
 			</Row>
