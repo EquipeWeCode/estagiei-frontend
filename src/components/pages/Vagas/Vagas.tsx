@@ -18,3 +18,5 @@ const Vagas = () => {
         </>
     )
 }
+
+export default Vagas;
