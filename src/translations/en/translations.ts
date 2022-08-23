@@ -35,5 +35,8 @@ export const TRANSLATIONS_EN = {
 	birth_date: "Birth date",
 	save: "Save",
 	go_back: "Go back",
-	vacancy: "Jobs"
+	vacancy: "Jobs",
+	vacancy_title_header: "Internship vacancies",
+	vacancy_description_header: 
+		"Looking for the so waited experience in your area? Want to be hired with the dream internship? So you are in the right place!"
 };

@@ -36,5 +36,7 @@ export const TRANSLATIONS_PT = {
 	save: "Salvar",
 	go_back: "Voltar",
 	vacancy: "Ver vagas",
-	vacancy_title_header: "Vagas para programadores",
+	vacancy_title_header: "Vagas de estágio",
+	vacancy_description_header: 
+		"Procurando a tão sonhada experiência na área? Quer ser contratado com o estágio dos sonhos? Então você está no lugar certo!"
 };

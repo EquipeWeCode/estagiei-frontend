@@ -1,20 +1,20 @@
 /// <reference types="vite-plugin-svgr/client" />
 
-import { Row, Col } from "antd"
+import { Row, Col } from "antd";
+import { useTranslation } from "react-i18next";
 
 const Vagas = () => {
+
+    const { t } = useTranslation();
 
     return (
         <>
             <Row>
                 <Col>
-                    <h1>Vagas para programadores</h1>
-                    <p>Domina alguma linguagem de programação (Front-End, Back-End, Mobile ou Full Stack)?
-Quer ser contratado como freelancer (PJ), estagiário ou CLT?
-Então você está no lugar certo!</p>
+                    <h1>{t("vacancy_title_header")}</h1>
+                    <p>{t("vacancy_description_header")}</p>
                 </Col>
             </Row>
-
         </>
     )
 }
