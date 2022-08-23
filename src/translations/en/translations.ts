@@ -38,5 +38,6 @@ export const TRANSLATIONS_EN = {
 	vacancy: "Jobs",
 	vacancy_title_header: "Internship vacancies",
 	vacancy_description_header: 
-		"Looking for the so waited experience in your area? Want to be hired with the dream internship? So you are in the right place!"
+		"Looking for the so waited experience in your area? Want to be hired with the dream internship? So you are in the right place!",
+	vacancy_btn: "Show interships"
 };
