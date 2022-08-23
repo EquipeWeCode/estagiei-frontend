@@ -18,6 +18,7 @@ import CadastroEstudante from "@/components/pages/CadastroEstudante";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import Notification from "@/components/common/Notification";
+import Vagas from "./components/pages/Vagas";
 
 render(
 	<Provider store={store}>
@@ -35,6 +36,7 @@ render(
 							}
 						/>
 						<Route path="login" element={<Login />} />
+						<Route path="vagas" element={<Vagas/>} />
 						<Route
 							path="/cadastro/estudante"
 							element={

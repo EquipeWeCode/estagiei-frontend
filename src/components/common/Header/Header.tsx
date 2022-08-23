@@ -6,6 +6,7 @@ import { useAuth } from "@/contexts/auth";
 import GoogleLogout from "../GoogleLogout";
 import { Link } from "react-router-dom";
 import TraducaoBtn from "../TraducaoBtn";
+import Vagas from "@/components/pages/Vagas";
 
 import { ReactComponent as Logo } from "@/assets/logo.svg";
 import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
