@@ -51,10 +51,10 @@ const HomePage = (): JSX.Element => {
 
 	return (
 		<>
-			<Row justify="center" style={{ padding: "2rem" }}>
+			{/* <Row justify="center" style={{ padding: "2rem" }}>
 				<InfoUsuario user={user} />
 			</Row>
-			<Divider />
+			<Divider /> */}
 
 			<Row justify="start" style={{ padding: "2rem" }}>
 				<Tabs defaultActiveKey="1" style={{ width: "100%" }}>

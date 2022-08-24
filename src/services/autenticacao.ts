@@ -8,3 +8,5 @@ export const postLogin = (body: LoginType) => {
 };
 
 export const getToken = () => localStorage.getItem(TOKEN_KEY);
+
+export const logout = () => localStorage.removeItem(TOKEN_KEY);

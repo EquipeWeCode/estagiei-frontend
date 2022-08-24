@@ -11,7 +11,7 @@ import { ReactComponent as LogoResumida } from "@/assets/logo-resumida.svg";
 import Button from "@/components/common/Button";
 import Input from "@/components/common/Input";
 import { LoginType } from "@/types/userTypes";
-import { postLogin } from "@/services/autenticacao";
+import { getToken, postLogin } from "@/services/autenticacao";
 import { TOKEN_KEY } from "@/constants";
 
 const Login = () => {
@@ -20,12 +20,13 @@ const Login = () => {
 	const { t } = useTranslation();
 
 	const [login, setLogin] = useState({} as LoginType);
+  const [token, setToken] = useState(getToken());
 
 	useEffect((): void => {
-		if (signed) {
+		if (token) {
 			navigate("/");
 		}
-	}, [signed]);
+	}, []);
 
 	const changeLogin = (e: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -33,9 +34,12 @@ const Login = () => {
 	};
 
 	const efetuarLogin = async () => {
-		const { data } = await postLogin(login);
-		const token = data?.accessToken;
-		localStorage.setItem(TOKEN_KEY, token);
+		const { data, status } = await postLogin(login);
+    if(status == 200) {
+      const token = data?.accessToken;
+      localStorage.setItem(TOKEN_KEY, token);
+      navigate("/");
+    }
 	};
 
 	return (
