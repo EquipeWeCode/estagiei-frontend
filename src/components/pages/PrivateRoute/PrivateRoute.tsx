@@ -6,8 +6,8 @@ interface PrivateRouteProps {
 }
 
 const PrivateRoute = ({ children }: PrivateRouteProps): JSX.Element => {
-	const { user } = useAuth();
-	return <>{user.codEstudante ? children : <Navigate to="/login" />}</>;
+	// return <>{user.codEstudante ? children : <Navigate to="/login" />}</>;
+  return <>{children}</>;
 };
 
 export default PrivateRoute;

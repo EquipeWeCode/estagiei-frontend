@@ -1,35 +1,45 @@
+import { getToken } from "./../services/autenticacao";
 import axios from "axios";
-import {store} from "@/redux/store";
+import { store } from "@/redux/store";
 
 const instance = axios.create({
-  baseURL: import.meta.env.VITE_SERVER_URL,
+	baseURL: import.meta.env.VITE_SERVER_URL,
 });
 
 // Interceptors
-instance.interceptors.request.use(config => {
-  document.body.classList.add('loading-indicator');
-  return config;
+instance.interceptors.request.use(
+	async config => {
+		document.body.classList.add("loading-indicator");
+		const token = getToken();
 
-}, function (error) {
-  document.body.classList.remove('loading-indicator');
-  return Promise.reject(error);
-});
+		if (token) {
+			config.headers!.Authorization = `Bearer ${token}`;
+		}
+		return config;
+	},
+	function (error) {
+		document.body.classList.remove("loading-indicator");
+		return Promise.reject(error);
+	}
+);
 
-instance.interceptors.response.use(response => {
+instance.interceptors.response.use(
+	response => {
+		document.body.classList.remove("loading-indicator");
 
-  document.body.classList.remove('loading-indicator');
-
-  return response;
-}, function (error) {
-  document.body.classList.remove('loading-indicator');
-  const response = error.response;
-  const errors: [] = response.data.errors ? response.data.errors : [];
-  const message = response.data.message ? response.data.message : "";
-  store.dispatch({
-    type: 'SHOW_ERROR',
-    payload: errors.length > 0 ? errors.join('\r\n') : message,
-  });
-  return Promise.reject(error);
-});
+		return response;
+	},
+	function (error) {
+		document.body.classList.remove("loading-indicator");
+		const response = error.response;
+		const errors: [] = response.data.errors ? response.data.errors : [];
+		const message = response.data.message ? response.data.message : "";
+		store.dispatch({
+			type: "SHOW_ERROR",
+			payload: errors.length > 0 ? errors.join("\r\n") : message,
+		});
+		return Promise.reject(error);
+	}
+);
 
 export default instance;
