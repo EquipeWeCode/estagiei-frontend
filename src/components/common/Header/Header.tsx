@@ -3,7 +3,6 @@
 import { i18n } from "@/translations/i18n";
 import { Col, Dropdown, Image, Menu, Row, Space } from "antd";
 import { useAuth } from "@/contexts/auth";
-import GoogleLogout from "../GoogleLogout";
 import { Link } from "react-router-dom";
 import TraducaoBtn from "../TraducaoBtn";
 
@@ -20,7 +19,7 @@ const Header = () => {
 			items={[
 				{
 					key: "1",
-					label: <GoogleLogout />,
+					label: "sair",
 				},
 			]}
 		/>

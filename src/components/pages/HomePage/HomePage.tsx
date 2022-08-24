@@ -27,12 +27,12 @@ const HomePage = (): JSX.Element => {
 	const { TabPane } = Tabs;
 
 	useEffect((): void => {
-		if (!signed || !user) {
-			navigate("/login");
-		} else {
+		// if (!signed || !user) {
+		// 	navigate("/login");
+		// } else {
 			fetchVagas();
 			fetchVagasRecomendadas();
-		}
+		// }
 	}, [signed]); // TODO: melhorar isso depois
 
 	const fetchVagas = async () => {

@@ -1,16 +1,5 @@
 import { CompetenciaType } from "./competenciaType";
 
-export interface UserGoogleRequest {
-  token: string;
-}
-
-export type UserGoogleType = {
-  id: string;
-  name: string;
-  email: string;
-  avatar: string;
-}
-
 export type StudentType = {
   codEstudante?: string;
   email?: string;
@@ -23,4 +12,9 @@ export type StudentType = {
   expProfissional?: string;
   dataNascimento?: string;
   competencias?: CompetenciaType[];
+}
+
+export type LoginType = {
+  email: string,
+  senha: string,
 }
