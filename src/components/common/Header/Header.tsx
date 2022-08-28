@@ -1,18 +1,17 @@
 /// <reference types="vite-plugin-svgr/client" />
 
 import { i18n } from "@/translations/i18n";
-import { Col, Dropdown, Image, Menu, Row, Space } from "antd";
+import { Button, Col, Dropdown, Image, Menu, Row, Space } from "antd";
 import { useAuth } from "@/contexts/auth";
-import GoogleLogout from "../GoogleLogout";
 import { Link } from "react-router-dom";
 import TraducaoBtn from "../TraducaoBtn";
 import VagasBtn from "../VagasHeaderBtn/VagasBtn";
 
 import { ReactComponent as Logo } from "@/assets/logo.svg";
 import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
+import { logout } from "@/services/autenticacao";
 
 const Header = () => {
-
 	const { user } = useAuth();
 	const { t } = i18n;
 
@@ -21,7 +20,7 @@ const Header = () => {
 			items={[
 				{
 					key: "1",
-					label: <GoogleLogout />,
+					label: "sair",
 				},
 			]}
 		/>
@@ -41,7 +40,7 @@ const Header = () => {
 						<Space>
 							<Col className="translate-button">
 								<TraducaoBtn />
-							</Col>					
+							</Col>
 							<Col className="welcome-text-header">
 								{t("welcome")}: {capitalizaPriLetraDeCadaPalavra(user.nome)}
 							</Col>
@@ -67,6 +66,7 @@ const Header = () => {
 							<Col>
 								<VagasBtn />
 							</Col>
+							<Button onClick={logout}>Logout</Button>
 						</Space>
 					</Row>
 				)}

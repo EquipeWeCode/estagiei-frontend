@@ -5,7 +5,7 @@ const ROOT_URL = () => {
 };
 
 //resources
-export const getResource = async (resource: string, config: any) => {
+export const getResource = async (resource: string, config: any = null) => {
 	const response = await axios.get(ROOT_URL() + resource, config);
 	return response;
 };
@@ -13,7 +13,7 @@ export const getResource = async (resource: string, config: any) => {
 export async function postResource(
 	resource: string,
 	body: object,
-	config: any,
+	config: any = null,
 ) {
 	const response = await axios.post(ROOT_URL() + resource, body, config);
 	return response;
@@ -22,7 +22,7 @@ export async function postResource(
 export async function putResource(
 	resource: string,
 	body: object,
-	config: any,
+	config: any = null,
 ) {
 	const response = await axios.put(ROOT_URL() + resource, body, config);
 	return response;
@@ -33,7 +33,7 @@ export async function deleteResource(resource: string, config: any) {
 	return response;
 }
 
-export function serializeObjectToParam(filtro: Record<string, any>, first: boolean) {
+export function serializeObjectToParam(filtro: Record<string, any>, first: boolean = false) {
 	let params = "";
 	let firstParam = "?";
 	if (first) {
