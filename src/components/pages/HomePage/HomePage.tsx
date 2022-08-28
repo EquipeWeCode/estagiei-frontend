@@ -58,38 +58,6 @@ const HomePage = (): JSX.Element => {
 
 			<Row justify="start" style={{ padding: "2rem" }}>
 				<Tabs defaultActiveKey="1" style={{ width: "100%" }}>
-					<TabPane tab={t("vacancies")} key="1">
-						<Row justify="space-evenly" className="row-vagas">
-							<Col md={24}>
-								<Row style={{ marginBottom: "1rem" }} gutter={12} justify="center" align="bottom">
-									<Col md={6}>
-										<Input
-											style={{ borderRadius: "0.5rem" }}
-											allowClear={true}
-											placeholder={t("type_job_title")}
-											value={filtroVaga.titulo}
-											onChange={v => setFiltroVaga({ ...filtroVaga, titulo: v.target.value })}
-										/>
-									</Col>
-									<Col md={6}>
-										<Input
-											style={{ borderRadius: "0.5rem" }}
-											allowClear={true}
-											placeholder={t("type_job_description")}
-											value={filtroVaga.descricao}
-											onChange={v => setFiltroVaga({ ...filtroVaga, descricao: v.target.value })}
-										/>
-									</Col>
-									<Col md={6}>
-										<Button type="primary" onClick={fetchVagas}>
-											{t("search")}
-										</Button>
-									</Col>
-								</Row>
-							</Col>
-							<CardVagas vagas={vagas} competenciasEstudante={user.competencias || []} />
-						</Row>
-					</TabPane>
 					<TabPane tab={t("recommended_vacancies")} key="2">
 						<Row justify="space-evenly" className="row-vagas">
 							<CardVagas
