@@ -1,5 +1,5 @@
 import { VagaType } from "@/types/vagasTypes";
-import { Col, Empty, Tag } from "antd";
+import { Col, Empty, Tag, Space } from "antd";
 import { CompetenciaType } from "@/types/competenciaType";
 import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
 import { COLORS } from '@/constants/colors'
@@ -22,7 +22,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 		<>
 			{props.vagas && props.vagas.length > 0 ? (
 				props.vagas.map((vaga: VagaType) => (
-					<Col md={11} key={vaga.codVaga} className="container-vaga">
+					<Col key={vaga.codVaga} className="container-vaga">
 						<div className="vaga-titulo">
 							<h3 style={{ display: "inline-block" }}>
 								<strong>{vaga.titulo} </strong>
@@ -41,7 +41,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 						</p>
 						{vaga.competencias &&
 							vaga.competencias.map((competencia: CompetenciaType) => (
-								<Tag style={{borderRadius: "0.5rem", padding: "0.2rem 0.4rem"}} key={competencia.codCompetencia} color={retornaCorTag(competencia)}>
+								<Tag style={{borderRadius: "1rem", padding: "0.2rem 0.4rem", marginBottom: "0.5rem"}} key={competencia.codCompetencia} color={retornaCorTag(competencia)}>
 									{competencia.descricaoCompetencia}
 								</Tag>
 							))}
