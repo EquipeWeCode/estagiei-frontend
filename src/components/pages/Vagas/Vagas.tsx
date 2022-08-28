@@ -48,11 +48,10 @@ const Vagas = () => {
             </Row>
             <Row justify="start" style={{ padding: "2rem" }}>
 				<Tabs defaultActiveKey="1" style={{ width: "100%" }}>
-					<TabPane tab={t("vacancies")} key="1">
 						<Row justify="space-evenly" className="row-vagas">
 							<Col md={24}>
 								<Row style={{ marginBottom: "1rem" }} gutter={12} justify="center" align="bottom">
-									<Col md={6}>
+									{/* <Col md={6}>
 										<Input
 											style={{ borderRadius: "0.5rem" }}
 											allowClear={true}
@@ -74,12 +73,11 @@ const Vagas = () => {
 										<Button type="primary" onClick={fetchVagas}>
 											{t("search")}
 										</Button>
-									</Col>
+									</Col> */}
                                     <CardVagas vagas={vagas} competenciasEstudante={user.competencias || []} />
 								</Row>
 							</Col>
 						</Row>
-					</TabPane>
 				</Tabs>
 			</Row>
         </>
