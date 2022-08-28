@@ -2,6 +2,7 @@ import { VagaType } from "@/types/vagasTypes";
 import { Col, Empty, Tag } from "antd";
 import { CompetenciaType } from "@/types/competenciaType";
 import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
+import { COLORS } from '@/constants/colors'
 
 interface CardVagasProps {
 	vagas: VagaType[];
@@ -13,7 +14,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 		return props.competenciasEstudante.find(
 			comp => comp.codCompetencia === competencia.codCompetencia
 		)
-			? "#c045f4"
+			? COLORS.primary_color
 			: "#000";
 	};
 

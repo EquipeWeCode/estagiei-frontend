@@ -8,9 +8,15 @@
   padding: 1.5rem;
   background-color: var(--container-color);
   text-align: left;
-  border-radius: 0.5rem;
   margin-bottom: 2rem;
   border: 1px solid var(--primary-color);
+  border-left: none;
+  border-right: none;
+  transition: ease 0.1s;
+}
+
+.container-vaga:hover {
+  background-color: var(--container_hover_color);
 }
 
 .vaga-titulo {

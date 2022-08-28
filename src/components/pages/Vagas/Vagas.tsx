@@ -46,11 +46,10 @@ const Vagas = () => {
                     <p>{t("vacancy_description_header")}</p>
                 </Col>
             </Row>
-            <Row justify="start" style={{ padding: "2rem" }}>
-				<Tabs defaultActiveKey="1" style={{ width: "100%" }}>
-						<Row justify="space-evenly" className="row-vagas">
-							<Col md={24}>
-								<Row style={{ marginBottom: "1rem" }} gutter={12} justify="center" align="bottom">
+            <Row justify="center" align="middle" style={{ padding: "2rem" }}>
+						<Row justify="center" className="row-vagas" align="middle">
+                            <Col>Filtros</Col>
+							<Col>
 									{/* <Col md={6}>
 										<Input
 											style={{ borderRadius: "0.5rem" }}
@@ -75,10 +74,8 @@ const Vagas = () => {
 										</Button>
 									</Col> */}
                                     <CardVagas vagas={vagas} competenciasEstudante={user.competencias || []} />
-								</Row>
 							</Col>
 						</Row>
-				</Tabs>
 			</Row>
         </>
     )
