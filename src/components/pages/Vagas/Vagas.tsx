@@ -9,6 +9,7 @@ import { useAuth } from "@/contexts/auth";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import executivoBackground from "@/assets/fundos/executivo.jpg";
+import { COLORS } from "@/constants/colors";
 
 const Vagas = () => {
     const FILTRO_INICIAL: VagaType = {
@@ -19,17 +20,12 @@ const Vagas = () => {
     const { t } = useTranslation();
     const { TabPane } = Tabs;
 
-    const { user, signed } = useAuth();
     const [vagas, setVagas] = useState<VagaType[]>([]);
     const [filtroVaga, setFiltroVaga] = useState<VagaType>(FILTRO_INICIAL);
 
     useEffect((): void => {
-		// if (!signed || !user) {
-		// 	navigate("/login");
-		// } else {
-			fetchVagas();
-		// }
-	}, [signed]); // TODO: melhorar isso depois
+        fetchVagas();
+	}, []); 
 
 	const fetchVagas = async () => {
 		const response = await getVagas(filtroVaga);
@@ -47,23 +43,26 @@ const Vagas = () => {
                 </Col>
             </Row>
             <Row justify="center" align="middle" style={{ padding: "2rem" }}>
-						<Row justify="center" className="row-vagas" align="middle">
-                            <Col>Filtros</Col>
-							<Col>
-                                    <CardVagas vagas={vagas} competenciasEstudante={user.competencias || []} />
-							</Col>
-						</Row>
+                    <Row justify="center" className="row-vagas" align="middle">
+                        <Col>
+                            Filtros
+                        </Col>
+                        <Col>
+                                <CardVagas vagas={vagas} competenciasEstudante={[]} />
+                        </Col>
+                    </Row>
 			</Row>
         </>
     )
 }
 
 const styles = {
+    backgroundColor: `${COLORS.argb.primary_color}`,
     backgroundImage: `url(${executivoBackground})`,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    height: "500px"
+    height: "calc(350px - 1vw)"
 }
 
 export default Vagas;
