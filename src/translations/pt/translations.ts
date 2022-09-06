@@ -39,5 +39,6 @@ export const TRANSLATIONS_PT = {
 	vacancy_title_header: "Vagas de estágio",
 	vacancy_description_header: 
 		"Procurando a tão sonhada experiência na área? Quer ser contratado com o estágio dos sonhos? Então você está no lugar certo!",
-	vacancy_btn: "Ver vagas"
+	vacancy_btn: "Ver vagas",
+	not_found_vacancies: "Nenhuma vaga encontrada"
 };

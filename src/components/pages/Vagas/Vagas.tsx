@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import executivoBackground from "@/assets/fundos/executivo.jpg";
 
 const Vagas = () => {
-    const FILTRO_INICIAL: FiltroVagaType = {
+    const FILTRO_INICIAL: VagaType = {
 		titulo: "",
 		descricao: "",
 	};
@@ -21,7 +21,7 @@ const Vagas = () => {
 
     const { user, signed } = useAuth();
     const [vagas, setVagas] = useState<VagaType[]>([]);
-    const [filtroVaga, setFiltroVaga] = useState<FiltroVagaType>(FILTRO_INICIAL);
+    const [filtroVaga, setFiltroVaga] = useState<VagaType>(FILTRO_INICIAL);
 
     useEffect((): void => {
 		// if (!signed || !user) {
@@ -50,29 +50,6 @@ const Vagas = () => {
 						<Row justify="center" className="row-vagas" align="middle">
                             <Col>Filtros</Col>
 							<Col>
-									{/* <Col md={6}>
-										<Input
-											style={{ borderRadius: "0.5rem" }}
-											allowClear={true}
-											placeholder={t("type_job_title")}
-											value={filtroVaga.titulo}
-											onChange={v => setFiltroVaga({ ...filtroVaga, titulo: v.target.value })}
-										/>
-									</Col>
-									<Col md={6}>
-										<Input
-											style={{ borderRadius: "0.5rem" }}
-											allowClear={true}
-											placeholder={t("type_job_description")}
-											value={filtroVaga.descricao}
-											onChange={v => setFiltroVaga({ ...filtroVaga, descricao: v.target.value })}
-										/>
-									</Col>
-									<Col md={6}>
-										<Button type="primary" onClick={fetchVagas}>
-											{t("search")}
-										</Button>
-									</Col> */}
                                     <CardVagas vagas={vagas} competenciasEstudante={user.competencias || []} />
 							</Col>
 						</Row>
