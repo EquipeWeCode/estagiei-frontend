@@ -24,5 +24,6 @@ dist-ssr
 *.sw?
 .env
 
-#loca
+#local
 alteracoes.md
+outline_dia

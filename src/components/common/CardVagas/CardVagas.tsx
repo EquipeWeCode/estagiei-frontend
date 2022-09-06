@@ -2,7 +2,8 @@ import { VagaType } from "@/types/vagasTypes";
 import { Col, Empty, Tag, Space } from "antd";
 import { CompetenciaType } from "@/types/competenciaType";
 import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
-import { COLORS } from '@/constants/colors'
+import { COLORS } from '@/constants/colors';
+import { useTranslation } from "react-i18next";
 
 interface CardVagasProps {
 	vagas: VagaType[];
@@ -10,6 +11,7 @@ interface CardVagasProps {
 }
 
 const CardVagas = (props: CardVagasProps): JSX.Element => {
+	const { t } = useTranslation();
 	const retornaCorTag = (competencia: CompetenciaType): string => {
 		return props.competenciasEstudante.find(
 			comp => comp.codCompetencia === competencia.codCompetencia
@@ -48,7 +50,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 					</Col>
 				))
 			) : (
-				<Empty description="Nenhuma vaga encontrada." />
+				<Empty description={t("not_found_vacancies")} />
 			)}
 		</>
 	);
