@@ -12,16 +12,15 @@ import executivoBackground from "@/assets/fundos/executivo.jpg";
 import { COLORS } from "@/constants/colors";
 
 const Vagas = () => {
-    const FILTRO_INICIAL: VagaType = {
+    const FILTRO_INICIAL: FiltroVagaType = {
 		titulo: "",
 		descricao: "",
 	};
 
     const { t } = useTranslation();
-    const { TabPane } = Tabs;
 
     const [vagas, setVagas] = useState<VagaType[]>([]);
-    const [filtroVaga, setFiltroVaga] = useState<VagaType>(FILTRO_INICIAL);
+    const [filtroVaga, setFiltroVaga] = useState<FiltroVagaType>(FILTRO_INICIAL);
 
     useEffect((): void => {
         fetchVagas();
@@ -48,7 +47,7 @@ const Vagas = () => {
                             Filtros
                         </Col>
                         <Col>
-                                <CardVagas vagas={vagas} competenciasEstudante={[]} />
+                            <CardVagas vagas={vagas} competenciasEstudante={[]} />
                         </Col>
                     </Row>
 			</Row>
