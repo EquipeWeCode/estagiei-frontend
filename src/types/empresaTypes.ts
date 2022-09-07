@@ -1,5 +1,6 @@
 export type EmpresaType = {
   codEmpresa?: number,
+  avatar?: string,
   razaoSocial?: string,
   nomeFantasia?: string,
   cnpj?: string,

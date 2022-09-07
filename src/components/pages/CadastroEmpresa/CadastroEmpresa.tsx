@@ -1,7 +1,8 @@
 import Input from "@/components/common/Input";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/auth";
-import { DatePicker, Form, Row, Select } from "antd";
+import { DatePicker, Form, Row, Col, Space } from "antd";
+import { ReactComponent as Logo } from "@/assets/logo.svg";
 import { useTranslation } from "react-i18next";
 import moment, { Moment } from "moment";
 import { getEstudante, putEstudante } from "@/services/estudante";
@@ -10,35 +11,22 @@ import { CompetenciaType } from "@/types/competenciaType";
 import { getCompetencias } from "@/services/competencias";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "@/components/common/Button";
+import { EmpresaType } from "@/types/empresaTypes";
 
 const CadastroEmpresa = () => {
 	const { user, setUser } = useAuth();
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 
-	const [novoUser, setNovoUser] = useState<StudentType>(user);
-	const [competencias, setCompetencias] = useState<CompetenciaType[]>([]);
+	const [novaEmpresa, setNovaEmpresa] = useState<EmpresaType>(user);
 
 	useEffect(() => {
-		fetchEstudante();
-		fetchCompetencias();
+
 	}, []);
 
 	useEffect(() => {
 		setNovoUser(user);
 	}, [user]);
-
-	const fetchEstudante = async () => {
-		const estudanteBuscado = await getEstudante(user.codEstudante);
-		const data: StudentType = estudanteBuscado.data;
-		setUser(data);
-	};
-
-	const fetchCompetencias = async () => {
-		const competencias = await getCompetencias();
-		const data: CompetenciaType[] = competencias.data;
-		setCompetencias(data);
-	};
 
 	const dateFormat = "DD/MM/YYYY";
 	const dateFormatDto = "YYYY-MM-DD";
@@ -69,6 +57,18 @@ const CadastroEmpresa = () => {
 
 	return (
 		<div className="container-cadastro-estudante">
+            <Row justify="center" align="middle">
+				<Col className="welcome-text">
+					<h1>
+						{t("login_company")}
+					</h1>
+				</Col>
+				<Space>
+					<Col>
+						<Logo className="logo-estagiei" />{" "}
+					</Col>
+				</Space>
+			</Row>
 			<Row justify="center" className="cadastro">
 				<Row className="info-dados">
 					<Row justify="center">
@@ -128,34 +128,6 @@ const CadastroEmpresa = () => {
 							<span>{t("education")}</span>
 							<Form.Item name="instEnsino" noStyle>
 								<Input placeholder={t("education")} value={novoUser.instEnsino} />
-							</Form.Item>
-						</Form.Item>
-
-						<Form.Item>
-							<span>{t("skills")}</span>
-							<Form.Item noStyle>
-								<Select
-									showArrow
-									mode="multiple"
-									value={novoUser.competencias?.map(competencia => competencia.codCompetencia)}
-									placeholder={t("skills")}
-									onChange={(value: (number | undefined)[] | undefined) => {
-										setNovoUser({
-											...novoUser,
-											competencias: value && value.map(codCompetencia => ({ codCompetencia })),
-										});
-									}}
-								>
-									{competencias &&
-										competencias.map(competencia => (
-											<Select.Option
-												key={competencia.codCompetencia}
-												value={competencia.codCompetencia}
-											>
-												{competencia.descricaoCompetencia}
-											</Select.Option>
-										))}
-								</Select>
 							</Form.Item>
 						</Form.Item>
 

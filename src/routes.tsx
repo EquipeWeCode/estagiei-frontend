@@ -19,6 +19,7 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import Notification from "@/components/common/Notification";
 import LoginEmpresa from "./components/pages/LoginEmpresa";
+import CadastroEmpresa from "./components/pages/CadastroEmpresa";
 
 render(
 	<Provider store={store}>
@@ -42,6 +43,14 @@ render(
 							element={
 								<PrivateRoute>
 									<CadastroEstudante />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path="/cadastro/empresa"
+							element={
+								<PrivateRoute>
+									<CadastroEmpresa />
 								</PrivateRoute>
 							}
 						/>
