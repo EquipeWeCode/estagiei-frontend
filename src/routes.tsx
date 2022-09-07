@@ -18,6 +18,7 @@ import CadastroEstudante from "@/components/pages/CadastroEstudante";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import Notification from "@/components/common/Notification";
+import LoginEmpresa from "./components/pages/LoginEmpresa";
 
 render(
 	<Provider store={store}>
@@ -34,7 +35,8 @@ render(
 								// </PrivateRoute>
 							}
 						/>
-						<Route path="login" element={<Login />} />
+						<Route path="/estudante/login" element={<Login />} />
+						<Route path="/empresa/login" element={<LoginEmpresa/>} />
 						<Route
 							path="/cadastro/estudante"
 							element={

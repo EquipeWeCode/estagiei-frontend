@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/auth";
 import { Col, Row } from "antd";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import { ReactComponent as Logo } from "@/assets/logo.svg";
 import { ReactComponent as LogoResumida } from "@/assets/logo-resumida.svg";
@@ -82,7 +82,9 @@ const Login = () => {
 					<p className="texto">{t("company_login_text")}</p>
 					<div className="button-login">
 						<LogoResumida className="logo-resumida" />
-						<Button className="button-company">{t("fill_form")}</Button>
+						<Link to="/empresa/login">
+							<Button className="button-company">{t("fill_form")}</Button>
+						</Link>
 					</div>
 				</Col>
 			</Row>
