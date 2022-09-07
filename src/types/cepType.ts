@@ -1,4 +1,4 @@
-export type cepType = {
+export type CepType = {
     cep: string,
     logradouro: string,
     complemento: string, 

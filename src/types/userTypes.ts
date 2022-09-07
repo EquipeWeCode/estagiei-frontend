@@ -15,6 +15,6 @@ export type StudentType = {
 }
 
 export type LoginType = {
-  email: string,
-  senha: string,
+  email: string;
+  senha: string;
 }
