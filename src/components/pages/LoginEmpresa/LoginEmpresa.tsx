@@ -45,7 +45,7 @@ const Login = () => {
 	return (
 		<>
 			<Row justify="center" align="middle">
-				<Col className="welcome-text" justify="center" align="middle">
+				<Col className="welcome-text">
 					<h1>
 						{t("login_company")}
 					</h1>
