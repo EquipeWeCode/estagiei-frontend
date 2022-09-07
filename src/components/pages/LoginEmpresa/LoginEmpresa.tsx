@@ -5,7 +5,6 @@ import { Col, Row, Space } from "antd";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-
 import { ReactComponent as Logo } from "@/assets/logo.svg";
 import { Link } from "react-router-dom";
 import Button from "@/components/common/Button";
@@ -14,7 +13,7 @@ import { getToken, postLogin } from "@/services/autenticacao";
 import { TOKEN_KEY } from "@/constants";
 import { EmpresaLoginType } from "@/types/empresaTypes";
 
-const Login = () => {
+const LoginEmpresa = () => {
 	const { signed } = useAuth();
 	const navigate = useNavigate();
 	const { t } = useTranslation();
@@ -94,4 +93,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default LoginEmpresa;
