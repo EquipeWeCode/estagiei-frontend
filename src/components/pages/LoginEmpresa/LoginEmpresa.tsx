@@ -7,19 +7,19 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import { ReactComponent as Logo } from "@/assets/logo.svg";
-import { ReactComponent as LogoResumida } from "@/assets/logo-resumida.svg";
+import { Link } from "react-router-dom";
 import Button from "@/components/common/Button";
 import Input from "@/components/common/Input";
-import { LoginType } from "@/types/userTypes";
 import { getToken, postLogin } from "@/services/autenticacao";
 import { TOKEN_KEY } from "@/constants";
+import { EmpresaLoginType } from "@/types/empresaTypes";
 
 const Login = () => {
 	const { signed } = useAuth();
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 
-	const [login, setLogin] = useState({} as LoginType);
+	const [login, setLogin] = useState({} as EmpresaLoginType);
   	const [token, setToken] = useState(getToken());
 
 	useEffect((): void => {
@@ -77,13 +77,12 @@ const Login = () => {
 						</Button>
 					</Col>
 				</Col>
-
-				<Col className="box-login">
-					<p className="texto">{t("company_login_text")}</p>
-					<div className="button-login">
-						<LogoResumida className="logo-resumida" />
-						<Button className="button-company">{t("fill_form")}</Button>
-					</div>
+				<Col>					
+					<Link to="/estudante/login">
+						<a>
+							{t("is_student")}
+						</a>
+					</Link>					
 				</Col>
 			</Row>
 		</>
