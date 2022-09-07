@@ -36,5 +36,6 @@ export const TRANSLATIONS_EN = {
 	save: "Save",
 	go_back: "Go back",
 	is_student: "I am a student",
-	is_company: "Eu sou empresa"
+	is_company: "Eu sou empresa",
+	login_company: "Login como empresa"
 };

@@ -53,7 +53,7 @@ const Login = () => {
 			</Row>
 			<Row className="container-login" justify="space-between">
 				<Col className="box-login">
-					<p className="texto">{t("student_login_text")}</p>
+					<p className="texto">{t("company_login_text")}</p>
 					<Col style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
 						<Col style={{ marginBottom: "1rem" }}>
 							<Input
@@ -75,14 +75,14 @@ const Login = () => {
 						<Button type="primary" onClick={efetuarLogin}>
 							Login
 						</Button>
+						<Col>					
+							<Link to="/estudante/login">
+								<a>
+									{t("is_student")}
+								</a>
+							</Link>					
+						</Col>
 					</Col>
-				</Col>
-				<Col>					
-					<Link to="/estudante/login">
-						<a>
-							{t("is_student")}
-						</a>
-					</Link>					
 				</Col>
 			</Row>
 		</>

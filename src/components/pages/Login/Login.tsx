@@ -82,7 +82,9 @@ const Login = () => {
 					<p className="texto">{t("company_login_text")}</p>
 					<div className="button-login">
 						<LogoResumida className="logo-resumida" />
-						<Button className="button-company">{t("fill_form")}</Button>
+						<Link to="/empresa/login">
+							<Button className="button-company">{t("fill_form")}</Button>
+						</Link>
 					</div>
 				</Col>
 			</Row>
