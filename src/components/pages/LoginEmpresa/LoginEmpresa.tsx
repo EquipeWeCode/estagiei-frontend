@@ -1,7 +1,7 @@
 /// <reference types="vite-plugin-svgr/client" />
 
 import { useAuth } from "@/contexts/auth";
-import { Col, Row } from "antd";
+import { Col, Row, Space } from "antd";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -45,43 +45,48 @@ const Login = () => {
 	return (
 		<>
 			<Row justify="center" align="middle">
-				<Col className="welcome-text">
+				<Col className="welcome-text" justify="center" align="middle">
 					<h1>
-						{t("welcome_to")} <Logo className="logo-estagiei" />{" "}
+						{t("login_company")}
 					</h1>
 				</Col>
+				<Space>
+					<Col>
+						<Logo className="logo-estagiei" />{" "}
+					</Col>
+				</Space>
 			</Row>
-			<Row className="container-login" justify="space-between">
-				<Col className="box-login">
-					<p className="texto">{t("company_login_text")}</p>
-					<Col style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-						<Col style={{ marginBottom: "1rem" }}>
-							<Input
-								placeholder="Digite seu e-mail"
-								name="email"
-								value={login.email}
-								onChange={changeLogin}
-							/>
-						</Col>
-						<Col style={{ marginBottom: "1rem" }}>
-							<Input
-								placeholder="Digite sua senha"
-								type={"password"}
-								name="senha"
-								value={login.senha}
-								onChange={changeLogin}
-							/>
-						</Col>
-						<Button type="primary" onClick={efetuarLogin}>
-							Login
-						</Button>
-						<Col>					
-							<Link to="/estudante/login">
-								<a>
-									{t("is_student")}
-								</a>
-							</Link>					
-						</Col>
+			<Row className="container-login">
+				<Col className="box-login" style={{minHeight:"100%"}}>
+					{/* <p className="texto">{t("company_login_text")}</p> */}
+					<Col style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%"}}>
+							<Col style={{ marginBottom: "1rem", width:"100%" }}>
+								<Input
+									placeholder="Digite seu e-mail"
+									name="email"
+									value={login.email}
+									onChange={changeLogin}		
+								/>
+							</Col>
+							<Col style={{ marginBottom: "1rem", width:"100%"  }}>
+								<Input
+									placeholder="Digite sua senha"
+									type={"password"}
+									name="senha"
+									value={login.senha}
+									onChange={changeLogin}
+								/>
+							</Col>
+							<Button type="primary" onClick={efetuarLogin} style={{width:"100%"}}>
+								Login
+							</Button>
+					</Col>
+					<Col>					
+						<Link to="/estudante/login">
+							<a>
+								{t("is_student")}
+							</a>
+						</Link>					
 					</Col>
 				</Col>
 			</Row>

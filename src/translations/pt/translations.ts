@@ -37,5 +37,5 @@ export const TRANSLATIONS_PT = {
   go_back: "Voltar",
   is_student: "Eu sou estudante",
   is_company: "Eu sou empresa",
-  login_company: "Sing up as a company"
+  login_company: "Login como empresa"
 };
