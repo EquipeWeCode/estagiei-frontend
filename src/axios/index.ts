@@ -34,9 +34,10 @@ instance.interceptors.response.use(
 		const response = error.response;
 		const errors: [] = response.data.errors ? response.data.errors : [];
 		const message = response.data.message ? response.data.message : "";
+
 		store.dispatch({
 			type: "SHOW_ERROR",
-			payload: errors.length > 0 ? errors.join("\r\n") : message,
+			payload: errors.length > 0 ? `${errors}` : message,
 		});
 		return Promise.reject(error);
 	}

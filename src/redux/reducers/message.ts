@@ -5,7 +5,7 @@ export const HIDE_MESSAGE = "HIDE_MESSAGE";
 
 interface ShowErrorAction {
 	type: typeof SHOW_ERROR | typeof HIDE_MESSAGE;
-	payload: string;
+	payload: Array<string> | string;
 }
 
 export const showErrorReducer = (state = "", action: ShowErrorAction) => {

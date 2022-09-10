@@ -8,29 +8,37 @@ interface NotificationProps {
 
 const Notification = (props: NotificationProps): JSX.Element => {
 	const selector = useSelector((state: any) => state.message);
-  const dispatch = useDispatch();
-	
-  useEffect(() => {
-    if (selector.visible) {
-      showNotification();
-    }
-  }, [selector]);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (selector.visible) {
+			showNotification();
+		}
+	}, [selector]);
+
+	const arrayMensagens: Array<string> = selector?.message?.split(",");
 
 	const showNotification = () => {
 		notificationAntd.open({
-			message: selector.message,
+			message: "Erro ao solicitar",
 			placement: "topRight",
-			duration: 4,
-      type: "error",
+			description: (
+				<>
+					{arrayMensagens?.map((item: string) => (
+						<>
+							<span>{item}</span>
+							<br />
+						</>
+					))}
+				</>
+			),
+			duration: 6,
+			type: "error",
 		});
-    dispatch({ type: "HIDE_MESSAGE" });
+		dispatch({ type: "HIDE_MESSAGE" });
 	};
 
-	return (
-		<>
-			{props.children}
-		</>
-	);
+	return <>{props.children}</>;
 };
 
 export default Notification;
