@@ -10,7 +10,7 @@ import { ReactComponent as Logo } from "@/assets/logo.svg";
 import { ReactComponent as LogoResumida } from "@/assets/logo-resumida.svg";
 import Button from "@/components/common/Button";
 import Input from "@/components/common/Input";
-import { LoginType } from "@/types/userTypes";
+import { LoginType } from "@/types/studentTypes";
 import { getToken, postLogin } from "@/services/autenticacao";
 import { TOKEN_KEY } from "@/constants";
 

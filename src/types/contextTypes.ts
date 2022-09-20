@@ -1,4 +1,4 @@
-import { StudentType } from "./userTypes";
+import { StudentType } from "./studentTypes";
 
 export interface AuthContextData {
 	signed: boolean;

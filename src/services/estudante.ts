@@ -1,5 +1,5 @@
 import { ENDPOINT_ESTUDANTE } from "@/constants";
-import { StudentType } from "@/types/userTypes";
+import { StudentType } from "@/types/studentTypes";
 import { getResource, putResource } from "./utils";
 
 export const getEstudante = async (id: string = "") => {

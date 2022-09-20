@@ -1,5 +1,5 @@
 import { AuthContextData } from "@/types/contextTypes";
-import { StudentType } from "@/types/userTypes";
+import { StudentType } from "@/types/studentTypes";
 import React, { createContext } from "react";
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
