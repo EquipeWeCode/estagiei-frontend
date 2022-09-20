@@ -1,4 +1,4 @@
 export type CompetenciaType = {
-  codCompetencia?: number,
-  descricaoCompetencia?: string,
+  codCompetencia?: number;
+  descricaoCompetencia?: string;
 }
