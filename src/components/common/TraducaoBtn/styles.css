@@ -1,8 +1,11 @@
 .switch-div {
     transform: scale(1);
-    position: absolute;
-    left: 45%;
+    position: -webkit-sticky !important; /* Safari */
+    position: fixed !important;
+    left: 95%;
     top: 90vh;
+    z-index: 1000;
+    transition: top 1s linear;
 }
 
 .switch-div > div:first-child::before {
@@ -11,9 +14,9 @@
 
 @media only screen and (max-width: 600px) {
     .switch-div {
-        transform: scale(1.5);
-        position: absolute;
-        left: 45%;
+        transform: scale(1.2);
+        position: fixed;
+        left: 80%;
         top: 90vh;
     }    
 }
