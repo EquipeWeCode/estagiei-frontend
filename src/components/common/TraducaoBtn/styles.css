@@ -1,7 +1,19 @@
-.switch-div{
-    transform: scale(1.5)
+.switch-div {
+    transform: scale(1);
+    position: absolute;
+    left: 45%;
+    top: 90vh;
 }
 
 .switch-div > div:first-child::before {
     background-color: white;
+}
+
+@media only screen and (max-width: 600px) {
+    .switch-div {
+        transform: scale(1.5);
+        position: absolute;
+        left: 45%;
+        top: 90vh;
+    }    
 }
