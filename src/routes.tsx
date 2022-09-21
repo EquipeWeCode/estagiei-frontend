@@ -28,14 +28,7 @@ render(
 				<BrowserRouter>
 					<Header />
 					<Routes>
-						<Route
-							path="/"
-							element={
-								// <PrivateRoute>
-									<HomePage />
-								// </PrivateRoute>
-							}
-						/>
+						<Route path="/" element={<HomePage />} />
 						<Route path="/estudante/login" element={<Login />} />
 						<Route path="/empresa/login" element={<LoginEmpresa/>} />
 						<Route

@@ -8,7 +8,12 @@ import moment, { Moment } from "moment";
 import { getEstudante, putEstudante } from "@/services/estudante";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "@/components/common/Button";
-import { EmpresaType } from "@/types/empresaTypes";
+import { EmpresaLoginType, EmpresaType } from "@/types/empresaTypes";
+import { getEmpresa, postEmpresa } from "@/services/empresa";
+import Notification from "@/components/common/Notification";
+import { use } from "i18next";
+import { CepType } from "@/types/cepType";
+import { getCep } from "@/services/cep";
 
 const CadastroEmpresa = () => {
 	const { user, setUser } = useAuth();
@@ -16,26 +21,25 @@ const CadastroEmpresa = () => {
 	const navigate = useNavigate();
 
 	const [novaEmpresa, setNovaEmpresa] = useState<EmpresaType>(user);
+	const [loginEmpresa, setLogin] = useState<EmpresaLoginType>({} as EmpresaLoginType);
+	const [novoCep, setCep] = useState<CepType>({} as CepType);
 
 	useEffect(() => {
 
 	}, []);
 
 	useEffect(() => {
-		setNovoUser(user);
+		setNovaEmpresa(user);
 	}, [user]);
 
 	const dateFormat = "DD/MM/YYYY";
 	const dateFormatDto = "YYYY-MM-DD";
 
 	const INITIAL_VALUES = {
-		nome: novoUser.nome,
-		cpf: novoUser.cpf,
-		rg: novoUser.rg,
-		instEnsino: novoUser.instEnsino,
-		dataNascimento: novoUser.dataNascimento
-			? moment(novoUser.dataNascimento, dateFormatDto)
-			: undefined,
+		razaoSocial: novaEmpresa.razaoSocial,
+		nomeFantasia: novaEmpresa.nomeFantasia,
+		cnpj: novaEmpresa.cnpj,
+		endereco: novaEmpresa.endereco
 	};
 
 	const RULES = [
@@ -45,11 +49,25 @@ const CadastroEmpresa = () => {
 		},
 	];
 
-	const salvaEstudante = async () => {
-		await putEstudante(user.codEstudante, novoUser);
-		const response = await getEstudante(user.codEstudante);
-		setUser(response.data);
-		navigate("/");
+	const fetchCep = async (cep: string) => {
+		try {
+			const response = await getCep(cep);
+			console.log(response);
+		}
+		catch(e) {
+			console.log(e);
+		}
+	}
+
+	const criarEmpresa = async () => {
+		try {
+			await postEmpresa(novaEmpresa);
+			// <Notification visible={true}  />
+			navigate('/');
+		}
+		catch(e) {
+			navigate('/');
+		}
 	};
 
 	return (
@@ -68,15 +86,12 @@ const CadastroEmpresa = () => {
 			</Row>
 			<Row justify="center" className="cadastro">
 				<Row className="info-dados">
-					<Row justify="center">
-						<h2>{t("edit_your_profile")}</h2>
-					</Row>
 					<Form
-						onFinish={salvaEstudante}
+						onFinish={criarEmpresa}
 						name="cadastroEstudante"
 						onValuesChange={(changedValues, allValues) => {
-							setNovoUser({
-								...novoUser,
+							setNovaEmpresa({
+								...novaEmpresa,
 								...allValues,
 								dataNascimento: moment(allValues.dataNascimento).format(dateFormatDto),
 							});
@@ -84,47 +99,104 @@ const CadastroEmpresa = () => {
 						initialValues={INITIAL_VALUES}
 					>
 						<Form.Item>
-							<span>{t("name")}</span>
-							<Form.Item name="nome" noStyle rules={RULES}>
-								<Input placeholder={t("name")} value={novoUser.nome} />
+							<span>{"Email"}</span>
+							<Form.Item name="email" noStyle rules={RULES}>
+								<Input type={"email"} placeholder={"email"} value={novaEmpresa.email} />
 							</Form.Item>
 						</Form.Item>
 
 						<Form.Item>
-							<span>CPF</span>
+							<span>Senha</span>
+							<Form.Item name="senha" noStyle rules={RULES}>
+								<Input type={"password"} placeholder={"senha"} value={novaEmpresa.senha} maxLength={14} />
+							</Form.Item>
+						</Form.Item>
+
+						<Form.Item>
+							<span>Repetir a senha</span>
+							<Form.Item name="repete-senha" noStyle rules={RULES}>
+								<Input type={"password"} placeholder={"senha"} value={novaEmpresa.senha} maxLength={14} />
+							</Form.Item>
+						</Form.Item>
+
+						<Form.Item>
+							<span>{"Razao social"}</span>
+							<Form.Item name="razaoSocial" noStyle rules={RULES}>
+								<Input placeholder={t("name")} value={novaEmpresa.razaoSocial} />
+							</Form.Item>
+						</Form.Item>
+
+						<Form.Item>
+							<span>{"Nome fantasia"}</span>
+							<Form.Item name="nomeFantasia" noStyle rules={RULES}>
+								<Input placeholder={t("name")} value={novaEmpresa.nomeFantasia} />
+							</Form.Item>
+						</Form.Item>
+
+						<Form.Item>
+							<span>CNPJ</span>
 							<Form.Item name="cpf" noStyle rules={RULES}>
-								<Input placeholder={"CPF"} value={novoUser.cpf} maxLength={14} />
+								<Input placeholder={"CPF"} value={novaEmpresa.cnpj} maxLength={14} />
 							</Form.Item>
 						</Form.Item>
 
-						<Form.Item>
+						{/* <Form.Item>
 							<span>RG</span>
 							<Form.Item name="rg" noStyle rules={RULES}>
-								<Input placeholder={"RG"} value={novoUser.rg} maxLength={12} />
+								<Input placeholder={"RG"} value={novaEmpresa.endereco} maxLength={12} />
 							</Form.Item>
-						</Form.Item>
+						</Form.Item> */}
 
 						<Form.Item>
-							<span>{t("birth_date")}</span>
+							{/* <span>{t("birth_date")}</span>
 							<Form.Item name="dataNascimento" noStyle rules={RULES}>
 								<DatePicker
 									style={{ width: "100%", marginBottom: "0.4rem", borderRadius: "0.5rem" }}
 									name="dataNascimento"
 									placeholder={t("birth_date")}
 									value={
-										novoUser.dataNascimento
-											? moment(novoUser.dataNascimento, dateFormatDto)
+										novaEmpresa.dataNascimento
+											? moment(novaEmpresa.dataNascimento, dateFormatDto)
 											: undefined
 									}
 									format={dateFormat}
 								/>
+							</Form.Item> */}
+							<Form.Item>
+								<span>CEP</span>
+								<Form.Item name="cep" noStyle rules={RULES}>
+									<Input placeholder={"cep"} value={novaEmpresa.endereco?.cep} maxLength={14} />
+								</Form.Item>
 							</Form.Item>
-						</Form.Item>
-
-						<Form.Item>
-							<span>{t("education")}</span>
-							<Form.Item name="instEnsino" noStyle>
-								<Input placeholder={t("education")} value={novoUser.instEnsino} />
+							<Form.Item>
+								<span>CNPJ</span>
+								<Form.Item name="cpf" noStyle rules={RULES}>
+									<Input placeholder={"CPF"} value={novaEmpresa.endereco?.logradouro} maxLength={14} />
+								</Form.Item>
+							</Form.Item>
+							<Form.Item>
+								<span>CNPJ</span>
+								<Form.Item name="cpf" noStyle rules={RULES}>
+									<Input placeholder={"CPF"} value={novaEmpresa.endereco?.numero} maxLength={14} />
+								</Form.Item>
+							</Form.Item>
+							<Form.Item>
+								<span>CNPJ</span>
+								<Form.Item name="cpf" noStyle rules={RULES}>
+									<Input placeholder={"CPF"} value={novaEmpresa.endereco?.bairro} maxLength={14} />
+								</Form.Item>
+							</Form.Item>
+							<Form.Item>
+								<span>CNPJ</span>
+								<Form.Item name="cpf" noStyle rules={RULES}>
+									<Input placeholder={"CPF"} value={novaEmpresa.endereco?.cidade} maxLength={14} />
+								</Form.Item>
+							</Form.Item>
+							<Form.Item>
+								<span>CNPJ</span>
+								<Form.Item name="cpf" noStyle rules={RULES}>
+									<Input placeholder={"CPF"} value={novaEmpresa.endereco?.estado} maxLength={14} />
+								</Form.Item>
 							</Form.Item>
 						</Form.Item>
 

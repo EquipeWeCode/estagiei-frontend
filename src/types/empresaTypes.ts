@@ -3,6 +3,8 @@ import { VagaType } from "./vagasTypes";
 
 export type EmpresaType = {
   codEmpresa?: number;
+  email?: string;
+  senha?: string;
   avatar?: string;
   razaoSocial?: string;
   nomeFantasia?: string;

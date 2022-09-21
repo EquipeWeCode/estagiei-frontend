@@ -61,8 +61,7 @@ const CadastroEstudante = () => {
 	];
 
 	const salvaEstudante = async () => {
-		await putEstudante(user.codEstudante, novoUser);
-		const response = await getEstudante(user.codEstudante);
+		const response = await putEstudante(user.codEstudante, novoUser);
 		setUser(response.data);
 		navigate("/");
 	};

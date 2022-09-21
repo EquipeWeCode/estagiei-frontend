@@ -1,5 +1,5 @@
 export type EnderecoType = {
-    codEndereco?: number;
+    codEndereco?: number; // n
     cep?: string;
     logradouro?: string;
     numero?: number;
@@ -7,6 +7,6 @@ export type EnderecoType = {
     cidade?: string;
     estado?: string;
     complemento?: string;
-    pontoReferencia?: string;
-    indAtivo?: boolean;
+    pontoReferencia?: string; // n
+    indAtivo?: boolean; // n
 }
