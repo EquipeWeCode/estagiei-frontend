@@ -2,6 +2,7 @@ import Button from "@/components/common/Button";
 import CardVagas from "@/components/common/CardVagas";
 import Input from "@/components/common/Input";
 import { useAuth } from "@/contexts/auth";
+import { getToken } from "@/services/autenticacao";
 import { getVagasRecomendadas } from "@/services/estudante";
 import { getVagas } from "@/services/vaga";
 import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
@@ -17,23 +18,22 @@ const HomePage = (): JSX.Element => {
 		descricao: "",
 	};
 
-	const { user, signed } = useAuth();
+	const { user } = useAuth();
 	const [vagas, setVagas] = useState<VagaType[]>([]);
 	const [vagasRecomendadas, setVagasRecomendadas] = useState<VagaType[]>([]);
 	const [filtroVaga, setFiltroVaga] = useState<FiltroVagaType>(FILTRO_INICIAL);
-	const navigate = useNavigate();
 	const { t } = useTranslation();
 
 	const { TabPane } = Tabs;
 
 	useEffect((): void => {
-		// if (!signed || !user) {
-		// 	navigate("/login");
-		// } else {
-			fetchVagas();
+		fetchVagas();
+		if (user?.codEstudante) {
 			fetchVagasRecomendadas();
-		// }
-	}, [signed]); // TODO: melhorar isso depois
+		} else {
+			setVagasRecomendadas([]);
+		}
+	}, [user?.codEstudante]);
 
 	const fetchVagas = async () => {
 		const response = await getVagas(filtroVaga);

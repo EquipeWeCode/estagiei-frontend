@@ -5,7 +5,7 @@ import { DatePicker, Form, Row, Select } from "antd";
 import { useTranslation } from "react-i18next";
 import moment, { Moment } from "moment";
 import { getEstudante, putEstudante } from "@/services/estudante";
-import { StudentType } from "@/types/userTypes";
+import { UserType } from "@/types/userTypes";
 import { CompetenciaType } from "@/types/competenciaType";
 import { getCompetencias } from "@/services/competencias";
 import { Link, useNavigate } from "react-router-dom";

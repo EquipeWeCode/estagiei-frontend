@@ -3,16 +3,17 @@
 import { i18n } from "@/translations/i18n";
 import { Button, Col, Dropdown, Image, Menu, Row, Space } from "antd";
 import { useAuth } from "@/contexts/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import TraducaoBtn from "../TraducaoBtn";
 
 import { ReactComponent as Logo } from "@/assets/logo.svg";
 import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
-import { logout } from "@/services/autenticacao";
+import { getToken, logout } from "@/services/autenticacao";
 
 const Header = () => {
-	const { user } = useAuth();
+	const { user, setUser } = useAuth();
 	const { t } = i18n;
+	const navigate = useNavigate();
 
 	const menu = (
 		<Menu
@@ -20,10 +21,22 @@ const Header = () => {
 				{
 					key: "1",
 					label: "sair",
+					onClick: () => {
+						fazLogout();
+					},
 				},
 			]}
 		/>
 	);
+
+	const navegaLogin = () => {
+		navigate("/estudante/login");
+	};
+
+	const fazLogout = () => {
+		setUser({});
+		logout();
+	};
 
 	return (
 		<header>
@@ -34,7 +47,7 @@ const Header = () => {
 					</Link>
 				</Col>
 
-				{user.codEstudante ? (
+				{user?.codEstudante ? (
 					<Row gutter={12} align="middle">
 						<Space>
 							<Col className="translate-button">
@@ -55,11 +68,11 @@ const Header = () => {
 								</Dropdown>
 							</Col>
 						</Space>
+						<TraducaoBtn />
 					</Row>
 				) : (
 					<>
-						<TraducaoBtn />
-						<Button onClick={logout}>Logout</Button>
+						<Button onClick={navegaLogin}>Faça login</Button>
 					</>
 				)}
 			</Row>
