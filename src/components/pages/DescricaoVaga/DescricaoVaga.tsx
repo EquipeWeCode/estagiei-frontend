@@ -15,6 +15,7 @@ const DescricaoVaga = () => {
 	const { t } = useTranslation();
 
 	return (
+		
 		<div className="container-descricao-vaga">
 			<Row justify="center" className="cadastro">
 				<Row className="info-dados">

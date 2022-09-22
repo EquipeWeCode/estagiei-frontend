@@ -9,6 +9,7 @@
 
 
 .descricaoVaga{
+  
   flex-direction: row;
   align-content: space-between;
   background-color: #fff;
