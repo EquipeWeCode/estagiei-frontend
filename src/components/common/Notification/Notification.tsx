@@ -24,11 +24,11 @@ const Notification = (props: NotificationProps): JSX.Element => {
 			placement: "topRight",
 			description: (
 				<>
-					{arrayMensagens?.map((item: string) => (
-						<>
+					{arrayMensagens?.map((item: string, idx: number) => (
+						<div key={idx}>
 							<span>{item}</span>
 							<br />
-						</>
+						</div>
 					))}
 				</>
 			),
