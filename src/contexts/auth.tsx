@@ -1,17 +1,24 @@
 import { AuthContextData } from "@/types/contextTypes";
-import { StudentType } from "@/types/userTypes";
-import React, { createContext } from "react";
+import { UserType, TokenType } from "@/types/userTypes";
+import React, { createContext, useEffect } from "react";
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
-	const [user, setUser] = React.useState<StudentType>({} as StudentType);
-	const [signed, setSigned] = React.useState(false);
+	const [user, setUser] = React.useState<UserType>({} as UserType);
+	const [userDecoded, setUserDecoded] = React.useState<TokenType>({} as TokenType);
+
+	useEffect(() => {
+		const user = localStorage.getItem("userDetails");
+		if (user) {
+			setUser(JSON.parse(user));
+		} else {
+      setUser({} as UserType);
+    }
+	}, []);
 
 	return (
-		<AuthContext.Provider value={{ signed, user, setUser, setSigned }}>
-			{children}
-		</AuthContext.Provider>
+		<AuthContext.Provider value={{ user, setUser, userDecoded }}>{children}</AuthContext.Provider>
 	);
 };
 

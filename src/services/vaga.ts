@@ -3,5 +3,5 @@ import { FiltroVagaType } from "@/types/vagasTypes";
 import { getResource, serializeObjectToParam } from "./utils";
 
 export const getVagas = (filtro: FiltroVagaType) => {
-	return getResource(ENDPOINT_VAGA + serializeObjectToParam(filtro, false), null);
+	return getResource(ENDPOINT_VAGA + serializeObjectToParam(filtro));
 };

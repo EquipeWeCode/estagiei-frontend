@@ -5,3 +5,8 @@ export type EmpresaType = {
   cnpj?: string,
   indAtivo?: boolean,
 }
+
+export type EmpresaLoginType = {
+  email: string,
+  senha: string,
+}

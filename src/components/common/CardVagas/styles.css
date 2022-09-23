@@ -1,6 +1,17 @@
 .container-vagas {
+  display: flex;
+  justify-content: space-between;
   margin: 1rem;
   text-align: center;
+  gap: 10px;
+}
+
+.content {
+  flex-grow: 1;
+}
+
+.col-image {
+  margin-right: 15px;
 }
 
 .container-vaga {
@@ -8,12 +19,33 @@
   padding: 1.5rem;
   background-color: var(--container-color);
   text-align: left;
-  border-radius: 0.5rem;
-  margin-bottom: 2rem;
-  border: 1px solid var(--primary-color);
+  border: 0.5px solid var(--primary-color);
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  transition: ease 0.2s;
+}
+
+.container-vaga:hover {
+  background-color: var(--container_hover_color);
 }
 
 .vaga-titulo {
   display: flex;
   justify-content: space-between;
+  width: 100%;
+}
+
+.col-desc {
+  display: inline-block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}
+
+@media only screen and (max-width: 950px) {
+  .col-image {
+    display: none;
+  }
 }
