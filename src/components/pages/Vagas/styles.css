@@ -6,6 +6,9 @@
     text-shadow: 0.2px 0.2px 0.2px rgb(0, 0, 0);
 }
 
+.row-vagas {
+    min-width: 100%;
+}
 
 .main-row h1 {
     color: black;

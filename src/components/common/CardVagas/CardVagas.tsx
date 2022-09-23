@@ -14,7 +14,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 		return props.competenciasEstudante.find(
 			comp => comp.codCompetencia === competencia.codCompetencia
 		)
-			? COLORS.primary_color
+			? COLORS.argb.primary_color
 			: "#000";
 	};
 
