@@ -5,6 +5,7 @@ import { Button, Col, Dropdown, Image, Menu, Row, Space } from "antd";
 import { useAuth } from "@/contexts/auth";
 import { Link, useNavigate } from "react-router-dom";
 import TraducaoBtn from "../TraducaoBtn";
+import VagasBtn from "../VagasHeaderBtn/VagasBtn";
 
 import { ReactComponent as Logo } from "@/assets/logo.svg";
 import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
@@ -72,7 +73,14 @@ const Header = () => {
 					</Row>
 				) : (
 					<>
-						<Button onClick={navegaLogin}>Faça login</Button>
+						<Row gutter={12} align="middle">
+							<Space>
+								<Col>
+									<VagasBtn />
+								</Col>
+								<Button onClick={navegaLogin}>Faça login</Button>
+							</Space>
+						</Row>
 					</>
 				)}
 			</Row>

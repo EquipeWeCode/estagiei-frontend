@@ -37,5 +37,11 @@ export const TRANSLATIONS_EN = {
 	go_back: "Go back",
 	is_student: "I am a student",
 	is_company: "I am a company",
-	login_company: "Sing up as a company"
+	login_company: "Sing up as a company",
+	vacancy: "Jobs",
+	vacancy_title_header: "Internship vacancies",
+	vacancy_description_header: 
+		"Looking for the so waited experience in your area? Want to be hired with the dream internship? So you are in the right place!",
+	vacancy_btn: "Show interships",
+	not_found_vacancies: "Not found vacancies"
 };
