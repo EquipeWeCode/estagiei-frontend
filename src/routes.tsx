@@ -37,8 +37,10 @@ render(
 								// </PrivateRoute>
 							}
 						/>
-						<Route path="login" element={<Login />} />
-						<Route path="vagas" element={<Vagas/>} />
+						<Route path="/estudante/login" element={<Login />} />
+						<Route path="/empresa/login" element={<LoginEmpresa/>} />
+						<Route path="/vagas" element={<Vagas/>} />
+						<Route path="/DescricaoVaga" element={<DescricaoVaga/>} />
 						<Route
 							path="/cadastro/estudante"
 							element={

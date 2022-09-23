@@ -18,6 +18,7 @@ const Vagas = () => {
 	};
 
     const { t } = useTranslation();
+    const { TabPane } = Tabs;
 
     const [vagas, setVagas] = useState<VagaType[]>([]);
     const [filtroVaga, setFiltroVaga] = useState<FiltroVagaType>(FILTRO_INICIAL);
@@ -41,11 +42,43 @@ const Vagas = () => {
                     <p>{t("vacancy_description_header")}</p>
                 </Col>
             </Row>
+
+
             <Row justify="center" align="middle" style={{ padding: "2rem" }}>
+            <Tabs defaultActiveKey="1" style={{ width: "100%" }}>
+					<TabPane tab={t("vacancies")} key="1">
+						<Row justify="center" align="middle" className="search-row">
+							<Col className="search-col">
+								<Row style={{ marginBottom: "1rem" }} gutter={12} className="search-sec-row">
+									<Col flex={1}>
+										<Input
+											style={{ borderRadius: "0.5rem" }}
+											allowClear={true}
+											placeholder={t("type_job_title")}
+											value={filtroVaga.titulo}
+											onChange={v => setFiltroVaga({ ...filtroVaga, titulo: v.target.value })}
+										/>
+									</Col>
+									<Col flex={1}>
+										<Input
+											style={{ borderRadius: "0.5rem" }}
+											allowClear={true}
+											placeholder={t("type_job_description")}
+											value={filtroVaga.descricao}
+											onChange={v => setFiltroVaga({ ...filtroVaga, descricao: v.target.value })}
+										/>
+									</Col>
+									<Col flex={1}>
+										<Button type="primary" onClick={fetchVagas}>
+											{t("search")}
+										</Button>
+									</Col>
+								</Row>
+							</Col>
+						</Row>
+					</TabPane>
+				</Tabs>
                     <Row justify="center" className="row-vagas" align="middle">
-                        <Col>
-                            Filtros
-                        </Col>
                         <Col>
                             <CardVagas vagas={vagas} competenciasEstudante={[]} />
                         </Col>

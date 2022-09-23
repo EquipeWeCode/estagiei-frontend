@@ -73,7 +73,14 @@ const Header = () => {
 					</Row>
 				) : (
 					<>
-						<Button onClick={navegaLogin}>Faça login</Button>
+						<Row gutter={12} align="middle">
+							<Space>
+								<Col>
+									<VagasBtn />
+								</Col>
+								<Button onClick={navegaLogin}>Faça login</Button>
+							</Space>
+						</Row>
 					</>
 				)}
 			</Row>

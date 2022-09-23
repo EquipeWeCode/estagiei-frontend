@@ -3,3 +3,23 @@
     padding: 10px;
     font-size: 18px;
 }
+
+.search-row {
+    display: flex;
+    justify-content: center !important;
+    align-items: center;
+}
+
+.search-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+}
+
+.search-sec-row {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
