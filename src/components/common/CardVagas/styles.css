@@ -19,10 +19,10 @@
   padding: 1.5rem;
   background-color: var(--container-color);
   text-align: left;
-  margin-bottom: 2rem;
-  border: 1px solid var(--primary-color);
+  border: 0.5px solid var(--primary-color);
   border-left: none;
   border-right: none;
+  border-bottom: none;
   transition: ease 0.2s;
 }
 

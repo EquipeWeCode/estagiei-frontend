@@ -44,7 +44,7 @@ const Vagas = () => {
 
 
             <Row justify="center" align="middle" style={{ padding: "2rem" }}>
-            <Tabs defaultActiveKey="1" style={{ width: "100%" }}>
+            	<Tabs defaultActiveKey="1" style={{ width: "100%" }}>
 					<TabPane tab={t("vacancies")} key="1">
 						<Row justify="center" align="middle" className="search-row">
 							<Col className="search-col">

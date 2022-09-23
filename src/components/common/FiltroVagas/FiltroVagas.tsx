@@ -52,3 +52,5 @@ const FiltroVagas = () => {
         </Dropdown>
     )
 }
+
+export default FiltroVagas;
