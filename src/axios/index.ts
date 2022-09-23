@@ -11,7 +11,7 @@ instance.interceptors.request.use(
 	async config => {
 		document.body.classList.add("loading-indicator");
 		const token = getToken();
-
+    
 		if (token) {
 			config.headers!.Authorization = `Bearer ${token}`;
 		}
@@ -31,12 +31,13 @@ instance.interceptors.response.use(
 	},
 	function (error) {
 		document.body.classList.remove("loading-indicator");
-		const response = error.response;
-		const errors: [] = response.data.errors ? response.data.errors : [];
-		const message = response.data.message ? response.data.message : "";
+		const response = error?.response;
+		const errors: [] = response?.data?.errors|| [];
+		const message = response?.data?.message || "";
+
 		store.dispatch({
 			type: "SHOW_ERROR",
-			payload: errors.length > 0 ? errors.join("\r\n") : message,
+			payload: errors?.length > 0 ? `${errors}` : message,
 		});
 		return Promise.reject(error);
 	}

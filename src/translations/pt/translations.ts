@@ -35,6 +35,9 @@ export const TRANSLATIONS_PT = {
 	birth_date: "Data de nascimento",
 	save: "Salvar",
 	go_back: "Voltar",
+	is_student: "Eu sou estudante",
+	is_company: "Eu sou empresa",
+	login_company: "Login como empresa",
 	vacancy: "Ver vagas",
 	vacancy_title_header: "Vagas de estágio",
 	vacancy_description_header: 

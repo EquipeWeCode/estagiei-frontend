@@ -1,8 +1,8 @@
-import { StudentType } from "./userTypes";
+import { UserType } from '@/types/userTypes';
+import { TokenType } from "./userTypes";
 
 export interface AuthContextData {
-	signed: boolean;
-  user: StudentType;
-  setUser: (user: StudentType) => void;
-  setSigned: (signed: boolean) => void;
+  user: UserType;
+  setUser: (user: UserType) => void;
+  userDecoded: TokenType;
 }
