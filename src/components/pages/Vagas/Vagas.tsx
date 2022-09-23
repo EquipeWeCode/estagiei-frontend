@@ -89,8 +89,7 @@ const Vagas = () => {
 }
 
 const styles = {
-    backgroundColor: `${COLORS.argb.primary_color}`,
-    backgroundImage: `url(${executivoBackground})`,
+    backgroundImage: `linear-gradient(rgba(191, 66, 245, 0.6), rgba(255, 255, 255, 0.3)), url(${executivoBackground})`,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',

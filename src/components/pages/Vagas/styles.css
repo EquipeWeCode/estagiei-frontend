@@ -1,7 +1,14 @@
 .main-row {
     align-items: "center";
     padding: 10px;
+    color: black;
     font-size: 18px;
+    text-shadow: 0.2px 0.2px 0.2px rgb(0, 0, 0);
+}
+
+
+.main-row h1 {
+    color: black;
 }
 
 .search-row {
