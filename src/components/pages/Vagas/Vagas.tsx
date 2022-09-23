@@ -9,7 +9,6 @@ import { useAuth } from "@/contexts/auth";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import executivoBackground from "@/assets/fundos/executivo.jpg";
-import { COLORS } from "@/constants/colors";
 
 const Vagas = () => {
     const FILTRO_INICIAL: FiltroVagaType = {
