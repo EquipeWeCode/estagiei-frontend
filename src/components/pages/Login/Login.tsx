@@ -10,17 +10,19 @@ import { ReactComponent as Logo } from "@/assets/logo.svg";
 import { ReactComponent as LogoResumida } from "@/assets/logo-resumida.svg";
 import Button from "@/components/common/Button";
 import Input from "@/components/common/Input";
-import { LoginType } from "@/types/studentTypes";
+import { LoginType, UserType } from "@/types/userTypes";
 import { getToken, postLogin } from "@/services/autenticacao";
 import { TOKEN_KEY } from "@/constants";
+import jwt from "jwt-decode";
+import { getUsuario } from "@/services/usuario";
+import { getEstudante } from "@/services/estudante";
 
 const Login = () => {
-	const { signed } = useAuth();
 	const navigate = useNavigate();
 	const { t } = useTranslation();
-
+	const { setUser } = useAuth();
 	const [login, setLogin] = useState({} as LoginType);
-  const [token, setToken] = useState(getToken());
+	const [token, setToken] = useState(getToken());
 
 	useEffect((): void => {
 		if (token) {
@@ -35,11 +37,32 @@ const Login = () => {
 
 	const efetuarLogin = async () => {
 		const { data, status } = await postLogin(login);
-    if(status == 200) {
-      const token = data?.accessToken;
-      localStorage.setItem(TOKEN_KEY, token);
-      navigate("/");
-    }
+		if (status == 200) {
+			const token = data?.accessToken;
+			const roles = data?.roles;
+			localStorage.setItem(TOKEN_KEY, token);
+
+			const decoded = jwt(token) as any;
+
+			const codUsuario = decoded?.sub?.split(",")[0];
+			const { data: userData } = await getUsuario(codUsuario);
+			const codEmpresa = userData?.codEmpresa;
+			const codEstudante = userData?.codEstudante;
+
+			let user: UserType = {} as UserType;
+
+			if (codEmpresa) {
+				// const response = await getEmpresa(codEmpresa);
+				// user = response.data;
+			} else if (codEstudante) {
+				const response = await getEstudante(codEstudante);
+				user = response.data;
+			}
+
+			setUser(user);
+			localStorage.setItem("userDetails", JSON.stringify(user));
+			navigate("/");
+		}
 	};
 
 	return (

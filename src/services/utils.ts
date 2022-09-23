@@ -8,7 +8,7 @@ const CEP_URL = () => {
 	return import.meta.env.API_CEP_URL;
 }
 
-//resources root
+//Resources
 export const getResource = async (resource: string, config: any = null) => {
 	const response = await axios.get(ROOT_URL() + resource, config);
 	return response;
@@ -23,11 +23,7 @@ export async function postResource(
 	return response;
 }
 
-export async function putResource(
-	resource: string,
-	body: object,
-	config: any = null,
-) {
+export async function putResource(resource: string, body: object, config: any = null) {
 	const response = await axios.put(ROOT_URL() + resource, body, config);
 	return response;
 }
@@ -51,8 +47,6 @@ export function serializeObjectToParam(filtro: Record<string, any>, first: boole
 	}
 	return params;
 }
-
-//resources cep
 
 export const getResourceCep = async (resource: string, config: any = null) => {
 	const response = await axios.get(CEP_URL() + resource, config);

@@ -1,13 +1,13 @@
 import Button from "@/components/common/Button";
 import { CompetenciaType } from "@/types/competenciaType";
-import { StudentType } from "@/types/studentTypes";
+import { UserType } from "@/types/userTypes";
 import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
 import { Col, Row, Tag } from "antd";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 interface InfoUsuarioProps {
-	user: StudentType;
+	user: UserType;
 }
 const InfoUsuario = ({ user }: InfoUsuarioProps): JSX.Element => {
   const { t } = useTranslation();

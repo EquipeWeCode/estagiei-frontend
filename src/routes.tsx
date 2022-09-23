@@ -20,6 +20,8 @@ import { store } from "./redux/store";
 import Notification from "@/components/common/Notification";
 import LoginEmpresa from "./components/pages/LoginEmpresa";
 import CadastroEmpresa from "./components/pages/CadastroEmpresa";
+import DescricaoVaga from "./components/pages/DescricaoVaga";
+import Vagas from "./components/pages/Vagas";
 
 render(
 	<Provider store={store}>
@@ -31,6 +33,8 @@ render(
 						<Route path="/" element={<HomePage />} />
 						<Route path="/estudante/login" element={<Login />} />
 						<Route path="/empresa/login" element={<LoginEmpresa/>} />
+						<Route path="/vagas" element={<Vagas/>} />
+						<Route path="/DescricaoVaga" element={<DescricaoVaga/>} />
 						<Route
 							path="/cadastro/estudante"
 							element={

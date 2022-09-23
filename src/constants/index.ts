@@ -4,5 +4,7 @@ export const ENDPOINT_LOGIN = "/login";
 export const ENDPOINT_COMPETENCIA = "/competencia";
 export const ENDPOINT_EMPRESA = "/empresa";
 export const ENDPOINT_CEP = "/json/"; 
+export const ENDPOINT_USUARIO = "/usuario";
 
 export const TOKEN_KEY = "authToken";
+export const USER_KEY = "userDetails";

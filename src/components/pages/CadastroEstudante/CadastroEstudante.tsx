@@ -5,7 +5,7 @@ import { DatePicker, Form, Row, Select } from "antd";
 import { useTranslation } from "react-i18next";
 import moment, { Moment } from "moment";
 import { getEstudante, putEstudante } from "@/services/estudante";
-import { StudentType } from "@/types/studentTypes";
+import { UserType } from "@/types/userTypes";
 import { CompetenciaType } from "@/types/competenciaType";
 import { getCompetencias } from "@/services/competencias";
 import { Link, useNavigate } from "react-router-dom";
@@ -16,7 +16,7 @@ const CadastroEstudante = () => {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 
-	const [novoUser, setNovoUser] = useState<StudentType>(user);
+	const [novoUser, setNovoUser] = useState<UserType>(user);
 	const [competencias, setCompetencias] = useState<CompetenciaType[]>([]);
 
 	useEffect(() => {
@@ -30,7 +30,7 @@ const CadastroEstudante = () => {
 
 	const fetchEstudante = async () => {
 		const estudanteBuscado = await getEstudante(user.codEstudante);
-		const data: StudentType = estudanteBuscado.data;
+		const data: UserType = estudanteBuscado.data;
 		setUser(data);
 	};
 

@@ -2,6 +2,7 @@ import Button from "@/components/common/Button";
 import CardVagas from "@/components/common/CardVagas";
 import Input from "@/components/common/Input";
 import { useAuth } from "@/contexts/auth";
+import { getToken } from "@/services/autenticacao";
 import { getVagasRecomendadas } from "@/services/estudante";
 import { getVagas } from "@/services/vaga";
 import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
@@ -17,23 +18,22 @@ const HomePage = (): JSX.Element => {
 		descricao: "",
 	};
 
-	const { user, signed } = useAuth();
+	const { user } = useAuth();
 	const [vagas, setVagas] = useState<VagaType[]>([]);
 	const [vagasRecomendadas, setVagasRecomendadas] = useState<VagaType[]>([]);
 	const [filtroVaga, setFiltroVaga] = useState<FiltroVagaType>(FILTRO_INICIAL);
-	const navigate = useNavigate();
 	const { t } = useTranslation();
 
 	const { TabPane } = Tabs;
 
 	useEffect((): void => {
-		// if (!signed || !user) {
-		// 	navigate("/login");
-		// } else {
-			fetchVagas();
+		fetchVagas();
+		if (user?.codEstudante) {
 			fetchVagasRecomendadas();
-		// }
-	}, [signed]); // TODO: melhorar isso depois
+		} else {
+			setVagasRecomendadas([]);
+		}
+	}, [user?.codEstudante]);
 
 	const fetchVagas = async () => {
 		const response = await getVagas(filtroVaga);
@@ -58,38 +58,6 @@ const HomePage = (): JSX.Element => {
 
 			<Row justify="start" style={{ padding: "2rem" }}>
 				<Tabs defaultActiveKey="1" style={{ width: "100%" }}>
-					<TabPane tab={t("vacancies")} key="1">
-						<Row justify="space-evenly" className="row-vagas">
-							<Col md={24}>
-								<Row style={{ marginBottom: "1rem" }} gutter={12} justify="center" align="bottom">
-									<Col md={6}>
-										<Input
-											style={{ borderRadius: "0.5rem" }}
-											allowClear={true}
-											placeholder={t("type_job_title")}
-											value={filtroVaga.titulo}
-											onChange={v => setFiltroVaga({ ...filtroVaga, titulo: v.target.value })}
-										/>
-									</Col>
-									<Col md={6}>
-										<Input
-											style={{ borderRadius: "0.5rem" }}
-											allowClear={true}
-											placeholder={t("type_job_description")}
-											value={filtroVaga.descricao}
-											onChange={v => setFiltroVaga({ ...filtroVaga, descricao: v.target.value })}
-										/>
-									</Col>
-									<Col md={6}>
-										<Button type="primary" onClick={fetchVagas}>
-											{t("search")}
-										</Button>
-									</Col>
-								</Row>
-							</Col>
-							<CardVagas vagas={vagas} competenciasEstudante={user.competencias || []} />
-						</Row>
-					</TabPane>
 					<TabPane tab={t("recommended_vacancies")} key="2">
 						<Row justify="space-evenly" className="row-vagas">
 							<CardVagas
