@@ -27,20 +27,12 @@ const HomePage = (): JSX.Element => {
 	const { TabPane } = Tabs;
 
 	useEffect((): void => {
-		fetchVagas();
 		if (user?.codEstudante) {
 			fetchVagasRecomendadas();
 		} else {
 			setVagasRecomendadas([]);
 		}
 	}, [user?.codEstudante]);
-
-	const fetchVagas = async () => {
-		const response = await getVagas(filtroVaga);
-		if (response.status === 200) {
-			setVagas(response.data);
-		}
-	};
 
 	const fetchVagasRecomendadas = async () => {
 		const response = await getVagasRecomendadas(user.codEstudante);
