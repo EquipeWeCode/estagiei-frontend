@@ -12,10 +12,6 @@ const Button = (props: ButtonCustomProps) => {
 		return styles.antBtnCustom + " " + (secondary && " " + styles.btnSecondary) + " " + props.className;
 	}
 
-	console.log(secondary);
-
-	console.log(getStyle());
-
 	return (
 		<ButtonAntd
 			{...props}

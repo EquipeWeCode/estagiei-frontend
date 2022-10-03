@@ -41,7 +41,7 @@ const Header = () => {
 			<Row className={styles.headerItens} justify="space-between" align="middle">
 				<Col className="logo">
 					<Link to="/">
-						<Logo width="100" height="35" />
+						<Logo className={styles.logoHeader} width="100" height="35" />
 					</Link>
 				</Col>
 
