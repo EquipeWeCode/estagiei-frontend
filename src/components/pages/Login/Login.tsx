@@ -1,11 +1,11 @@
 /// <reference types="vite-plugin-svgr/client" />
 
 import { useAuth } from "@/contexts/auth";
-import { Col, Row } from "antd";
+import { Col, Divider, Row } from "antd";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, Link } from "react-router-dom";
-import styles from "./styles.module.css";
+import styles from "./styles.module.scss";
 
 import { ReactComponent as Logo } from "@/assets/logo.svg";
 import { ReactComponent as LogoResumida } from "@/assets/logo-resumida.svg";
@@ -59,9 +59,9 @@ const Login = () => {
 				const response = await getEstudante(codEstudante);
 				user = response.data;
 			}
-			
+
 			user.roles = roles;
-			
+
 			setUser(user);
 			localStorage.setItem("userDetails", JSON.stringify(user));
 			navigate("/");
@@ -70,53 +70,39 @@ const Login = () => {
 
 	return (
 		<>
-			{/* <Row justify="center" align="middle">
-				<Col className="welcome-text">
-					<h1>
-						{t("welcome_to")} <Logo className="logo-estagiei" />{" "}
-					</h1>
-				</Col>
-			</Row> */}
 			<div className={styles.containerGeral}>
-				<Row className={styles.containerLogin} justify="space-between" style={{}}>
+				<Row className={styles.containerLogin} justify="center" style={{}}>
 					<Col className={styles.boxLogin}>
-						{/* <p className="texto">{t("student_login_text")}</p>
-						 */}
-						<LogoResumida width={200}/>
-						<h1>Login</h1>
-						<Col style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-							<Col style={{ marginBottom: "1rem" }}>
-								<Input
-									placeholder="Digite seu e-mail"
-									name="email"
-									value={login.email}
-									onChange={changeLogin}
-								/>
-							</Col>
-							<Col style={{ marginBottom: "1rem" }}>
-								<Input
-									placeholder="Digite sua senha"
-									type={"password"}
-									name="senha"
-									value={login.senha}
-									onChange={changeLogin}
-								/>
-							</Col>
-							<Button type="primary" onClick={efetuarLogin}>
-								Login
+						<LogoResumida width={200} />
+						<h1>{t("signin")}</h1>
+						<Row className={styles.containerInput} justify="center">
+							<Input
+								label={t("email")}
+								className={styles.inputLogin}
+								placeholder={t("type_email")}
+								name="email"
+								value={login.email}
+								onChange={changeLogin}
+							/>
+							<Input
+								label={t("password")}
+								className={styles.inputLogin}
+								placeholder={t("type_password")}
+								type={"password"}
+								name="senha"
+								value={login.senha}
+								onChange={changeLogin}
+							/>
+							<Button className={styles.btnLogin} onClick={efetuarLogin}>
+								{t("signin")}
 							</Button>
-						</Col>
+							{/* <Divider style={{p}}/> */}
+							<hr style={{width: "100%", margin: "1rem 0", border: "0.1px solid var(--primary-color)"}}/>
+							<p>
+								{t("dont_have_account")} <Link to="/cadastro">{t("signup")}</Link>
+							</p>
+						</Row>
 					</Col>
-
-					{/* <Col className="box-login">
-					<p className="texto">{t("company_login_text")}</p>
-					<div className="button-login">
-					<LogoResumida className="logo-resumida" />
-					<Link to="/empresa/login">
-					<Button className="button-company">{t("fill_form")}</Button>
-					</Link>
-					</div>
-				</Col> */}
 				</Row>
 			</div>
 		</>

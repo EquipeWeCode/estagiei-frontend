@@ -43,5 +43,12 @@ export const TRANSLATIONS_EN = {
 	vacancy_description_header: 
 		"Looking for the so waited experience in your area? Want to be hired with the dream internship? So you are in the right place!",
 	vacancy_btn: "Show interships",
-	not_found_vacancies: "Not found vacancies"
+	not_found_vacancies: "Not found vacancies",
+	signin: "Sign in",
+	password: "Password",
+	email: "E-mail",
+	type_email: "Type your e-mail",
+	type_password: "Type your password",
+	dont_have_account: "Don't have an account?",
+	signup: "Sign up",
 };

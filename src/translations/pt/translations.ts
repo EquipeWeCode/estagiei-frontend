@@ -43,5 +43,12 @@ export const TRANSLATIONS_PT = {
 	vacancy_description_header: 
 		"Procurando a tão sonhada experiência na área? Quer ser contratado com o estágio dos sonhos? Então você está no lugar certo!",
 	vacancy_btn: "Ver vagas",
-	not_found_vacancies: "Nenhuma vaga encontrada"
+	not_found_vacancies: "Nenhuma vaga encontrada",
+	signin: "Entrar",
+	password: "Senha",
+	email: "E-mail",
+	type_email: "Digite seu e-mail",
+	type_password: "Digite sua senha",
+	dont_have_account: "Não tem uma conta?",
+	signup: "Cadastre-se",
 };

@@ -1,12 +1,27 @@
 import { Button as ButtonAntd, ButtonProps } from "antd";
+import styles from "./styles.module.css";
 
-const Button = (props: ButtonProps) => {
+export interface ButtonCustomProps extends ButtonProps {
+	secondary?: boolean;
+}
+
+const Button = (props: ButtonCustomProps) => {
+	const { secondary } = props;
+
+	const getStyle = () => {
+		return styles.antBtnCustom + " " + (secondary && " " + styles.btnSecondary) + " " + props.className;
+	}
+
+	console.log(secondary);
+
+	console.log(getStyle());
+
 	return (
 		<ButtonAntd
 			{...props}
+			className={getStyle()}
 			style={{
 				...props.style,
-				borderRadius: "0.5rem",
 			}}
 		/>
 	);

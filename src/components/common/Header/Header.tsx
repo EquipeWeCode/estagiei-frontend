@@ -5,7 +5,6 @@ import styles from "./styles.module.css";
 import { useAuth } from "@/contexts/auth";
 import { Link, useNavigate } from "react-router-dom";
 import TraducaoBtn from "../TraducaoBtn";
-import VagasBtn from "../VagasHeaderBtn/VagasBtn";
 
 import { ReactComponent as Logo } from "@/assets/logo.svg";
 import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
@@ -31,10 +30,6 @@ const Header = () => {
 		/>
 	);
 
-	const navegaLogin = () => {
-		navigate("/estudante/login");
-	};
-
 	const fazLogout = () => {
 		setUser({});
 		logout();
@@ -50,12 +45,11 @@ const Header = () => {
 					</Link>
 				</Col>
 
+				<TraducaoBtn />
 				{user?.roles ? (
 					<Row gutter={12} align="middle">
 						<Space>
-							<Col className={styles.translateButton}>
-								<TraducaoBtn />
-							</Col>
+							<Col className={styles.translateButton}></Col>
 							<Col className={styles.welcomeTextHeader}>
 								{t("welcome")}: {capitalizaPriLetraDeCadaPalavra(user.nome)}
 							</Col>
@@ -78,10 +72,12 @@ const Header = () => {
 						<Row gutter={12} align="middle">
 							<Space>
 								<Col>
-									<VagasBtn />
+									<Link to={"/vagas"}>{t("vacancy_btn")}</Link>
 								</Col>
-								<span style={{ color: "#FFF" }} onClick={navegaLogin}>
-									Faça login
+								<span className={styles.linkLogin}>
+									<Link className={styles.linkHeader} to={"/login"}>
+										{t("signin")}
+									</Link>
 								</span>
 							</Space>
 						</Row>

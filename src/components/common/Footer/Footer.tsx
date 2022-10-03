@@ -4,7 +4,8 @@ const Footer = () => {
 
   const { t } = useTranslation();
 
-	return <footer className="footer-title">{t("footer_title")}</footer>;
+  return <></>
+	// return <footer className="footer-title">{t("footer_title")}</footer>;
 };
 
 export default Footer;
