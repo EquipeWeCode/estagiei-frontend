@@ -1,6 +1,7 @@
 /// <reference types="vite-plugin-svgr/client" />
 
 import { Button, Col, Dropdown, Image, Menu, Row, Space } from "antd";
+import styles from "./styles.module.css";
 import { useAuth } from "@/contexts/auth";
 import { Link, useNavigate } from "react-router-dom";
 import TraducaoBtn from "../TraducaoBtn";
@@ -41,8 +42,8 @@ const Header = () => {
 	};
 
 	return (
-		<header className="header-container">
-			<Row className="header-itens" justify="space-between" align="middle">
+		<header className={styles.headerContainer}>
+			<Row className={styles.headerItens} justify="space-between" align="middle">
 				<Col className="logo">
 					<Link to="/">
 						<Logo width="100" height="35" />
@@ -52,16 +53,16 @@ const Header = () => {
 				{user?.roles ? (
 					<Row gutter={12} align="middle">
 						<Space>
-							<Col className="translate-button">
+							<Col className={styles.translateButton}>
 								<TraducaoBtn />
 							</Col>
-							<Col className="welcome-text-header">
+							<Col className={styles.welcomeTextHeader}>
 								{t("welcome")}: {capitalizaPriLetraDeCadaPalavra(user.nome)}
 							</Col>
 							<Col>
 								<Dropdown overlay={menu} placement="bottomRight" trigger={["click"]}>
 									<Image
-										className="user-image"
+										className={styles.userImage}
 										src={user.avatar}
 										alt={t("user")}
 										width={35}
@@ -79,7 +80,9 @@ const Header = () => {
 								<Col>
 									<VagasBtn />
 								</Col>
-								<span style={{color:"#FFF"}} onClick={navegaLogin}>Faça login</span>
+								<span style={{ color: "#FFF" }} onClick={navegaLogin}>
+									Faça login
+								</span>
 							</Space>
 						</Row>
 					</>

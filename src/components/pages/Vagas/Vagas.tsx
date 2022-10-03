@@ -9,6 +9,7 @@ import { useAuth } from "@/contexts/auth";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import executivoBackground from "@/assets/fundos/executivo.jpg";
+import styles from "./styles.module.css";
 
 const Vagas = () => {
     const FILTRO_INICIAL: FiltroVagaType = {
@@ -35,7 +36,7 @@ const Vagas = () => {
 
     return (
         <>
-            <Row itemType="flex" style={styles} justify="center" className="main-row" align="middle">
+            <Row itemType="flex" style={styles} justify="center" className={styles.mainRow} align="middle">
                 <Col>
                     <h1>{t("vacancy_title_header")}</h1>
                     <p>{t("vacancy_description_header")}</p>
@@ -46,9 +47,9 @@ const Vagas = () => {
             <Row justify="center" align="middle" style={{ padding: "2rem" }}>
             	<Tabs defaultActiveKey="1" style={{ width: "100%" }}>
 					<TabPane tab={t("vacancies")} key="1">
-						<Row justify="center" align="middle" className="search-row">
-							<Col className="search-col">
-								<Row style={{ marginBottom: "1rem" }} gutter={12} className="search-sec-row">
+						<Row justify="center" align="middle" className={styles.searchRow}>
+							<Col className={styles.searchCol}>
+								<Row style={{ marginBottom: "1rem" }} gutter={12} className={styles.searchSecRow}>
 									<Col flex={1}>
 										<Input
 											allowClear={true}
@@ -75,7 +76,7 @@ const Vagas = () => {
 						</Row>
 					</TabPane>
 				</Tabs>
-                    <Row justify="center" className="row-vagas" align="middle">
+                    <Row justify="center" className={styles.rowVagas} align="middle">
                         <Col>
                             <CardVagas vagas={vagas} competenciasEstudante={[]} />
                         </Col>
@@ -85,12 +86,12 @@ const Vagas = () => {
     )
 }
 
-const styles = {
-    backgroundImage: `linear-gradient(rgba(191, 66, 245, 0.6), rgba(255, 255, 255, 0.3)), url(${executivoBackground})`,
-    backgroundPosition: 'center',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    height: "calc(350px - 1vw)"
-}
+// const styles = {
+//     backgroundImage: `linear-gradient(rgba(191, 66, 245, 0.6), rgba(255, 255, 255, 0.3)), url(${executivoBackground})`,
+//     backgroundPosition: 'center',
+//     backgroundSize: 'cover',
+//     backgroundRepeat: 'no-repeat',
+//     height: "calc(350px - 1vw)"
+// }
 
 export default Vagas;

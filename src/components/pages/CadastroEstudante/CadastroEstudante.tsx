@@ -10,6 +10,7 @@ import { CompetenciaType } from "@/types/competenciaType";
 import { getCompetencias } from "@/services/competencias";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "@/components/common/Button";
+import styles from './styles.module.css';
 
 const CadastroEstudante = () => {
 	const { user, setUser } = useAuth();
@@ -68,9 +69,9 @@ const CadastroEstudante = () => {
 	};
 
 	return (
-		<div className="container-cadastro-estudante">
-			<Row justify="center" className="cadastro">
-				<Row className="info-dados">
+		<div className={styles.containerCadastroEstudante}>
+			<Row justify="center" className={styles.cadastro}>
+				<Row className={styles.infoDados}>
 					<Row justify="center">
 						<h2>{t("edit_your_profile")}</h2>
 					</Row>

@@ -1,5 +1,6 @@
 import { i18n } from "@/translations/i18n";
 import { Switch, Image } from 'antd';
+import styles from './styles.module.css';
 
 import usaIcon from "@/assets/bandeiras/usa.svg";
 import brazilIcon from "@/assets/bandeiras/brazil.svg";
@@ -24,7 +25,7 @@ const TraducaoBtn = () => {
         boolParam ? (onChangeFlag("pt")) : (onChangeFlag("en"))
     }
 
-    const styles = {
+    const stylesJs = {
         backgroundImage: `url(${urlIcons[iconUrl]})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
@@ -32,7 +33,7 @@ const TraducaoBtn = () => {
     };
 
     return (
-        <Switch defaultChecked onChange={onChangeSwitch} className="switch-div" style={styles} />
+        <Switch defaultChecked onChange={onChangeSwitch} className={styles.switchDiv} style={stylesJs} />
     );
 }
 

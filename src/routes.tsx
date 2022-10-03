@@ -18,7 +18,6 @@ import CadastroEstudante from "@/components/pages/CadastroEstudante";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import Notification from "@/components/common/Notification";
-import LoginEmpresa from "./components/pages/LoginEmpresa";
 import DescricaoVaga from "./components/pages/DescricaoVaga";
 import Vagas from "./components/pages/Vagas";
 import { ESTUDANTE } from "./constants";
@@ -31,10 +30,9 @@ render(
 					<Header />
 					<Routes>
 						<Route path="/" element={<HomePage />} />
-						<Route path="/estudante/login" element={<Login />} />
-						<Route path="/empresa/login" element={<LoginEmpresa />} />
+						<Route path="/login" element={<Login />} />
 						<Route path="/vagas" element={<Vagas />} />
-						<Route path="/descricaoVaga" element={<DescricaoVaga />} />
+						<Route path="/detalheVaga" element={<DescricaoVaga />} />
 						<Route path="/cadastro/estudante" element={<CadastroEstudante />} />
 						<Route path="*" element={<NotFound />} />
 					</Routes>

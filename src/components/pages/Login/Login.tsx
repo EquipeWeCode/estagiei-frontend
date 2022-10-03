@@ -5,6 +5,7 @@ import { Col, Row } from "antd";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, Link } from "react-router-dom";
+import styles from "./styles.module.css";
 
 import { ReactComponent as Logo } from "@/assets/logo.svg";
 import { ReactComponent as LogoResumida } from "@/assets/logo-resumida.svg";
@@ -57,9 +58,10 @@ const Login = () => {
 			} else if (codEstudante) {
 				const response = await getEstudante(codEstudante);
 				user = response.data;
-				user.roles = roles;
 			}
-
+			
+			user.roles = roles;
+			
 			setUser(user);
 			localStorage.setItem("userDetails", JSON.stringify(user));
 			navigate("/");
@@ -75,9 +77,9 @@ const Login = () => {
 					</h1>
 				</Col>
 			</Row> */}
-			<div className="container-geral">
-				<Row className="container-login" justify="space-between" style={{}}>
-					<Col className="box-login">
+			<div className={styles.containerGeral}>
+				<Row className={styles.containerLogin} justify="space-between" style={{}}>
+					<Col className={styles.boxLogin}>
 						{/* <p className="texto">{t("student_login_text")}</p>
 						 */}
 						<LogoResumida width={200}/>

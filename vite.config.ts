@@ -22,10 +22,14 @@ export default defineConfig({
 	],
 
 	css: {
+		modules: {
+			generateScopedName: "[name]__[local]___[hash:base64:5]",
+			localsConvention: "camelCase",
+		},
 		preprocessorOptions: {
 			less: {
 				modifyVars: {
-					"primary-color": "#c045f4", // mudar cor das variaveis padrao do antd por aqui
+					"primary-color": "#D699EF", // mudar cor das variaveis padrao do antd por aqui
 				},
 				javascriptEnabled: true,
 			},
@@ -33,6 +37,7 @@ export default defineConfig({
 	},
 
 	resolve: {
+		extensions: [".js", ".jsx", ".ts", ".tsx", ".json", ".css", ".less"],
 		alias: {
 			"@": path.resolve(__dirname, "src"),
 		},
