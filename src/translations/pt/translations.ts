@@ -51,4 +51,11 @@ export const TRANSLATIONS_PT = {
 	type_password: "Digite sua senha",
 	dont_have_account: "Não tem uma conta?",
 	signup: "Cadastre-se",
+	im_company: "Sou empresa",
+	im_student: "Sou estudante",
+	company: "Empresa",
+	banner_text: "Busque vagas de estágio de maneira simplificada.",
+	banner_subtitle: "Chega de processos seletivos longos e cansativos... Aqui, com poucos cliques, você consegue a sua sonhada vaga de estágio. Venha já conhecer o Estagiei!",
+	internships: "Vagas",
+	change_language: "Mudar idioma",
 };

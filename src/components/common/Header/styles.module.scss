@@ -1,6 +1,7 @@
 header {
-  padding: 0.5rem 1.6rem 0.5rem 1.2rem;
+  padding: 1rem 10rem 1rem 10rem;
   background-color: var(--secondary-color);
+  font-size: 1.1rem;
 }
 
 header.header-container {
@@ -33,8 +34,12 @@ ul.itens {
 
 .user-image {
   border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
   background-color: #fff;
+  background: #FFF;
   cursor: pointer;
+  border: 1px solid var(--primary-color);
 }
 
 .link-header {
@@ -60,4 +65,31 @@ header a:hover {
 
 .logo-header {
   display: flex;
+  width: 8.1rem;
+}
+
+:global {
+  body .ant-dropdown {
+    width: 120px;
+    text-align: center;
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+  }
+  
+  body .ant-dropdown-menu {
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    box-shadow: rgb(33, 3, 36) 5px 5px 10px;
+  }
+
+  body .ant-dropdown-menu-item {
+    text-align: center;
+    color: #FFF;
+    padding: 1rem;
+  }
+
+  body .ant-dropdown-menu-item:hover {
+    background-color: var(--primary-color);
+    color: #000;
+  }
 }

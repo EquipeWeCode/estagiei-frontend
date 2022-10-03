@@ -1,15 +1,19 @@
 .switch-div {
     transform: scale(1);
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    /* height: 50%; */
     position: -webkit-sticky !important; /* Safari */
     position: fixed !important;
-    left: 95%;
+    left: 92%;
     top: 90vh;
     z-index: 1000;
     transition: top 1s linear;
 }
 
 .switch-div > div:first-child::before {
-    background-color: white;
+    display: none;
 }
 
 @media only screen and (max-width: 600px) {

@@ -73,7 +73,7 @@ const Login = () => {
 			<div className={styles.containerGeral}>
 				<Row className={styles.containerLogin} justify="center" style={{}}>
 					<Col className={styles.boxLogin}>
-						<LogoResumida width={200} />
+						<LogoResumida width={90} />
 						<h1>{t("signin")}</h1>
 						<Row className={styles.containerInput} justify="center">
 							<Input
@@ -96,11 +96,15 @@ const Login = () => {
 							<Button className={styles.btnLogin} onClick={efetuarLogin}>
 								{t("signin")}
 							</Button>
-							{/* <Divider style={{p}}/> */}
 							<hr style={{width: "100%", margin: "1rem 0", border: "0.1px solid var(--primary-color)"}}/>
 							<p>
 								{t("dont_have_account")} <Link to="/cadastro">{t("signup")}</Link>
 							</p>
+							<Row justify="center" align="middle">
+							<Button secondary onClick={() => navigate("/")}>
+								{t("go_back")}
+							</Button>
+							</Row>
 						</Row>
 					</Col>
 				</Row>

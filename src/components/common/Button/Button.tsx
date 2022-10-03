@@ -9,8 +9,10 @@ const Button = (props: ButtonCustomProps) => {
 	const { secondary } = props;
 
 	const getStyle = () => {
-		return styles.antBtnCustom + " " + (secondary && " " + styles.btnSecondary) + " " + props.className;
-	}
+		return (
+			styles.antBtnCustom + " " + (secondary && " " + styles.btnSecondary) + " " + props.className
+		);
+	};
 
 	return (
 		<ButtonAntd
@@ -19,7 +21,9 @@ const Button = (props: ButtonCustomProps) => {
 			style={{
 				...props.style,
 			}}
-		/>
+		>
+			{props.children}
+		</ButtonAntd>
 	);
 };
 

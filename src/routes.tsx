@@ -21,6 +21,7 @@ import Notification from "@/components/common/Notification";
 import DescricaoVaga from "./components/pages/DescricaoVaga";
 import Vagas from "./components/pages/Vagas";
 import { ESTUDANTE } from "./constants";
+import TraducaoBtn from "./components/common/TraducaoBtn";
 
 render(
 	<Provider store={store}>
@@ -28,6 +29,7 @@ render(
 			<AuthProvider>
 				<BrowserRouter>
 					<Header />
+					<TraducaoBtn />
 					<Routes>
 						<Route path="/" element={<HomePage />} />
 						<Route path="/login" element={<Login />} />

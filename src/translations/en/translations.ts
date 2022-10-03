@@ -51,4 +51,11 @@ export const TRANSLATIONS_EN = {
 	type_password: "Type your password",
 	dont_have_account: "Don't have an account?",
 	signup: "Sign up",
+	im_company: "I'm a company",
+	im_student: "I'm a student",
+	company: "Company",
+	banner_text: "Search for internships in a simplified way.",
+	banner_subtitle: "No more long and tiring selection processes... Here, with just a few clicks, you can get your dream internship. Come and meet the Estagiei!",
+	internships: "Internships",
+	change_language: "Change language",
 };

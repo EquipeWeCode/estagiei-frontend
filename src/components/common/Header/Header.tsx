@@ -1,7 +1,7 @@
 /// <reference types="vite-plugin-svgr/client" />
 
 import { Button, Col, Dropdown, Image, Menu, Row, Space } from "antd";
-import styles from "./styles.module.css";
+import styles from "./styles.module.scss";
 import { useAuth } from "@/contexts/auth";
 import { Link, useNavigate } from "react-router-dom";
 import TraducaoBtn from "../TraducaoBtn";
@@ -21,6 +21,13 @@ const Header = () => {
 			items={[
 				{
 					key: "1",
+				label: t("internships"),
+					onClick: () => {
+						navigate("/vagas");
+					}
+				},
+				{
+					key: "2",
 					label: t("logout_button"),
 					onClick: () => {
 						fazLogout();
@@ -39,28 +46,27 @@ const Header = () => {
 	return (
 		<header className={styles.headerContainer}>
 			<Row className={styles.headerItens} justify="space-between" align="middle">
-				<Col className="logo">
+				<Col className={styles.logo}>
 					<Link to="/">
-						<Logo className={styles.logoHeader} width="100" height="35" />
+						<Logo className={styles.logoHeader} />
 					</Link>
 				</Col>
-
-				<TraducaoBtn />
+				
 				{user?.roles ? (
 					<Row gutter={12} align="middle">
 						<Space>
 							<Col className={styles.translateButton}></Col>
 							<Col className={styles.welcomeTextHeader}>
-								{t("welcome")}: {capitalizaPriLetraDeCadaPalavra(user.nome)}
+								{capitalizaPriLetraDeCadaPalavra(user.nome)}
 							</Col>
 							<Col>
-								<Dropdown overlay={menu} placement="bottomRight" trigger={["click"]}>
-									<Image
+								<Dropdown className={styles.dropdown} overlay={menu} placement="bottomRight" trigger={["click"]}>
+									<img
 										className={styles.userImage}
 										src={user.avatar}
 										alt={t("user")}
-										width={35}
-										preview={false}
+										// preview={false}
+										
 									/>
 								</Dropdown>
 							</Col>
@@ -72,7 +78,7 @@ const Header = () => {
 						<Row gutter={12} align="middle">
 							<Space>
 								<Col>
-									<Link to={"/vagas"}>{t("vacancy_btn")}</Link>
+									<Link to={"/vagas"}>{t("im_company")}</Link>
 								</Col>
 								<span className={styles.linkLogin}>
 									<Link className={styles.linkHeader} to={"/login"}>

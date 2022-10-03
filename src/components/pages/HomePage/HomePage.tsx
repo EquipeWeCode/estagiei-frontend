@@ -5,8 +5,11 @@ import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
 import { Col, Row, Tabs } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import BannerStudent from "@/assets/fundos/student-banner.png";
 import { ReactComponent as StudentBanner } from "@/assets/fundos/student-banner.svg";
+import styles from "./styles.module.css";
+import TextBanner from "./TextBanner";
+import Button from "@/components/common/Button";
+import { Link } from "react-router-dom";
 
 const HomePage = (): JSX.Element => {
 	const FILTRO_INICIAL: FiltroVagaType = {
@@ -39,11 +42,21 @@ const HomePage = (): JSX.Element => {
 
 	return (
 		<>
-			<Row className="banner" justify="center" align="middle" style={{ height: "100vh" }}>
-				<Col span={12}></Col>
-				<Col span={12}>
-					<StudentBanner  width={500}/>
-				</Col>
+			<Row className={styles.banner}>
+				<Row className={styles.bannerContainer} justify="space-around" align="middle">
+					<Col className={styles.bannerText}  md={24} xl={12}>
+						<TextBanner />
+						<div>
+							<Button secondary className={styles.bannerButton}>
+								<Link to="/cadastro">{t("signup")}</Link>
+							</Button>
+						</div>
+					</Col>
+					<Col className={styles.studentImage} span={12}>
+						<StudentBanner className={styles.studentSvg} />
+					</Col>
+					<Col></Col>
+				</Row>
 			</Row>
 			{/* <Row justify="start" style={{ padding: "2rem" }}>
 				<Tabs defaultActiveKey="1" style={{ width: "100%" }}>

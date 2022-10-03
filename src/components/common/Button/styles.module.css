@@ -4,6 +4,7 @@
   border-radius: 5px;
   border: none;
   transition: all 0.3s ease-in-out;
+  height: auto;
 }
 
 .ant-btn-custom:hover,
