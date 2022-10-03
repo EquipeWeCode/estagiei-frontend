@@ -57,6 +57,7 @@ const Login = () => {
 			} else if (codEstudante) {
 				const response = await getEstudante(codEstudante);
 				user = response.data;
+				user.roles = roles;
 			}
 
 			setUser(user);
@@ -67,50 +68,55 @@ const Login = () => {
 
 	return (
 		<>
-			<Row justify="center" align="middle">
+			{/* <Row justify="center" align="middle">
 				<Col className="welcome-text">
 					<h1>
 						{t("welcome_to")} <Logo className="logo-estagiei" />{" "}
 					</h1>
 				</Col>
-			</Row>
-			<Row className="container-login" justify="space-between">
-				<Col className="box-login">
-					<p className="texto">{t("student_login_text")}</p>
-					<Col style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-						<Col style={{ marginBottom: "1rem" }}>
-							<Input
-								placeholder="Digite seu e-mail"
-								name="email"
-								value={login.email}
-								onChange={changeLogin}
-							/>
+			</Row> */}
+			<div className="container-geral">
+				<Row className="container-login" justify="space-between" style={{}}>
+					<Col className="box-login">
+						{/* <p className="texto">{t("student_login_text")}</p>
+						 */}
+						<LogoResumida width={200}/>
+						<h1>Login</h1>
+						<Col style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+							<Col style={{ marginBottom: "1rem" }}>
+								<Input
+									placeholder="Digite seu e-mail"
+									name="email"
+									value={login.email}
+									onChange={changeLogin}
+								/>
+							</Col>
+							<Col style={{ marginBottom: "1rem" }}>
+								<Input
+									placeholder="Digite sua senha"
+									type={"password"}
+									name="senha"
+									value={login.senha}
+									onChange={changeLogin}
+								/>
+							</Col>
+							<Button type="primary" onClick={efetuarLogin}>
+								Login
+							</Button>
 						</Col>
-						<Col style={{ marginBottom: "1rem" }}>
-							<Input
-								placeholder="Digite sua senha"
-								type={"password"}
-								name="senha"
-								value={login.senha}
-								onChange={changeLogin}
-							/>
-						</Col>
-						<Button type="primary" onClick={efetuarLogin}>
-							Login
-						</Button>
 					</Col>
-				</Col>
 
-				<Col className="box-login">
+					{/* <Col className="box-login">
 					<p className="texto">{t("company_login_text")}</p>
 					<div className="button-login">
-						<LogoResumida className="logo-resumida" />
-						<Link to="/empresa/login">
-							<Button className="button-company">{t("fill_form")}</Button>
-						</Link>
+					<LogoResumida className="logo-resumida" />
+					<Link to="/empresa/login">
+					<Button className="button-company">{t("fill_form")}</Button>
+					</Link>
 					</div>
-				</Col>
-			</Row>
+				</Col> */}
+				</Row>
+			</div>
 		</>
 	);
 };

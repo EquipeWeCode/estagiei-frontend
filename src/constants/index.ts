@@ -6,3 +6,8 @@ export const ENDPOINT_USUARIO = "/usuario";
 
 export const TOKEN_KEY = "authToken";
 export const USER_KEY = "userDetails";
+
+export const ESTUDANTE = "ESTUDANTE";
+export const EMPRESA = "EMPRESA";
+export const REPRESENTANTE = "REPRESENTANTE";
+export const ADMINISTRADOR = "ADMINISTRADOR";

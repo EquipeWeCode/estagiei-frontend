@@ -1,6 +1,5 @@
 /// <reference types="vite-plugin-svgr/client" />
 
-import { i18n } from "@/translations/i18n";
 import { Button, Col, Dropdown, Image, Menu, Row, Space } from "antd";
 import { useAuth } from "@/contexts/auth";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,10 +9,11 @@ import VagasBtn from "../VagasHeaderBtn/VagasBtn";
 import { ReactComponent as Logo } from "@/assets/logo.svg";
 import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
 import { getToken, logout } from "@/services/autenticacao";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
 	const { user, setUser } = useAuth();
-	const { t } = i18n;
+	const { t } = useTranslation();
 	const navigate = useNavigate();
 
 	const menu = (
@@ -21,7 +21,7 @@ const Header = () => {
 			items={[
 				{
 					key: "1",
-					label: "sair",
+					label: t("logout_button"),
 					onClick: () => {
 						fazLogout();
 					},
@@ -37,10 +37,11 @@ const Header = () => {
 	const fazLogout = () => {
 		setUser({});
 		logout();
+		navigate("/");
 	};
 
 	return (
-		<header>
+		<header className="header-container">
 			<Row className="header-itens" justify="space-between" align="middle">
 				<Col className="logo">
 					<Link to="/">
@@ -48,7 +49,7 @@ const Header = () => {
 					</Link>
 				</Col>
 
-				{user?.codEstudante ? (
+				{user?.roles ? (
 					<Row gutter={12} align="middle">
 						<Space>
 							<Col className="translate-button">
@@ -78,7 +79,7 @@ const Header = () => {
 								<Col>
 									<VagasBtn />
 								</Col>
-								<Button onClick={navegaLogin}>Faça login</Button>
+								<span style={{color:"#FFF"}} onClick={navegaLogin}>Faça login</span>
 							</Space>
 						</Row>
 					</>

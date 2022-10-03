@@ -21,6 +21,7 @@ import Notification from "@/components/common/Notification";
 import LoginEmpresa from "./components/pages/LoginEmpresa";
 import DescricaoVaga from "./components/pages/DescricaoVaga";
 import Vagas from "./components/pages/Vagas";
+import { ESTUDANTE } from "./constants";
 
 render(
 	<Provider store={store}>
@@ -29,26 +30,12 @@ render(
 				<BrowserRouter>
 					<Header />
 					<Routes>
-						<Route
-							path="/"
-							element={
-								// <PrivateRoute>
-									<HomePage />
-								// </PrivateRoute>
-							}
-						/>
+						<Route path="/" element={<HomePage />} />
 						<Route path="/estudante/login" element={<Login />} />
-						<Route path="/empresa/login" element={<LoginEmpresa/>} />
-						<Route path="/vagas" element={<Vagas/>} />
-						<Route path="/DescricaoVaga" element={<DescricaoVaga/>} />
-						<Route
-							path="/cadastro/estudante"
-							element={
-								<PrivateRoute>
-									<CadastroEstudante />
-								</PrivateRoute>
-							}
-						/>
+						<Route path="/empresa/login" element={<LoginEmpresa />} />
+						<Route path="/vagas" element={<Vagas />} />
+						<Route path="/descricaoVaga" element={<DescricaoVaga />} />
+						<Route path="/cadastro/estudante" element={<CadastroEstudante />} />
 						<Route path="*" element={<NotFound />} />
 					</Routes>
 					<Footer />

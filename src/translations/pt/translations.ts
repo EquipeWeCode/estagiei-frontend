@@ -13,7 +13,7 @@ export const TRANSLATIONS_PT = {
 	student_experience: "Experiência profissional",
 	name: "Nome",
 	user: "Usuário",
-	not_found: "Não foi possivel encontrar o que você estava procurando...",
+	not_found: "Não foi possível encontrar o que você estava procurando...",
 	info_registration: "Perfil",
 	vacancies: "Vagas",
 	student_login_text:

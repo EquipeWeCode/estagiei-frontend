@@ -51,7 +51,6 @@ const Vagas = () => {
 								<Row style={{ marginBottom: "1rem" }} gutter={12} className="search-sec-row">
 									<Col flex={1}>
 										<Input
-											style={{ borderRadius: "0.5rem" }}
 											allowClear={true}
 											placeholder={t("type_job_title")}
 											value={filtroVaga.titulo}
@@ -60,7 +59,6 @@ const Vagas = () => {
 									</Col>
 									<Col flex={1}>
 										<Input
-											style={{ borderRadius: "0.5rem" }}
 											allowClear={true}
 											placeholder={t("type_job_description")}
 											value={filtroVaga.descricao}

@@ -1,16 +1,12 @@
-import Button from "@/components/common/Button";
-import CardVagas from "@/components/common/CardVagas";
-import Input from "@/components/common/Input";
+/// <reference types="vite-plugin-svgr/client" />
 import { useAuth } from "@/contexts/auth";
-import { getToken } from "@/services/autenticacao";
 import { getVagasRecomendadas } from "@/services/estudante";
-import { getVagas } from "@/services/vaga";
 import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
-import { Col, Divider, Row, Tabs } from "antd";
+import { Col, Row, Tabs } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import InfoUsuario from "./InfoUsuario";
+import BannerStudent from "@/assets/fundos/student-banner.png";
+import { ReactComponent as StudentBanner } from "@/assets/fundos/student-banner.svg";
 
 const HomePage = (): JSX.Element => {
 	const FILTRO_INICIAL: FiltroVagaType = {
@@ -43,12 +39,13 @@ const HomePage = (): JSX.Element => {
 
 	return (
 		<>
-			{/* <Row justify="center" style={{ padding: "2rem" }}>
-				<InfoUsuario user={user} />
+			<Row className="banner" justify="center" align="middle" style={{ height: "100vh" }}>
+				<Col span={12}></Col>
+				<Col span={12}>
+					<StudentBanner  width={500}/>
+				</Col>
 			</Row>
-			<Divider /> */}
-
-			<Row justify="start" style={{ padding: "2rem" }}>
+			{/* <Row justify="start" style={{ padding: "2rem" }}>
 				<Tabs defaultActiveKey="1" style={{ width: "100%" }}>
 					<TabPane tab={t("recommended_vacancies")} key="2">
 						<Row justify="space-evenly" className="row-vagas">
@@ -59,7 +56,7 @@ const HomePage = (): JSX.Element => {
 						</Row>
 					</TabPane>
 				</Tabs>
-			</Row>
+			</Row> */}
 		</>
 	);
 };
