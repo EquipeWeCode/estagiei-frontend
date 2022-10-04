@@ -3,9 +3,8 @@ import { useTranslation } from "react-i18next";
 const Footer = () => {
 
   const { t } = useTranslation();
-
-  return <></>
-	// return <footer className="footer-title">{t("footer_title")}</footer>;
+  
+	return <footer className="footer-title">{t("footer_title")}</footer>;
 };
 
 export default Footer;

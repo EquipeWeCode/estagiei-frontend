@@ -58,4 +58,9 @@ export const TRANSLATIONS_PT = {
 	banner_subtitle: "Chega de processos seletivos longos e cansativos... Aqui, com poucos cliques, você consegue a sua sonhada vaga de estágio. Venha já conhecer o Estagiei!",
 	internships: "Vagas",
 	change_language: "Mudar idioma",
+	my_profile: "Meu perfil",
+	student: "Estudante",
+	see_more: "Ver mais",
+	some_of_our_jobs: "Algumas de nossas vagas",
 };
+

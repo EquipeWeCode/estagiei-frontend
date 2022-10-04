@@ -1,0 +1,69 @@
+.carousel-container {
+  width: 60%;
+}
+
+.vaga-carousel {
+  display: flex;
+  justify-content: center;
+  width: 320px;
+  height: 450px;
+  border-radius: 5px;
+  margin: 2rem auto;
+  box-shadow: 1px 1px 14px 4px rgba(0,0,0,0.47);
+}
+
+.company-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 90%;
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.row-top-vaga {
+  margin: 2rem 0 0 0;
+  gap: 5rem;
+}
+
+.tag-vagas {
+  padding: 0.1rem 0.8rem;
+  height: 26px;
+}
+
+.company-name {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.descricao-vaga {
+  margin-top: 0.8rem;
+  padding: 0 1rem;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 100px;
+}
+
+.salario-vaga {
+  font-size: 1.4rem;
+  padding: 2rem;
+}
+
+body .react-multiple-carousel__arrow {
+  background: none;
+}
+
+body .react-multiple-carousel__arrow::before {
+  color: var(--primary-color);
+}
+
+
+@media(max-width: 1200px) {
+  .carousel-container {
+    width: 100%;
+  }
+}

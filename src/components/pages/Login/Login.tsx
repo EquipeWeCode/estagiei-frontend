@@ -17,6 +17,7 @@ import { TOKEN_KEY } from "@/constants";
 import jwt from "jwt-decode";
 import { getUsuario } from "@/services/usuario";
 import { getEstudante } from "@/services/estudante";
+import { getEmpresa } from "@/services/empresa";
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -53,8 +54,8 @@ const Login = () => {
 			let user: UserType = {} as UserType;
 
 			if (codEmpresa) {
-				// const response = await getEmpresa(codEmpresa);
-				// user = response.data;
+				const response = await getEmpresa(codEmpresa);
+				user = response.data;
 			} else if (codEstudante) {
 				const response = await getEstudante(codEstudante);
 				user = response.data;
@@ -71,7 +72,7 @@ const Login = () => {
 	return (
 		<>
 			<div className={styles.containerGeral}>
-				<Row className={styles.containerLogin} justify="center" style={{}}>
+				<Row justify="center">
 					<Col className={styles.boxLogin}>
 						<LogoResumida width={90} />
 						<h1>{t("signin")}</h1>
@@ -81,6 +82,7 @@ const Login = () => {
 								className={styles.inputLogin}
 								placeholder={t("type_email")}
 								name="email"
+								type="email"
 								value={login.email}
 								onChange={changeLogin}
 							/>
@@ -100,7 +102,7 @@ const Login = () => {
 							<p>
 								{t("dont_have_account")} <Link to="/cadastro">{t("signup")}</Link>
 							</p>
-							<Row justify="center" align="middle">
+							<Row justify="center" align="middle" style={{width: "100%"}}>
 							<Button secondary onClick={() => navigate("/")}>
 								{t("go_back")}
 							</Button>

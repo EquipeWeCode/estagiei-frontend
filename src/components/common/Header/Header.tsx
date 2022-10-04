@@ -21,13 +21,20 @@ const Header = () => {
 			items={[
 				{
 					key: "1",
-				label: t("internships"),
+					label: t("internships"),
 					onClick: () => {
 						navigate("/vagas");
 					}
 				},
 				{
 					key: "2",
+					label: t("my_profile"),
+					onClick: () => {
+						navigate("/perfil");
+					}
+				},
+				{
+					key: "99",
 					label: t("logout_button"),
 					onClick: () => {
 						fazLogout();
@@ -51,7 +58,7 @@ const Header = () => {
 						<Logo className={styles.logoHeader} />
 					</Link>
 				</Col>
-				
+
 				{user?.roles ? (
 					<Row gutter={12} align="middle">
 						<Space>
@@ -65,8 +72,6 @@ const Header = () => {
 										className={styles.userImage}
 										src={user.avatar}
 										alt={t("user")}
-										// preview={false}
-										
 									/>
 								</Dropdown>
 							</Col>
@@ -78,7 +83,7 @@ const Header = () => {
 						<Row gutter={12} align="middle">
 							<Space>
 								<Col>
-									<Link to={"/vagas"}>{t("im_company")}</Link>
+									<Link to={"/vagas"}>{t("internships")}</Link>
 								</Col>
 								<span className={styles.linkLogin}>
 									<Link className={styles.linkHeader} to={"/login"}>
