@@ -5,16 +5,33 @@ h2 {
 .banner {
   height: 100vh;
   width: 100%;
-  background-color: #2B0046;
+  background-color: var(--secondary-color);
   display: flex;
   justify-content: center;
 }
+
+.banner-empresa {
+  height: 100vh;
+  width: 100%;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+}
+
 .banner-container {
   display: flex;
   align-items: center;
   height: 100vh;
   width: 90%;
-  background-color: #2B0046;
+  background-color: var(--secondary-color);
+}
+
+.banner-container-empresa {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  width: 90%;
+  background-color: var(--primary-color);
 }
 
 .banner-text {

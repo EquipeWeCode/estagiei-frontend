@@ -1,13 +1,18 @@
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.css";
 
-const TextBanner = () => {
-	const { t } = useTranslation();
+type TextBannerProps = {
+	title: string;
+	subtitle: string;
+}
+
+const TextBanner = (props: TextBannerProps) => {
+	const {title, subtitle } = props;
 
 	return (
 		<>
-			<span>{t("banner_text")}</span>
-			<span className={styles.subtitle}>{t("banner_subtitle")}</span>
+			<span>{title}</span>
+			<span className={styles.subtitle}>{subtitle}</span>
 		</>
 	);
 };

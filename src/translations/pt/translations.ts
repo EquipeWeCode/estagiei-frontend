@@ -62,5 +62,8 @@ export const TRANSLATIONS_PT = {
 	student: "Estudante",
 	see_more: "Ver mais",
 	some_of_our_jobs: "Algumas de nossas vagas",
+	banner_text_company: "Divulgue vagas de estágio de forma fácil.",
+	banner_subtitle_company: "Sua empresa possui vagas de estágio em aberto? Venha divulgá-las em nosso site e receba recomendações de estudantes mais compatíveis com as soft skills que procura.",
+	advertise_my_jobs: "Divulgar vagas",
 };
 
