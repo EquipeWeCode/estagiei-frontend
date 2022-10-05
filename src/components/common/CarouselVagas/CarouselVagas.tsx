@@ -1,6 +1,6 @@
 import { getVagas } from "@/services/vaga";
 import { SIZE_FILTER_DEFAULT } from "@/constants";
-import Carousel from "react-multi-carousel";
+import C from "react-multi-carousel";
 import carouselStyles from "react-multi-carousel/lib/styles.css";
 import { useEffect, useState } from "react";
 import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
@@ -11,6 +11,11 @@ import { useNavigate } from "react-router-dom";
 import Button from "@/components/common/Button";
 import { useTranslation } from "react-i18next";
 import { CaretLeftOutlined, CaretRightOutlined, LeftOutlined } from "@ant-design/icons";
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const Carousel = C.default ? C.default : C;
 
 const CarouselVagas = () => {
 	const FILTRO_INICIAL: FiltroVagaType = {
