@@ -1,0 +1,95 @@
+header {
+  padding: 1.2rem 10rem 1rem 10rem;
+  background-color: var(--secondary-color);
+  font-size: 1.1rem;
+}
+
+header.header-container {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+}
+
+.header-itens {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+ul.itens {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.welcome-text-header {
+  color: #fff;
+}
+
+.translate-button {
+  margin-right: 2px;
+}
+
+.user-image {
+  border-radius: 50%;
+  width: 3.2rem;
+  height: 3.2rem;
+  background-color: #fff;
+  background: #FFF;
+  cursor: pointer;
+  border: none;
+}
+
+.link-header {
+  border: 1px solid var(--primary-color);
+  padding: 0.3rem 0.6rem;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+  color: #FFF;
+}
+
+.link-login:hover .link-header {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+header a {
+  color: #FFF;
+}
+
+header a:hover {
+  color:  var(--primary-color);
+}
+
+.logo-header {
+  display: flex;
+  width: 8.1rem;
+}
+
+:global {
+  body .ant-dropdown {
+    width: 170px;
+    text-align: center;
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+  }
+  
+  body .ant-dropdown-menu {
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    box-shadow: rgb(33, 3, 36) 5px 5px 10px;
+  }
+
+  body .ant-dropdown-menu-item {
+    text-align: center;
+    color: #FFF;
+    padding: 1rem;
+  }
+
+  body .ant-dropdown-menu-item:hover {
+    background-color: var(--primary-color);
+    color: #000;
+  }
+}

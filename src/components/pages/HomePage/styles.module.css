@@ -1,0 +1,77 @@
+h2 {
+  font-weight: 700 !important;
+}
+
+.banner {
+  height: 100vh;
+  width: 100%;
+  background-color: var(--secondary-color);
+  display: flex;
+  justify-content: center;
+}
+
+.banner-empresa {
+  height: 100vh;
+  width: 100%;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+}
+
+.banner-container {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  width: 90%;
+  background-color: var(--secondary-color);
+}
+
+.banner-container-empresa {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  width: 90%;
+  background-color: var(--primary-color);
+}
+
+.banner-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 3rem;
+  width: 100%;
+  color: #fff;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.subtitle {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-top: 1rem;
+  line-height: 201.19%;
+  text-align: justify;
+}
+
+.student-image {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.student-svg {
+  width: 40rem;
+}
+
+body .banner-button {
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.6rem 1rem;
+}
+
+@media(max-width: 1200px) {
+  .student-image {
+    display: none;
+  }
+}

@@ -1,71 +1,102 @@
 /// <reference types="vite-plugin-svgr/client" />
 
-import { i18n } from "@/translations/i18n";
 import { Button, Col, Dropdown, Image, Menu, Row, Space } from "antd";
+import styles from "./styles.module.scss";
 import { useAuth } from "@/contexts/auth";
 import { Link, useNavigate } from "react-router-dom";
 import TraducaoBtn from "../TraducaoBtn";
-import VagasBtn from "../VagasHeaderBtn/VagasBtn";
 
 import { ReactComponent as Logo } from "@/assets/logo.svg";
 import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
 import { getToken, logout } from "@/services/autenticacao";
+import { useTranslation } from "react-i18next";
+import { EMPRESA, ESTUDANTE } from "@/constants";
 
 const Header = () => {
 	const { user, setUser } = useAuth();
-	const { t } = i18n;
+	const { t } = useTranslation();
 	const navigate = useNavigate();
 
-	const menu = (
-		<Menu
-			items={[
-				{
-					key: "1",
-					label: "sair",
-					onClick: () => {
-						fazLogout();
-					},
+	const getMenuItems: any = (tipoUsuario: string = "") => {
+		const menuItems = [
+			{
+				key: "1",
+				label: t("home"),
+				onClick: () => {
+					navigate("/");
 				},
-			]}
-		/>
-	);
+			},
+			{
+				key: "2",
+				label: t("internships"),
+				onClick: () => {
+					navigate("/vagas");
+				},
+			},
+			{
+				key: "3",
+				label: t("my_profile"),
+				onClick: () => {
+					switch (tipoUsuario) {
+						case ESTUDANTE:
+							navigate("estudante/meu-perfil");
+							break;
+						case EMPRESA:
+							navigate("empresa/meu-perfil");
+						default:
+							break;
+					}
+				},
+			},
+			{
+				key: "99",
+				label: t("logout_button"),
+				onClick: () => {
+					fazLogout();
+				},
+			},
+		];
 
-	const navegaLogin = () => {
-		navigate("/estudante/login");
+		// if (tipoUsuario === EMPRESA) {
+		// menuItems.push({
+
+		// });
+
+		return menuItems;
 	};
+
+	const menu = <Menu items={getMenuItems(user?.roles?.at(0))} />;
 
 	const fazLogout = () => {
 		setUser({});
 		logout();
+		navigate("/");
 	};
 
 	return (
-		<header>
-			<Row className="header-itens" justify="space-between" align="middle">
-				<Col className="logo">
+		<header className={styles.headerContainer}>
+			<Row className={styles.headerItens} justify="space-between" align="middle">
+				<Col className={styles.logo}>
 					<Link to="/">
-						<Logo width="100" height="35" />
+						<Logo className={styles.logoHeader} />
 					</Link>
 				</Col>
 
-				{user?.codEstudante ? (
+				{user?.roles ? (
 					<Row gutter={12} align="middle">
 						<Space>
-							<Col className="translate-button">
-								<TraducaoBtn />
-							</Col>
-							<Col className="welcome-text-header">
-								{t("welcome")}: {capitalizaPriLetraDeCadaPalavra(user.nome)}
+							<Col className={styles.translateButton}></Col>
+							<Col className={styles.welcomeTextHeader}>
+								{capitalizaPriLetraDeCadaPalavra(user.nome)}
 							</Col>
 							<Col>
-								<Dropdown overlay={menu} placement="bottomRight" trigger={["click"]}>
-									<Image
-										className="user-image"
-										src={user.avatar}
-										alt={t("user")}
-										width={35}
-										preview={false}
-									/>
+								<Dropdown
+									className={styles.dropdown}
+									overlay={menu}
+									placement="bottomRight"
+									trigger={["click"]}
+								>
+									<img className={styles.userImage} src={user.avatar} alt={t("user")} />
 								</Dropdown>
 							</Col>
 						</Space>
@@ -76,9 +107,13 @@ const Header = () => {
 						<Row gutter={12} align="middle">
 							<Space>
 								<Col>
-									<VagasBtn />
+									<Link to={"/vagas"}>{t("internships")}</Link>
 								</Col>
-								<Button onClick={navegaLogin}>Faça login</Button>
+								<span className={styles.linkLogin}>
+									<Link className={styles.linkHeader} to={"/login"}>
+										{t("signin")}
+									</Link>
+								</span>
 							</Space>
 						</Row>
 					</>
