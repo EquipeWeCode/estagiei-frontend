@@ -1,6 +1,6 @@
 /// <reference types="vite-plugin-svgr/client" />
 
-import { Button, Col, Dropdown, Image, Menu, Row, Space } from "antd";
+import { Col, Dropdown, Menu, Row, Space } from "antd";
 import styles from "./styles.module.scss";
 import { useAuth } from "@/contexts/auth";
 import { Link, useNavigate } from "react-router-dom";

@@ -9,8 +9,13 @@ import TextBanner from "./TextBanner";
 import Button from "@/components/common/Button";
 import { Link } from "react-router-dom";
 import CarouselVagas from "@/components/common/CarouselVagas";
-import Carousel from "react-multi-carousel";
+import C from "react-multi-carousel";
 import { UserType } from "@/types/userTypes";
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const Carousel = C.default ? C.default : C;
 
 type BannerProps = {
 	user: UserType;
