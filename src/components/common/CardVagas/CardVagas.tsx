@@ -22,8 +22,8 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 
 	return (
 		<>
-			{props.vagas && props.vagas.length > 0 ? (
-				props.vagas.map((vaga: VagaType) => (
+			{props?.vagas && props?.vagas?.length > 0 ? (
+				props?.vagas?.map((vaga: VagaType) => (
 					<Row key={vaga.codVaga} className="container-vaga" align="middle">
 						<Link to="/empresa/profile">
 							<Col className="col-image">
