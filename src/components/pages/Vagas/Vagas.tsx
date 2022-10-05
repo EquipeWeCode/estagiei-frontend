@@ -12,20 +12,20 @@ import executivoBackground from "@/assets/fundos/executivo.jpg";
 import styles from "./styles.module.css";
 
 const Vagas = () => {
-    const FILTRO_INICIAL: FiltroVagaType = {
+	const FILTRO_INICIAL: FiltroVagaType = {
 		titulo: "",
 		descricao: "",
 	};
 
-    const { t } = useTranslation();
-    const { TabPane } = Tabs;
+	const { t } = useTranslation();
+	const { TabPane } = Tabs;
 
-    const [vagas, setVagas] = useState<VagaType[]>([]);
-    const [filtroVaga, setFiltroVaga] = useState<FiltroVagaType>(FILTRO_INICIAL);
+	const [vagas, setVagas] = useState<VagaType[]>([]);
+	const [filtroVaga, setFiltroVaga] = useState<FiltroVagaType>(FILTRO_INICIAL);
 
-    useEffect((): void => {
-        fetchVagas();
-	}, []); 
+	useEffect((): void => {
+		fetchVagas();
+	}, []);
 
 	const fetchVagas = async () => {
 		const response = await getVagas(filtroVaga);
@@ -34,18 +34,23 @@ const Vagas = () => {
 		}
 	};
 
-    return (
-        <>
-            <Row itemType="flex" style={styles} justify="center" className={styles.mainRow} align="middle">
-                <Col>
-                    <h1>{t("vacancy_title_header")}</h1>
-                    <p>{t("vacancy_description_header")}</p>
-                </Col>
-            </Row>
+	return (
+		<div className="container">
+			<Row
+				itemType="flex"
+				style={styles}
+				justify="center"
+				className={styles.mainRow}
+				align="middle"
+			>
+				<Col>
+					<h1>{t("vacancy_title_header")}</h1>
+					<p>{t("vacancy_description_header")}</p>
+				</Col>
+			</Row>
 
-
-            <Row justify="center" align="middle" style={{ padding: "2rem" }}>
-            	<Tabs defaultActiveKey="1" style={{ width: "100%" }}>
+			<Row justify="center" align="middle" style={{ padding: "2rem" }}>
+				<Tabs defaultActiveKey="1" style={{ width: "100%" }}>
 					<TabPane tab={t("vacancies")} key="1">
 						<Row justify="center" align="middle" className={styles.searchRow}>
 							<Col className={styles.searchCol}>
@@ -76,15 +81,15 @@ const Vagas = () => {
 						</Row>
 					</TabPane>
 				</Tabs>
-                    <Row justify="center" className={styles.rowVagas} align="middle">
-                        <Col>
-                            <CardVagas vagas={vagas} competenciasEstudante={[]} />
-                        </Col>
-                    </Row>
+				<Row justify="center" className={styles.rowVagas} align="middle">
+					<Col>
+						<CardVagas vagas={vagas} competenciasEstudante={[]} />
+					</Col>
+				</Row>
 			</Row>
-        </>
-    )
-}
+		</div>
+	);
+};
 
 // const styles = {
 //     backgroundImage: `linear-gradient(rgba(191, 66, 245, 0.6), rgba(255, 255, 255, 0.3)), url(${executivoBackground})`,

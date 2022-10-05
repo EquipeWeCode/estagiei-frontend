@@ -5,6 +5,15 @@
   --secondary-color: #2B0046;
 }
 
+.container {
+  padding-top: 64.68px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
 body .ant-tag {
   border-radius: 5px;
 }

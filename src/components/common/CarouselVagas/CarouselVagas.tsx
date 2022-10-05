@@ -5,11 +5,12 @@ import carouselStyles from "react-multi-carousel/lib/styles.css";
 import { useEffect, useState } from "react";
 import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
 import styles from "./styles.module.css";
-import { Col, Divider, Image, Row, Tag } from "antd";
+import { Col, Divider, Row, Tag } from "antd";
 import { capitalizaPriLetraDeCadaPalavra, realMask } from "@/utils/masks";
 import { useNavigate } from "react-router-dom";
-import Button from "../Button";
+import Button from "@/components/common/Button";
 import { useTranslation } from "react-i18next";
+import { CaretLeftOutlined, CaretRightOutlined, LeftOutlined } from "@ant-design/icons";
 
 const CarouselVagas = () => {
 	const FILTRO_INICIAL: FiltroVagaType = {
@@ -25,7 +26,7 @@ const CarouselVagas = () => {
 	}, []);
 
 	const navigate = useNavigate();
-  const { t } = useTranslation();
+	const { t } = useTranslation();
 
 	const fetchVagas = async () => {
 		const response = await getVagas(filtroVaga);
@@ -76,15 +77,22 @@ const CarouselVagas = () => {
 				keyBoardControl={true}
 				focusOnSelect={true}
 				slidesToSlide={1}
+				customLeftArrow={
+					<span className={[styles.arrow, styles.leftArrow].join(" ")}>
+						<CaretLeftOutlined />
+					</span>
+				}
+				customRightArrow={
+					<span className={[styles.arrow, styles.rightArrow].join(" ")}>
+						<CaretRightOutlined />
+					</span>
+				}
 				removeArrowOnDeviceType={["tablet"]}
 				containerClass={carouselStyles.carouselContainer}
 			>
 				{vagas?.map(vaga => {
 					return (
-						<div
-							key={vaga.codVaga}
-							className={styles.vagaCarousel}
-						>
+						<div key={vaga.codVaga} className={styles.vagaCarousel}>
 							<Row justify="center" align="top" style={{ width: "100%", textAlign: "center" }}>
 								<Col span={24}>
 									<Row className={styles.rowTopVaga} justify="space-around">
@@ -95,7 +103,7 @@ const CarouselVagas = () => {
 									</Row>
 								</Col>
 								<Col span={24} className={styles.companyInfo}>
-									<h2 style={{height: "60px"}}>{vaga?.titulo}</h2>
+									<h2 style={{ height: "60px" }}>{vaga?.titulo}</h2>
 									<span className={styles.companyName}>
 										{capitalizaPriLetraDeCadaPalavra(vaga?.empresa?.nomeFantasia)}
 									</span>
@@ -103,20 +111,22 @@ const CarouselVagas = () => {
 								<Col span={24}>
 									<div className={styles.descricaoVaga}>{vaga?.descricao}</div>
 								</Col>
-                <Col span={24}>
-                  <span className={styles.salarioVaga}>{realMask(vaga?.salario)}</span>
-                  <Row justify="center">
-                    <Button secondary onClick={() => navigate("/vagas")}>
-                      {t("see_more")}
-                    </Button>
-                  </Row>
-                </Col>
+								<Col span={24}>
+									<span className={styles.salarioVaga}>{realMask(vaga?.salario)}</span>
+									<Row justify="center">
+										<Button secondary onClick={() => navigate("/vagas")}>
+											{t("see_more")}
+										</Button>
+									</Row>
+								</Col>
 
-								<Divider style={{ minWidth: "70%", maxWidth: "70%", marginBottom: "0.5rem"}} />
+								<Divider style={{ minWidth: "70%", maxWidth: "70%", marginBottom: "0.5rem" }} />
 
 								<Col span={24}>
 									<Row justify="center">
-										<h4>{vaga?.endereco?.estado} - {vaga?.endereco?.cidade}</h4>
+										<h4>
+											{vaga?.endereco?.estado} - {vaga?.endereco?.cidade}
+										</h4>
 									</Row>
 								</Col>
 							</Row>

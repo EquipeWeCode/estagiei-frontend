@@ -49,13 +49,6 @@ const Header = () => {
 				},
 			},
 			{
-				key: "4",
-				label: t("my_jobs"),
-				onClick: () => {
-					navigate("/minhas-vagas");
-				},
-			},
-			{
 				key: "99",
 				label: t("logout_button"),
 				onClick: () => {

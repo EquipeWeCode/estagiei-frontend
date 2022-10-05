@@ -4,7 +4,6 @@ import carouselStyles from "react-multi-carousel/lib/styles.css";
 import { Col, Row } from "antd";
 import { useTranslation } from "react-i18next";
 import { ReactComponent as StudentBanner } from "@/assets/fundos/student-banner.svg";
-import { ReactComponent as CompanyBanner } from "@/assets/fundos/company-banner.svg";
 import styles from "./styles.module.css";
 import TextBanner from "./TextBanner";
 import Button from "@/components/common/Button";
@@ -83,8 +82,9 @@ const HomePage = (): JSX.Element => {
 				focusOnSelect={true}
 				slidesToSlide={1}
 				autoPlay={true}
-				autoPlaySpeed={7000}
-				removeArrowOnDeviceType={["tablet"]}
+				showDots={true}
+				autoPlaySpeed={6000}
+				removeArrowOnDeviceType={["superLargeDesktop"]}
 				containerClass={carouselStyles.carouselContainer}
 			>
 				<Banner

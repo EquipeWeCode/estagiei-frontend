@@ -36,14 +36,12 @@ const TraducaoBtn = () => {
 
 	return (
 		<Tooltip title={t("change_language")}>
-			{/* <span> */}
 				<Switch
 					defaultChecked
 					onChange={onChangeSwitch}
 					className={styles.switchDiv}
 					style={stylesJs}
 				/>
-			{/* </span> */}
 		</Tooltip>
 	);
 };

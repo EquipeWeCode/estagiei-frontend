@@ -65,7 +65,9 @@ const Login = () => {
 
 			setUser(user);
 			localStorage.setItem("userDetails", JSON.stringify(user));
-			navigate("/");
+
+
+			codEmpresa ? navigate("/empresa/meu-perfil") : codEstudante ?  navigate("/estudante/meu-perfil") : navigate("/");
 		}
 	};
 

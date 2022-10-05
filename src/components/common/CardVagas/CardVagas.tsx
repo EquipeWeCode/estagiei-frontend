@@ -17,18 +17,24 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 			comp => comp.codCompetencia === competencia.codCompetencia
 		)
 			? COLORS.argb.primary_color
-			: "#000";
+			: "default";
 	};
 
 	return (
 		<>
 			{props.vagas && props.vagas.length > 0 ? (
 				props.vagas.map((vaga: VagaType) => (
-					<Row key={vaga.codVaga} className="container-vaga">
+					<Row key={vaga.codVaga} className="container-vaga" align="middle">
 						<Link to="/empresa/profile">
 							<Col className="col-image">
 								{vaga?.empresa?.avatar ? (
-									<img src={vaga?.empresa?.avatar} alt="avatar-empresa" width={100} height={100} />
+									<img
+										src={vaga?.empresa?.avatar}
+										alt="avatar-company"
+										width={100}
+										height={100}
+										style={{ borderRadius: "5px" }}
+									/>
 								) : (
 									<NotFound width={100} height={100} />
 								)}
@@ -59,7 +65,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 								vaga.competencias.map((competencia: CompetenciaType) => (
 									<Tag
 										style={{
-											borderRadius: "1rem",
+											borderRadius: "5px",
 											padding: "0.2rem 0.4rem",
 											marginBottom: "0.5rem",
 										}}

@@ -52,6 +52,32 @@
   font-size: 1.4rem;
   padding: 2rem;
 }
+.arrow {
+  position: absolute;
+  transform: translateY(-50%);
+  background-color: transparent;
+  font-size: 3rem;
+  border: none;
+  top: 50%;
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.arrow svg {
+  transition: all 0.2s ease-in-out;
+}
+
+.arrow svg:hover {
+  color: var(--primary-color);
+}
+
+.right-arrow {
+  right: -15px;
+}
+
+.left-arrow {
+  left: -15px;
+}
 
 body .react-multiple-carousel__arrow {
   background: none;
