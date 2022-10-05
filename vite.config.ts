@@ -21,6 +21,10 @@ export default defineConfig({
 		}),
 	],
 
+	// build: {
+	// 	minify: false,
+	// },
+
 	css: {
 		modules: {
 			generateScopedName: "[name]__[local]___[hash:base64:5]",
