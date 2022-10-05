@@ -13,7 +13,6 @@ import NotFound from "@/components/pages/NotFound";
 import { AuthProvider } from "@/contexts/auth";
 import Footer from "@/components/common/Footer";
 import PrivateRoute from "@/components/pages/PrivateRoute";
-import CadastroEstudante from "@/components/pages/CadastroEstudante";
 
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
@@ -22,6 +21,7 @@ import DescricaoVaga from "./components/pages/DescricaoVaga";
 import Vagas from "./components/pages/Vagas";
 import { ESTUDANTE } from "./constants";
 import TraducaoBtn from "./components/common/TraducaoBtn";
+import PerfilEstudante from "@/components/pages/PerfilEstudante";
 
 render(
 	<Provider store={store}>
@@ -35,7 +35,11 @@ render(
 						<Route path="/login" element={<Login />} />
 						<Route path="/vagas" element={<Vagas />} />
 						<Route path="/detalheVaga" element={<DescricaoVaga />} />
-						<Route path="/cadastro/estudante" element={<CadastroEstudante />} />
+						<Route path="/estudante/meu-perfil" element={
+							<PrivateRoute roles={[ESTUDANTE]}>
+								<PerfilEstudante />
+							</PrivateRoute>
+						} />
 						<Route path="*" element={<NotFound />} />
 					</Routes>
 					<Footer />

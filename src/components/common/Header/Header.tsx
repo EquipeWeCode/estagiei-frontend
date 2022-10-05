@@ -10,39 +10,69 @@ import { ReactComponent as Logo } from "@/assets/logo.svg";
 import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
 import { getToken, logout } from "@/services/autenticacao";
 import { useTranslation } from "react-i18next";
+import { EMPRESA, ESTUDANTE } from "@/constants";
 
 const Header = () => {
 	const { user, setUser } = useAuth();
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 
-	const menu = (
-		<Menu
-			items={[
-				{
-					key: "1",
-					label: t("internships"),
-					onClick: () => {
-						navigate("/vagas");
+	const getMenuItems: any = (tipoUsuario: string = "") => {
+		const menuItems = [
+			{
+				key: "1",
+				label: t("home"),
+				onClick: () => {
+					navigate("/");
+				},
+			},
+			{
+				key: "2",
+				label: t("internships"),
+				onClick: () => {
+					navigate("/vagas");
+				},
+			},
+			{
+				key: "3",
+				label: t("my_profile"),
+				onClick: () => {
+					switch (tipoUsuario) {
+						case ESTUDANTE:
+							navigate("estudante/meu-perfil");
+							break;
+						case EMPRESA:
+							navigate("empresa/meu-perfil");
+						default:
+							break;
 					}
 				},
-				{
-					key: "2",
-					label: t("my_profile"),
-					onClick: () => {
-						navigate("/perfil");
-					}
+			},
+			{
+				key: "4",
+				label: t("my_jobs"),
+				onClick: () => {
+					navigate("/minhas-vagas");
 				},
-				{
-					key: "99",
-					label: t("logout_button"),
-					onClick: () => {
-						fazLogout();
-					},
+			},
+			{
+				key: "99",
+				label: t("logout_button"),
+				onClick: () => {
+					fazLogout();
 				},
-			]}
-		/>
-	);
+			},
+		];
+
+		// if (tipoUsuario === EMPRESA) {
+		// menuItems.push({
+
+		// });
+
+		return menuItems;
+	};
+
+	const menu = <Menu items={getMenuItems(user?.roles?.at(0))} />;
 
 	const fazLogout = () => {
 		setUser({});
@@ -67,12 +97,13 @@ const Header = () => {
 								{capitalizaPriLetraDeCadaPalavra(user.nome)}
 							</Col>
 							<Col>
-								<Dropdown className={styles.dropdown} overlay={menu} placement="bottomRight" trigger={["click"]}>
-									<img
-										className={styles.userImage}
-										src={user.avatar}
-										alt={t("user")}
-									/>
+								<Dropdown
+									className={styles.dropdown}
+									overlay={menu}
+									placement="bottomRight"
+									trigger={["click"]}
+								>
+									<img className={styles.userImage} src={user.avatar} alt={t("user")} />
 								</Dropdown>
 							</Col>
 						</Space>

@@ -21,19 +21,19 @@ const CadastroEstudante = () => {
 	const [competencias, setCompetencias] = useState<CompetenciaType[]>([]);
 
 	useEffect(() => {
-		fetchEstudante();
+		// fetchEstudante();
 		fetchCompetencias();
 	}, []);
 
-	useEffect(() => {
-		setNovoUser(user);
-	}, [user]);
+	// useEffect(() => {
+	// 	setNovoUser(user);
+	// }, [user]);
 
-	const fetchEstudante = async () => {
-		const estudanteBuscado = await getEstudante(user.codEstudante);
-		const data: UserType = estudanteBuscado.data;
-		setUser(data);
-	};
+	// const fetchEstudante = async () => {
+	// 	const estudanteBuscado = await getEstudante(user.codEstudante);
+	// 	const data: UserType = estudanteBuscado.data;
+	// 	setUser(data);
+	// };
 
 	const fetchCompetencias = async () => {
 		const competencias = await getCompetencias();

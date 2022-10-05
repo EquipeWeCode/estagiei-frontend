@@ -64,4 +64,7 @@ export const TRANSLATIONS_EN = {
 	banner_text_company: "Publish your internships in a simplified way.",
 	banner_subtitle_company: "Does your company have open internship positions? Come share them on our website and receive students recommendations who are most compatible with the soft skills you are looking for.",
 	advertise_my_jobs: "Advertise my jobs",
+	my_jobs: "My jobs",
+	home: "Home",
+	back_to_home: "Back to home",
 };
