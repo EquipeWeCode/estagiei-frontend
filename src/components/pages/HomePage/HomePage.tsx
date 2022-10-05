@@ -1,4 +1,3 @@
-/// <reference types="vite-plugin-svgr/client" />
 import { useAuth } from "@/contexts/auth";
 import carouselStyles from "react-multi-carousel/lib/styles.css";
 import { Col, Row } from "antd";
@@ -45,13 +44,7 @@ const Banner = (props: BannerProps) => {
 					{type === "student" ? (
 						<StudentBanner className={styles.studentSvg} />
 					) : (
-						<div>
-							<img
-								className={styles.studentSvg}
-								src={"/src/assets/fundos/company-banner.svg"}
-								alt="image"
-							/>
-						</div>
+						<img src="https://res.cloudinary.com/dlkvupjc7/image/upload/v1664977159/company-banner-png_vhreut.png" className={styles.studentSvg} />
 					)}
 				</Col>
 				<Col></Col>
