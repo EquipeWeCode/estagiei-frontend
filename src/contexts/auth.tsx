@@ -1,3 +1,4 @@
+import { logout } from "@/services/autenticacao";
 import { AuthContextData } from "@/types/contextTypes";
 import { UserType, TokenType } from "@/types/userTypes";
 import React, { createContext, useEffect } from "react";
@@ -14,6 +15,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 			setUser(JSON.parse(user));
 		} else {
       setUser({} as UserType);
+			logout();
     }
 	}, []);
 

@@ -12,7 +12,7 @@ import Button from "@/components/common/Button";
 import Input from "@/components/common/Input";
 import { LoginType, UserType } from "@/types/userTypes";
 import { getToken, postLogin } from "@/services/autenticacao";
-import { TOKEN_KEY } from "@/constants";
+import { TOKEN_KEY, USER_KEY } from "@/constants";
 import jwt from "jwt-decode";
 import { getUsuario } from "@/services/usuario";
 import { getEstudante } from "@/services/estudante";
@@ -21,15 +21,17 @@ import { getEmpresa } from "@/services/empresa";
 const Login = () => {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
-	const { setUser } = useAuth();
+	const { user, setUser } = useAuth();
 	const [login, setLogin] = useState({} as LoginType);
 	const [token, setToken] = useState(getToken());
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const expired = searchParams.get("expired");
 
+	const userLocal = localStorage.getItem(USER_KEY);
+
 	useEffect((): void => {
-		if (token) {
+		if (token !== null && USER_KEY && user?.roles) {
 			navigate("/");
 		}
 	}, []);
