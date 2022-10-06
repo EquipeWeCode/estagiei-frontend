@@ -136,33 +136,12 @@ const CadastroEmpresa = () => {
 
 						<Form.Item>
 							<span>CNPJ</span>
-							<Form.Item name="cpf" noStyle rules={RULES}>
-								<Input placeholder={"CPF"} value={novaEmpresa.cnpj} maxLength={14} />
+							<Form.Item name="cnpj" noStyle rules={RULES}>
+								<Input placeholder={"cnpj"} value={novaEmpresa.cnpj} maxLength={14} />
 							</Form.Item>
 						</Form.Item>
 
-						{/* <Form.Item>
-							<span>RG</span>
-							<Form.Item name="rg" noStyle rules={RULES}>
-								<Input placeholder={"RG"} value={novaEmpresa.endereco} maxLength={12} />
-							</Form.Item>
-						</Form.Item> */}
-
 						<Form.Item>
-							{/* <span>{t("birth_date")}</span>
-							<Form.Item name="dataNascimento" noStyle rules={RULES}>
-								<DatePicker
-									style={{ width: "100%", marginBottom: "0.4rem", borderRadius: "0.5rem" }}
-									name="dataNascimento"
-									placeholder={t("birth_date")}
-									value={
-										novaEmpresa.dataNascimento
-											? moment(novaEmpresa.dataNascimento, dateFormatDto)
-											: undefined
-									}
-									format={dateFormat}
-								/>
-							</Form.Item> */}
 							<Form.Item>
 								<span>CEP</span>
 								<Form.Item name="cep" noStyle rules={RULES}>
@@ -170,33 +149,39 @@ const CadastroEmpresa = () => {
 								</Form.Item>
 							</Form.Item>
 							<Form.Item>
-								<span>CNPJ</span>
-								<Form.Item name="cpf" noStyle rules={RULES}>
-									<Input placeholder={"CPF"} value={novaEmpresa.endereco?.logradouro} maxLength={14} />
+								<span>Estado</span>
+								<Form.Item name="estado" noStyle rules={RULES}>
+									<Input placeholder={"estado"} value={novaEmpresa.endereco?.estado} maxLength={14} />
 								</Form.Item>
 							</Form.Item>
 							<Form.Item>
-								<span>CNPJ</span>
-								<Form.Item name="cpf" noStyle rules={RULES}>
-									<Input placeholder={"CPF"} value={novaEmpresa.endereco?.numero} maxLength={14} />
+								<span>Cidade</span>
+								<Form.Item name="cidade" noStyle rules={RULES}>
+									<Input placeholder={"cidade"} value={novaEmpresa.endereco?.cidade} maxLength={14} />
 								</Form.Item>
 							</Form.Item>
 							<Form.Item>
-								<span>CNPJ</span>
-								<Form.Item name="cpf" noStyle rules={RULES}>
-									<Input placeholder={"CPF"} value={novaEmpresa.endereco?.bairro} maxLength={14} />
+								<span>Bairro</span>
+								<Form.Item name="bairro" noStyle rules={RULES}>
+									<Input placeholder={"bairro"} value={novaEmpresa.endereco?.bairro} maxLength={14} />
 								</Form.Item>
 							</Form.Item>
 							<Form.Item>
-								<span>CNPJ</span>
-								<Form.Item name="cpf" noStyle rules={RULES}>
-									<Input placeholder={"CPF"} value={novaEmpresa.endereco?.cidade} maxLength={14} />
+								<span>Logradouro</span>
+								<Form.Item name="logradouro" noStyle rules={RULES}>
+									<Input placeholder={"logradouro"} value={novaEmpresa.endereco?.logradouro} maxLength={14} />
 								</Form.Item>
 							</Form.Item>
 							<Form.Item>
-								<span>CNPJ</span>
-								<Form.Item name="cpf" noStyle rules={RULES}>
-									<Input placeholder={"CPF"} value={novaEmpresa.endereco?.estado} maxLength={14} />
+								<span>Numero</span>
+								<Form.Item name="numero" noStyle rules={RULES}>
+									<Input placeholder={"numero"} value={novaEmpresa.endereco?.numero} maxLength={14} />
+								</Form.Item>
+							</Form.Item>
+							<Form.Item>
+								<span>Complemento</span>
+								<Form.Item name="complemento" noStyle rules={RULES}>
+									<Input placeholder={"complemento"} value={novaEmpresa.endereco?.complemento} maxLength={14} />
 								</Form.Item>
 							</Form.Item>
 						</Form.Item>
