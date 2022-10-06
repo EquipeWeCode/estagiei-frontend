@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import moment, { Moment } from "moment";
 import { getEstudante, putEstudante } from "@/services/estudante";
 import { Link, useNavigate } from "react-router-dom";
+import { getToken } from "@/services/autenticacao";
 import Button from "@/components/common/Button";
 import { EmpresaLoginType, EmpresaType } from "@/types/empresaTypes";
 import { getEmpresa, postEmpresa } from "@/services/empresa";
@@ -16,16 +17,19 @@ import { CepType } from "@/types/cepType";
 import { getCep } from "@/services/cep";
 
 const CadastroEmpresa = () => {
-	const { user, setUser } = useAuth();
 	const { t } = useTranslation();
 	const navigate = useNavigate();
+
+	const [token, setToken] = useState(getToken());
 
 	const [novaEmpresa, setNovaEmpresa] = useState<EmpresaType>(user);
 	const [loginEmpresa, setLogin] = useState<EmpresaLoginType>({} as EmpresaLoginType);
 	const [novoCep, setCep] = useState<CepType>({} as CepType);
 
 	useEffect(() => {
-
+		if (token) {
+			navigate("/");
+		}
 	}, []);
 
 	useEffect(() => {
