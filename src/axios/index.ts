@@ -12,7 +12,7 @@ instance.interceptors.request.use(
 	async config => {
 		document.body.classList.add("loading-indicator");
 		const token = getToken();
-    
+
 		if (token) {
 			config.headers!.Authorization = `Bearer ${token}`;
 		}
@@ -21,7 +21,7 @@ instance.interceptors.request.use(
 	function (error) {
 		document.body.classList.remove("loading-indicator");
 
-		if(error.response.status === 401) {
+		if (error.response.status === 401) {
 			logout();
 			history.push("/login?expired=true");
 		}
@@ -38,7 +38,7 @@ instance.interceptors.response.use(
 	function (error) {
 		document.body.classList.remove("loading-indicator");
 		const response = error?.response;
-		const errors: [] = response?.data?.errors|| [];
+		const errors: [] = response?.data?.errors || [];
 		const message = response?.data?.message || "";
 
 		store.dispatch({
