@@ -68,4 +68,5 @@ export const TRANSLATIONS_EN = {
 	my_jobs: "My jobs",
 	home: "Home",
 	back_to_home: "Back to home",
+	expired_session: "Your session has expired. Please login again.",
 };

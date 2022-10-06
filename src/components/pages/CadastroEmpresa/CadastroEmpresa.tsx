@@ -15,6 +15,17 @@ import Notification from "@/components/common/Notification";
 import { use } from "i18next";
 import { CepType } from "@/types/cepType";
 import { getCep } from "@/services/cep";
+import { EnderecoType } from "@/types/enderecoType";
+
+type CadastroEmpresaType = {
+	email: string,
+	senha: string,
+	avatar: string,
+	razaoSocial: string,
+	nomeFantasia: string,
+	cnpj: string,
+	endereco: EnderecoType
+}
 
 const CadastroEmpresa = () => {
 	const { t } = useTranslation();
@@ -22,8 +33,7 @@ const CadastroEmpresa = () => {
 
 	const [token, setToken] = useState(getToken());
 
-	const [novaEmpresa, setNovaEmpresa] = useState<EmpresaType>(user);
-	const [loginEmpresa, setLogin] = useState<EmpresaLoginType>({} as EmpresaLoginType);
+	const [novaEmpresa, setNovaEmpresa] = useState<CadastroEmpresaType>({} as CadastroEmpresaType);
 	const [novoCep, setCep] = useState<CepType>({} as CepType);
 
 	useEffect(() => {
@@ -32,19 +42,8 @@ const CadastroEmpresa = () => {
 		}
 	}, []);
 
-	useEffect(() => {
-		setNovaEmpresa(user);
-	}, [user]);
-
 	const dateFormat = "DD/MM/YYYY";
 	const dateFormatDto = "YYYY-MM-DD";
-
-	const INITIAL_VALUES = {
-		razaoSocial: novaEmpresa.razaoSocial,
-		nomeFantasia: novaEmpresa.nomeFantasia,
-		cnpj: novaEmpresa.cnpj,
-		endereco: novaEmpresa.endereco
-	};
 
 	const RULES = [
 		{
@@ -92,15 +91,13 @@ const CadastroEmpresa = () => {
 				<Row className="info-dados">
 					<Form
 						onFinish={criarEmpresa}
-						name="cadastroEstudante"
+						name="cadastroEmpresa"
 						onValuesChange={(changedValues, allValues) => {
 							setNovaEmpresa({
 								...novaEmpresa,
 								...allValues,
-								dataNascimento: moment(allValues.dataNascimento).format(dateFormatDto),
 							});
 						}}
-						initialValues={INITIAL_VALUES}
 					>
 						<Form.Item>
 							<span>{"Email"}</span>

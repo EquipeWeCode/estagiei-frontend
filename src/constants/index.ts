@@ -6,7 +6,7 @@ export const ENDPOINT_CEP = "/json/";
 export const ENDPOINT_USUARIO = "/usuario";
 export const ENDPOINT_EMPRESA = "/empresa";
 
-export const TOKEN_KEY = "authToken";
+export const TOKEN_KEY = "token";
 export const USER_KEY = "userDetails";
 
 export const ESTUDANTE = "ESTUDANTE";
