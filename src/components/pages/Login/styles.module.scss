@@ -23,7 +23,7 @@
   border: 1px solid var(--primary-color); 
   padding: 1rem;
   border-radius: 10px;
-  height: 450px;
+  height: 470px;
   width: 390px;
   box-shadow: rgba(33, 3, 36, 0.205) 0px 0px 10px;
 }
@@ -37,6 +37,10 @@ body .btn-login {
 
 .input-login {
   margin-bottom: 1rem;
+}
+
+.expired {
+  color: red;
 }
 
 @media(max-width: 480px) {

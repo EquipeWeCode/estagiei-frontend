@@ -1,6 +1,7 @@
-import { getToken } from "./../services/autenticacao";
+import { getToken, logout } from "./../services/autenticacao";
 import axios from "axios";
 import { store } from "@/redux/store";
+import history from "@/utils/history";
 
 const instance = axios.create({
 	baseURL: import.meta.env.VITE_SERVER_URL,
@@ -19,6 +20,11 @@ instance.interceptors.request.use(
 	},
 	function (error) {
 		document.body.classList.remove("loading-indicator");
+
+		if(error.response.status === 401) {
+			logout();
+			history.push("/login?expired=true");
+		}
 		return Promise.reject(error);
 	}
 );
