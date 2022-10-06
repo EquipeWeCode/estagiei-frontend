@@ -1,13 +1,12 @@
 /// <reference types="vite-plugin-svgr/client" />
 
 import { useAuth } from "@/contexts/auth";
-import { Col, Divider, Row } from "antd";
+import { Col, Row } from "antd";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import styles from "./styles.module.scss";
 
-import { ReactComponent as Logo } from "@/assets/logo.svg";
 import { ReactComponent as LogoResumida } from "@/assets/logo-resumida.svg";
 import Button from "@/components/common/Button";
 import Input from "@/components/common/Input";
@@ -25,6 +24,9 @@ const Login = () => {
 	const { user, setUser } = useAuth();
 	const [login, setLogin] = useState({} as LoginType);
 	const [token, setToken] = useState(getToken());
+	const [searchParams, setSearchParams] = useSearchParams();
+
+	const expired = searchParams.get("expired");
 
 	const userLocal = localStorage.getItem(USER_KEY);
 
@@ -68,8 +70,11 @@ const Login = () => {
 			setUser(user);
 			localStorage.setItem("userDetails", JSON.stringify(user));
 
-
-			codEmpresa ? navigate("/empresa/meu-perfil") : codEstudante ?  navigate("/estudante/meu-perfil") : navigate("/");
+			codEmpresa
+				? navigate("/empresa/meu-perfil")
+				: codEstudante
+				? navigate("/estudante/meu-perfil")
+				: navigate("/");
 		}
 	};
 
@@ -80,6 +85,11 @@ const Login = () => {
 					<Col className={styles.boxLogin}>
 						<LogoResumida width={90} />
 						<h1>{t("signin")}</h1>
+						{expired && (
+							<p className={styles.expired}>
+								{t("expired_session")}
+							</p>
+						)}
 						<Row className={styles.containerInput} justify="center">
 							<Input
 								label={t("email")}
@@ -102,14 +112,20 @@ const Login = () => {
 							<Button className={styles.btnLogin} onClick={efetuarLogin}>
 								{t("signin")}
 							</Button>
-							<hr style={{width: "100%", margin: "1rem 0", border: "0.1px solid var(--primary-color)"}}/>
+							<hr
+								style={{
+									width: "100%",
+									margin: "1rem 0",
+									border: "0.1px solid var(--primary-color)",
+								}}
+							/>
 							<p>
 								{t("dont_have_account")} <Link to="/cadastro">{t("signup")}</Link>
 							</p>
-							<Row justify="center" align="middle" style={{width: "100%"}}>
-							<Button secondary onClick={() => navigate("/")}>
-								{t("go_back")}
-							</Button>
+							<Row justify="center" align="middle" style={{ width: "100%" }}>
+								<Button secondary onClick={() => navigate("/")}>
+									{t("go_back")}
+								</Button>
 							</Row>
 						</Row>
 					</Col>
