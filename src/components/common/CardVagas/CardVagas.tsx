@@ -2,7 +2,7 @@ import { VagaType } from "@/types/vagasTypes";
 import { Col, Empty, Tag, Space, Row } from "antd";
 import { CompetenciaType } from "@/types/competenciaType";
 import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
-import { COLORS } from '@/constants/colors';
+import { COLORS } from "@/constants/colors";
 import NotFound from "../NotFound";
 import { Link } from "react-router-dom";
 
@@ -17,20 +17,30 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 			comp => comp.codCompetencia === competencia.codCompetencia
 		)
 			? COLORS.argb.primary_color
-			: "#000";
+			: "default";
 	};
 
 	return (
 		<>
-			{props.vagas && props.vagas.length > 0 ? (
-				props.vagas.map((vaga: VagaType) => (
-					<Row key={vaga.codVaga} className="container-vaga">
+			{props?.vagas && props?.vagas?.length > 0 ? (
+				props?.vagas?.map((vaga: VagaType) => (
+					<Row key={vaga.codVaga} className="container-vaga" align="middle">
 						<Link to="/empresa/profile">
-							<Col className="col-image" >
-								<NotFound width={100} height={100}/>
+							<Col className="col-image">
+								{vaga?.empresa?.avatar ? (
+									<img
+										src={vaga?.empresa?.avatar}
+										alt="avatar-company"
+										width={100}
+										height={100}
+										style={{ borderRadius: "5px" }}
+									/>
+								) : (
+									<NotFound width={100} height={100} />
+								)}
 							</Col>
 						</Link>
-						<Col className="content" >
+						<Col className="content">
 							<Link to="/DescricaoVaga">
 								<div className="vaga-titulo">
 									<h3 style={{ display: "inline-block" }}>
@@ -44,7 +54,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 							<div className="col-desc">
 								<p>{vaga.descricao}</p>
 							</div>
-							<p style={{fontSize: "1rem" }}>
+							<p style={{ fontSize: "1rem" }}>
 								R$
 								{vaga.salario.toLocaleString("pt-BR", {
 									maximumFractionDigits: 2,
@@ -53,7 +63,15 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 							</p>
 							{vaga.competencias &&
 								vaga.competencias.map((competencia: CompetenciaType) => (
-									<Tag style={{borderRadius: "1rem", padding: "0.2rem 0.4rem", marginBottom: "0.5rem"}} key={competencia.codCompetencia} color={retornaCorTag(competencia)}>
+									<Tag
+										style={{
+											borderRadius: "5px",
+											padding: "0.2rem 0.4rem",
+											marginBottom: "0.5rem",
+										}}
+										key={competencia.codCompetencia}
+										color={retornaCorTag(competencia)}
+									>
 										{competencia.descricaoCompetencia}
 									</Tag>
 								))}

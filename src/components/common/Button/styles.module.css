@@ -1,0 +1,25 @@
+.ant-btn-custom {
+  color: var(--primary-color);
+  background-color: var(--secondary-color);
+  border-radius: 5px;
+  border: none;
+  transition: all 0.3s ease-in-out;
+  height: auto;
+}
+
+.ant-btn-custom:hover,
+.ant-btn-custom:focus,
+.ant-btn-custom:active {
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
+}
+
+.btn-secondary {
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
+}
+
+.btn-secondary:hover {
+  color: var(--primary-color);
+  background-color: var(--secondary-color);
+}

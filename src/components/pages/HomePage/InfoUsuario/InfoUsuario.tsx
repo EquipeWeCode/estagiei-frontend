@@ -5,7 +5,7 @@ import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
 import { Col, Row, Tag } from "antd";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-
+import styles from "./styles.module.css";
 interface InfoUsuarioProps {
 	user: UserType;
 }
@@ -14,7 +14,7 @@ const InfoUsuario = ({ user }: InfoUsuarioProps): JSX.Element => {
   
 	return (
 		<>
-			<Col className="container-info-user" md={15}>
+			<Col className={styles.containerInfoUser} md={15}>
 				<Row justify="end">
 					<Button type="primary" ghost>
 						<Link to="/cadastro/estudante">{t("edit_profile")}</Link>

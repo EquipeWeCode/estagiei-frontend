@@ -7,5 +7,5 @@ export const postEmpresa = async (body: EmpresaType = {}) => {
 }
 
 export const getEmpresa = async (id: string = "") => {
-    return await getResource(`${ENDPOINT_EMPRESA}/${id}`);
-}
+	return await getResource(`${ENDPOINT_EMPRESA}/${id}`);
+};
