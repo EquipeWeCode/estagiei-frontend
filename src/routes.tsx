@@ -35,7 +35,12 @@ render(
 						<Route path="/" element={<HomePage />} />
 						<Route path="/login" element={<Login />} />
 						<Route path="/vagas" element={<Vagas />} />
-						<Route path="/detalheVaga" element={<DescricaoVaga />} />
+						
+						<Route path="/detalheVaga" element={
+							<PrivateRoute roles={[ESTUDANTE]}>
+								<DescricaoVaga />
+							</PrivateRoute>
+						} />
 						<Route path="/estudante/meu-perfil" element={
 							<PrivateRoute roles={[ESTUDANTE]}>
 								<PerfilEstudante />

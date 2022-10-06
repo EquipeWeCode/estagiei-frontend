@@ -1,5 +1,5 @@
 import { VagaType } from "@/types/vagasTypes";
-import { Col, Empty, Tag, Space, Row } from "antd";
+import { Col, Empty, Tag, Space,Button, Row } from "antd";
 import { CompetenciaType } from "@/types/competenciaType";
 import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
 import { COLORS } from "@/constants/colors";
@@ -76,6 +76,9 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 									</Tag>
 								))}
 						</Col>
+						<Button >
+							<Link to="/detalheVaga">Ver detalhes</Link>
+						</Button>
 					</Row>
 				))
 			) : (
