@@ -8,7 +8,7 @@ const DescricaoVaga = () => {
 	const { t } = useTranslation();
 
 	return (
-		
+		<div className="container">
 		<div className={styles.containerDescricaoVaga}>
 			<Row justify="center" className={styles.cadastro}>
 				<Row className={styles.infoDados}>
@@ -47,6 +47,7 @@ const DescricaoVaga = () => {
 					</Form>
 				</Row>
 			</Row>
+		</div>
 		</div>
 	);
 };
