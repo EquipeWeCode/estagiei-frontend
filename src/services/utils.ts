@@ -5,7 +5,7 @@ const ROOT_URL = () => {
 };
 
 const CEP_URL = () => {
-	return import.meta.env.API_CEP_URL;
+	return import.meta.env.VITE_CEP_URL;
 }
 
 //Resources
@@ -13,6 +13,11 @@ export const getResource = async (resource: string, config: any = null) => {
 	const response = await axios.get(ROOT_URL() + resource, config);
 	return response;
 };
+
+export const getResourceCep = async (resource: string, config: any = null) => {
+	const response = await axios.get(CEP_URL() + resource, config);
+	return response; 
+}
 
 export async function postResource(
 	resource: string,
@@ -46,9 +51,4 @@ export function serializeObjectToParam(filtro: Record<string, any>, first: boole
 		}
 	}
 	return params;
-}
-
-export const getResourceCep = async (resource: string, config: any = null) => {
-	const response = await axios.get(CEP_URL() + resource, config);
-	return response;
 }

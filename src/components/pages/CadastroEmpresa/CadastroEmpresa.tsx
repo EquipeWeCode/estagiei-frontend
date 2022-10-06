@@ -52,7 +52,7 @@ const CadastroEmpresa = () => {
 		},
 	];
 
-	const fetchCep = async (cep: string) => {
+	const getViaCep = async (cep: string) => {
 		try {
 			const response = await getCep(cep);
 			console.log(response);
@@ -145,7 +145,7 @@ const CadastroEmpresa = () => {
 							<Form.Item>
 								<span>CEP</span>
 								<Form.Item name="cep" noStyle rules={RULES}>
-									<Input placeholder={"cep"} value={novaEmpresa.endereco?.cep} maxLength={14} />
+									<Input placeholder={"cep"} value={novaEmpresa.endereco?.cep} maxLength={14} onChange={e => getViaCep(e.target.value)}/>
 								</Form.Item>
 							</Form.Item>
 							<Form.Item>
