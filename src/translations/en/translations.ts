@@ -68,4 +68,12 @@ export const TRANSLATIONS_EN = {
 	home: "Home",
 	back_to_home: "Back to home",
 	expired_session: "Your session has expired. Please login again.",
+	apply: "Apply",
+	job_details: "Job details",
+	job_name: "Job name",
+	job_description: "Job description",
+	details: "Details",
+	address: "Address",
+	description: "Description",
+	show_details: "Show details",
 };

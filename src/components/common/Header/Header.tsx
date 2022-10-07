@@ -87,7 +87,7 @@ const Header = () => {
 						<Space>
 							<Col className={styles.translateButton}></Col>
 							<Col className={styles.welcomeTextHeader}>
-								{capitalizaPriLetraDeCadaPalavra(user.nome)}
+								{capitalizaPriLetraDeCadaPalavra(user.nome || user.nomeFantasia)}
 							</Col>
 							<Col>
 								<Dropdown

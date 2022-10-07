@@ -5,6 +5,7 @@ import Card from "@/components/common/Card";
 import { Link } from "react-router-dom";
 import Button from "@/components/common/Button";
 import styles from "./styles.module.css";
+import ButtonVoltar from "@/components/common/ButtonVoltar";
 
 const NotFound = () => {
 	const { t } = useTranslation();
@@ -15,11 +16,7 @@ const NotFound = () => {
 					<Col className={styles.notfound}>
 						<Logo width="150" height="150" />
 						<h1>{t("not_found")}</h1>
-						<Button secondary>
-							<Link to="/">
-								{t("back_to_home")}
-							</Link>
-						</Button>
+						<ButtonVoltar secondary />
 					</Col>
 				</Row>
 		</>
