@@ -1,10 +1,14 @@
 import { VagaType } from "@/types/vagasTypes";
-import { Col, Empty, Tag, Space,Button, Row } from "antd";
+import { Col, Empty, Tag, Space, Row } from "antd";
 import { CompetenciaType } from "@/types/competenciaType";
 import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
 import { COLORS } from "@/constants/colors";
 import NotFound from "../NotFound";
 import { Link } from "react-router-dom";
+import Button from "../Button";
+import ButtonDrawer from "../ButtonDrawer";
+import { useAuth } from "@/contexts/auth";
+import { ESTUDANTE } from "@/constants";
 
 interface CardVagasProps {
 	vagas: VagaType[];
@@ -12,6 +16,11 @@ interface CardVagasProps {
 }
 
 const CardVagas = (props: CardVagasProps): JSX.Element => {
+	const { user } = useAuth();
+
+	const roles = user?.roles;
+	const isEstudante = roles?.includes(ESTUDANTE);
+
 	const retornaCorTag = (competencia: CompetenciaType): string => {
 		return props.competenciasEstudante.find(
 			comp => comp.codCompetencia === competencia.codCompetencia
@@ -76,9 +85,20 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 									</Tag>
 								))}
 						</Col>
-						<Button >
-							<Link to="/detalheVaga">Ver detalhes</Link>
-						</Button>
+						<ButtonDrawer
+							label="Ver Vaga"
+							title={`${vaga.titulo} - ${vaga?.empresa?.nomeFantasia}`}
+						>
+							<>
+								<div>{vaga.cargaHoraria}</div>
+								<div>{vaga.titulo}</div>
+								{(isEstudante || !user?.roles) && (
+									<Space direction="vertical">
+										<Button secondary label="Candidatar-se" />
+									</Space>
+								)}
+							</>
+						</ButtonDrawer>
 					</Row>
 				))
 			) : (

@@ -4,7 +4,7 @@ const PerfilEmpresa = () => {
 
 	return (
 		<div className="container">
-			Dashboard Empresa
+			Dashboard Empresa (em construção)
 		</div>
 	);
 };
