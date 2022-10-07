@@ -1,6 +1,6 @@
 /// <reference types="vite-plugin-svgr/client" />
 
-import { Row, Col, Button, Tabs } from "antd";
+import { Row, Col, Tabs } from "antd";
 import Input from "@/components/common/Input";
 import CardVagas from "@/components/common/CardVagas";
 import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import executivoBackground from "@/assets/fundos/executivo.jpg";
 import styles from "./styles.module.css";
+import Button from "@/components/common/Button";
 
 const Vagas = () => {
 	const FILTRO_INICIAL: FiltroVagaType = {
@@ -38,7 +39,7 @@ const Vagas = () => {
 		<div className="container">
 			<Row
 				itemType="flex"
-				style={styles}
+				style={stylesNovo}
 				justify="center"
 				className={styles.mainRow}
 				align="middle"
@@ -91,12 +92,14 @@ const Vagas = () => {
 	);
 };
 
-// const styles = {
-//     backgroundImage: `linear-gradient(rgba(191, 66, 245, 0.6), rgba(255, 255, 255, 0.3)), url(${executivoBackground})`,
-//     backgroundPosition: 'center',
-//     backgroundSize: 'cover',
-//     backgroundRepeat: 'no-repeat',
-//     height: "calc(350px - 1vw)"
-// }
+const stylesNovo = {
+    backgroundImage: `linear-gradient(rgba(191, 66, 245, 0.6), rgba(255, 255, 255, 0.3)), url(${executivoBackground})`,
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+		width: '100%',
+		marginTop: '-1rem',
+    backgroundRepeat: 'no-repeat',
+    height: "calc(350px - 1vw)"
+}
 
 export default Vagas;

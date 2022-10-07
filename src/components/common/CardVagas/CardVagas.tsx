@@ -1,10 +1,12 @@
 import { VagaType } from "@/types/vagasTypes";
-import { Col, Empty, Tag, Space,Button, Row } from "antd";
+import { Col, Empty, Tag, Space, Row } from "antd";
 import { CompetenciaType } from "@/types/competenciaType";
 import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
 import { COLORS } from "@/constants/colors";
 import NotFound from "../NotFound";
 import { Link } from "react-router-dom";
+import Button from "../Button";
+import ButtonDrawer from "../ButtonDrawer";
 
 interface CardVagasProps {
 	vagas: VagaType[];
@@ -76,8 +78,11 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 									</Tag>
 								))}
 						</Col>
-						<Button >
-							<Link to="/detalheVaga">Ver detalhes</Link>
+						<Button>
+							<ButtonDrawer title="teste">
+								ok
+							</ButtonDrawer>
+							{/* <Link to="/detalheVaga">Ver detalhes</Link> */}
 						</Button>
 					</Row>
 				))
