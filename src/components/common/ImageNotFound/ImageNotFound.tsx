@@ -5,7 +5,7 @@ interface NotFoundProps {
     height?: number
 }
 
-const NotFound = (props: NotFoundProps): JSX.Element => {
+const ImageNotFound = (props: NotFoundProps): JSX.Element => {
     const { width } = props;
     const { height } = props;
 
@@ -19,4 +19,4 @@ const NotFound = (props: NotFoundProps): JSX.Element => {
     );
 };
 
-export default NotFound;
+export default ImageNotFound;

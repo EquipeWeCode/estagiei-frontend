@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import Button from "@/components/common/Button";
+import ButtonVoltar from "@/components/common/ButtonVoltar";
 
 const Vagas = () => {
 	const FILTRO_INICIAL: FiltroVagaType = {

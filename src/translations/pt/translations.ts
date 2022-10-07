@@ -69,5 +69,13 @@ export const TRANSLATIONS_PT = {
 	home: "Início",
 	back_to_home: "Voltar para início",
 	expired_session: "Sua sessão expirou. Por favor, faça login novamente.",
+	apply: "Candidatar-se",
+	job_details: "Detalhes da vaga",
+	job_name: "Nome da vaga",
+	job_description: "Descrição da vaga",
+	details: "Detalhes",
+	address: "Endereço",
+	description: "Descrição",
+	show_details: "Ver detalhes",
 };
 

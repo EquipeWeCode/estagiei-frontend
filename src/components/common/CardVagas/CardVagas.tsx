@@ -1,14 +1,16 @@
+import { useRef } from "react";
 import { VagaType } from "@/types/vagasTypes";
-import { Col, Empty, Tag, Space, Row } from "antd";
+import { Col, Empty, Tag, Row } from "antd";
 import { CompetenciaType } from "@/types/competenciaType";
 import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
 import { COLORS } from "@/constants/colors";
-import NotFound from "../NotFound";
 import { Link } from "react-router-dom";
-import Button from "../Button";
 import ButtonDrawer from "../ButtonDrawer";
 import { useAuth } from "@/contexts/auth";
-import { ESTUDANTE } from "@/constants";
+import { useTranslation } from "react-i18next";
+import DescricaoVaga from "@/components/pages/DescricaoVaga";
+import styles from "./styles.module.css";
+import ImageNotFound from "../ImageNotFound";
 
 interface CardVagasProps {
 	vagas: VagaType[];
@@ -17,9 +19,9 @@ interface CardVagasProps {
 
 const CardVagas = (props: CardVagasProps): JSX.Element => {
 	const { user } = useAuth();
+	const { t } = useTranslation();
 
-	const roles = user?.roles;
-	const isEstudante = roles?.includes(ESTUDANTE);
+	const refDrawer = useRef<ButtonDrawer>(null);
 
 	const retornaCorTag = (competencia: CompetenciaType): string => {
 		return props.competenciasEstudante.find(
@@ -29,13 +31,17 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 			: "default";
 	};
 
+	const abreDrawer = () => {
+		refDrawer?.current?.abreDrawer();
+	};
+
 	return (
 		<>
 			{props?.vagas && props?.vagas?.length > 0 ? (
 				props?.vagas?.map((vaga: VagaType) => (
-					<Row key={vaga.codVaga} className="container-vaga" align="middle">
+					<Row key={vaga.codVaga} className={styles.containerVaga} align="middle">
 						<Link to="/empresa/profile">
-							<Col className="col-image">
+							<Col className={styles.colImage}>
 								{vaga?.empresa?.avatar ? (
 									<img
 										src={vaga?.empresa?.avatar}
@@ -45,22 +51,20 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 										style={{ borderRadius: "5px" }}
 									/>
 								) : (
-									<NotFound width={100} height={100} />
+									<ImageNotFound width={100} height={100} />
 								)}
 							</Col>
 						</Link>
-						<Col className="content">
-							<Link to="/DescricaoVaga">
-								<div className="vaga-titulo">
-									<h3 style={{ display: "inline-block" }}>
-										<strong>{vaga.titulo} </strong>
-									</h3>
-									<span style={{ color: "var(--primary-color)" }}>
-										{vaga.empresa && capitalizaPriLetraDeCadaPalavra(vaga.empresa.nomeFantasia)}
-									</span>
-								</div>
-							</Link>
-							<div className="col-desc">
+						<Col className={styles.content} onClick={abreDrawer} style={{cursor: "pointer"}}>
+							<div className={styles.vagaTitulo}>
+								<h3 style={{ display: "inline-block" }}>
+									<strong>{vaga.titulo} </strong>
+								</h3>
+								<span style={{ color: "var(--primary-color)" }}>
+									{vaga.empresa && capitalizaPriLetraDeCadaPalavra(vaga.empresa.nomeFantasia)}
+								</span>
+							</div>
+							<div className={styles.colDesc}>
 								<p>{vaga.descricao}</p>
 							</div>
 							<p style={{ fontSize: "1rem" }}>
@@ -86,18 +90,12 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 								))}
 						</Col>
 						<ButtonDrawer
-							label="Ver Vaga"
+							style={{ display: "none"}}
+							ref={refDrawer}
+							label={t("show_details")}
 							title={`${vaga.titulo} - ${vaga?.empresa?.nomeFantasia}`}
 						>
-							<>
-								<div>{vaga.cargaHoraria}</div>
-								<div>{vaga.titulo}</div>
-								{(isEstudante || !user?.roles) && (
-									<Space direction="vertical">
-										<Button secondary label="Candidatar-se" />
-									</Space>
-								)}
-							</>
+							<DescricaoVaga user={user} vaga={vaga} key={vaga?.codVaga} />
 						</ButtonDrawer>
 					</Row>
 				))
