@@ -35,22 +35,23 @@ render(
 						<Route path="/" element={<HomePage />} />
 						<Route path="/login" element={<Login />} />
 						<Route path="/vagas" element={<Vagas />} />
-						
-						<Route path="/detalheVaga" element={
-							<PrivateRoute roles={[ESTUDANTE]}>
-								<DescricaoVaga />
-							</PrivateRoute>
-						} />
-						<Route path="/estudante/meu-perfil" element={
-							<PrivateRoute roles={[ESTUDANTE]}>
-								<PerfilEstudante />
-							</PrivateRoute>
-						} />
-						<Route path="/empresa/meu-perfil" element={
-							<PrivateRoute roles={[EMPRESA]}>
-								<PerfilEmpresa />
-							</PrivateRoute>
-						} />
+
+						<Route
+							path="/estudante/meu-perfil"
+							element={
+								<PrivateRoute roles={[ESTUDANTE]}>
+									<PerfilEstudante />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path="/empresa/meu-perfil"
+							element={
+								<PrivateRoute roles={[EMPRESA]}>
+									<PerfilEmpresa />
+								</PrivateRoute>
+							}
+						/>
 						<Route path="*" element={<NotFound />} />
 					</Routes>
 					<Footer />
