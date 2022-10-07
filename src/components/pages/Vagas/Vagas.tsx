@@ -8,7 +8,6 @@ import { getVagas } from "@/services/vaga";
 import { useAuth } from "@/contexts/auth";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
-import executivoBackground from "@/assets/fundos/executivo.jpg";
 import styles from "./styles.module.css";
 import Button from "@/components/common/Button";
 
@@ -93,7 +92,7 @@ const Vagas = () => {
 };
 
 const stylesNovo = {
-    backgroundImage: `linear-gradient(rgba(191, 66, 245, 0.6), rgba(255, 255, 255, 0.3)), url(${executivoBackground})`,
+    backgroundImage: `linear-gradient(rgba(191, 66, 245, 0.6), rgba(255, 255, 255, 0.3))`,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
 		width: '100%',
