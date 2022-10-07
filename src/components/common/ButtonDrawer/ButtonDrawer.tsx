@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@/components/common/Button";
 import Drawer from "@/components/common/Drawer";
 import { DEFAULT } from "../Drawer/Drawer";
@@ -8,62 +8,55 @@ export interface ButtonDrawerProps extends ButtonProps {
 	title?: string;
 	placement?: "left" | "right" | "top" | "bottom";
 	sizeDrawer?: "default" | "large" | "fullscreen";
+	label?: string;
 	children?: React.ReactNode;
 	onOpen?: () => void;
 	onClose?: () => void;
 }
 
-class ButtonDrawer extends React.Component<ButtonDrawerProps> {
-	state = {
-		DrawerOpen: false,
-	};
+const ButtonDrawer = (props: ButtonDrawerProps) => {
+	const {
+		title,
+		disabled,
+		type = undefined,
+		icon = null,
+		ghost = false,
+		block = false,
+		label,
+		sizeDrawer = DEFAULT,
+	} = props;
 
-	abreDrawer = () => {
-		const abrir = () => this.setState({ DrawerOpen: true });
-		if (this.props.onOpen) {
-			this.props.onOpen();
+	const [visible, setVisible] = useState(false);
+
+	const abreDrawer = () => {
+		const abrir = () => setVisible(true);
+		if (props.onOpen) {
+			props.onOpen();
 		}
 		abrir();
 	};
 
-	fechaDrawer = () => {
-		this.setState({ DrawerOpen: false }, this.props.onClose && this.props.onClose);
+	const fechaDrawer = () => {
+		setVisible(false);
 	};
 
-	render() {
-		const {
-			title,
-			disabled,
-			type = undefined,
-			icon = null,
-			ghost = false,
-			block = false,
-			sizeDrawer = DEFAULT,
-		} = this.props;
-
-		return (
-			<>
-				<Button
-					onClick={this.abreDrawer}
-					// onOk={this.abreDrawer}
-					title={title}
-					disabled={disabled}
-					ghost={ghost}
-					block={block}
-					icon={icon}
-					type={type}
-				/>
-				<Drawer
-					size={sizeDrawer}
-					visible={this.state.DrawerOpen}
-					title={title}
-					onClose={this.fechaDrawer}
-				>
-					{this.props.children}
-				</Drawer>
-			</>
-		);
-	}
-}
+	return (
+		<>
+			<Button
+				onClick={abreDrawer}
+				title={title}
+				disabled={disabled}
+				ghost={ghost}
+				block={block}
+				icon={icon}
+				type={type}
+				label={label}
+			/>
+			<Drawer size={sizeDrawer} visible={visible} title={title} onClose={fechaDrawer}>
+				{props.children}
+			</Drawer>
+		</>
+	);
+};
 
 export default ButtonDrawer;

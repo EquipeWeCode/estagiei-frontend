@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 
 export interface ButtonCustomProps extends ButtonProps {
 	secondary?: boolean;
+	label?: string;
 }
 
 const Button = (props: ButtonCustomProps) => {
@@ -22,7 +23,7 @@ const Button = (props: ButtonCustomProps) => {
 				...props.style,
 			}}
 		>
-			{props.children}
+			{props.children || props.label}
 		</ButtonAntd>
 	);
 };
