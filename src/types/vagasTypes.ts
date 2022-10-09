@@ -2,6 +2,7 @@ import { EnderecoType } from './enderecoType';
 import { CompetenciaType } from "./competenciaType";
 import { EmpresaType } from "./empresaTypes";
 import { FilterType } from "./filterTypes";
+import { AuditoriaType } from './userTypes';
 
 export interface VagaType {
   codVaga?: number,
@@ -14,6 +15,7 @@ export interface VagaType {
   empresa?: EmpresaType,
   endereco?: EnderecoType,
   competencias?: CompetenciaType[],
+  auditoria?: AuditoriaType,
 }
 
 export interface FiltroVagaType extends FilterType {

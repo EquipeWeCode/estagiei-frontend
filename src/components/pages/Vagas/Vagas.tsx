@@ -99,23 +99,32 @@ const Vagas = () => {
 										/>
 									</Col>
 									<Col flex={1} md={4}>
-										<Button type="primary" onClick={() => fetchVagas()}>
+										<Button secondary onClick={() => fetchVagas()}>
 											{t("search")}
 										</Button>
 									</Col>
 								</Row>
 							</Col>
 						</Row>
-						{/* <Row justify="center" className={styles.rowVagas} align="middle"> */}
-						{/* <Col> */}
+						<Row justify="end" style={{ marginBottom: "1rem" }}>
+							<Pagination
+								defaultCurrent={1}
+								total={quantidadeTotal}
+								pageSize={filtroVaga.size}
+								current={filtroVaga.page}
+								onChange={paginar}
+							/>
+						</Row>
 						<CardVagas vagas={vagas} competenciasEstudante={[]} />
-						<Pagination
-							defaultCurrent={1}
-							total={quantidadeTotal}
-							pageSize={filtroVaga.size}
-							current={filtroVaga.page}
-							onChange={paginar}
-						/>
+						<Row justify="end">
+							<Pagination
+								defaultCurrent={1}
+								total={quantidadeTotal}
+								pageSize={filtroVaga.size}
+								current={filtroVaga.page}
+								onChange={paginar}
+							/>
+						</Row>
 						{/* </Col> */}
 						{/* </Row> */}
 					</TabPane>

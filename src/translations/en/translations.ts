@@ -76,4 +76,5 @@ export const TRANSLATIONS_EN = {
 	address: "Address",
 	description: "Description",
 	show_details: "Show details",
+	not_informed: "Not informed",
 };

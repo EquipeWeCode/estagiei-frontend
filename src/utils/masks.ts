@@ -139,7 +139,7 @@ export const padTo2Digits = (num: number) => {
 	return num.toString().padStart(2, "0");
 };
 
-export const justDateMask = (date: string | number | Date) => {
+export const justDateMask = (date: string | number | Date = "") => {
 	if (date) {
 		let data = new Date(date);
 		data.setDate(data.getDate());

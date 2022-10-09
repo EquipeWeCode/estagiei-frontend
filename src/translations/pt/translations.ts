@@ -77,5 +77,6 @@ export const TRANSLATIONS_PT = {
 	address: "Endereço",
 	description: "Descrição",
 	show_details: "Ver detalhes",
+	not_informed: "Não informado",
 };
 

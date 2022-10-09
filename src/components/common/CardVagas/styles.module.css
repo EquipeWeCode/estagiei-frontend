@@ -8,10 +8,14 @@
 
 .content {
   flex-grow: 1;
+  margin-right: 10px;
 }
 
 .col-image {
   margin-right: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .container-vaga {
@@ -30,6 +34,14 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+  align-items: center;
+}
+
+.vaga-titulo-container h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0;
+  color: var(--secondary-color);
 }
 
 .company-image {
@@ -38,8 +50,22 @@
   border-radius: 5px;
 }
 
+.tag-modalidade {
+  width: 100px;
+  text-align: center;
+  margin-left: 2rem;
+}
+
 .company-image:hover {
   transform: scale(1.1);
+}
+
+.location-auditoria {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  font-size: 1.1rem;
 }
 
 @media only screen and (max-width: 950px) {
