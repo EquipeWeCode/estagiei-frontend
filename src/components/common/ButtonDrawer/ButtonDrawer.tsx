@@ -25,20 +25,17 @@ class ButtonDrawer extends React.Component<ButtonDrawerProps> {
 			this.props.onOpen();
 		}
 		abrir();
+		document.body.style.overflow = 'hidden';
 	};
 
 	fechaDrawer = () => {
-		this.setState({ visible: false }, this.props.onClose && this.props.onClose);
-	};
-
-	componentDidUpdate() {
-		if(this.state.visible) {
-			document.body.style.overflow = 'hidden';
-		} else {
-			document.body.style.overflow = 'unset';
+		const fechar = () => this.setState({ visible: false });
+		if (this.props.onClose) {
+			this.props.onClose();
 		}
-	}
-
+		fechar();
+		document.body.style.overflow = 'initial';
+	};
 	
 	render() {
 		const {
@@ -51,7 +48,7 @@ class ButtonDrawer extends React.Component<ButtonDrawerProps> {
 			sizeDrawer = DEFAULT,
 			style,
 		} = this.props;
-
+		
 		return (
 			<>
 				<Button

@@ -5,12 +5,10 @@ import Input from "@/components/common/Input";
 import CardVagas from "@/components/common/CardVagas";
 import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
 import { getVagas } from "@/services/vaga";
-import { useAuth } from "@/contexts/auth";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import Button from "@/components/common/Button";
-import ButtonVoltar from "@/components/common/ButtonVoltar";
 import { useSearchParams } from "react-router-dom";
 
 const Vagas = () => {

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
 import styles from "./styles.module.css";
 import { Col, Divider, Row, Tag } from "antd";
-import { capitalizaPriLetraDeCadaPalavra, realMask } from "@/utils/masks";
+import { capitalizaPriLetraDeCadaPalavra, ellipsisText, realMask } from "@/utils/masks";
 import { useNavigate } from "react-router-dom";
 import Button from "@/components/common/Button";
 import { useTranslation } from "react-i18next";
@@ -25,21 +25,25 @@ const CarouselVagas = () => {
 
 	const [vagas, setVagas] = useState<VagaType[]>([]);
 	const [filtroVaga, setFiltroVaga] = useState<FiltroVagaType>(FILTRO_INICIAL);
-
+	
 	useEffect((): void => {
 		fetchVagas();
 	}, []);
-
+	
 	const navigate = useNavigate();
 	const { t } = useTranslation();
-
+	
 	const fetchVagas = async () => {
 		const response = await getVagas(filtroVaga);
 		if (response.status === 200) {
 			setVagas(response.data);
 		}
 	};
-
+	
+	const redirecionaPaginaVagas = (titulo: string = "", nomeFantasia: string = "") => {
+		navigate(`/vagas?titulo=${titulo}&empresa=${nomeFantasia}`);
+	};
+	
 	const responsive = {
 		superLargeDesktop: {
 			breakpoint: { max: 4000, min: 2500 },
@@ -96,6 +100,9 @@ const CarouselVagas = () => {
 				containerClass={carouselStyles.carouselContainer}
 			>
 				{vagas?.map(vaga => {
+
+					const { empresa } = vaga;
+
 					return (
 						<div key={vaga.codVaga} className={styles.vagaCarousel}>
 							<Row justify="center" align="top" style={{ width: "100%", textAlign: "center" }}>
@@ -110,16 +117,16 @@ const CarouselVagas = () => {
 								<Col span={24} className={styles.companyInfo}>
 									<h2 style={{ height: "60px" }}>{vaga?.titulo}</h2>
 									<span className={styles.companyName}>
-										{capitalizaPriLetraDeCadaPalavra(vaga?.empresa?.nomeFantasia)}
+										{capitalizaPriLetraDeCadaPalavra(empresa?.nomeFantasia)}
 									</span>
 								</Col>
 								<Col span={24}>
-									<div className={styles.descricaoVaga}>{vaga?.descricao}</div>
+									<div className={styles.descricaoVaga}>{ellipsisText(vaga?.descricao, 90)}</div>
 								</Col>
 								<Col span={24}>
 									<span className={styles.salarioVaga}>{realMask(vaga?.salario)}</span>
 									<Row justify="center">
-										<Button secondary onClick={() => navigate("/vagas")}>
+										<Button secondary onClick={() => redirecionaPaginaVagas(vaga.titulo, empresa?.nomeFantasia)}>
 											{t("see_more")}
 										</Button>
 									</Row>

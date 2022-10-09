@@ -11,24 +11,25 @@ import { ESTUDANTE } from "@/constants";
 export interface DescricaoVagaProps {
 	vaga: VagaType;
 	user: UserType;
+	refDrawer: any;
 }
 
 const DescricaoVaga = (props: DescricaoVagaProps) => {
 	const { t } = useTranslation();
 
-	const { vaga, user } = props;
+	const { vaga, user, refDrawer } = props;
 	const { endereco: enderecoVaga } = vaga;
 	const { empresa } = vaga;
 	const navigate = useNavigate();
 	const location = useLocation();
-	const [searchParams, setSearchParams] = useSearchParams();
 
 	const roles = user?.roles;
 	const isEstudante = roles?.includes(ESTUDANTE);
 
 	const fazCandidatura = () => {
 		if (!roles) {
-			navigate(`/login?next=${location?.pathname}`);
+			refDrawer?.current?.fechaDrawer();
+			navigate(`/login?next=${location?.pathname}${location?.search || ""}`);
 		}
 	};
 

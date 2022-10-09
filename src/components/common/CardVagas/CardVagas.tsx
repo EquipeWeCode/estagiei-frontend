@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { VagaType } from "@/types/vagasTypes";
 import { Col, Empty, Tag, Row } from "antd";
 import { CompetenciaType } from "@/types/competenciaType";
@@ -32,9 +32,14 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 			: "default";
 	};
 
-	const abreDrawer = () => {
-		refDrawer?.current?.abreDrawer();
+	const fechaDrawer = () => {
+		refDrawer?.current?.fechaDrawer();
 	};
+
+	useEffect(() => {
+		fechaDrawer();
+	}, [])
+	
 
 	return (
 		<>
@@ -56,7 +61,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 								)}
 							</Col>
 						</Link>
-						<Col className={styles.content} onClick={abreDrawer}>
+						<Col className={styles.content}>
 							<div className={styles.vagaTitulo}>
 								<h3 style={{ display: "inline-block" }}>
 									<strong>{vaga.titulo} </strong>
@@ -89,7 +94,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 							label={t("show_details")}
 							title={`${vaga.titulo} - ${vaga?.empresa?.nomeFantasia}`}
 						>
-							<DescricaoVaga user={user} vaga={vaga} key={vaga?.codVaga} />
+							<DescricaoVaga refDrawer={refDrawer} user={user} vaga={vaga} key={vaga?.codVaga} />
 						</ButtonDrawer>
 					</Row>
 				))
