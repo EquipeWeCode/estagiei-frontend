@@ -35,6 +35,7 @@
 .company-image {
   object-fit: cover;
   transition: ease 0.2s;
+  border-radius: 5px;
 }
 
 .company-image:hover {

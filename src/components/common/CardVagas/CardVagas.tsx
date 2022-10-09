@@ -20,6 +20,8 @@ interface CardVagasProps {
 const CardVagas = (props: CardVagasProps): JSX.Element => {
 	const { user } = useAuth();
 	const { t } = useTranslation();
+	
+	const {vagas = [], competenciasEstudante = []} = props;
 
 	const refDrawer = useRef<ButtonDrawer>(null);
 
@@ -41,18 +43,18 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 
 	return (
 		<>
-			{props?.vagas && props?.vagas?.length > 0 ? (
-				props?.vagas?.map((vaga: VagaType) => (
+			{vagas && vagas?.length > 0 ? (
+				vagas?.map((vaga: VagaType) => (
 					<Row key={vaga.codVaga} className={styles.containerVaga} align="middle">
-						<Link to="/empresa/profile">
+						<Link to={`/empresa/profile/${vaga?.empresa?.codEmpresa}`}>
 							<Col className={styles.colImage}>
 								{vaga?.empresa?.avatar ? (
 									<img
 										src={vaga?.empresa?.avatar}
 										alt="avatar-company"
+										className={styles.companyImage}
 										width={100}
 										height={100}
-										style={{ borderRadius: "5px" }}
 									/>
 								) : (
 									<ImageNotFound width={100} height={100} />

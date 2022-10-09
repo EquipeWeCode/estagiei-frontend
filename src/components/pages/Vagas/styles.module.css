@@ -1,16 +1,28 @@
 .main-row {
-    align-items: "center";
+    align-items: center;
     padding: 10px;
-    color: black;
     font-size: 18px;
+    background: rgb(43,0,70);
+	background-position: center;
+	background-size: cover;
+	width: 100%;
+	margin-top: -1rem;
+	background-repeat: no-repeat;
+	height: calc(200px - 1vw);
+    color: #FFF;
+}
+
+.main-row:nth-child(1),
+.main-row:nth-child(2) {
+    text-align: center;
 }
 
 .row-vagas {
-    min-width: 100%;
+    max-width: 70%;
 }
 
 .main-row h1 {
-    color: black;
+    color: #FFF;
 }
 
 .search-row {

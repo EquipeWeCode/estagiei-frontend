@@ -3,9 +3,10 @@
 import Button from "@/components/common/Button";
 import CardVagas from "@/components/common/CardVagas";
 import Input from "@/components/common/Input";
+import { PAGINATION_SIZE_DEFAULT } from "@/constants";
 import { getVagas } from "@/services/vaga";
 import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
-import { Col, Row, Tabs } from "antd";
+import { Col, Pagination, Row, Tabs } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
@@ -25,23 +26,31 @@ const Vagas = () => {
 	const FILTRO_INICIAL: FiltroVagaType = {
 		titulo: titulo || "",
 		descricao: descricao || "",
+		page: 1,
+		size: PAGINATION_SIZE_DEFAULT,
 	};
 
 	const [filtroVaga, setFiltroVaga] = useState<FiltroVagaType>(FILTRO_INICIAL);
+	const [quantidadeTotal, setQuantidadeTotal] = useState<number>(0);
 
 	useEffect((): void => {
-		fetchVagas();
-	}, []);
+		fetchVagas(filtroVaga?.page);
+	}, [filtroVaga?.page]);
 
-	const fetchVagas = async () => {
+	const fetchVagas = async (pagina: number = 1) => {
 		setSearchParams({
 			titulo: filtroVaga.titulo || "",
 			descricao: filtroVaga.descricao || "",
 		});
 
-		const response = await getVagas(filtroVaga);
+		const novoFiltro = { ...filtroVaga, page: pagina };
+
+		const response = await getVagas(novoFiltro);
+
 		if (response.status === 200) {
 			setVagas(response.data);
+			setFiltroVaga(novoFiltro);
+			setQuantidadeTotal(Number(response?.headers["quantidadetotal"]));
 		}
 	};
 
@@ -50,22 +59,22 @@ const Vagas = () => {
 		setFiltroVaga({ ...filtroVaga, [name]: value });
 	};
 
+	const paginar = (page: number) => {
+		setFiltroVaga({ ...filtroVaga, page });
+	};
+
 	return (
 		<div className="container">
-			<Row
-				itemType="flex"
-				style={stylesNovo}
-				justify="center"
-				className={styles.mainRow}
-				align="middle"
-			>
-				<Col>
+			<Row itemType="flex" justify="center" className={styles.mainRow} align="middle">
+				<Col sm={24}>
 					<h1>{t("vacancy_title_header")}</h1>
+				</Col>
+				<Col sm={24}>
 					<p>{t("vacancy_description_header")}</p>
 				</Col>
 			</Row>
 
-			<Row justify="center" align="middle" style={{ padding: "2rem" }}>
+			<Row justify="center" align="middle">
 				<Tabs defaultActiveKey="1" style={{ width: "100%" }}>
 					<TabPane tab={t("vacancies")} key="1">
 						<Row justify="center" align="middle" className={styles.searchRow}>
@@ -90,33 +99,30 @@ const Vagas = () => {
 										/>
 									</Col>
 									<Col flex={1} md={4}>
-										<Button type="primary" onClick={fetchVagas}>
+										<Button type="primary" onClick={() => fetchVagas()}>
 											{t("search")}
 										</Button>
 									</Col>
 								</Row>
 							</Col>
 						</Row>
-						<Row justify="center" className={styles.rowVagas} align="middle">
-							<Col>
-								<CardVagas vagas={vagas} competenciasEstudante={[]} />
-							</Col>
-						</Row>
+						{/* <Row justify="center" className={styles.rowVagas} align="middle"> */}
+						{/* <Col> */}
+						<CardVagas vagas={vagas} competenciasEstudante={[]} />
+						<Pagination
+							defaultCurrent={1}
+							total={quantidadeTotal}
+							pageSize={filtroVaga.size}
+							current={filtroVaga.page}
+							onChange={paginar}
+						/>
+						{/* </Col> */}
+						{/* </Row> */}
 					</TabPane>
 				</Tabs>
 			</Row>
 		</div>
 	);
-};
-
-const stylesNovo = {
-	backgroundImage: `linear-gradient(rgba(191, 66, 245, 0.6), rgba(255, 255, 255, 0.3))`,
-	backgroundPosition: "center",
-	backgroundSize: "cover",
-	width: "100%",
-	marginTop: "-1rem",
-	backgroundRepeat: "no-repeat",
-	height: "calc(350px - 1vw)",
 };
 
 export default Vagas;
