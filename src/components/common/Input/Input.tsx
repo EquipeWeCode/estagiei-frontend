@@ -6,7 +6,6 @@ export interface InputCustomProps extends InputProps {
 }
 
 const Input = (props: InputCustomProps) => {
-
 	return (
 		<>
 			<label className={styles.label}>{props.label}</label>

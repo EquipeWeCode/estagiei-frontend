@@ -1,6 +1,6 @@
-import Button, { ButtonCustomProps } from "../Button/Button";
 import history from "@/utils/history";
 import { useTranslation } from "react-i18next";
+import Button, { ButtonCustomProps } from "../Button/Button";
 
 const ButtonVoltar = (props: ButtonCustomProps) => {
 	const { t } = useTranslation();

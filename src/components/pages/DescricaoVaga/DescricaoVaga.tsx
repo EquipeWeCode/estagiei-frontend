@@ -1,27 +1,36 @@
+import Button from "@/components/common/Button";
+import { ESTUDANTE } from "@/constants";
+import { UserType } from "@/types/userTypes";
+import { VagaType } from "@/types/vagasTypes";
 import { Form, Row, Space, Tag } from "antd";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-import Button from "@/components/common/Button";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
-import ButtonVoltar from "@/components/common/ButtonVoltar";
-import { VagaType } from "@/types/vagasTypes";
-import { UserType } from "@/types/userTypes";
-import { ESTUDANTE } from "@/constants";
 
 export interface DescricaoVagaProps {
 	vaga: VagaType;
 	user: UserType;
+	refDrawer: any;
 }
 
 const DescricaoVaga = (props: DescricaoVagaProps) => {
 	const { t } = useTranslation();
 
-	const { vaga, user } = props;
+	const { vaga, user, refDrawer } = props;
 	const { endereco: enderecoVaga } = vaga;
 	const { empresa } = vaga;
+	const navigate = useNavigate();
+	const location = useLocation();
 
 	const roles = user?.roles;
 	const isEstudante = roles?.includes(ESTUDANTE);
+
+	const fazCandidatura = () => {
+		if (!roles) {
+			refDrawer?.current?.fechaDrawer();
+			navigate(`/login?next=${location?.pathname}${location?.search || ""}`);
+		}
+	};
 
 	return (
 		<div>
@@ -60,7 +69,7 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 								</span>
 								<h4>
 									<b>{t("address")}:</b> {enderecoVaga?.logradouro}, {enderecoVaga?.numero},{" "}
-									{enderecoVaga?.bairro}, {enderecoVaga?.cidade} - {enderecoVaga?.estado}, {" "}
+									{enderecoVaga?.bairro}, {enderecoVaga?.cidade} - {enderecoVaga?.estado},{" "}
 									{enderecoVaga?.cep}
 								</h4>
 								<h4>
@@ -70,7 +79,7 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 
 							{(isEstudante || !user?.roles) && (
 								<Space direction="vertical">
-									<Button secondary label={t("apply")} />
+									<Button secondary label={t("apply")} onClick={fazCandidatura} />
 								</Space>
 							)}
 						</Form>

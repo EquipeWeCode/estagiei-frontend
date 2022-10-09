@@ -1,1 +1,1 @@
-export { default } from './FiltroVagas';
+export { default } from "./FiltroVagas";

@@ -4,19 +4,20 @@ import { useAuth } from "@/contexts/auth";
 import { Col, Row } from "antd";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import styles from "./styles.module.scss";
 
 import { ReactComponent as LogoResumida } from "@/assets/logo-resumida.svg";
 import Button from "@/components/common/Button";
+import ButtonVoltar from "@/components/common/ButtonVoltar";
 import Input from "@/components/common/Input";
-import { LoginType, UserType } from "@/types/userTypes";
-import { getToken, postLogin } from "@/services/autenticacao";
 import { TOKEN_KEY, USER_KEY } from "@/constants";
-import jwt from "jwt-decode";
-import { getUsuario } from "@/services/usuario";
-import { getEstudante } from "@/services/estudante";
+import { getToken, postLogin } from "@/services/autenticacao";
 import { getEmpresa } from "@/services/empresa";
+import { getEstudante } from "@/services/estudante";
+import { getUsuario } from "@/services/usuario";
+import { LoginType, UserType } from "@/types/userTypes";
+import jwt from "jwt-decode";
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -27,14 +28,17 @@ const Login = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const expired = searchParams.get("expired");
-
-	const userLocal = localStorage.getItem(USER_KEY);
+	const next = searchParams.get("next");
 
 	useEffect((): void => {
 		if (token !== null && USER_KEY && user?.roles) {
 			navigate("/");
 		}
 	}, []);
+
+	const navegaProximaPagina = (proximaPagina: string) => {
+		navigate(proximaPagina);
+	};
 
 	const changeLogin = (e: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -70,11 +74,13 @@ const Login = () => {
 			setUser(user);
 			localStorage.setItem("userDetails", JSON.stringify(user));
 
-			codEmpresa
-				? navigate("/empresa/meu-perfil")
+			next
+				? navegaProximaPagina(next)
+				: codEmpresa
+				? navegaProximaPagina("/empresa/meu-perfil")
 				: codEstudante
-				? navigate("/estudante/meu-perfil")
-				: navigate("/");
+				? navegaProximaPagina("/estudante/meu-perfil")
+				: navegaProximaPagina("/");
 		}
 	};
 
@@ -85,11 +91,7 @@ const Login = () => {
 					<Col className={styles.boxLogin}>
 						<LogoResumida width={90} />
 						<h1>{t("signin")}</h1>
-						{expired && (
-							<p className={styles.expired}>
-								{t("expired_session")}
-							</p>
-						)}
+						{expired && <p className={styles.expired}>{t("expired_session")}</p>}
 						<Row className={styles.containerInput} justify="center">
 							<Input
 								label={t("email")}
@@ -123,9 +125,7 @@ const Login = () => {
 								{t("dont_have_account")} <Link to="/cadastro">{t("signup")}</Link>
 							</p>
 							<Row justify="center" align="middle" style={{ width: "100%" }}>
-								<Button secondary onClick={() => navigate("/")}>
-									{t("go_back")}
-								</Button>
+								<ButtonVoltar secondary />
 							</Row>
 						</Row>
 					</Col>

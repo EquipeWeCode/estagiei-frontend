@@ -1,11 +1,11 @@
 import { i18n } from "@/translations/i18n";
-import { Switch, Image, Tooltip } from "antd";
+import { Switch, Tooltip } from "antd";
 import styles from "./styles.module.css";
 
-import usaIcon from "@/assets/bandeiras/usa.svg";
 import brazilIcon from "@/assets/bandeiras/brazil.svg";
-import { useState } from "react";
+import usaIcon from "@/assets/bandeiras/usa.svg";
 import { urlIconsType } from "@/types/urlIconsType";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const urlIcons: urlIconsType = {
@@ -16,7 +16,7 @@ const urlIcons: urlIconsType = {
 const TraducaoBtn = () => {
 	const [iconUrl, setIconUrl] = useState("pt");
 
-    const { t } = useTranslation();
+	const { t } = useTranslation();
 
 	const onChangeFlag = (language: string) => {
 		i18n.changeLanguage(language);
@@ -36,12 +36,12 @@ const TraducaoBtn = () => {
 
 	return (
 		<Tooltip title={t("change_language")}>
-				<Switch
-					defaultChecked
-					onChange={onChangeSwitch}
-					className={styles.switchDiv}
-					style={stylesJs}
-				/>
+			<Switch
+				defaultChecked
+				onChange={onChangeSwitch}
+				className={styles.switchDiv}
+				style={stylesJs}
+			/>
 		</Tooltip>
 	);
 };
