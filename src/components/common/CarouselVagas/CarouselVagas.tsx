@@ -1,16 +1,16 @@
-import { getVagas } from "@/services/vaga";
+import Button from "@/components/common/Button";
 import { SIZE_FILTER_DEFAULT } from "@/constants";
+import { getVagas } from "@/services/vaga";
+import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
+import { capitalizaPriLetraDeCadaPalavra, ellipsisText, realMask } from "@/utils/masks";
+import { CaretLeftOutlined, CaretRightOutlined } from "@ant-design/icons";
+import { Col, Divider, Row, Tag } from "antd";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import C from "react-multi-carousel";
 import carouselStyles from "react-multi-carousel/lib/styles.css";
-import { useEffect, useState } from "react";
-import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
-import styles from "./styles.module.css";
-import { Col, Divider, Row, Tag } from "antd";
-import { capitalizaPriLetraDeCadaPalavra, ellipsisText, realMask } from "@/utils/masks";
 import { useNavigate } from "react-router-dom";
-import Button from "@/components/common/Button";
-import { useTranslation } from "react-i18next";
-import { CaretLeftOutlined, CaretRightOutlined, LeftOutlined } from "@ant-design/icons";
+import styles from "./styles.module.css";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore// eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -25,25 +25,25 @@ const CarouselVagas = () => {
 
 	const [vagas, setVagas] = useState<VagaType[]>([]);
 	const [filtroVaga, setFiltroVaga] = useState<FiltroVagaType>(FILTRO_INICIAL);
-	
+
 	useEffect((): void => {
 		fetchVagas();
 	}, []);
-	
+
 	const navigate = useNavigate();
 	const { t } = useTranslation();
-	
+
 	const fetchVagas = async () => {
 		const response = await getVagas(filtroVaga);
 		if (response.status === 200) {
 			setVagas(response.data);
 		}
 	};
-	
+
 	const redirecionaPaginaVagas = (titulo: string = "", nomeFantasia: string = "") => {
 		navigate(`/vagas?titulo=${titulo}&empresa=${nomeFantasia}`);
 	};
-	
+
 	const responsive = {
 		superLargeDesktop: {
 			breakpoint: { max: 4000, min: 2500 },
@@ -100,7 +100,6 @@ const CarouselVagas = () => {
 				containerClass={carouselStyles.carouselContainer}
 			>
 				{vagas?.map(vaga => {
-
 					const { empresa } = vaga;
 
 					return (
@@ -126,7 +125,10 @@ const CarouselVagas = () => {
 								<Col span={24}>
 									<span className={styles.salarioVaga}>{realMask(vaga?.salario)}</span>
 									<Row justify="center">
-										<Button secondary onClick={() => redirecionaPaginaVagas(vaga.titulo, empresa?.nomeFantasia)}>
+										<Button
+											secondary
+											onClick={() => redirecionaPaginaVagas(vaga.titulo, empresa?.nomeFantasia)}
+										>
 											{t("see_more")}
 										</Button>
 									</Row>

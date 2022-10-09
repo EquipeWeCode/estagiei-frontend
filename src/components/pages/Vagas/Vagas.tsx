@@ -1,15 +1,15 @@
 /// <reference types="vite-plugin-svgr/client" />
 
-import { Row, Col, Tabs } from "antd";
-import Input from "@/components/common/Input";
-import CardVagas from "@/components/common/CardVagas";
-import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
-import { getVagas } from "@/services/vaga";
-import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
-import styles from "./styles.module.css";
 import Button from "@/components/common/Button";
+import CardVagas from "@/components/common/CardVagas";
+import Input from "@/components/common/Input";
+import { getVagas } from "@/services/vaga";
+import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
+import { Col, Row, Tabs } from "antd";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
+import styles from "./styles.module.css";
 
 const Vagas = () => {
 	const { t } = useTranslation();

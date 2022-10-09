@@ -4,20 +4,20 @@ import { useAuth } from "@/contexts/auth";
 import { Col, Row } from "antd";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import styles from "./styles.module.scss";
 
 import { ReactComponent as LogoResumida } from "@/assets/logo-resumida.svg";
 import Button from "@/components/common/Button";
-import Input from "@/components/common/Input";
-import { LoginType, UserType } from "@/types/userTypes";
-import { getToken, postLogin } from "@/services/autenticacao";
-import { TOKEN_KEY, USER_KEY } from "@/constants";
-import jwt from "jwt-decode";
-import { getUsuario } from "@/services/usuario";
-import { getEstudante } from "@/services/estudante";
-import { getEmpresa } from "@/services/empresa";
 import ButtonVoltar from "@/components/common/ButtonVoltar";
+import Input from "@/components/common/Input";
+import { TOKEN_KEY, USER_KEY } from "@/constants";
+import { getToken, postLogin } from "@/services/autenticacao";
+import { getEmpresa } from "@/services/empresa";
+import { getEstudante } from "@/services/estudante";
+import { getUsuario } from "@/services/usuario";
+import { LoginType, UserType } from "@/types/userTypes";
+import jwt from "jwt-decode";
 
 const Login = () => {
 	const navigate = useNavigate();

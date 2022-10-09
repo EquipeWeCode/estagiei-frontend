@@ -1,8 +1,8 @@
-import React from "react";
 import Button from "@/components/common/Button";
 import Drawer from "@/components/common/Drawer";
-import { DEFAULT } from "../Drawer/Drawer";
 import { ButtonProps } from "antd";
+import React from "react";
+import { DEFAULT } from "../Drawer/Drawer";
 
 export interface ButtonDrawerProps extends ButtonProps {
 	title?: string;
@@ -25,7 +25,7 @@ class ButtonDrawer extends React.Component<ButtonDrawerProps> {
 			this.props.onOpen();
 		}
 		abrir();
-		document.body.style.overflow = 'hidden';
+		document.body.style.overflow = "hidden";
 	};
 
 	fechaDrawer = () => {
@@ -34,9 +34,9 @@ class ButtonDrawer extends React.Component<ButtonDrawerProps> {
 			this.props.onClose();
 		}
 		fechar();
-		document.body.style.overflow = 'initial';
+		document.body.style.overflow = "initial";
 	};
-	
+
 	render() {
 		const {
 			title,
@@ -48,7 +48,7 @@ class ButtonDrawer extends React.Component<ButtonDrawerProps> {
 			sizeDrawer = DEFAULT,
 			style,
 		} = this.props;
-		
+
 		return (
 			<>
 				<Button

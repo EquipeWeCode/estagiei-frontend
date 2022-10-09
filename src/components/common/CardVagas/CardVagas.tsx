@@ -1,17 +1,16 @@
-import { useRef, useEffect } from "react";
-import { VagaType } from "@/types/vagasTypes";
-import { Col, Empty, Tag, Row } from "antd";
-import { CompetenciaType } from "@/types/competenciaType";
-import { capitalizaPriLetraDeCadaPalavra, ellipsisText } from "@/utils/masks";
+import DescricaoVaga from "@/components/pages/DescricaoVaga";
 import { COLORS } from "@/constants/colors";
+import { useAuth } from "@/contexts/auth";
+import { CompetenciaType } from "@/types/competenciaType";
+import { VagaType } from "@/types/vagasTypes";
+import { capitalizaPriLetraDeCadaPalavra, ellipsisText, realMask } from "@/utils/masks";
+import { Col, Empty, Row, Tag } from "antd";
+import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import ButtonDrawer from "../ButtonDrawer";
-import { useAuth } from "@/contexts/auth";
-import { useTranslation } from "react-i18next";
-import DescricaoVaga from "@/components/pages/DescricaoVaga";
-import styles from "./styles.module.css";
 import ImageNotFound from "../ImageNotFound";
-import { realMask } from "@/utils/masks";
+import styles from "./styles.module.css";
 
 interface CardVagasProps {
 	vagas: VagaType[];
@@ -38,8 +37,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 
 	useEffect(() => {
 		fechaDrawer();
-	}, [])
-	
+	}, []);
 
 	return (
 		<>
@@ -71,9 +69,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 								</span>
 							</div>
 							<p className={styles.colDesc}>{ellipsisText(vaga.descricao, 75)}</p>
-							<p style={{ fontSize: "1rem" }}>
-									{realMask(vaga?.salario)}
-							</p>
+							<p style={{ fontSize: "1rem" }}>{realMask(vaga?.salario)}</p>
 							{vaga.competencias &&
 								vaga.competencias.map((competencia: CompetenciaType) => (
 									<Tag

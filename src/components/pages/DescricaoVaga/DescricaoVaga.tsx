@@ -1,12 +1,11 @@
+import Button from "@/components/common/Button";
+import { ESTUDANTE } from "@/constants";
+import { UserType } from "@/types/userTypes";
+import { VagaType } from "@/types/vagasTypes";
 import { Form, Row, Space, Tag } from "antd";
 import { useTranslation } from "react-i18next";
-import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import Button from "@/components/common/Button";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
-import ButtonVoltar from "@/components/common/ButtonVoltar";
-import { VagaType } from "@/types/vagasTypes";
-import { UserType } from "@/types/userTypes";
-import { ESTUDANTE } from "@/constants";
 
 export interface DescricaoVagaProps {
 	vaga: VagaType;
