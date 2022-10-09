@@ -26,22 +26,19 @@
   transition: ease 0.2s;
 }
 
-.container-vaga:hover {
-  background-color: var(--container_hover_color);
-}
-
 .vaga-titulo {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 
-.col-desc {
-  display: inline-block;
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden !important;
-  text-overflow: ellipsis;
+.company-image {
+  object-fit: cover;
+  transition: ease 0.2s;
+}
+
+.company-image:hover {
+  transform: scale(1.1);
 }
 
 @media only screen and (max-width: 950px) {

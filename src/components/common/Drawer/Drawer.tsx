@@ -24,7 +24,8 @@ const Drawer = (props: DrawerCustomProps) => {
 		size = DEFAULT,
 	} = props;
 
-	const sizeComponent = size === FULLSCREEN ? "95%" : LARGE ? "736px" : "378%";
+	const sizeComponent = size === FULLSCREEN ? "95%" : LARGE ? "736px" : "378px";
+	const isMobile = window.innerWidth <= 768;
 
 	// const onCloseComponent = (event: React.ChangeEvent<HTMLInputElement>) => {
 	// 	if (onClose) {
@@ -41,7 +42,7 @@ const Drawer = (props: DrawerCustomProps) => {
 			visible={visible}
 			getContainer={getContainer}
 			style={style}
-			width={sizeComponent}
+			width={isMobile ? "100%" : sizeComponent}
 		>
 			{children}
 		</DrawerAntd>

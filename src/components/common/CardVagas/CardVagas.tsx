@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { VagaType } from "@/types/vagasTypes";
 import { Col, Empty, Tag, Row } from "antd";
 import { CompetenciaType } from "@/types/competenciaType";
-import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
+import { capitalizaPriLetraDeCadaPalavra, ellipsisText } from "@/utils/masks";
 import { COLORS } from "@/constants/colors";
 import { Link } from "react-router-dom";
 import ButtonDrawer from "../ButtonDrawer";
@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import DescricaoVaga from "@/components/pages/DescricaoVaga";
 import styles from "./styles.module.css";
 import ImageNotFound from "../ImageNotFound";
+import { realMask } from "@/utils/masks";
 
 interface CardVagasProps {
 	vagas: VagaType[];
@@ -55,7 +56,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 								)}
 							</Col>
 						</Link>
-						<Col className={styles.content} onClick={abreDrawer} style={{cursor: "pointer"}}>
+						<Col className={styles.content} onClick={abreDrawer}>
 							<div className={styles.vagaTitulo}>
 								<h3 style={{ display: "inline-block" }}>
 									<strong>{vaga.titulo} </strong>
@@ -64,15 +65,9 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 									{vaga.empresa && capitalizaPriLetraDeCadaPalavra(vaga.empresa.nomeFantasia)}
 								</span>
 							</div>
-							<div className={styles.colDesc}>
-								<p>{vaga.descricao}</p>
-							</div>
+							<p className={styles.colDesc}>{ellipsisText(vaga.descricao, 75)}</p>
 							<p style={{ fontSize: "1rem" }}>
-								R$
-								{vaga.salario.toLocaleString("pt-BR", {
-									maximumFractionDigits: 2,
-									minimumFractionDigits: 2,
-								})}
+									{realMask(vaga?.salario)}
 							</p>
 							{vaga.competencias &&
 								vaga.competencias.map((competencia: CompetenciaType) => (
@@ -90,7 +85,6 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 								))}
 						</Col>
 						<ButtonDrawer
-							style={{ display: "none"}}
 							ref={refDrawer}
 							label={t("show_details")}
 							title={`${vaga.titulo} - ${vaga?.empresa?.nomeFantasia}`}

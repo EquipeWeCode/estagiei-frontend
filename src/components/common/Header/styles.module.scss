@@ -1,3 +1,29 @@
+:global {
+  body .ant-dropdown {
+    width: 170px;
+    text-align: center;
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+  }
+  
+  body .ant-dropdown-menu {
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    box-shadow: rgb(33, 3, 36) 5px 5px 10px;
+  }
+
+  body .ant-dropdown-menu-item {
+    text-align: center;
+    color: #FFF;
+    padding: 1rem;
+  }
+
+  body .ant-dropdown-menu-item:hover {
+    background-color: var(--primary-color);
+    color: #000;
+  }
+}
+
 header {
   padding: 1.2rem 10rem 1rem 10rem;
   background-color: var(--secondary-color);
@@ -68,28 +94,8 @@ header a:hover {
   width: 8.1rem;
 }
 
-:global {
-  body .ant-dropdown {
-    width: 170px;
-    text-align: center;
-    background-color: var(--secondary-color);
-    border-radius: 5px;
-  }
-  
-  body .ant-dropdown-menu {
-    background-color: var(--secondary-color);
-    border-radius: 5px;
-    box-shadow: rgb(33, 3, 36) 5px 5px 10px;
-  }
-
-  body .ant-dropdown-menu-item {
-    text-align: center;
-    color: #FFF;
-    padding: 1rem;
-  }
-
-  body .ant-dropdown-menu-item:hover {
-    background-color: var(--primary-color);
-    color: #000;
+@media(max-width: 768px) {
+  header {
+    padding: 1.2rem 2rem 1rem 2rem;
   }
 }

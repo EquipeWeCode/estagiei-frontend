@@ -1,6 +1,6 @@
 import { Form, Row, Space, Tag } from "antd";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import Button from "@/components/common/Button";
 import styles from "./styles.module.css";
 import ButtonVoltar from "@/components/common/ButtonVoltar";
@@ -19,9 +19,18 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 	const { vaga, user } = props;
 	const { endereco: enderecoVaga } = vaga;
 	const { empresa } = vaga;
+	const navigate = useNavigate();
+	const location = useLocation();
+	const [searchParams, setSearchParams] = useSearchParams();
 
 	const roles = user?.roles;
 	const isEstudante = roles?.includes(ESTUDANTE);
+
+	const fazCandidatura = () => {
+		if (!roles) {
+			navigate(`/login?next=${location?.pathname}`);
+		}
+	};
 
 	return (
 		<div>
@@ -60,7 +69,7 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 								</span>
 								<h4>
 									<b>{t("address")}:</b> {enderecoVaga?.logradouro}, {enderecoVaga?.numero},{" "}
-									{enderecoVaga?.bairro}, {enderecoVaga?.cidade} - {enderecoVaga?.estado}, {" "}
+									{enderecoVaga?.bairro}, {enderecoVaga?.cidade} - {enderecoVaga?.estado},{" "}
 									{enderecoVaga?.cep}
 								</h4>
 								<h4>
@@ -70,7 +79,7 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 
 							{(isEstudante || !user?.roles) && (
 								<Space direction="vertical">
-									<Button secondary label={t("apply")} />
+									<Button secondary label={t("apply")} onClick={fazCandidatura} />
 								</Space>
 							)}
 						</Form>

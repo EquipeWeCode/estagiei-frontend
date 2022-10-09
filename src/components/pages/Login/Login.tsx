@@ -17,6 +17,7 @@ import jwt from "jwt-decode";
 import { getUsuario } from "@/services/usuario";
 import { getEstudante } from "@/services/estudante";
 import { getEmpresa } from "@/services/empresa";
+import ButtonVoltar from "@/components/common/ButtonVoltar";
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -27,14 +28,17 @@ const Login = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const expired = searchParams.get("expired");
-
-	const userLocal = localStorage.getItem(USER_KEY);
+	const next = searchParams.get("next");
 
 	useEffect((): void => {
 		if (token !== null && USER_KEY && user?.roles) {
 			navigate("/");
 		}
 	}, []);
+
+	const navegaProximaPagina = (proximaPagina: string) => {
+		navigate(proximaPagina);
+	};
 
 	const changeLogin = (e: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -70,11 +74,13 @@ const Login = () => {
 			setUser(user);
 			localStorage.setItem("userDetails", JSON.stringify(user));
 
-			codEmpresa
-				? navigate("/empresa/meu-perfil")
+			next
+				? navegaProximaPagina(next)
+				: codEmpresa
+				? navegaProximaPagina("/empresa/meu-perfil")
 				: codEstudante
-				? navigate("/estudante/meu-perfil")
-				: navigate("/");
+				? navegaProximaPagina("/estudante/meu-perfil")
+				: navegaProximaPagina("/");
 		}
 	};
 
@@ -85,11 +91,7 @@ const Login = () => {
 					<Col className={styles.boxLogin}>
 						<LogoResumida width={90} />
 						<h1>{t("signin")}</h1>
-						{expired && (
-							<p className={styles.expired}>
-								{t("expired_session")}
-							</p>
-						)}
+						{expired && <p className={styles.expired}>{t("expired_session")}</p>}
 						<Row className={styles.containerInput} justify="center">
 							<Input
 								label={t("email")}
@@ -123,9 +125,7 @@ const Login = () => {
 								{t("dont_have_account")} <Link to="/cadastro">{t("signup")}</Link>
 							</p>
 							<Row justify="center" align="middle" style={{ width: "100%" }}>
-								<Button secondary onClick={() => navigate("/")}>
-									{t("go_back")}
-								</Button>
+								<ButtonVoltar secondary />
 							</Row>
 						</Row>
 					</Col>

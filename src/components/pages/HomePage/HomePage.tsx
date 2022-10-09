@@ -82,7 +82,7 @@ const HomePage = (): JSX.Element => {
 				autoPlay={true}
 				showDots={true}
 				autoPlaySpeed={6000}
-				removeArrowOnDeviceType={["superLargeDesktop"]}
+				removeArrowOnDeviceType={["superLargeDesktop", "tablet"]}
 				containerClass={carouselStyles.carouselContainer}
 			>
 				<Banner
