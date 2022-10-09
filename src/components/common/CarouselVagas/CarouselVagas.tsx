@@ -17,6 +17,20 @@ import styles from "./styles.module.css";
 // @ts-ignore
 const Carousel = C.default ? C.default : C;
 
+
+export const getTagColor = (modalidadeVaga: string = "") => {
+	switch (modalidadeVaga) {
+		case "REMOTO":
+			return "green";
+		case "PRESENCIAL":
+			return "blue";
+		case "HIBRIDO":
+			return "purple";
+		default:
+			return "geekblue";
+	}
+};
+
 const CarouselVagas = () => {
 	const FILTRO_INICIAL: FiltroVagaType = {
 		size: SIZE_FILTER_DEFAULT,
@@ -24,7 +38,6 @@ const CarouselVagas = () => {
 	};
 
 	const [vagas, setVagas] = useState<VagaType[]>([]);
-	const [filtroVaga, setFiltroVaga] = useState<FiltroVagaType>(FILTRO_INICIAL);
 
 	useEffect((): void => {
 		fetchVagas();
@@ -34,7 +47,7 @@ const CarouselVagas = () => {
 	const { t } = useTranslation();
 
 	const fetchVagas = async () => {
-		const response = await getVagas(filtroVaga);
+		const response = await getVagas(FILTRO_INICIAL);
 		if (response.status === 200) {
 			setVagas(response.data);
 		}
@@ -61,19 +74,6 @@ const CarouselVagas = () => {
 			breakpoint: { max: 1259, min: 0 },
 			items: 1,
 		},
-	};
-
-	const getTagColor = (modalidadeVaga: string = "") => {
-		switch (modalidadeVaga) {
-			case "REMOTO":
-				return "green";
-			case "PRESENCIAL":
-				return "blue";
-			case "HIBRIDO":
-				return "purple";
-			default:
-				return "geekblue";
-		}
 	};
 
 	return (

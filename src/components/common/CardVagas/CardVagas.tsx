@@ -1,14 +1,20 @@
 import DescricaoVaga from "@/components/pages/DescricaoVaga";
-import { COLORS } from "@/constants/colors";
 import { useAuth } from "@/contexts/auth";
 import { CompetenciaType } from "@/types/competenciaType";
 import { VagaType } from "@/types/vagasTypes";
-import { capitalizaPriLetraDeCadaPalavra, ellipsisText, realMask } from "@/utils/masks";
+import {
+	capitalizaPriLetraDeCadaPalavra,
+	ellipsisText,
+	justDateMask,
+	realMask,
+} from "@/utils/masks";
+import { ClockCircleOutlined, EnvironmentOutlined } from "@ant-design/icons";
 import { Col, Empty, Row, Tag } from "antd";
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import ButtonDrawer from "../ButtonDrawer";
+import { getTagColor } from "../CarouselVagas/CarouselVagas";
 import ImageNotFound from "../ImageNotFound";
 import styles from "./styles.module.css";
 
@@ -21,15 +27,9 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 	const { user } = useAuth();
 	const { t } = useTranslation();
 
-	const refDrawer = useRef<ButtonDrawer>(null);
+	const { vagas = [], competenciasEstudante = [] } = props;
 
-	const retornaCorTag = (competencia: CompetenciaType): string => {
-		return props.competenciasEstudante.find(
-			comp => comp.codCompetencia === competencia.codCompetencia
-		)
-			? COLORS.argb.primary_color
-			: "default";
-	};
+	const refDrawer = useRef<ButtonDrawer>(null);
 
 	const fechaDrawer = () => {
 		refDrawer?.current?.fechaDrawer();
@@ -41,51 +41,60 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 
 	return (
 		<>
-			{props?.vagas && props?.vagas?.length > 0 ? (
-				props?.vagas?.map((vaga: VagaType) => (
+			{vagas && vagas?.length > 0 ? (
+				vagas?.map((vaga: VagaType) => (
 					<Row key={vaga.codVaga} className={styles.containerVaga} align="middle">
-						<Link to="/empresa/profile">
-							<Col className={styles.colImage}>
+						<Col className={styles.colImage}>
+							<Link to={`/empresa/profile/${vaga?.empresa?.codEmpresa}`}>
 								{vaga?.empresa?.avatar ? (
-									<img
-										src={vaga?.empresa?.avatar}
-										alt="avatar-company"
-										width={100}
-										height={100}
-										style={{ borderRadius: "5px" }}
-									/>
+									<>
+										<img
+											src={vaga?.empresa?.avatar}
+											alt="avatar-company"
+											className={styles.companyImage}
+											width={100}
+											height={100}
+										/>
+									</>
 								) : (
-									<ImageNotFound width={100} height={100} />
+									<ImageNotFound width={100} height={100} className={styles.companyImage} />
 								)}
-							</Col>
-						</Link>
+							</Link>
+						</Col>
 						<Col className={styles.content}>
-							<div className={styles.vagaTitulo}>
-								<h3 style={{ display: "inline-block" }}>
-									<strong>{vaga.titulo} </strong>
-								</h3>
-								<span style={{ color: "var(--primary-color)" }}>
-									{vaga.empresa && capitalizaPriLetraDeCadaPalavra(vaga.empresa.nomeFantasia)}
-								</span>
+							<div className={styles.vagaTituloContainer}>
+								<div className={styles.vagaTitulo}>
+									<h3>{vaga.titulo}</h3>
+									<span>
+										<Tag className={styles.tagModalidade} color={getTagColor(vaga.modalidade)}>
+											{vaga.modalidade}
+										</Tag>
+										<h4 style={{ display: "inline-block" }}>{vaga.cargaHoraria}h</h4>
+									</span>
+								</div>
+								<div style={{ color: "var(--primary-color)" }}>
+									<Link to={`/empresa/profile/${vaga?.empresa?.codEmpresa}`}>
+										{vaga.empresa && capitalizaPriLetraDeCadaPalavra(vaga.empresa.nomeFantasia)}
+									</Link>
+								</div>
 							</div>
 							<p className={styles.colDesc}>{ellipsisText(vaga.descricao, 75)}</p>
-							<p style={{ fontSize: "1rem" }}>{realMask(vaga?.salario)}</p>
-							{vaga.competencias &&
-								vaga.competencias.map((competencia: CompetenciaType) => (
-									<Tag
-										style={{
-											borderRadius: "5px",
-											padding: "0.2rem 0.4rem",
-											marginBottom: "0.5rem",
-										}}
-										key={competencia.codCompetencia}
-										color={retornaCorTag(competencia)}
-									>
-										{competencia.descricaoCompetencia}
-									</Tag>
-								))}
+							<div>
+								<p style={{ fontSize: "1.4rem", display: "inline-block" }}>
+									{vaga?.salario ? realMask(vaga?.salario) : t("not_informed")}
+								</p>
+							</div>
+							<div className={styles.locationAuditoria}>
+								<span>
+									<EnvironmentOutlined /> {vaga?.endereco?.cidade} / {vaga?.endereco?.estado}
+								</span>
+								<span>
+									<ClockCircleOutlined /> {justDateMask(vaga?.auditoria?.dataInclusao)}
+								</span>
+							</div>
 						</Col>
 						<ButtonDrawer
+							secondary
 							ref={refDrawer}
 							label={t("show_details")}
 							title={`${vaga.titulo} - ${vaga?.empresa?.nomeFantasia}`}

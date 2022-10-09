@@ -10,6 +10,7 @@ export interface ButtonDrawerProps extends ButtonProps {
 	sizeDrawer?: "default" | "large" | "fullscreen";
 	children?: React.ReactNode;
 	label?: string;
+	secondary?: boolean;
 	onOpen?: () => void;
 	onClose?: () => void;
 }
@@ -47,6 +48,7 @@ class ButtonDrawer extends React.Component<ButtonDrawerProps> {
 			block = false,
 			sizeDrawer = DEFAULT,
 			style,
+			secondary,
 		} = this.props;
 
 		return (
@@ -61,6 +63,7 @@ class ButtonDrawer extends React.Component<ButtonDrawerProps> {
 					icon={icon}
 					type={type}
 					label={this.props.label}
+					secondary={secondary}
 				/>
 				<Drawer
 					size={sizeDrawer}
