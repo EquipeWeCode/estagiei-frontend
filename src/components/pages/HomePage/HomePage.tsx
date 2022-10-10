@@ -50,7 +50,6 @@ const Banner = (props: BannerProps) => {
 						/>
 					)}
 				</Col>
-				<Col></Col>
 			</Row>
 		</Row>
 	);
