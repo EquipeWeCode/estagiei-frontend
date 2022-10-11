@@ -1,0 +1,12 @@
+:global {
+  body .ant-pagination-item,
+  body .ant-pagination-prev,
+  body .ant-pagination-next {
+    border-radius: 5px;
+    width: 0.5rem;
+    min-width: 0;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+  }
+}
