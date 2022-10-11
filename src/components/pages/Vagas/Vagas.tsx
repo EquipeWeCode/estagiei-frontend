@@ -3,10 +3,11 @@
 import Button from "@/components/common/Button";
 import CardVagas from "@/components/common/CardVagas";
 import Input from "@/components/common/Input";
+import Pagination from "@/components/common/Pagination";
 import { PAGINATION_SIZE_DEFAULT } from "@/constants";
 import { getVagas } from "@/services/vaga";
 import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
-import { Col, Pagination, Row, Tabs } from "antd";
+import { Col, Row, Tabs } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
@@ -108,7 +109,6 @@ const Vagas = () => {
 						</Row>
 						<Row justify="end" style={{ marginBottom: "1rem" }}>
 							<Pagination
-								defaultCurrent={1}
 								total={quantidadeTotal}
 								pageSize={filtroVaga.size}
 								current={filtroVaga.page}
@@ -118,15 +118,12 @@ const Vagas = () => {
 						<CardVagas vagas={vagas} competenciasEstudante={[]} />
 						<Row justify="end">
 							<Pagination
-								defaultCurrent={1}
 								total={quantidadeTotal}
 								pageSize={filtroVaga.size}
 								current={filtroVaga.page}
 								onChange={paginar}
 							/>
 						</Row>
-						{/* </Col> */}
-						{/* </Row> */}
 					</TabPane>
 				</Tabs>
 			</Row>
