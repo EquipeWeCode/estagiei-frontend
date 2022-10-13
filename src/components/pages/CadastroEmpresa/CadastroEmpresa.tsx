@@ -31,7 +31,8 @@ type FormCadastroEmpresaType = {
 	bairro?: string,
 	logradouro?: string,
 	numero?: string,
-	complemento?: string
+	complemento?: string,
+	pontoReferencia?: string
 }
 
 const CadastroEmpresa = () => {
@@ -114,15 +115,18 @@ const CadastroEmpresa = () => {
 				bairro: formEmpresa.bairro,
 				logradouro: formEmpresa.logradouro,
 				numero: formEmpresa.numero,
-				complemento: formEmpresa.complemento
+				complemento: formEmpresa.complemento,
+				pontoReferencia: formEmpresa.pontoReferencia
 			}
 		})
 	}
 
 	const criarEmpresa = async () => {
-		transferData();
+		await transferData();
+		console.log(novaEmpresa)
 		try {
 			await postEmpresa(novaEmpresa);
+			navigate('/');
 		}
 		catch(e) {
 			navigate('/');
@@ -162,14 +166,14 @@ const CadastroEmpresa = () => {
 						<Form.Item>
 							<span>Senha</span>
 							<Form.Item name="senha" noStyle rules={RULES}>
-								<Input type={"password"} placeholder={"senha"} value={formEmpresa.senha} maxLength={14} minLength={6}/>
+								<Input type={"password"} placeholder={"senha"} value={formEmpresa.senha} maxLength={14} minLength={8}/>
 							</Form.Item>
 						</Form.Item>
 
 						<Form.Item>
 							<span>Repetir a senha</span>
 							<Form.Item name="repete-senha" noStyle rules={RULES_PASSWORD} dependencies={['senha']}>
-								<Input type={"password"} placeholder={"senha"} value={formEmpresa.senha} maxLength={14} minLength={6}/>
+								<Input type={"password"} placeholder={"senha"} value={formEmpresa.senha} maxLength={14} minLength={8}/>
 							</Form.Item>
 						</Form.Item>
 
@@ -194,48 +198,55 @@ const CadastroEmpresa = () => {
 							</Form.Item>
 						</Form.Item>
 
-							<Form.Item>
-								<span>CEP</span>
-								<Form.Item name="cep" noStyle rules={RULES}>
-									<Input placeholder={"cep"} value={formEmpresa.cep} maxLength={8} onChange={e => getViaCep(e.target.value)}/>
-								</Form.Item>
+						<Form.Item>
+							<span>CEP</span>
+							<Form.Item name="cep" noStyle rules={RULES}>
+								<Input placeholder={"cep"} value={formEmpresa.cep} maxLength={8} onChange={e => getViaCep(e.target.value)}/>
 							</Form.Item>
-							<Form.Item>
-								<span>Estado</span>
-								<Form.Item noStyle rules={RULES}>
-									<Input placeholder={"estado"} value={formEmpresa.estado} maxLength={14} />
-								</Form.Item>
+						</Form.Item>
+						<Form.Item>
+							<span>Estado</span>
+							<Form.Item noStyle rules={RULES}>
+								<Input placeholder={"estado"} value={formEmpresa.estado} maxLength={14} />
 							</Form.Item>
-							<Form.Item>
-								<span>Cidade</span>
-								<Form.Item noStyle rules={RULES}>
-									<Input placeholder={"cidade"} value={formEmpresa.cidade} maxLength={14} />
-								</Form.Item>
+						</Form.Item>
+						<Form.Item>
+							<span>Cidade</span>
+							<Form.Item noStyle rules={RULES}>
+								<Input placeholder={"cidade"} value={formEmpresa.cidade} maxLength={14} />
 							</Form.Item>
-							<Form.Item>
-								<span>Bairro</span>
-								<Form.Item noStyle rules={RULES}>
-									<Input placeholder={"bairro"} value={formEmpresa.bairro} maxLength={14} />
-								</Form.Item>
+						</Form.Item>
+						<Form.Item>
+							<span>Bairro</span>
+							<Form.Item noStyle rules={RULES}>
+								<Input placeholder={"bairro"} value={formEmpresa.bairro} maxLength={14} />
 							</Form.Item>
-							<Form.Item>
-								<span>Logradouro</span>
-								<Form.Item noStyle rules={RULES}>
-									<Input placeholder={"logradouro"} value={formEmpresa.logradouro} maxLength={14} />
-								</Form.Item>
+						</Form.Item>
+						<Form.Item>
+							<span>Logradouro</span>
+							<Form.Item noStyle rules={RULES}>
+								<Input placeholder={"logradouro"} value={formEmpresa.logradouro} maxLength={14} />
 							</Form.Item>
-							<Form.Item>
-								<span>Numero</span>
-								<Form.Item name="numero" noStyle rules={RULES}>
-									<Input placeholder={"numero"} value={formEmpresa.numero} maxLength={14} />
-								</Form.Item>
+						</Form.Item>
+						<Form.Item>
+							<span>Numero</span>
+							<Form.Item name="numero" noStyle rules={RULES}>
+								<Input placeholder={"numero"} value={formEmpresa.numero} maxLength={14} />
 							</Form.Item>
-							<Form.Item>
-								<span>Complemento</span>
-								<Form.Item name="complemento" noStyle>
-									<Input placeholder={"complemento"} value={formEmpresa.complemento} maxLength={14} />
-								</Form.Item>
+						</Form.Item>
+						<Form.Item>
+							<span>Complemento</span>
+							<Form.Item name="complemento" noStyle>
+								<Input placeholder={"complemento"} value={formEmpresa.complemento} maxLength={14} />
 							</Form.Item>
+						</Form.Item>
+
+						<Form.Item>
+							<span>Ponto de referencia</span>
+							<Form.Item name="pontoReferencia" noStyle>
+								<Input placeholder={"Ponto de referencia"} value={formEmpresa.complemento} maxLength={14} />
+							</Form.Item>
+						</Form.Item>
 
 						<Form.Item style={{ marginTop: "1rem" }}>
 							<Button style={{ marginRight: "2rem", backgroundColor: "#000", color: "#FFF" }}>
