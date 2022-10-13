@@ -120,7 +120,7 @@ const Login = () => {
 								}}
 							/>
 							<p>
-								{t("dont_have_account")} <Link to="/cadastro">{t("signup")}</Link>
+								{t("dont_have_account")} <Link to="/cadastro/estudante">{t("signup")}</Link>
 							</p>
 							<Row justify="center" align="middle" style={{ width: "100%" }}>
 								<Button secondary onClick={() => navigate("/")}>

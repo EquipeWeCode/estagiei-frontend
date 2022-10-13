@@ -160,12 +160,15 @@ const CadastroEstudante = () => {
 
 						<Form.Item style={{ marginTop: "1rem" }}>
 							<Button style={{ marginRight: "2rem", backgroundColor: "#000", color: "#FFF" }}>
-								<Link to={"/"}>{t("go_back")}</Link>
+								<Link to={"/login"}>{t("go_back")}</Link>
 							</Button>
 							<Button htmlType="submit" type="primary">
 								{t("save")}
 							</Button>
 						</Form.Item>
+						<Row>
+							<span>Cadastre-se como <Link to={"/cadastro/empresa"}>empresa</Link></span>
+						</Row>
 					</Form>
 				</Row>
 			</Row>

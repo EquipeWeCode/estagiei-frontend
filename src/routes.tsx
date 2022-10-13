@@ -24,6 +24,7 @@ import { EMPRESA, ESTUDANTE } from "./constants";
 import TraducaoBtn from "./components/common/TraducaoBtn";
 import PerfilEstudante from "@/components/pages/estudante/PerfilEstudante";
 import PerfilEmpresa from "@/components/pages/empresa/PerfilEmpresa";
+import CadastroEstudante from "./components/pages/CadastroEstudante/CadastroEstudante";
 
 render(
 	<Provider store={store}>
@@ -37,6 +38,7 @@ render(
 						<Route path="/login" element={<Login />} />
 						<Route path="/vagas" element={<Vagas />} />
 						<Route path="/cadastro/empresa" element={<CadastroEmpresa />} />
+						<Route path="/cadastro/estudante" element={<CadastroEstudante />} />
 						<Route path="/detalheVaga" element={
 							<PrivateRoute roles={[ESTUDANTE]}>
 								<DescricaoVaga />
