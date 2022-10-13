@@ -78,5 +78,6 @@ export const TRANSLATIONS_PT = {
 	description: "Descrição",
 	show_details: "Ver detalhes",
 	not_informed: "Não informado",
+	not_authenticated: "Você não está autenticado, por favor faça login.",
 };
 

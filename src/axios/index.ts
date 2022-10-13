@@ -20,11 +20,6 @@ instance.interceptors.request.use(
 	},
 	function (error) {
 		document.body.classList.remove("loading-indicator");
-
-		if (error.response.status === 401) {
-			logout();
-			history.push("/login?expired=true");
-		}
 		return Promise.reject(error);
 	}
 );
@@ -45,6 +40,12 @@ instance.interceptors.response.use(
 			type: "SHOW_ERROR",
 			payload: errors?.length > 0 ? `${errors}` : message,
 		});
+
+		if (error.response.status === 401) {
+			logout();
+			history.push("/login?expired=true");
+		}
+
 		return Promise.reject(error);
 	}
 );

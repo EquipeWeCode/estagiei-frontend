@@ -77,4 +77,5 @@ export const TRANSLATIONS_EN = {
 	description: "Description",
 	show_details: "Show details",
 	not_informed: "Not informed",
+	not_authenticated: "You are not authenticated, please login.",
 };

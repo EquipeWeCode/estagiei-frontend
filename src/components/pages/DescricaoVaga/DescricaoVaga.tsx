@@ -28,7 +28,7 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 	const fazCandidatura = () => {
 		if (!roles) {
 			refDrawer?.current?.fechaDrawer();
-			navigate(`/login?next=${location?.pathname}${location?.search || ""}`);
+			navigate(`/login?notAuthenticated=true&next=${location?.pathname}${location?.search || ""}`);
 		}
 	};
 
