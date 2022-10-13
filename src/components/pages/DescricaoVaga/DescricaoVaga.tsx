@@ -25,7 +25,8 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 	const { empresa } = vaga;
 	const navigate = useNavigate();
 	const location = useLocation();
-	const [candidatura, setCandidatura] = useState({} as CandidaturaType);
+	const codEstudante = user.codEstudante;
+	const codVaga = vaga.codVaga
 
 	
 
@@ -37,10 +38,9 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 			refDrawer?.current?.fechaDrawer();
 			navigate(`/login?next=${location?.pathname}${location?.search || ""}`);
 		}else{
-			setCandidatura({codEstudante: user.codEstudante, codVaga: vaga.codVaga });
-			const { data, status } =  await postCandidatura(candidatura);
-			console.log(status, data)
-			navigate("/vagas");
+			
+			const { data, status } =  await postCandidatura(codEstudante, codVaga);
+			
 		}
 	};
 

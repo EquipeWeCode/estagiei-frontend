@@ -1,7 +1,6 @@
 import { ENDPOINT_CANDIDATURA } from "@/constants";
-import { CandidaturaType } from "@/types/candidaturaType";
-import { postResource } from "./utils";
+import { postCandidaturaResource } from "./utils";
 
-export const postCandidatura = (params: CandidaturaType) => {
-	return postResource(ENDPOINT_CANDIDATURA, params);
+export const postCandidatura = (codEstudante: string = "", codVaga: string = "") => {
+	return postCandidaturaResource(`${ENDPOINT_CANDIDATURA}/${codEstudante}/${codVaga}`);
 };
