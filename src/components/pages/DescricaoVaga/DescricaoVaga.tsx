@@ -1,14 +1,12 @@
 import Button from "@/components/common/Button";
 import { ESTUDANTE } from "@/constants";
 import { UserType } from "@/types/userTypes";
-import { VagaType } from "@/types/vagasTypes";
 import { Form, Row, Space, Tag } from "antd";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
-
-import { postCandidatura } from "@/services/candidatura";
 import { VagaComCandidaturaType } from "@/components/common/CardVagas/CardVagas";
+import { postCandidatura } from "@/services/candidatura";
 
 export interface DescricaoVagaProps {
 	vaga: VagaComCandidaturaType;
@@ -24,16 +22,18 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 	const { empresa } = vaga;
 	const navigate = useNavigate();
 	const location = useLocation();
+	const codEstudante = user.codEstudante;
+	const codVaga = vaga.codVaga;
 
 	const roles = user?.roles;
 	const isEstudante = roles?.includes(ESTUDANTE);
 
-	const fazCandidatura = () => {
+	const fazCandidatura = async () => {
 		if (!roles) {
 			refDrawer?.current?.fechaDrawer();
 			navigate(`/login?notAuthenticated=true&next=${location?.pathname}${location?.search || ""}`);
 		} else {
-			postCandidatura(user?.codEstudante, vaga?.codVaga);
+			await postCandidatura(codEstudante, codVaga);
 		}
 	};
 

@@ -93,6 +93,7 @@ const Login = () => {
 						<LogoResumida width={90} />
 						<h1>{t("signin")}</h1>
 						{expired && <p className={styles.expired}>{t("expired_session")}</p>}
+						{notAuthenticated && <p className={styles.expired}>{t("not_authenticated")}</p>}
 						<Row className={styles.containerInput} justify="center">
 							<Input
 								label={t("email")}

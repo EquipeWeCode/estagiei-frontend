@@ -29,6 +29,14 @@ export async function deleteResource(resource: string, config: any) {
 	return response;
 }
 
+export async function postCandidaturaResource(
+	resource: string,
+	config: any = null,
+) {
+	const response = await axios.post(ROOT_URL() + resource, config);
+	return response;
+}
+
 export function serializeObjectToParam(filtro: Record<string, any>, first: boolean = false) {
 	let params = "";
 	let firstParam = "?";
