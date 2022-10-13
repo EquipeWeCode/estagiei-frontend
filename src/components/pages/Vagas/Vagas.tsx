@@ -53,9 +53,10 @@ const Vagas = () => {
 
 	const fetchCandidaturas = async () => {
 		if (isEstudante) {
-			const { data, status } = await getCandidaturas(777666);
+			const { data, status } = await getCandidaturas(user?.codEstudante);
 			if (status === 200) {
 				setCandidaturas(data);
+				fetchVagas(filtroVaga?.page);
 			}
 		}
 	};
