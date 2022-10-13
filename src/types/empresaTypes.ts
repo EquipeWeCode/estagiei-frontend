@@ -10,6 +10,16 @@ export type EmpresaType = {
   indAtivo?: boolean,
 }
 
+export type CadastroEmpresaType = {
+  email?: string,
+	senha?: string,
+	avatar?: string,
+	razaoSocial?: string,
+	nomeFantasia?: string,
+	cnpj?: string,
+	endereco?: EnderecoType
+}
+
 export type EmpresaLoginType = {
   email: string;
   senha: string;

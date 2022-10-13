@@ -16,16 +16,7 @@ import { use } from "i18next";
 import { CepType } from "@/types/cepType";
 import { getCep } from "@/services/cep";
 import { EnderecoType } from "@/types/enderecoType";
-
-type CadastroEmpresaType = {
-	email?: string,
-	senha?: string,
-	avatar?: string,
-	razaoSocial?: string,
-	nomeFantasia?: string,
-	cnpj?: string,
-	endereco?: EnderecoType
-}
+import {CadastroEmpresaType} from "@/types/empresaTypes";
 
 type FormCadastroEmpresaType = {
 	email?: string,
@@ -53,6 +44,8 @@ const CadastroEmpresa = () => {
 	const [formEmpresa, setForm] = useState<FormCadastroEmpresaType>({} as FormCadastroEmpresaType);
 	const [novoCep, setCep] = useState<CepType>({} as CepType);
 
+	const [finished, setFinished] = useState<boolean>(false);
+
 	useEffect(() => {
 		if (token) {
 			navigate("/");
@@ -69,10 +62,6 @@ const CadastroEmpresa = () => {
 		})
 	}, [novoCep]);
 
-	useEffect(() => {
-		console.log(formEmpresa)
-	}, [formEmpresa]);
-
 	const dateFormat = "DD/MM/YYYY";
 	const dateFormatDto = "YYYY-MM-DD";
 
@@ -80,8 +69,23 @@ const CadastroEmpresa = () => {
 		{
 			required: true,
 			message: t("required"),
-		},
+		}
 	];
+
+	const RULES_PASSWORD = [
+		{
+		  required: true,
+		  message: 'Please confirm your password!',
+		},
+		({ getFieldValue }: any) => ({
+		  validator(_: any, value: any) {
+			if (!value || getFieldValue('senha') === value) {
+			  return Promise.resolve();
+			}
+			return Promise.reject(new Error('The two passwords that you entered do not match!'));
+		  },
+		}),
+	]
 
 	const getViaCep = async (cep: string) => {
 		if (cep.length == 8) {
@@ -95,11 +99,30 @@ const CadastroEmpresa = () => {
 		}
 	}
 
+	const transferData = () => {
+		setNovaEmpresa({
+			email: formEmpresa.email,
+			senha: formEmpresa.senha,
+			avatar: "https://dummyimage.com/600x400/000/fff&text=company",
+			razaoSocial: formEmpresa.razaoSocial,
+			nomeFantasia: formEmpresa.nomeFantasia,
+			cnpj: formEmpresa.cnpj,
+			endereco: {
+				cep: formEmpresa.cep,
+				estado: formEmpresa.estado,
+				cidade: formEmpresa.cidade,
+				bairro: formEmpresa.bairro,
+				logradouro: formEmpresa.logradouro,
+				numero: formEmpresa.numero,
+				complemento: formEmpresa.complemento
+			}
+		})
+	}
+
 	const criarEmpresa = async () => {
+		transferData();
 		try {
 			await postEmpresa(novaEmpresa);
-			// <Notification visible={true}  />
-			navigate('/');
 		}
 		catch(e) {
 			navigate('/');
@@ -139,14 +162,14 @@ const CadastroEmpresa = () => {
 						<Form.Item>
 							<span>Senha</span>
 							<Form.Item name="senha" noStyle rules={RULES}>
-								<Input type={"password"} placeholder={"senha"} value={formEmpresa.senha} maxLength={14} />
+								<Input type={"password"} placeholder={"senha"} value={formEmpresa.senha} maxLength={14} minLength={6}/>
 							</Form.Item>
 						</Form.Item>
 
 						<Form.Item>
 							<span>Repetir a senha</span>
-							<Form.Item name="repete-senha" noStyle rules={RULES}>
-								<Input type={"password"} placeholder={"senha"} value={formEmpresa.senha} maxLength={14} />
+							<Form.Item name="repete-senha" noStyle rules={RULES_PASSWORD} dependencies={['senha']}>
+								<Input type={"password"} placeholder={"senha"} value={formEmpresa.senha} maxLength={14} minLength={6}/>
 							</Form.Item>
 						</Form.Item>
 
@@ -209,7 +232,7 @@ const CadastroEmpresa = () => {
 							</Form.Item>
 							<Form.Item>
 								<span>Complemento</span>
-								<Form.Item name="complemento" noStyle rules={RULES}>
+								<Form.Item name="complemento" noStyle>
 									<Input placeholder={"complemento"} value={formEmpresa.complemento} maxLength={14} />
 								</Form.Item>
 							</Form.Item>
