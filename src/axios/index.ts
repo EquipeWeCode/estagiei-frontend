@@ -20,6 +20,11 @@ instance.interceptors.request.use(
 	},
 	function (error) {
 		document.body.classList.remove("loading-indicator");
+
+		if (error.response.status === 401) {
+			logout();
+			history.push("/login?expired=true");
+		}
 		return Promise.reject(error);
 	}
 );
@@ -36,16 +41,16 @@ instance.interceptors.response.use(
 		const errors: [] = response?.data?.errors || [];
 		const message = response?.data?.message || "";
 
+		if (error?.response?.status === 401) {
+			logout();
+			window.location.href = "/login?sessionExpired=true";
+		}
+
 		store.dispatch({
 			type: "SHOW_ERROR",
 			payload: errors?.length > 0 ? `${errors}` : message,
 		});
-
-		if (error.response.status === 401) {
-			logout();
-			history.push("/login?expired=true");
-		}
-
+		
 		return Promise.reject(error);
 	}
 );

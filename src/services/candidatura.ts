@@ -1,6 +1,10 @@
 import { ENDPOINT_CANDIDATURA } from "@/constants";
-import { postCandidaturaResource } from "./utils";
+import { getResource, postResource } from "./utils";
+
+export const getCandidaturas = (codEstudante: string | number = "") => {
+	return getResource(`${ENDPOINT_CANDIDATURA}/${codEstudante}`);
+};
 
 export const postCandidatura = (codEstudante: string = "", codVaga: string | number = "") => {
-	return postCandidaturaResource(`${ENDPOINT_CANDIDATURA}/${codEstudante}/${codVaga}`);
+	return postResource(`${ENDPOINT_CANDIDATURA}/${codEstudante}/${codVaga}`);
 };

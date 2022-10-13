@@ -79,5 +79,6 @@ export const TRANSLATIONS_PT = {
 	show_details: "Ver detalhes",
 	not_informed: "Não informado",
 	not_authenticated: "Você não está autenticado, por favor faça login.",
+	applied: "Aplicado",
 };
 

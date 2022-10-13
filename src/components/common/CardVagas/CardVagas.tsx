@@ -1,5 +1,6 @@
 import DescricaoVaga from "@/components/pages/DescricaoVaga";
 import { useAuth } from "@/contexts/auth";
+import { CandidaturaType } from "@/types/candidaturaType";
 import { CompetenciaType } from "@/types/competenciaType";
 import { VagaType } from "@/types/vagasTypes";
 import {
@@ -20,14 +21,18 @@ import styles from "./styles.module.css";
 
 interface CardVagasProps {
 	vagas: VagaType[];
-	competenciasEstudante: CompetenciaType[];
+	candidaturas: CandidaturaType[];
+}
+
+export interface VagaComCandidaturaType extends VagaType {
+	isCandidatada?: boolean;
 }
 
 const CardVagas = (props: CardVagasProps): JSX.Element => {
 	const { user } = useAuth();
 	const { t } = useTranslation();
 
-	const { vagas = [], competenciasEstudante = [] } = props;
+	const { vagas = [], candidaturas = [] } = props;
 
 	const refDrawer = useRef<ButtonDrawer>(null);
 
@@ -39,10 +44,20 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 		fechaDrawer();
 	}, []);
 
+	const vagasComCandidatura: VagaComCandidaturaType[] = vagas.map(vaga => {
+		const candidatura = candidaturas.find(candidatura => candidatura.codVaga === vaga.codVaga);
+		const isCandidatada = candidatura ? true : false;
+
+		return {
+			...vaga,
+			isCandidatada,
+		};
+	});
+
 	return (
 		<>
-			{vagas && vagas?.length > 0 ? (
-				vagas?.map((vaga: VagaType) => (
+			{vagasComCandidatura && vagasComCandidatura?.length > 0 ? (
+				vagasComCandidatura?.map((vaga: VagaComCandidaturaType) => (
 					<Row key={vaga.codVaga} className={styles.containerVaga} align="middle">
 						<Col className={styles.colImage}>
 							<Link to={`/empresa/profile/${vaga?.empresa?.codEmpresa}`}>
@@ -83,6 +98,11 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 								<p style={{ fontSize: "1.4rem", display: "inline-block" }}>
 									{vaga?.salario ? realMask(vaga?.salario) : t("not_informed")}
 								</p>
+								{vaga?.isCandidatada && (
+									<span style={{ marginLeft: "1rem" }}>
+										<Tag color={"success"}>{t("applied")}</Tag>
+									</span>
+								)}
 							</div>
 							<div className={styles.locationAuditoria}>
 								<span>

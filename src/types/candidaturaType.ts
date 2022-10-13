@@ -1,4 +1,4 @@
 export type CandidaturaType = {
-    codEstudante: string,
-    codVaga: string,
-  }
+	codEstudante?: string | number;
+	codVaga?: string | number;
+};

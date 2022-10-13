@@ -4,8 +4,11 @@ import Button from "@/components/common/Button";
 import CardVagas from "@/components/common/CardVagas";
 import Input from "@/components/common/Input";
 import Pagination from "@/components/common/Pagination";
-import { PAGINATION_SIZE_DEFAULT } from "@/constants";
+import { ESTUDANTE, PAGINATION_SIZE_DEFAULT } from "@/constants";
+import { useAuth } from "@/contexts/auth";
+import { getCandidaturas } from "@/services/candidatura";
 import { getVagas } from "@/services/vaga";
+import { CandidaturaType } from "@/types/candidaturaType";
 import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
 import { Col, Row, Tabs } from "antd";
 import { useEffect, useState } from "react";
@@ -15,7 +18,10 @@ import styles from "./styles.module.css";
 
 const Vagas = () => {
 	const { t } = useTranslation();
+	const { user } = useAuth();
 	const { TabPane } = Tabs;
+	const roles = user?.roles;
+	const isEstudante = roles?.includes(ESTUDANTE);
 
 	const [searchParams, setSearchParams] = useSearchParams();
 
@@ -23,6 +29,7 @@ const Vagas = () => {
 	const descricao = searchParams.get("descricao");
 
 	const [vagas, setVagas] = useState<VagaType[]>([]);
+	const [candidaturas, setCandidaturas] = useState<CandidaturaType[]>([]);
 
 	const FILTRO_INICIAL: FiltroVagaType = {
 		titulo: titulo || "",
@@ -37,6 +44,21 @@ const Vagas = () => {
 	useEffect((): void => {
 		fetchVagas(filtroVaga?.page);
 	}, [filtroVaga?.page]);
+
+	useEffect((): void => {
+		if (user?.codEstudante) {
+			fetchCandidaturas();
+		}
+	}, [user?.codEstudante]);
+
+	const fetchCandidaturas = async () => {
+		if (isEstudante) {
+			const { data, status } = await getCandidaturas(777666);
+			if (status === 200) {
+				setCandidaturas(data);
+			}
+		}
+	};
 
 	const fetchVagas = async (pagina: number = 1) => {
 		setSearchParams({
@@ -115,7 +137,7 @@ const Vagas = () => {
 								onChange={paginar}
 							/>
 						</Row>
-						<CardVagas vagas={vagas} competenciasEstudante={[]} />
+						<CardVagas vagas={vagas} candidaturas={candidaturas} />
 						<Row justify="end">
 							<Pagination
 								total={quantidadeTotal}

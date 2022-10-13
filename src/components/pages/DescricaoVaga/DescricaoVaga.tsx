@@ -1,18 +1,15 @@
 import Button from "@/components/common/Button";
 import { ESTUDANTE } from "@/constants";
 import { UserType } from "@/types/userTypes";
-import { VagaType } from "@/types/vagasTypes";
 import { Form, Row, Space, Tag } from "antd";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
-
-import { CandidaturaType } from "@/types/candidaturaType";
+import { VagaComCandidaturaType } from "@/components/common/CardVagas/CardVagas";
 import { postCandidatura } from "@/services/candidatura";
 
 export interface DescricaoVagaProps {
-	vaga: VagaType;
+	vaga: VagaComCandidaturaType;
 	user: UserType;
 	refDrawer: any;
 }
@@ -36,7 +33,7 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 			refDrawer?.current?.fechaDrawer();
 			navigate(`/login?notAuthenticated=true&next=${location?.pathname}${location?.search || ""}`);
 		} else {
-			const { data, status } = await postCandidatura(codEstudante, codVaga);
+			await postCandidatura(codEstudante, codVaga);
 		}
 	};
 
@@ -87,7 +84,13 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 
 							{(isEstudante || !user?.roles) && (
 								<Space direction="vertical">
-									<Button secondary label={t("apply")} onClick={fazCandidatura} />
+									{vaga?.isCandidatada ? (
+										<Button disabled={true} type="primary" size="large">
+											{t("applied")}
+										</Button>
+									) : (
+										<Button secondary label={t("apply")} onClick={fazCandidatura} />
+									)}
 								</Space>
 							)}
 						</Form>

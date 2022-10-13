@@ -12,7 +12,7 @@ export const getResource = async (resource: string, config: any = null) => {
 
 export async function postResource(
 	resource: string,
-	body: object,
+	body: object = {},
 	config: any = null,
 ) {
 	const response = await axios.post(ROOT_URL() + resource, body, config);
