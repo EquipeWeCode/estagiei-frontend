@@ -3,9 +3,13 @@ import { ESTUDANTE } from "@/constants";
 import { UserType } from "@/types/userTypes";
 import { VagaType } from "@/types/vagasTypes";
 import { Form, Row, Space, Tag } from "antd";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
+
+import { CandidaturaType } from "@/types/candidaturaType";
+import { postCandidatura } from "@/services/candidatura";
 
 export interface DescricaoVagaProps {
 	vaga: VagaType;
@@ -21,14 +25,22 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 	const { empresa } = vaga;
 	const navigate = useNavigate();
 	const location = useLocation();
+	const [candidatura, setCandidatura] = useState({} as CandidaturaType);
+
+	
 
 	const roles = user?.roles;
 	const isEstudante = roles?.includes(ESTUDANTE);
 
-	const fazCandidatura = () => {
+	const fazCandidatura = async () => {
 		if (!roles) {
 			refDrawer?.current?.fechaDrawer();
 			navigate(`/login?next=${location?.pathname}${location?.search || ""}`);
+		}else{
+			setCandidatura({codEstudante: user.codEstudante, codVaga: vaga.codVaga });
+			const { data, status } =  await postCandidatura(candidatura);
+			console.log(status, data)
+			navigate("/vagas");
 		}
 	};
 

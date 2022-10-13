@@ -4,6 +4,7 @@ export const ENDPOINT_LOGIN = "/login";
 export const ENDPOINT_COMPETENCIA = "/competencia";
 export const ENDPOINT_USUARIO = "/usuario";
 export const ENDPOINT_EMPRESA = "/empresa";
+export const ENDPOINT_CANDIDATURA = "/candidatura"
 
 export const TOKEN_KEY = "token";
 export const USER_KEY = "userDetails";
