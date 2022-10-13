@@ -7,8 +7,11 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 
+import { postCandidatura } from "@/services/candidatura";
+import { VagaComCandidaturaType } from "@/components/common/CardVagas/CardVagas";
+
 export interface DescricaoVagaProps {
-	vaga: VagaType;
+	vaga: VagaComCandidaturaType;
 	user: UserType;
 	refDrawer: any;
 }
@@ -28,7 +31,9 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 	const fazCandidatura = () => {
 		if (!roles) {
 			refDrawer?.current?.fechaDrawer();
-			navigate(`/login?next=${location?.pathname}${location?.search || ""}`);
+			navigate(`/login?notAuthenticated=true&next=${location?.pathname}${location?.search || ""}`);
+		} else {
+			postCandidatura(user?.codEstudante, vaga?.codVaga);
 		}
 	};
 
@@ -79,7 +84,13 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 
 							{(isEstudante || !user?.roles) && (
 								<Space direction="vertical">
-									<Button secondary label={t("apply")} onClick={fazCandidatura} />
+									{vaga?.isCandidatada ? (
+										<Button disabled={true} type="primary" size="large">
+											{t("applied")}
+										</Button>
+									) : (
+										<Button secondary label={t("apply")} onClick={fazCandidatura} />
+									)}
 								</Space>
 							)}
 						</Form>

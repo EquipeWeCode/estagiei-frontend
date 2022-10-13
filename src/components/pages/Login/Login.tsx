@@ -27,7 +27,8 @@ const Login = () => {
 	const [token, setToken] = useState(getToken());
 	const [searchParams, setSearchParams] = useSearchParams();
 
-	const expired = searchParams.get("expired");
+	const expired = searchParams.get("sessionExpired");
+	const notAuthenticated = searchParams.get("notAuthenticated");
 	const next = searchParams.get("next");
 
 	useEffect((): void => {
