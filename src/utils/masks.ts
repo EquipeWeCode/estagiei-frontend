@@ -76,7 +76,7 @@ export const numberMask = (value: string) => {
 	return result;
 };
 
-export const cpfCnpjMask = (value: string | null) => {
+export const cpfCnpjMask = (value: string | null | undefined) => {
 	if (value != null) {
 		const cleanValueSpaces = value.replace(/[^0-9]/g, "").trim();
 		if (cleanValueSpaces.length <= 11) {

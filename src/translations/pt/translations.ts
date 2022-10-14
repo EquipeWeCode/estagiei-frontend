@@ -80,5 +80,7 @@ export const TRANSLATIONS_PT = {
 	not_informed: "Não informado",
 	not_authenticated: "Você não está autenticado, por favor faça login.",
 	applied: "Aplicado",
+	personal_information: "Dados Pessoais",
+	applies: "Candidaturas",
 };
 

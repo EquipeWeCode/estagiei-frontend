@@ -1,0 +1,30 @@
+.container-perfil {
+  display: flex;
+  justify-content: space-between;
+  width: 900px;
+  height: calc(82vh);
+  border-radius: 5px;
+  border: 1px solid var(--primary-color);
+}
+
+.menu {
+  border-right: 1px solid var(--primary-color);
+}
+
+.containerDetalhes {
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+@media(max-width: 950px) {
+  .container-perfil {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+  }
+
+  .menu {
+    border-right: none;
+    border-bottom: 1px solid var(--primary-color);
+  }
+}
