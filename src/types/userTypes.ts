@@ -1,4 +1,8 @@
-import { CompetenciaType } from "./competenciaType";
+import { CompetenciaCodType, CompetenciaType } from "./competenciaType";
+import { contatosType } from "./contatoType";
+import { EnderecoType } from "./enderecoType";
+import { experienciaProfissionalType } from "./experienciaProfissionalType";
+import { historicoEscolarType } from "./historicoEscolarType";
 
 export type UserType = {
   codEstudante?: string;
@@ -15,6 +19,22 @@ export type UserType = {
   dataNascimento?: string;
   competencias?: CompetenciaType[];
   roles?: string[];
+}
+
+export type CadastroEstudanteType = {
+  email?: string;
+	nvlEscolaridade?: string;
+	senha?: string;
+  cpf?: string;
+  rg?: string;
+  nome?: string;
+  avatar?: string;
+  dataNascimento?: string;
+  endereco?: EnderecoType;
+  experienciaProfissional?: experienciaProfissionalType[];
+  competencias?: CompetenciaCodType[],
+  historicoEscola?: historicoEscolarType[];
+  contatos?: contatosType[]
 }
 
 export type LoginType = {

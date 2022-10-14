@@ -5,6 +5,7 @@ const ROOT_URL = "https://estagiei.herokuapp.com/api";
 const data = {
     email: "teste@gmail.com",
     senha: "12345678",
+    avatar: "https://dummyimage.com/600x400/000/fff&text=company",
     razaoSocial: "teste",
     nomeFantasia: "teste",
     cnpj: "71366694000",
