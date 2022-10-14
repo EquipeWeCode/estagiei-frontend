@@ -21,13 +21,13 @@ const data = {
 }
 
 describe('POST /empresa [testando a funcionalidade de criar empresas]', function() {
-    it('Deve retornar 202 OK', function(done) {
+    it('Deve retornar 201 OK', function(done) {
       request(ROOT_URL)
         .post('/empresa/')
         .send(data)
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
-        .expect(202, done);
+        .expect(201, done);
     });
   });
 
