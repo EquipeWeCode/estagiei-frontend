@@ -134,7 +134,7 @@ const CadastroEmpresa = () => {
 					<Col>
 						<LogoResumida width={90} />
 					</Col>
-					<Col className="welcome-text">
+					<Col className="welcome-text" style={{bottom: "20px"}}>
 						<h1>
 							{t("singup_company")}
 						</h1>
@@ -246,12 +246,12 @@ const CadastroEmpresa = () => {
 							</Form.Item>
 						</Row>	
 					</Row>
-						<Form.Item style={{ marginTop: "1rem"}}>
+						<Form.Item style={{ marginTop: "1rem" }}>
 							<Row style={{display: "flex", flexDirection:"column", justifyContent: "center", alignItems: "center"}}>
 								<Button htmlType="submit" type="primary" className={styles.btnLogin}>
 									{t("save")}
 								</Button>
-								<Button style={{ marginRight: "2rem", backgroundColor: "#000", color: "#FFF", width: "10%", top:"10px" }} >
+								<Button style={{ backgroundColor: "#000", color: "#FFF", top:"10px" }} >
 									<Link to={"/"}>{t("go_back")}</Link>
 								</Button>
 							</Row>
