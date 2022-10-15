@@ -3,39 +3,48 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   /* justify-content: center; */
+  border: 1px solid rgb(206, 206, 206);
+  border-radius: 5px;
+  padding: 1rem;
 }
 
-.descricaoVaga{
+.descricao-vaga {
   
   flex-direction: row;
   align-content: space-between;
   background-color: #fff;
   padding: 10px;
   margin-top: 10px;
-  border-radius: 10px;
-  border-color: #A53BD2;
+  border-radius: 10px;  
+}
+
+.dados-lista {
   
 }
 
-.cadastro {
-  margin-top: 2rem;
-  width: 60%;
-  padding: 2rem;
-  border-radius: 1rem;
-  border: 1px solid var(--primary-color);
-  background-color: var(--container-color);
+.company-image {
+  object-fit: cover;
+  transition: ease 0.2s;
+  border-radius: 5px;
 }
 
-.info-dados {
+.company-image:hover {
+  transform: scale(1.1);
+}
+
+.col-titulo {
+  display: flex;
   flex-direction: column;
-  text-align: center;
-  width: 70%;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 10px;
 }
 
-.ant-form-item {
-  margin-bottom: 0.4rem !important;
+.titulo-empresa {
+  font-weight: 500;
+  font-size: 2rem;
 }
 
 @media(max-width: 768px) {

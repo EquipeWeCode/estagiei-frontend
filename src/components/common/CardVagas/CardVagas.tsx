@@ -6,7 +6,7 @@ import {
 	capitalizaPriLetraDeCadaPalavra,
 	ellipsisText,
 	justDateMask,
-	realMask
+	realMask,
 } from "@/utils/masks";
 import { ClockCircleOutlined, EnvironmentOutlined } from "@ant-design/icons";
 import { Col, Empty, Row, Tag } from "antd";
@@ -53,6 +53,20 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 			isCandidatada,
 		};
 	});
+
+	const getLocalVaga = (vaga: VagaComCandidaturaType) => {
+		if (vaga?.modalidade === "REMOTO") {
+			return t("remote");
+		} else if (!vaga?.endereco?.estado) {
+			return t("not_informed");
+		} else {
+			return (
+				capitalizaPriLetraDeCadaPalavra(vaga?.endereco?.cidade) +
+				" " +
+				(vaga?.endereco?.estado && "  / " + vaga?.endereco?.estado)
+			);
+		}
+	};
 
 	return (
 		<>
@@ -106,8 +120,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 							</div>
 							<div className={styles.locationAuditoria}>
 								<span>
-									<EnvironmentOutlined /> {vaga?.endereco?.cidade}{" "}
-									{vaga?.endereco?.estado && "  / " + vaga?.endereco?.estado}
+									<EnvironmentOutlined /> {getLocalVaga(vaga)}
 								</span>
 								<span>
 									<ClockCircleOutlined /> {justDateMask(vaga?.auditoria?.dataInclusao)}
@@ -120,7 +133,13 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 							label={t("show_details")}
 							title={`${vaga.titulo} - ${vaga?.empresa?.nomeFantasia}`}
 						>
-							<DescricaoVaga refDrawer={refDrawer} user={user} vaga={vaga} key={vaga?.codVaga} fetchCandidaturas={fetchCandidaturas}/>
+							<DescricaoVaga
+								refDrawer={refDrawer}
+								user={user}
+								vaga={vaga}
+								key={vaga?.codVaga}
+								fetchCandidaturas={fetchCandidaturas}
+							/>
 						</ButtonDrawer>
 					</Row>
 				))

@@ -1,12 +1,12 @@
-import Button from "@/components/common/Button";
+import { VagaComCandidaturaType } from "@/components/common/CardVagas/CardVagas";
 import { ESTUDANTE } from "@/constants";
+import { postCandidatura } from "@/services/candidatura";
 import { UserType } from "@/types/userTypes";
-import { Form, message, Row, Space, Tag } from "antd";
+import { Col, message, Row } from "antd";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import ImageNotFound from "../../ImageNotFound";
 import styles from "./styles.module.css";
-import { VagaComCandidaturaType } from "@/components/common/CardVagas/CardVagas";
-import { postCandidatura } from "@/services/candidatura";
 
 export interface DescricaoVagaProps {
 	vaga: VagaComCandidaturaType;
@@ -45,67 +45,37 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 	};
 
 	return (
-		<div>
-			<div className={styles.containerDescricaoVaga}>
-				<Row justify="center" className={styles.cadastro}>
-					<Row className={styles.infoDados}>
-						<Row justify="center">
-							<h2>{t("job_details")}</h2>
-						</Row>
-						<Form>
-							<div className={styles.descricaoVaga}>
-								<span>
-									<b>{t("company")}</b>
-								</span>
-								<h4>{empresa?.nomeFantasia}</h4>
-							</div>
-							<div className={styles.descricaoVaga}>
-								<span>
-									<b>{t("job_name")}</b>
-								</span>
-								<h4>{vaga?.titulo}</h4>
-							</div>
-							<div className={styles.descricaoVaga}>
-								<span>
-									<b>Soft Skills</b>
-								</span>
-								{vaga?.competencias?.map(competencia => (
-									<div key={competencia.codCompetencia} style={{ marginBottom: "5px" }}>
-										<Tag color="blue">{competencia?.descricaoCompetencia}</Tag>
-									</div>
-								))}
-							</div>
-							<div className={styles.descricaoVaga}>
-								<span>
-									<b>{t("details")}</b>
-								</span>
-								<h4>
-									<b>{t("address")}:</b> {enderecoVaga?.logradouro}, {enderecoVaga?.numero},{" "}
-									{enderecoVaga?.bairro}, {enderecoVaga?.cidade} - {enderecoVaga?.estado},{" "}
-									{enderecoVaga?.cep}
-								</h4>
-								<h4>
-									<b>{t("description")}:</b> {vaga?.descricao}
-								</h4>
-							</div>
-
-							{(isEstudante || !user?.roles) && (
-								<Space direction="vertical">
-									{vaga?.isCandidatada ? (
-										<Link to={`/estudante/meu-perfil?tab=candidaturas`}>
-											<Button>
-												{t("applied")}
-											</Button>
-										</Link>
-									) : (
-										<Button secondary label={t("apply")} onClick={fazCandidatura} />
-									)}
-								</Space>
-							)}
-						</Form>
+		<div className={styles.containerDescricaoVaga}>
+			<Row className={styles.dadosBasicos}>
+				<Col className={styles.colTitulo}>
+					<span className={styles.tituloEmpresa}>{vaga?.titulo}</span>
+					<Link to={`/empresa/profile/${empresa?.codEmpresa}`}>
+						<span>{empresa?.nomeFantasia}</span>
+					</Link>
+					<Row className={styles.dadosLista}> 
+						
 					</Row>
-				</Row>
-			</div>
+				</Col>
+			</Row>
+
+
+			{/* <Col className={styles.colImage}>
+					<Link to={`/empresa/profile/${empresa?.codEmpresa}`}>
+						{empresa?.avatar ? (
+							<>
+								<img
+									src={empresa?.avatar}
+									alt="avatar-company"
+									className={styles.companyImage}
+									width={100}
+									height={100}
+								/>
+							</>
+						) : (
+							<ImageNotFound width={100} height={100} className={styles.companyImage} />
+						)}
+					</Link>
+				</Col> */}
 		</div>
 	);
 };
