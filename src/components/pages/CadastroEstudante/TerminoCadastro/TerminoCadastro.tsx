@@ -12,7 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "@/components/common/Button";
 import { getToken } from "@/services/autenticacao";
 
-const CadastroEstudante = () => {
+const TerminoCadastro = () => {
 	const { user, setUser } = useAuth();
 	const { t } = useTranslation();
 	const navigate = useNavigate();
@@ -150,4 +150,4 @@ const CadastroEstudante = () => {
 	);
 };
 
-export default CadastroEstudante;
+export default TerminoCadastro;
