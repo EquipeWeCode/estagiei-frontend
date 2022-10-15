@@ -1,9 +1,9 @@
 import Button from "@/components/common/Button";
 import { ESTUDANTE } from "@/constants";
 import { UserType } from "@/types/userTypes";
-import { Form, Row, Space, Tag } from "antd";
+import { Form, message, Row, Space, Tag } from "antd";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import { VagaComCandidaturaType } from "@/components/common/CardVagas/CardVagas";
 import { postCandidatura } from "@/services/candidatura";
@@ -12,12 +12,13 @@ export interface DescricaoVagaProps {
 	vaga: VagaComCandidaturaType;
 	user: UserType;
 	refDrawer: any;
+	fetchCandidaturas: () => void;
 }
 
 const DescricaoVaga = (props: DescricaoVagaProps) => {
 	const { t } = useTranslation();
 
-	const { vaga, user, refDrawer } = props;
+	const { vaga, user, refDrawer, fetchCandidaturas } = props;
 	const { endereco: enderecoVaga } = vaga;
 	const { empresa } = vaga;
 	const navigate = useNavigate();
@@ -33,7 +34,13 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 			refDrawer?.current?.fechaDrawer();
 			navigate(`/login?notAuthenticated=true&next=${location?.pathname}${location?.search || ""}`);
 		} else {
-			await postCandidatura(codEstudante, codVaga);
+			const { status } = await postCandidatura(codEstudante, codVaga);
+
+			if (status === 200) {
+				refDrawer?.current?.fechaDrawer();
+				fetchCandidaturas();
+				message.success(t("success_apply"));
+			}
 		}
 	};
 
@@ -85,9 +92,11 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 							{(isEstudante || !user?.roles) && (
 								<Space direction="vertical">
 									{vaga?.isCandidatada ? (
-										<Button disabled={true} type="primary" size="large">
-											{t("applied")}
-										</Button>
+										<Link to={`/estudante/meu-perfil?tab=candidaturas`}>
+											<Button>
+												{t("applied")}
+											</Button>
+										</Link>
 									) : (
 										<Button secondary label={t("apply")} onClick={fazCandidatura} />
 									)}

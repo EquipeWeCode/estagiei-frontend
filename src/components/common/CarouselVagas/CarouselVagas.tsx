@@ -21,7 +21,7 @@ const Carousel = C.default ? C.default : C;
 export const getTagColor = (modalidadeVaga: string = "") => {
 	switch (modalidadeVaga) {
 		case "REMOTO":
-			return "green";
+			return "magenta";
 		case "PRESENCIAL":
 			return "blue";
 		case "HIBRIDO":

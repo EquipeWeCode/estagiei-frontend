@@ -79,4 +79,5 @@ export const TRANSLATIONS_EN = {
 	not_informed: "Not informed",
 	not_authenticated: "You are not authenticated, please login.",
 	applied: "Applied",
+	success_apply: "Applied successfully!",
 };

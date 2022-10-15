@@ -38,7 +38,7 @@
 }
 
 .vaga-titulo-container h3 {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 0;
   color: var(--secondary-color);
@@ -65,7 +65,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 5px;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 @media only screen and (max-width: 950px) {

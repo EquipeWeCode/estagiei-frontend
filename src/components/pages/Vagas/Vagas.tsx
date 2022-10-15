@@ -138,7 +138,7 @@ const Vagas = () => {
 								onChange={paginar}
 							/>
 						</Row>
-						<CardVagas vagas={vagas} candidaturas={candidaturas} />
+						<CardVagas vagas={vagas} candidaturas={candidaturas} fetchCandidaturas={fetchCandidaturas} />
 						<Row justify="end">
 							<Pagination
 								total={quantidadeTotal}
