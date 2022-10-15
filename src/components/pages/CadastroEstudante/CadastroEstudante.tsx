@@ -14,6 +14,7 @@ import { getToken } from "@/services/autenticacao";
 
 import CadastroEstudanteInicio from "./CadastroEstudanteInicio";
 import TerminoCadastro from "./TerminoCadastro";
+import { useSelector, useDispatch } from "react-redux";
 
 //fluxo -> na hora que ele terminar a etp1, eu coloco como true no redux e isso passa para o
 //proximo componente
@@ -24,6 +25,7 @@ import TerminoCadastro from "./TerminoCadastro";
 const CadastroEstudante = () => {
 	const [token, setToken] = useState(getToken());
 	const navigate = useNavigate();
+	const cadastroetp1 = useSelector((state) => state.cadastroetp1.value);
 
 	useEffect(() => {
 		if (token) {
