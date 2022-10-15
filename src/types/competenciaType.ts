@@ -4,5 +4,5 @@ export type CompetenciaType = {
 }
 
 export type CompetenciaCodType = {
-  codCompetence?: number;
+  codCompetencia?: number;
 }
