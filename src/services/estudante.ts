@@ -1,5 +1,5 @@
 import { ENDPOINT_ESTUDANTE } from "@/constants";
-import { UserType } from "@/types/userTypes";
+import { CadastroEstudanteType, UserType } from "@/types/userTypes";
 import { getResource, postResource, putResource } from "./utils";
 
 export const getEstudante = async (id: string = "") => {
@@ -10,7 +10,7 @@ export const putEstudante = async (id: string = "", body: UserType = {}) => {
 	return await putResource(`${ENDPOINT_ESTUDANTE}/${id}`, body);
 };
 
-export const postEstudante = async (body: UserType = {}) => {
+export const postEstudante = async (body: CadastroEstudanteType = {}) => {
 	return await postResource(ENDPOINT_ESTUDANTE, body)
 }
 

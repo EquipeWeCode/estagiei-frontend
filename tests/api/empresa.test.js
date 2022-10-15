@@ -8,7 +8,7 @@ const data = {
     avatar: "https://dummyimage.com/600x400/000/fff&text=company",
     razaoSocial: "teste",
     nomeFantasia: "teste",
-    cnpj: "71366694000",
+    cnpj: "50368351000228",
     endereco: {
         cep: "76804149",
         estado: "RO",
