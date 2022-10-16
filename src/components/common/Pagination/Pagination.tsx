@@ -8,7 +8,7 @@ const Pagination = (props: PaginationProps) => {
 		<PaginationAntd
 			{...props}
 			defaultCurrent={1}
-			hideOnSinglePage={false}
+			hideOnSinglePage={true}
 			className={styles.paginationCustom}
 		/>
 	);

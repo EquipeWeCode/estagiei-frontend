@@ -80,5 +80,11 @@ export const TRANSLATIONS_PT = {
 	not_informed: "Não informado",
 	not_authenticated: "Você não está autenticado, por favor faça login.",
 	applied: "Aplicado",
+	success_apply: "Candidatura efetuada com sucesso!",
+	remote: "Remoto",
+	last_modified: "Última alteração",
+	created_at: "Criada em",
+	day: "dia",
+	about_company: "Sobre a empresa",
 };
 
