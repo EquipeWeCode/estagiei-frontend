@@ -81,4 +81,7 @@ export const TRANSLATIONS_EN = {
 	applied: "Applied",
 	success_apply: "Applied successfully!",
 	remote: "Remote",
+	last_modified: "Last modified",
+	created_at: "Created at",
+	day: "day",
 };

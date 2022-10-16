@@ -82,5 +82,8 @@ export const TRANSLATIONS_PT = {
 	applied: "Aplicado",
 	success_apply: "Candidatura efetuada com sucesso!",
 	remote: "Remoto",
+	last_modified: "Última alteração",
+	created_at: "Criada em",
+	day: "dia",
 };
 

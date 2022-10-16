@@ -3,25 +3,28 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  /* justify-content: center; */
   border: 1px solid rgb(206, 206, 206);
   border-radius: 5px;
   padding: 1rem;
 }
 
-.descricao-vaga {
-  
-  flex-direction: row;
-  align-content: space-between;
-  background-color: #fff;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 10px;  
+.dados-basicos {
+  border: 1px solid hsl(276, 100%, 84%);
+  border-radius: 5px;
+  padding: 1rem;
+  background-color: hsl(278, 100%, 98%);
 }
 
 .dados-lista {
-  
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.dados-lista-text {
+  font-size: 1rem;
+  color: hsl(0, 0%, 50%);
 }
 
 .company-image {
@@ -44,7 +47,7 @@
 
 .titulo-empresa {
   font-weight: 500;
-  font-size: 2rem;
+  font-size: 1.3rem;
 }
 
 @media(max-width: 768px) {

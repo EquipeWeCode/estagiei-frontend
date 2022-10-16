@@ -2,6 +2,14 @@ import { VagaComCandidaturaType } from "@/components/common/CardVagas/CardVagas"
 import { ESTUDANTE } from "@/constants";
 import { postCandidatura } from "@/services/candidatura";
 import { UserType } from "@/types/userTypes";
+import { capitalizaPriLetraDeCadaPalavra, dateMask, justDateMask, realMask } from "@/utils/masks";
+import {
+	ClockCircleFilled,
+	ClockCircleOutlined,
+	DollarOutlined,
+	EnvironmentOutlined,
+	HomeOutlined,
+} from "@ant-design/icons";
 import { Col, message, Row } from "antd";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -29,6 +37,20 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 	const roles = user?.roles;
 	const isEstudante = roles?.includes(ESTUDANTE);
 
+	const getLocalVaga = (vaga: VagaComCandidaturaType) => {
+		if (vaga?.modalidade === "REMOTO") {
+			return t("remote");
+		} else if (!vaga?.endereco?.estado) {
+			return t("not_informed");
+		} else {
+			return (
+				capitalizaPriLetraDeCadaPalavra(vaga?.endereco?.cidade) +
+				" " +
+				(vaga?.endereco?.estado && "  / " + vaga?.endereco?.estado)
+			);
+		}
+	};
+
 	const fazCandidatura = async () => {
 		if (!roles) {
 			refDrawer?.current?.fechaDrawer();
@@ -46,18 +68,43 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 
 	return (
 		<div className={styles.containerDescricaoVaga}>
-			<Row className={styles.dadosBasicos}>
+			<Row className={styles.dadosBasicos} justify="space-between" align="middle">
 				<Col className={styles.colTitulo}>
 					<span className={styles.tituloEmpresa}>{vaga?.titulo}</span>
 					<Link to={`/empresa/profile/${empresa?.codEmpresa}`}>
 						<span>{empresa?.nomeFantasia}</span>
 					</Link>
-					<Row className={styles.dadosLista}> 
-						
+					<Row
+						className={styles.dadosLista + " " + styles.dadosListaText}
+						style={{ marginTop: "1.4rem" }}
+					>
+						{t("created_at")}: {dateMask(vaga?.auditoria?.dataInclusao)}
+					</Row>
+					{vaga?.auditoria?.dataAlteracao && (
+						<Row className={styles.dadosLista + " " + styles.dadosListaText}>
+							<>
+								{t("last_modified")}
+								{": "}
+								{dateMask(vaga?.auditoria?.dataAlteracao)}
+							</>
+						</Row>
+					)}
+				</Col>
+				<Col>
+					<Row className={styles.dadosLista}>
+						<DollarOutlined /> {vaga?.salario ? realMask(vaga?.salario) : t("not_informed")}
+					</Row>
+					<Row className={styles.dadosLista}>
+						<ClockCircleOutlined /> {vaga?.cargaHoraria ? vaga?.cargaHoraria + `h/${t("day")}` : t("not_informed")}
+					</Row>
+					<Row className={styles.dadosLista}>
+						<HomeOutlined /> {capitalizaPriLetraDeCadaPalavra(vaga?.modalidade)}
+					</Row>
+					<Row className={styles.dadosLista}>
+						<EnvironmentOutlined /> {getLocalVaga(vaga)}
 					</Row>
 				</Col>
 			</Row>
-
 
 			{/* <Col className={styles.colImage}>
 					<Link to={`/empresa/profile/${empresa?.codEmpresa}`}>

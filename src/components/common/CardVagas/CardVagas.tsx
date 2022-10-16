@@ -4,6 +4,7 @@ import { CandidaturaType } from "@/types/candidaturaType";
 import { VagaType } from "@/types/vagasTypes";
 import {
 	capitalizaPriLetraDeCadaPalavra,
+	dateMask,
 	ellipsisText,
 	justDateMask,
 	realMask,
@@ -123,7 +124,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 									<EnvironmentOutlined /> {getLocalVaga(vaga)}
 								</span>
 								<span>
-									<ClockCircleOutlined /> {justDateMask(vaga?.auditoria?.dataInclusao)}
+									<ClockCircleOutlined /> {dateMask(vaga?.auditoria?.dataInclusao)}
 								</span>
 							</div>
 						</Col>
