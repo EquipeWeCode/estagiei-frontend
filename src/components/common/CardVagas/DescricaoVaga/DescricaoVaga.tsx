@@ -4,6 +4,8 @@ import { postCandidatura } from "@/services/candidatura";
 import { UserType } from "@/types/userTypes";
 import { capitalizaPriLetraDeCadaPalavra, dateMask, justDateMask, realMask } from "@/utils/masks";
 import {
+	BulbOutlined,
+	CaretRightOutlined,
 	ClockCircleFilled,
 	ClockCircleOutlined,
 	DollarOutlined,
@@ -125,7 +127,34 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 				<TabPane tab={t("details")} key="1">
 					<p className={styles.descricaoVaga}>{vaga?.descricao}</p>
 					<Divider />
-					<p>(Em Contrução)</p>
+					<Row className={styles.dadosLista}>
+						<BulbOutlined /> Soft-skills
+					</Row>
+					<Row className={styles.descricaoVaga}>
+						{vaga?.competencias?.map(c => {
+							return (
+								<div style={{ marginRight: "1rem" }}>
+									<CaretRightOutlined /> {capitalizaPriLetraDeCadaPalavra(c.descricaoCompetencia)}
+								</div>
+							);
+						})}
+					</Row>
+					<Divider />
+					{vaga?.modalidade !== "REMOTO" && (
+						<>
+							<Row className={styles.dadosLista}>
+								<EnvironmentOutlined /> <span>{t("address")}</span>
+							</Row>
+							<Row>
+								{capitalizaPriLetraDeCadaPalavra(enderecoVaga?.logradouro)}, {enderecoVaga?.numero}{" "}
+								- {capitalizaPriLetraDeCadaPalavra(enderecoVaga?.bairro)}
+							</Row>
+							<Row>
+								{capitalizaPriLetraDeCadaPalavra(enderecoVaga?.cidade)} - {enderecoVaga?.estado}
+								{enderecoVaga?.cep && ", " + enderecoVaga?.cep}
+							</Row>
+						</>
+					)}
 					{/* TOOD: Endereco, soft skills */}
 				</TabPane>
 				<TabPane tab={t("about_company")} key="2">
