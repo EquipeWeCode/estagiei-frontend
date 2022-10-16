@@ -15,7 +15,7 @@ export const mask = (value: any, type: any) => {
 	let newValue;
 	switch (type) {
 		case "text":
-			value = textMask(value);
+			newValue = textMask(value);
 			break;
 		case "phone":
 			newValue = phoneMask(value);
@@ -52,7 +52,7 @@ export const mask = (value: any, type: any) => {
 };
 
 export const textMask = (value: string) =>
-	value.replace(/\b[a-z]/g, (f: string) => f.toUpperCase());
+	value.replace(/\b[a-z]/g, (f: string) => f?.toUpperCase());
 
 export const phoneMask = (value: string | null) => {
 	if (value != null) {
@@ -76,7 +76,7 @@ export const numberMask = (value: string) => {
 	return result;
 };
 
-export const cpfCnpjMask = (value: string | null | undefined) => {
+export const cpfCnpjMask = (value: string | undefined) => {
 	if (value != null) {
 		const cleanValueSpaces = value.replace(/[^0-9]/g, "").trim();
 		if (cleanValueSpaces.length <= 11) {
@@ -116,18 +116,11 @@ export const percentageMask = (value: any) => {
 };
 
 export const dateMask = (
-	value: {
-		_isAMomentObject: any;
-		format: (arg0: string) => any;
-		split: (arg0: string) => any[];
-		replace: (arg0: RegExp, arg1: string) => string;
-	} | null
+	value: string | undefined
 ) => {
 	if (value != null) {
-		if (value._isAMomentObject) {
-			value = value.format("YYYY-MM-DD");
-		}
-		const newValue = value?.split("-")?.reverse()?.join();
+		const valueSplit = value?.split(" ")[0];
+		const newValue = valueSplit?.split("-")?.reverse()?.join();
 		const cleanValueSpaces = newValue?.replace(/[^0-9]/g, "").trim();
 		const result = cleanValueSpaces?.replace(dateRegex, "$1/$2/$3");
 		return result;
@@ -143,7 +136,6 @@ export const justDateMask = (date: string | number | Date = "") => {
 	if (date) {
 		let data = new Date(date);
 		data.setDate(data.getDate());
-
 		const dd = padTo2Digits(data.getDate());
 		const mm = padTo2Digits(data.getMonth() + 1);
 		const yyyy = data.getFullYear();
@@ -157,11 +149,11 @@ export const hourMask = (value = "") => {
 	if (!value) {
 		return "";
 	}
-	const [hora, minuto] = value.toUpperCase().split("T")[1].split(":") || [];
+	const [hora, minuto] = value?.toUpperCase()?.split(" ")[1]?.split(":") || [];
 	return `${hora}:${minuto}`;
 };
 
-export const porcentMask = (value = "") => {
+export const percentMask = (value = "") => {
 	if (!value) {
 		return "";
 	}
@@ -345,6 +337,9 @@ export const textWithoutAccents = (text = "") => {
 };
 
 export const capitalizaPriLetraDeCadaPalavra = (texto: string = ""): string => {
+	if (!texto) {
+		return "";
+	}
 	return texto?.replace(/\w\S*/g, txt => {
 		return txt?.charAt(0)?.toUpperCase() + txt?.substring(1)?.toLowerCase();
 	});

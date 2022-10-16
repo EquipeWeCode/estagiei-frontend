@@ -1,10 +1,10 @@
-import DescricaoVaga from "@/components/pages/DescricaoVaga";
+import DescricaoVaga from "@/components/common/CardVagas/DescricaoVaga";
 import { useAuth } from "@/contexts/auth";
 import { CandidaturaType } from "@/types/candidaturaType";
-import { CompetenciaType } from "@/types/competenciaType";
 import { VagaType } from "@/types/vagasTypes";
 import {
 	capitalizaPriLetraDeCadaPalavra,
+	dateMask,
 	ellipsisText,
 	justDateMask,
 	realMask,
@@ -22,6 +22,7 @@ import styles from "./styles.module.css";
 interface CardVagasProps {
 	vagas: VagaType[];
 	candidaturas: CandidaturaType[];
+	fetchCandidaturas: () => void;
 }
 
 export interface VagaComCandidaturaType extends VagaType {
@@ -32,7 +33,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 	const { user } = useAuth();
 	const { t } = useTranslation();
 
-	const { vagas = [], candidaturas = [] } = props;
+	const { vagas = [], candidaturas = [], fetchCandidaturas } = props;
 
 	const refDrawer = useRef<ButtonDrawer>(null);
 
@@ -53,6 +54,20 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 			isCandidatada,
 		};
 	});
+
+	const getLocalVaga = (vaga: VagaComCandidaturaType) => {
+		if (vaga?.modalidade === "REMOTO") {
+			return t("remote");
+		} else if (!vaga?.endereco?.estado) {
+			return t("not_informed");
+		} else {
+			return (
+				capitalizaPriLetraDeCadaPalavra(vaga?.endereco?.cidade) +
+				" " +
+				(vaga?.endereco?.estado && "  / " + vaga?.endereco?.estado)
+			);
+		}
+	};
 
 	return (
 		<>
@@ -95,7 +110,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 							</div>
 							<p className={styles.colDesc}>{ellipsisText(vaga.descricao, 75)}</p>
 							<div>
-								<p style={{ fontSize: "1.4rem", display: "inline-block" }}>
+								<p style={{ fontSize: "1rem", display: "inline-block" }}>
 									{vaga?.salario ? realMask(vaga?.salario) : t("not_informed")}
 								</p>
 								{vaga?.isCandidatada && (
@@ -106,10 +121,10 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 							</div>
 							<div className={styles.locationAuditoria}>
 								<span>
-									<EnvironmentOutlined /> {vaga?.endereco?.cidade} / {vaga?.endereco?.estado}
+									<EnvironmentOutlined /> {getLocalVaga(vaga)}
 								</span>
 								<span>
-									<ClockCircleOutlined /> {justDateMask(vaga?.auditoria?.dataInclusao)}
+									<ClockCircleOutlined /> {dateMask(vaga?.auditoria?.dataInclusao)}
 								</span>
 							</div>
 						</Col>
@@ -119,7 +134,13 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 							label={t("show_details")}
 							title={`${vaga.titulo} - ${vaga?.empresa?.nomeFantasia}`}
 						>
-							<DescricaoVaga refDrawer={refDrawer} user={user} vaga={vaga} key={vaga?.codVaga} />
+							<DescricaoVaga
+								refDrawer={refDrawer}
+								user={user}
+								vaga={vaga}
+								key={vaga?.codVaga}
+								fetchCandidaturas={fetchCandidaturas}
+							/>
 						</ButtonDrawer>
 					</Row>
 				))

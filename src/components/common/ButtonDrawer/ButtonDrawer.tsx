@@ -38,6 +38,10 @@ class ButtonDrawer extends React.Component<ButtonDrawerProps> {
 		document.body.style.overflow = "initial";
 	};
 
+	componentDidMount() {
+		document.body.style.overflow = "initial";
+	}
+
 	render() {
 		const {
 			title,

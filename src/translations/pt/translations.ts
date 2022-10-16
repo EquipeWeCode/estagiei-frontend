@@ -82,5 +82,11 @@ export const TRANSLATIONS_PT = {
 	applied: "Aplicado",
 	personal_information: "Dados Pessoais",
 	applies: "Candidaturas",
+	success_apply: "Candidatura efetuada com sucesso!",
+	remote: "Remoto",
+	last_modified: "Última alteração",
+	created_at: "Criada em",
+	day: "dia",
+	about_company: "Sobre a empresa",
 };
 

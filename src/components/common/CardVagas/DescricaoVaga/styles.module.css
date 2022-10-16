@@ -1,0 +1,80 @@
+.container-descricao-vaga {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid rgb(206, 206, 206); */
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.dados-basicos {
+  border: 1px solid hsl(276, 100%, 84%);
+  border-radius: 5px;
+  padding: 1rem;
+  background-color: hsl(278, 100%, 98%);
+}
+
+.dados-lista {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.dados-lista-text {
+  font-size: 13px;
+  color: hsl(0, 0%, 50%);
+}
+
+.company-image {
+  object-fit: cover;
+  transition: ease 0.2s;
+  border-radius: 5px;
+}
+
+.company-image:hover {
+  transform: scale(1.1);
+}
+
+.col-titulo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 10px;
+}
+
+.titulo-empresa {
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+.descricao-vaga {
+  white-space: pre-line;
+}
+
+.dados-empresa {
+  border: 1px solid hsl(276, 100%, 84%);
+  border-radius: 5px;
+  padding: 1rem;
+  background-color: hsl(278, 100%, 98%);
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.nome-empresa {
+  font-size: 1.4rem;
+}
+
+@media(max-width: 768px) {
+  .cadastro {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+  }
+  .info-dados {
+    width: 100%;
+  }
+}

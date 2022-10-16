@@ -17,7 +17,7 @@ import PrivateRoute from "@/components/pages/PrivateRoute";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import Notification from "@/components/common/Notification";
-import DescricaoVaga from "./components/pages/DescricaoVaga";
+import DescricaoVaga from "./components/common/CardVagas/DescricaoVaga";
 import Vagas from "./components/pages/Vagas";
 import { EMPRESA, ESTUDANTE } from "./constants";
 import TraducaoBtn from "./components/common/TraducaoBtn";
