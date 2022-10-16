@@ -10,7 +10,7 @@ import {
 	EnvironmentOutlined,
 	HomeOutlined,
 } from "@ant-design/icons";
-import { Col, message, Row } from "antd";
+import { Col, Divider, message, Row, Tabs } from "antd";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import ImageNotFound from "../../ImageNotFound";
@@ -36,6 +36,7 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 
 	const roles = user?.roles;
 	const isEstudante = roles?.includes(ESTUDANTE);
+	const { TabPane } = Tabs;
 
 	const getLocalVaga = (vaga: VagaComCandidaturaType) => {
 		if (vaga?.modalidade === "REMOTO") {
@@ -95,7 +96,8 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 						<DollarOutlined /> {vaga?.salario ? realMask(vaga?.salario) : t("not_informed")}
 					</Row>
 					<Row className={styles.dadosLista}>
-						<ClockCircleOutlined /> {vaga?.cargaHoraria ? vaga?.cargaHoraria + `h/${t("day")}` : t("not_informed")}
+						<ClockCircleOutlined />{" "}
+						{vaga?.cargaHoraria ? vaga?.cargaHoraria + `h/${t("day")}` : t("not_informed")}
 					</Row>
 					<Row className={styles.dadosLista}>
 						<HomeOutlined /> {capitalizaPriLetraDeCadaPalavra(vaga?.modalidade)}
@@ -105,6 +107,14 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 					</Row>
 				</Col>
 			</Row>
+
+			<Tabs defaultActiveKey="1" style={{ width: "95%", alignSelf: "center" }}>
+				<TabPane tab={t("details")} key="1">
+					<p className={styles.descricaoVaga}>{vaga?.descricao}</p>
+					<Divider />
+					{/* TOOD: Endereco, soft skills e aba de empresa */}
+				</TabPane>
+			</Tabs>
 
 			{/* <Col className={styles.colImage}>
 					<Link to={`/empresa/profile/${empresa?.codEmpresa}`}>
