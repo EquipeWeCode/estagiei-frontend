@@ -1,8 +1,15 @@
 import { VagaComCandidaturaType } from "@/components/common/CardVagas/CardVagas";
 import { ESTUDANTE } from "@/constants";
 import { postCandidatura } from "@/services/candidatura";
+import { EnderecoType } from "@/types/enderecoType";
 import { UserType } from "@/types/userTypes";
-import { capitalizaPriLetraDeCadaPalavra, dateMask, justDateMask, realMask } from "@/utils/masks";
+import {
+	capitalizaPriLetraDeCadaPalavra,
+	cpfCnpjMask,
+	dateMask,
+	justDateMask,
+	realMask,
+} from "@/utils/masks";
 import {
 	BulbOutlined,
 	CaretRightOutlined,
@@ -68,6 +75,21 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 				message.success(t("success_apply"));
 			}
 		}
+	};
+
+	const getEndereco = (endereco: EnderecoType | undefined) => {
+		return (
+			<>
+				<Row>
+					{capitalizaPriLetraDeCadaPalavra(endereco?.logradouro)}, {endereco?.numero} -{" "}
+					{capitalizaPriLetraDeCadaPalavra(endereco?.bairro)}
+				</Row>
+				<Row>
+					{capitalizaPriLetraDeCadaPalavra(endereco?.cidade)} - {endereco?.estado}
+					{endereco?.cep && ", " + endereco?.cep}
+				</Row>
+			</>
+		);
 	};
 
 	return (
@@ -145,41 +167,39 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 							<Row className={styles.dadosLista}>
 								<EnvironmentOutlined /> <span>{t("address")}</span>
 							</Row>
-							<Row>
-								{capitalizaPriLetraDeCadaPalavra(enderecoVaga?.logradouro)}, {enderecoVaga?.numero}{" "}
-								- {capitalizaPriLetraDeCadaPalavra(enderecoVaga?.bairro)}
-							</Row>
-							<Row>
-								{capitalizaPriLetraDeCadaPalavra(enderecoVaga?.cidade)} - {enderecoVaga?.estado}
-								{enderecoVaga?.cep && ", " + enderecoVaga?.cep}
-							</Row>
+							{getEndereco(enderecoVaga)}
 						</>
 					)}
-					{/* TOOD: Endereco, soft skills */}
 				</TabPane>
 				<TabPane tab={t("about_company")} key="2">
-					{/* TOOD: Dados empresa*/}
-					<p>(Em construção)</p>
+					<Col className={styles.dadosEmpresa}>
+						<Link to={`/empresa/profile/${empresa?.codEmpresa}`}>
+							{empresa?.avatar ? (
+								<>
+									<img
+										src={empresa?.avatar}
+										alt="avatar-company"
+										className={styles.companyImage}
+										width={100}
+										height={100}
+									/>
+								</>
+							) : (
+								<ImageNotFound width={100} height={100} className={styles.companyImage} />
+							)}
+						</Link>
+						<span>
+							<Link to={`/empresa/profile/${empresa?.codEmpresa}`}>
+								<Row className={styles.nomeEmpresa}>
+									{capitalizaPriLetraDeCadaPalavra(empresa?.nomeFantasia)}
+								</Row>
+							</Link>
+							<Row>{cpfCnpjMask(empresa?.cnpj)}</Row>
+							<>{getEndereco(empresa?.endereco)}</>
+						</span>
+					</Col>
 				</TabPane>
 			</Tabs>
-
-			{/* <Col className={styles.colImage}>
-					<Link to={`/empresa/profile/${empresa?.codEmpresa}`}>
-						{empresa?.avatar ? (
-							<>
-								<img
-									src={empresa?.avatar}
-									alt="avatar-company"
-									className={styles.companyImage}
-									width={100}
-									height={100}
-								/>
-							</>
-						) : (
-							<ImageNotFound width={100} height={100} className={styles.companyImage} />
-						)}
-					</Link>
-				</Col> */}
 		</div>
 	);
 };

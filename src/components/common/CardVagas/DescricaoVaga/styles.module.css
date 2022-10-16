@@ -54,6 +54,20 @@
   white-space: pre-line;
 }
 
+.dados-empresa {
+  border: 1px solid hsl(276, 100%, 84%);
+  border-radius: 5px;
+  padding: 1rem;
+  background-color: hsl(278, 100%, 98%);
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.nome-empresa {
+  font-size: 1.8rem;
+}
+
 @media(max-width: 768px) {
   .cadastro {
     width: 100%;
