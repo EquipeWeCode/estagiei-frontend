@@ -10,9 +10,10 @@ import {
 	EnvironmentOutlined,
 	HomeOutlined,
 } from "@ant-design/icons";
-import { Col, Divider, message, Row, Tabs } from "antd";
+import { Col, Divider, message, Row, Space, Tabs } from "antd";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Button from "../../Button";
 import ImageNotFound from "../../ImageNotFound";
 import styles from "./styles.module.css";
 
@@ -90,6 +91,18 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 							</>
 						</Row>
 					)}
+
+					{(isEstudante || !user?.roles) && (
+						<Space direction="vertical" style={{ marginTop: "1rem" }}>
+							{vaga?.isCandidatada ? (
+								<Link to={`/estudante/meu-perfil?tab=candidaturas`}>
+									<Button secondary>{t("applied")}</Button>
+								</Link>
+							) : (
+								<Button secondary label={t("apply")} onClick={fazCandidatura} />
+							)}
+						</Space>
+					)}
 				</Col>
 				<Col>
 					<Row className={styles.dadosLista}>
@@ -112,7 +125,12 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 				<TabPane tab={t("details")} key="1">
 					<p className={styles.descricaoVaga}>{vaga?.descricao}</p>
 					<Divider />
-					{/* TOOD: Endereco, soft skills e aba de empresa */}
+					<p>(Em Contrução)</p>
+					{/* TOOD: Endereco, soft skills */}
+				</TabPane>
+				<TabPane tab={t("about_company")} key="2">
+					{/* TOOD: Dados empresa*/}
+					<p>(Em construção)</p>
 				</TabPane>
 			</Tabs>
 

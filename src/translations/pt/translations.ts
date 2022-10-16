@@ -85,5 +85,6 @@ export const TRANSLATIONS_PT = {
 	last_modified: "Última alteração",
 	created_at: "Criada em",
 	day: "dia",
+	about_company: "Sobre a empresa",
 };
 

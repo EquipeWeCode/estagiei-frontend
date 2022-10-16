@@ -84,4 +84,5 @@ export const TRANSLATIONS_EN = {
 	last_modified: "Last modified",
 	created_at: "Created at",
 	day: "day",
+	about_company: "About company",
 };
