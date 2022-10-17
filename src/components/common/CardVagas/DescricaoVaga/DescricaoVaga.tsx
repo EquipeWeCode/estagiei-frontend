@@ -5,6 +5,7 @@ import { EnderecoType } from "@/types/enderecoType";
 import { UserType } from "@/types/userTypes";
 import {
 	capitalizaPriLetraDeCadaPalavra,
+	cepMask,
 	cpfCnpjMask,
 	dateMask,
 	justDateMask,
@@ -86,7 +87,7 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 				</Row>
 				<Row>
 					{capitalizaPriLetraDeCadaPalavra(endereco?.cidade)} - {endereco?.estado}
-					{endereco?.cep && ", " + endereco?.cep}
+					{endereco?.cep && ", " + cepMask(endereco?.cep)}
 				</Row>
 			</>
 		);
