@@ -5,14 +5,12 @@ interface CounterState {
     cadastroetp2: boolean
 }
 
-const initialState: CounterState = {
-    cadastroetp1: false,
-    cadastroetp2: false
-}
-
 export const counterSlice = createSlice({
     name: 'cadastro',
-    initialState,
+    initialState: {
+        cadastroetp1: false,
+        cadastroetp2: false
+    } as CounterState,
     reducers: {
         negateCadastroetp1: (state) => {
             state.cadastroetp1 = !state.cadastroetp1

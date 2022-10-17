@@ -7,7 +7,7 @@ type TextBannerProps = {
 }
 
 const TextBanner = (props: TextBannerProps) => {
-	const {title, subtitle } = props;
+	const { title, subtitle } = props;
 
 	return (
 		<>

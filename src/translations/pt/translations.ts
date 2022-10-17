@@ -50,6 +50,7 @@ export const TRANSLATIONS_PT = {
 	email: "E-mail",
 	type_email: "Digite seu e-mail",
 	type_password: "Digite sua senha",
+	type_repeat_password: "Repita sua senha",
 	dont_have_account: "Não tem uma conta?",
 	signup: "Cadastre-se",
 	im_company: "Sou empresa",
@@ -70,5 +71,7 @@ export const TRANSLATIONS_PT = {
 	home: "Início",
 	back_to_home: "Voltar para início",
 	expired_session: "Sua sessão expirou. Por favor, faça login novamente.",
+	login_home: "Cadastre-se e receba recomendações de vagas de estágio voltadas ao seu perfil.",
+	singup: "Cadastrar-se"
 };
 

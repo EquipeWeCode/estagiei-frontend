@@ -1,0 +1,79 @@
+.container-geral {
+    padding-top: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: calc(100vh - 2rem);
+    height: auto;
+    padding-bottom: 50px;
+    background-color: var(--secondary-color);
+}
+  
+.container-input {
+    width: 100%;
+}
+
+.color-primary {
+    color: var(--primary-color);
+}
+
+.box-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    background-color:#F3F3F3;
+    border: 1px solid var(--primary-color); 
+    padding: 1rem;
+    border-radius: 10px;
+    max-height: 100%;
+    width: 40%;
+    box-shadow: rgba(33, 3, 36, 0.205) 0px 0px 10px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+body .btn-login {
+    width: 40%;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: 0.5rem 0;
+}
+
+.input-login {
+    margin-bottom: 1rem;
+}
+
+.expired {
+    color: red;
+}
+
+.font-style {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    line-height: 201.19%;
+    text-align: justify;
+    color: white;
+    margin-right: 100px;
+}
+
+@media screen and (max-width: 1000px) {
+    .box-login {
+        width: 80% !important;
+        height: 100%;
+    };
+
+    .container-geral {
+        flex-direction: column-reverse;
+    };
+
+    .font-style {
+        width: 60% !important;
+        margin-top: 50px;
+        margin-right: 0px;
+    };
+}

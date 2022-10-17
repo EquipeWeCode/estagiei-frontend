@@ -11,14 +11,26 @@ import { getCompetencias } from "@/services/competencias";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "@/components/common/Button";
 import { getToken } from "@/services/autenticacao";
+import styles from './styles.module.scss';
+import { useAppDispatch, useAppSelector } from "@/redux/reducers/hooks";
+import { negateCadastroetp1 } from "@/redux/reducers/cadastro";
+
+type CadastroEstudanteTypeUuid = {
+	email?: string,
+	senha?: string
+}
 
 const CadastroEstudanteInicio = () => {
-	const { user, setUser } = useAuth();
 	const { t } = useTranslation();
 	const navigate = useNavigate();
-	const [token, setToken] = useState(getToken());
 
-	const [novoEstudante, cadastrarEstudante] = useState<CadastroEstudanteType>({} as CadastroEstudanteType);
+	const [token, setToken] = useState(getToken());
+	const { user, setUser } = useAuth();
+
+	const [novoEstudante, cadastrarEstudante] = useState<CadastroEstudanteTypeUuid>({} as CadastroEstudanteTypeUuid);
+
+	const dispatch = useAppDispatch();
+	const cadastroetp1 = useAppSelector(state => state.cadastro.cadastroetp1);
 
 	useEffect(() => {
 		if (token) {
@@ -33,23 +45,36 @@ const CadastroEstudanteInicio = () => {
 		{
 			required: true,
 			message: t("required"),
-		},
+		}
 	];
 
-	const salvaEstudante = async () => {
-		const response = await postEstudante(novoEstudante);
-		navigate("/");
-	};
+	const RULES_PASSWORD = [
+		{
+		  required: true,
+		  message: 'Please confirm your password!',
+		},
+		({ getFieldValue }: any) => ({
+		  validator(_: any, value: any) {
+			if (!value || getFieldValue('senha') === value) {
+			  return Promise.resolve();
+			}
+			return Promise.reject(new Error('The two passwords that you entered do not match!'));
+		  },
+		}),
+	];
+
+	const transferDataFinishingForm = () => {
+		dispatch(negateCadastroetp1());
+	}
 
 	return (
-		<div className="container-geral">
-			<Row justify="center" className="cadastro">
-				<Row className="info-dados">
-					<Row justify="center">
-						<h2>{t("edit_your_profile")}</h2>
-					</Row>
+		<div className={styles.containerGeral}>
+			<Row justify="center" style={{wordBreak: "break-word", width:"30%", textAlign: "center"}} className={styles.fontStyle}>
+				<h2 style={{color: "white"}}>{t("login_home")}</h2>
+			</Row>
+			<Row justify="center" className={styles.boxLogin}>
 					<Form
-						onFinish={salvaEstudante}
+						onFinish={transferDataFinishingForm}
 						name="cadastroEstudante"
 						onValuesChange={(changedValues, allValues) => {
 							cadastrarEstudante({
@@ -58,93 +83,51 @@ const CadastroEstudanteInicio = () => {
 								dataNascimento: moment(allValues.dataNascimento).format(dateFormatDto),
 							});
 						}}
+						style={{width: "70%"}}
 					>
 						<Form.Item>
-							<span>{t("name")}</span>
-							<Form.Item name="nome" noStyle rules={RULES}>
-								<Input placeholder={t("name")} value={novoEstudante.nome} />
+								<Form.Item name="email" noStyle rules={RULES}>
+									<Input label={t("email")} type={"email"} placeholder={t("type_email")} value={novoEstudante.email}/>
+								</Form.Item>
+						</Form.Item>
+
+						<Form.Item>
+							<Form.Item name="senha" noStyle rules={RULES}>
+								<Input label={t("password")} type={"password"} placeholder={t("type_password")} value={novoEstudante.senha} maxLength={14} minLength={8}/>
 							</Form.Item>
 						</Form.Item>
 
 						<Form.Item>
-							<span>CPF</span>
-							<Form.Item name="cpf" noStyle rules={RULES}>
-								<Input placeholder={"CPF"} value={novoEstudante.cpf} maxLength={14} />
+							<Form.Item name="repete-senha" noStyle rules={RULES_PASSWORD} dependencies={['senha']}>
+								<Input label={t("type_repeat_password")} type={"password"} placeholder={t("type_password")} value={novoEstudante.senha} maxLength={14} minLength={8}/>
 							</Form.Item>
 						</Form.Item>
 
-						<Form.Item>
-							<span>RG</span>
-							<Form.Item name="rg" noStyle rules={RULES}>
-								<Input placeholder={"RG"} value={novoEstudante.rg} maxLength={12} />
-							</Form.Item>
-						</Form.Item>
-
-						<Form.Item>
-							<span>{t("birth_date")}</span>
-							<Form.Item name="dataNascimento" noStyle rules={RULES}>
-								<DatePicker
-									style={{ width: "100%", marginBottom: "0.4rem", borderRadius: "0.5rem" }}
-									name="dataNascimento"
-									placeholder={t("birth_date")}
-									value={
-										novoEstudante.dataNascimento
-											? moment(novoEstudante.dataNascimento, dateFormatDto)
-											: undefined
-									}
-									format={dateFormat}
-								/>
-							</Form.Item>
-						</Form.Item>
-
-						<Form.Item>
-							<span>{t("education")}</span>
-							<Form.Item name="instEnsino" noStyle>
-								<Input placeholder={t("education")} value={novoEstudante.instEnsino} />
-							</Form.Item>
-						</Form.Item>
-
-						<Form.Item>
-							<span>{t("skills")}</span>
-							<Form.Item noStyle>
-								<Select
-									showArrow
-									mode="multiple"
-									value={novoEstudante.competencias?.map(competencia => competencia.codCompetencia)}
-									placeholder={t("skills")}
-									onChange={(value: (number | undefined)[] | undefined) => {
-										cadastrarEstudante({
-											...novoEstudante,
-											competencias: value && value.map(codCompetencia => ({ codCompetencia })),
-										});
-									}}
-								>
-									{novoEstudante.competencias &&
-										novoEstudante.competencias.map(competencia => (
-											<Select.Option
-												key={competencia.codCompetencia}
-												value={competencia.codCompetencia}
-											>
-												{undefined}
-											</Select.Option>
-										))}
-								</Select>
-							</Form.Item>
-						</Form.Item>
+						<hr
+								style={{
+									width: "100%",
+									margin: "1rem 0",
+									border: "0.1px solid var(--primary-color)",
+								}}
+						/>
 
 						<Form.Item style={{ marginTop: "1rem" }}>
-							<Button style={{ marginRight: "2rem", backgroundColor: "#000", color: "#FFF" }}>
-								<Link to={"/login"}>{t("go_back")}</Link>
-							</Button>
-							<Button htmlType="submit" type="primary">
-								{t("save")}
-							</Button>
+							<Row style={{display: "flex", flexDirection:"column", justifyContent: "center", alignItems: "center"}}>
+								<Button htmlType="submit" type="primary" className={styles.btnLogin} style={{width: "100%"}}>
+									{t("singup")}
+								</Button>
+							</Row>
 						</Form.Item>
-						<Row>
-							<span>Cadastre-se como <Link to={"/cadastro/empresa"}>empresa</Link></span>
+						<Row style={{display: "flex"}}>
+							<span style={{flex:"1"}}>Cadastre-se como <Link to={"/cadastro/empresa"}>empresa</Link></span>
+						</Row>
+
+						<Row justify="center" align="middle" style={{ width: "100%" }}>
+								<Button secondary onClick={() => navigate("/login")}>
+									{t("go_back")}
+								</Button>
 						</Row>
 					</Form>
-				</Row>
 			</Row>
 		</div>
 	);

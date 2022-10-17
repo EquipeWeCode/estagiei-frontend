@@ -50,6 +50,7 @@ export const TRANSLATIONS_EN = {
 	email: "E-mail",
 	type_email: "Type your e-mail",
 	type_password: "Type your password",
+	type_repeat_password: "Repeat your password",
 	dont_have_account: "Don't have an account?",
 	signup: "Sign up",
 	im_company: "I'm a company",
@@ -69,4 +70,6 @@ export const TRANSLATIONS_EN = {
 	home: "Home",
 	back_to_home: "Back to home",
 	expired_session: "Your session has expired. Please login again.",
+	login_home: "Sing up to receive intership vacancies recommendations matching with your profile.",
+	singup: "Sing up"
 };
