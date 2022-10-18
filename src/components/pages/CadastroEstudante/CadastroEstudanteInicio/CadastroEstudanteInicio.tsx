@@ -13,12 +13,7 @@ import Button from "@/components/common/Button";
 import { getToken } from "@/services/autenticacao";
 import styles from './styles.module.scss';
 import { useAppDispatch, useAppSelector } from "@/redux/reducers/hooks";
-import { negateCadastroetp1 } from "@/redux/reducers/cadastro";
-
-type CadastroEstudanteTypeUuid = {
-	email?: string,
-	senha?: string
-}
+import { negateCadastroetp1, setState } from "@/redux/reducers/cadastro";
 
 const CadastroEstudanteInicio = () => {
 	const { t } = useTranslation();
@@ -27,10 +22,8 @@ const CadastroEstudanteInicio = () => {
 	const [token, setToken] = useState(getToken());
 	const { user, setUser } = useAuth();
 
-	const [novoEstudante, cadastrarEstudante] = useState<CadastroEstudanteTypeUuid>({} as CadastroEstudanteTypeUuid);
-
+	const novoEstudante = useAppSelector(state => state.cadastro.estudante);
 	const dispatch = useAppDispatch();
-	const cadastroetp1 = useAppSelector(state => state.cadastro.cadastroetp1);
 
 	useEffect(() => {
 		if (token) {
@@ -77,18 +70,14 @@ const CadastroEstudanteInicio = () => {
 						onFinish={transferDataFinishingForm}
 						name="cadastroEstudante"
 						onValuesChange={(changedValues, allValues) => {
-							cadastrarEstudante({
-								...novoEstudante,
-								...allValues,
-								dataNascimento: moment(allValues.dataNascimento).format(dateFormatDto),
-							});
+							dispatch(setState({...novoEstudante, ...changedValues}));
 						}}
-						style={{width: "70%"}}
+						className={styles.containerInput}
 					>
 						<Form.Item>
-								<Form.Item name="email" noStyle rules={RULES}>
-									<Input label={t("email")} type={"email"} placeholder={t("type_email")} value={novoEstudante.email}/>
-								</Form.Item>
+							<Form.Item name="email" noStyle rules={RULES}>
+								<Input label={t("email")} type={"email"} placeholder={t("type_email")} value={novoEstudante.email}/>
+							</Form.Item>
 						</Form.Item>
 
 						<Form.Item>
@@ -103,14 +92,6 @@ const CadastroEstudanteInicio = () => {
 							</Form.Item>
 						</Form.Item>
 
-						<hr
-								style={{
-									width: "100%",
-									margin: "1rem 0",
-									border: "0.1px solid var(--primary-color)",
-								}}
-						/>
-
 						<Form.Item style={{ marginTop: "1rem" }}>
 							<Row style={{display: "flex", flexDirection:"column", justifyContent: "center", alignItems: "center"}}>
 								<Button htmlType="submit" type="primary" className={styles.btnLogin} style={{width: "100%"}}>
@@ -118,14 +99,17 @@ const CadastroEstudanteInicio = () => {
 								</Button>
 							</Row>
 						</Form.Item>
-						<Row style={{display: "flex"}}>
+
+						<hr style={{ width: "100%", margin: "1rem 0", border: "0.1px solid var(--primary-color) ", }}/>
+
+						<Row style={{display: "flex", marginBottom: "20px"}}>
 							<span style={{flex:"1"}}>Cadastre-se como <Link to={"/cadastro/empresa"}>empresa</Link></span>
 						</Row>
 
 						<Row justify="center" align="middle" style={{ width: "100%" }}>
-								<Button secondary onClick={() => navigate("/login")}>
-									{t("go_back")}
-								</Button>
+							<Button secondary onClick={() => navigate("/login")}>
+								{t("go_back")}
+							</Button>
 						</Row>
 					</Form>
 			</Row>

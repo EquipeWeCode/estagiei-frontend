@@ -23,8 +23,8 @@ export type UserType = {
 
 export type CadastroEstudanteType = {
   email?: string;
+  senha?: string;
 	nvlEscolaridade?: string;
-	senha?: string;
   cpf?: string;
   rg?: string;
   nome?: string;
@@ -33,7 +33,7 @@ export type CadastroEstudanteType = {
   endereco?: EnderecoType;
   experienciaProfissional?: experienciaProfissionalType[];
   competencias?: CompetenciaCodType[],
-  historicoEscola?: historicoEscolarType[];
+  historicoEscolar?: historicoEscolarType[];
   contatos?: contatosType[]
 }
 

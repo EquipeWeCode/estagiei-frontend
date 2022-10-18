@@ -12,7 +12,7 @@
 }
   
 .container-input {
-    width: 100%;
+    width: 70%;
 }
 
 .color-primary {
@@ -65,15 +65,19 @@ body .btn-login {
     .box-login {
         width: 80% !important;
         height: 100%;
-    };
+    }
 
     .container-geral {
         flex-direction: column-reverse;
-    };
+    }
 
     .font-style {
         width: 60% !important;
         margin-top: 50px;
         margin-right: 0px;
-    };
+    }
+
+    .container-input {
+        width: 90%;
+    }
 }

@@ -17,21 +17,13 @@ import TerminoCadastro from "./TerminoCadastro";
 import { useAppSelector, useAppDispatch } from "@/redux/reducers/hooks";
 import { negateCadastroetp1, negateCadastroetp2 } from "@/redux/reducers/cadastro";
 
-//fluxo -> na hora que ele terminar a etp1, eu coloco como true no redux e isso passa para o
-//proximo componente
-
-//cadastroetp1 
-//cadastroetp2
-
 const CadastroEstudante = () => {
 	const [token, setToken] = useState(getToken());
 	const navigate = useNavigate();
 
-	//fluxo
 	const cadastroetp1 = useAppSelector(state => state.cadastro.cadastroetp1);
 	const cadastroetp2 = useAppSelector(state => state.cadastro.cadastroetp2);
-
-	const dispatch = useAppDispatch();
+	const estudante = useAppSelector(state => state.cadastro.estudante);
 
 	useEffect(() => {
 		if (token) {
@@ -39,13 +31,27 @@ const CadastroEstudante = () => {
 		}
 	})
 
+	const salvaEstudante = async () => {
+		console.log(estudante);
+		try {
+			const response = await postEstudante(estudante);
+			navigate("/");
+		}
+		catch (e) {
+			console.log(e);
+			navigate("/");
+		}
+	};
+
 	const Cadastro = () => {
 		if (!cadastroetp1) {
 			return <CadastroEstudanteInicio />
 		}
-		else {
+		if (!cadastroetp2) {
 			return <TerminoCadastro />
 		}
+
+		salvaEstudante();
 	}
 
 	return (Cadastro());

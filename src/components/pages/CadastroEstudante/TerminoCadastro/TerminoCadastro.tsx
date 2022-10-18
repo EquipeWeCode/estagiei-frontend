@@ -11,6 +11,9 @@ import { getCompetencias } from "@/services/competencias";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "@/components/common/Button";
 import { getToken } from "@/services/autenticacao";
+import styles from './styles.module.scss';
+import { useAppDispatch, useAppSelector } from "@/redux/reducers/hooks";
+import { negateCadastroetp1, negateCadastroetp2, setState } from "@/redux/reducers/cadastro";
 
 const TerminoCadastro = () => {
 	const { user, setUser } = useAuth();
@@ -18,7 +21,8 @@ const TerminoCadastro = () => {
 	const navigate = useNavigate();
 	const [token, setToken] = useState(getToken());
 
-	const [novoEstudante, cadastrarEstudante] = useState<CadastroEstudanteType>({} as CadastroEstudanteType);
+	const novoEstudante: CadastroEstudanteType = useAppSelector(state => state.cadastro.estudante);
+	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		if (token) {
@@ -36,33 +40,28 @@ const TerminoCadastro = () => {
 		},
 	];
 
-	const salvaEstudante = async () => {
-		const response = await postEstudante(novoEstudante);
-		navigate("/");
-	};
+	
 
 	return (
-		<div className="container-geral">
-			<Row justify="center" className="cadastro">
-				<Row className="info-dados">
+		<div className={styles.containerGeral}>
+			<Row justify="center" className={styles.boxLogin}>
+				<Row style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
 					<Row justify="center">
-						<h2>{t("edit_your_profile")}</h2>
+						<h2>Precisamos de mais algumas informações para completar seu cadastro</h2>
 					</Row>
 					<Form
-						onFinish={salvaEstudante}
+						onFinish={() => {dispatch(negateCadastroetp2())}}
 						name="cadastroEstudante"
 						onValuesChange={(changedValues, allValues) => {
-							cadastrarEstudante({
-								...novoEstudante,
+							dispatch(setState({type:"set", payload: {
 								...allValues,
-								dataNascimento: moment(allValues.dataNascimento).format(dateFormatDto),
-							});
+								dataNascimento: moment(allValues.dataNascimento).format(dateFormatDto),}}));
 						}}
+						className={styles.containerInput}
 					>
 						<Form.Item>
-							<span>{t("name")}</span>
 							<Form.Item name="nome" noStyle rules={RULES}>
-								<Input placeholder={t("name")} value={novoEstudante.nome} />
+								<Input label={t("name")} placeholder={t("name")} value={novoEstudante.nome} />
 							</Form.Item>
 						</Form.Item>
 
@@ -104,7 +103,7 @@ const TerminoCadastro = () => {
 							</Form.Item>
 						</Form.Item>
 
-						<Form.Item>
+						{/* <Form.Item>
 							<span>{t("skills")}</span>
 							<Form.Item noStyle>
 								<Select
@@ -113,10 +112,7 @@ const TerminoCadastro = () => {
 									value={novoEstudante.competencias?.map(competencia => competencia.codCompetencia)}
 									placeholder={t("skills")}
 									onChange={(value: (number | undefined)[] | undefined) => {
-										cadastrarEstudante({
-											...novoEstudante,
-											competencias: value && value.map(codCompetencia => ({ codCompetencia })),
-										});
+										dispatch(setState({type: "set", payload: competencias: value && value.map(codCompetencia => ({ codCompetencia }))});
 									}}
 								>
 									{novoEstudante.competencias &&
@@ -130,19 +126,21 @@ const TerminoCadastro = () => {
 										))}
 								</Select>
 							</Form.Item>
-						</Form.Item>
+						</Form.Item> */}
 
 						<Form.Item style={{ marginTop: "1rem" }}>
-							<Button style={{ marginRight: "2rem", backgroundColor: "#000", color: "#FFF" }}>
-								<Link to={"/login"}>{t("go_back")}</Link>
-							</Button>
 							<Button htmlType="submit" type="primary">
-								{t("save")}
+								{t("singup")}
 							</Button>
 						</Form.Item>
-						<Row>
+
+						<Row justify="center" align="middle" style={{ width: "100%", marginBottom: "20px" }}>
 							<span>Cadastre-se como <Link to={"/cadastro/empresa"}>empresa</Link></span>
 						</Row>
+
+						<Button style={{ marginRight: "2rem", backgroundColor: "#000", color: "#FFF" }} onClick={() => {dispatch(negateCadastroetp1())}}>
+								{t("go_back")}
+						</Button>
 					</Form>
 				</Row>
 			</Row>
