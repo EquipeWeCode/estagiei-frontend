@@ -63,7 +63,6 @@ const TerminoCadastro = () => {
 
 	useEffect(() => {
 		dispatch(setState({...novoEstudante, endereco: {
-			cep: novoCep.cep,
 			estado: novoCep.uf,
 			cidade: novoCep.localidade,
 			bairro: novoCep.bairro,
@@ -157,10 +156,10 @@ const TerminoCadastro = () => {
 							</Form.Item>
 						</Form.Item> */}
 
-						<Form.Item name="endereco">
+						<Form.Provider>
 							<Form.Item>
 								<span>CEP</span>
-								<Form.Item name="cep" noStyle rules={RULES}>
+								<Form.Item name={['endereco', 'cep']} noStyle rules={RULES}>
 									<Input placeholder={"cep"} value={novoEstudante.endereco?.cep} maxLength={8} onChange={e => getViaCep(e.target.value)}/>
 								</Form.Item>
 							</Form.Item>
@@ -190,28 +189,28 @@ const TerminoCadastro = () => {
 							</Form.Item>
 							<Form.Item>
 								<span>Numero</span>
-								<Form.Item name="numero" noStyle rules={RULES}>
+								<Form.Item name={['endereco', 'numero']} noStyle rules={RULES}>
 									<Input placeholder={"numero"} value={novoEstudante.endereco?.numero} maxLength={14} />
 								</Form.Item>
 							</Form.Item>
 							<Form.Item>
 								<span>Complemento</span>
-								<Form.Item name="complemento" noStyle>
+								<Form.Item name={['endereco', 'complemento']} noStyle>
 									<Input placeholder={"complemento"} value={novoEstudante.endereco?.complemento} maxLength={14} />
 								</Form.Item>
 							</Form.Item>
 						
 							<Form.Item>
 								<span>Ponto de referencia</span>
-								<Form.Item name="pontoReferencia" noStyle>
+								<Form.Item name={['endereco', 'pontoReferencia']} noStyle>
 									<Input placeholder={"Ponto de referencia"} value={novoEstudante.endereco?.complemento} maxLength={14} />
 								</Form.Item>
 							</Form.Item>
-						</Form.Item>
+						</Form.Provider>
 						
 						<span>Experiência Profissional</span>
 
-						
+
 
 						<Form.Item>
 							<Button type="dashed" onClick={() => {}} block icon={<PlusOutlined />}>
