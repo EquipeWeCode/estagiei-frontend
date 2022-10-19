@@ -14,6 +14,10 @@ import { getToken } from "@/services/autenticacao";
 import styles from './styles.module.scss';
 import { useAppDispatch, useAppSelector } from "@/redux/reducers/hooks";
 import { negateCadastroetp1, negateCadastroetp2, setState } from "@/redux/reducers/cadastro";
+import type { DatePickerProps } from "antd";
+import { CepType } from "@/types/cepType";
+import { getCep } from "@/services/cep";
+import { PlusOutlined } from "@ant-design/icons";
 
 const TerminoCadastro = () => {
 	const { user, setUser } = useAuth();
@@ -22,6 +26,7 @@ const TerminoCadastro = () => {
 	const [token, setToken] = useState(getToken());
 
 	const novoEstudante: CadastroEstudanteType = useAppSelector(state => state.cadastro.estudante);
+	const [novoCep, setCep] = useState<CepType>({} as CepType);
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
@@ -40,6 +45,32 @@ const TerminoCadastro = () => {
 		},
 	];
 
+	const datePasser: DatePickerProps['onChange'] = (date, dateString) => {
+		dispatch(setState({ ...novoEstudante, ...{dataNascimento: moment(dateString, dateFormat).format(dateFormatDto)}}));
+	}
+
+	const getViaCep = async (cep: string) => {
+		if (cep.length == 8) {
+			try {
+				const response = await getCep(cep)
+				setCep({...response.data})
+			}
+			catch(e) {
+				console.log(e);
+			}
+		}
+	}
+
+	useEffect(() => {
+		dispatch(setState({...novoEstudante, endereco: {
+			cep: novoCep.cep,
+			estado: novoCep.uf,
+			cidade: novoCep.localidade,
+			bairro: novoCep.bairro,
+			logradouro: novoCep.logradouro,
+		}}))
+	}, [novoCep])
+
 	useEffect(() => {
 		console.log(novoEstudante)
 	}, [novoEstudante])
@@ -55,7 +86,9 @@ const TerminoCadastro = () => {
 						onFinish={() => {dispatch(negateCadastroetp2())}}
 						name="cadastroEstudante"
 						onValuesChange={(changedValues, allValues) => {
-							dispatch(setState({...novoEstudante, ...changedValues}))
+							if (!changedValues.dataNascimento) {
+								dispatch(setState({...novoEstudante, ...changedValues}))
+							}
 						}}
 						className={styles.containerInput}
 					>
@@ -86,11 +119,7 @@ const TerminoCadastro = () => {
 									style={{ width: "100%", marginBottom: "0.4rem", borderRadius: "0.5rem" }}
 									name="dataNascimento"
 									placeholder={t("birth_date")}
-									value={
-										novoEstudante.dataNascimento
-											? moment(novoEstudante.dataNascimento, dateFormatDto)
-											: undefined
-									}
+									onChange={datePasser}
 									format={dateFormat}
 								/>
 							</Form.Item>
@@ -127,6 +156,68 @@ const TerminoCadastro = () => {
 								</Select>
 							</Form.Item>
 						</Form.Item> */}
+
+						<Form.Item name="endereco">
+							<Form.Item>
+								<span>CEP</span>
+								<Form.Item name="cep" noStyle rules={RULES}>
+									<Input placeholder={"cep"} value={novoEstudante.endereco?.cep} maxLength={8} onChange={e => getViaCep(e.target.value)}/>
+								</Form.Item>
+							</Form.Item>
+							<Form.Item>
+								<span>Estado</span>
+								<Form.Item noStyle rules={RULES}>
+									<Input placeholder={"estado"} value={novoEstudante.endereco?.estado} maxLength={14} />
+								</Form.Item>
+							</Form.Item>
+							<Form.Item>
+								<span>Cidade</span>
+								<Form.Item noStyle rules={RULES}>
+									<Input placeholder={"cidade"} value={novoEstudante.endereco?.cidade} maxLength={14} />
+								</Form.Item>
+							</Form.Item>
+							<Form.Item>
+								<span>Bairro</span>
+								<Form.Item noStyle rules={RULES}>
+									<Input placeholder={"bairro"} value={novoEstudante.endereco?.bairro} maxLength={14} />
+								</Form.Item>
+							</Form.Item>
+							<Form.Item>
+								<span>Logradouro</span>
+								<Form.Item noStyle rules={RULES}>
+									<Input placeholder={"logradouro"} value={novoEstudante.endereco?.logradouro} maxLength={14} />
+								</Form.Item>
+							</Form.Item>
+							<Form.Item>
+								<span>Numero</span>
+								<Form.Item name="numero" noStyle rules={RULES}>
+									<Input placeholder={"numero"} value={novoEstudante.endereco?.numero} maxLength={14} />
+								</Form.Item>
+							</Form.Item>
+							<Form.Item>
+								<span>Complemento</span>
+								<Form.Item name="complemento" noStyle>
+									<Input placeholder={"complemento"} value={novoEstudante.endereco?.complemento} maxLength={14} />
+								</Form.Item>
+							</Form.Item>
+						
+							<Form.Item>
+								<span>Ponto de referencia</span>
+								<Form.Item name="pontoReferencia" noStyle>
+									<Input placeholder={"Ponto de referencia"} value={novoEstudante.endereco?.complemento} maxLength={14} />
+								</Form.Item>
+							</Form.Item>
+						</Form.Item>
+						
+						<span>Experiência Profissional</span>
+
+						
+
+						<Form.Item>
+							<Button type="dashed" onClick={() => {}} block icon={<PlusOutlined />}>
+								Add sights
+							</Button>
+						</Form.Item>
 
 						<Form.Item style={{ marginTop: "1rem" }}>
 							<Button htmlType="submit" type="primary">

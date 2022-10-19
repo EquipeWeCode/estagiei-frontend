@@ -163,7 +163,7 @@ const CadastroEmpresa = () => {
 							</Form.Item>
 						</Row>
 						<Row className={styles.formRowCadastro}>
-							<Form.Item name="endereco">
+							{/* <Form.Item name="endereco">
 									<Form.Item>
 										<span>CEP</span>
 										<Form.Item name="cep" noStyle rules={RULES}>
@@ -172,25 +172,25 @@ const CadastroEmpresa = () => {
 									</Form.Item>
 									<Form.Item>
 										<span>Estado</span>
-										<Form.Item noStyle rules={RULES}>
+										<Form.Item name="estado" noStyle rules={RULES}>
 											<Input placeholder={"estado"} value={formEmpresa.endereco.estado} maxLength={14} />
 										</Form.Item>
 									</Form.Item>
 									<Form.Item>
 										<span>Cidade</span>
-										<Form.Item noStyle rules={RULES}>
+										<Form.Item name="cidade" noStyle rules={RULES}>
 											<Input placeholder={"cidade"} value={formEmpresa.endereco.cidade} maxLength={14} />
 										</Form.Item>
 									</Form.Item>
 									<Form.Item>
 										<span>Bairro</span>
-										<Form.Item noStyle rules={RULES}>
+										<Form.Item name="bairro" noStyle rules={RULES}>
 											<Input placeholder={"bairro"} value={formEmpresa.endereco.bairro} maxLength={14} />
 										</Form.Item>
 									</Form.Item>
 									<Form.Item>
 										<span>Logradouro</span>
-										<Form.Item noStyle rules={RULES}>
+										<Form.Item name="logradouro" noStyle rules={RULES}>
 											<Input placeholder={"logradouro"} value={formEmpresa.endereco.logradouro} maxLength={14} />
 										</Form.Item>
 									</Form.Item>
@@ -213,7 +213,7 @@ const CadastroEmpresa = () => {
 											<Input placeholder={"Ponto de referencia"} value={formEmpresa.endereco.complemento} maxLength={14} />
 										</Form.Item>
 									</Form.Item>
-							</Form.Item>
+							</Form.Item> */}
 						</Row>	
 					</Row>
 						<Form.Item style={{ marginTop: "1rem" }}>
