@@ -72,6 +72,7 @@ const CadastroEstudanteInicio = () => {
 						onValuesChange={(changedValues, allValues) => {
 							dispatch(setState({...novoEstudante, ...changedValues}));
 						}}
+						initialValues={novoEstudante}
 						className={styles.containerInput}
 					>
 						<Form.Item>

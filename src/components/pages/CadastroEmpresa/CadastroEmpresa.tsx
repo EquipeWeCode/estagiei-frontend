@@ -12,31 +12,23 @@ import { getCep } from "@/services/cep";
 import {CadastroEmpresaType} from "@/types/empresaTypes";
 import styles from "./styles.module.scss";
 import { ReactComponent as LogoResumida } from "@/assets/logo-resumida.svg";
+import { EnderecoType } from "@/types/enderecoType";
 
 type FormCadastroEmpresaType = {
 	email?: string,
 	senha?: string,
-	repete_senha?: string,
 	razaoSocial?: string,
 	nomeFantasia?: string,
 	cnpj?: string,
-	cep?: string,
-	estado?: string,
-	cidade?: string,
-	bairro?: string,
-	logradouro?: string,
-	numero?: string,
-	complemento?: string,
-	pontoReferencia?: string
+	endereco: EnderecoType
 }
 
 const CadastroEmpresa = () => {
-	const { t } = useTranslation();
 	const navigate = useNavigate();
+	const { t } = useTranslation();
 
 	const [token, setToken] = useState(getToken());
 
-	const [novaEmpresa, setNovaEmpresa] = useState<CadastroEmpresaType>({} as CadastroEmpresaType);
 	const [formEmpresa, setForm] = useState<FormCadastroEmpresaType>({} as FormCadastroEmpresaType);
 	const [novoCep, setCep] = useState<CepType>({} as CepType);
 
@@ -47,15 +39,20 @@ const CadastroEmpresa = () => {
 	}, []);
 
 	useEffect(() => {
-		setForm({...formEmpresa, 
-			cep: novoCep.cep,
-			estado: novoCep.uf,
-			cidade: novoCep.localidade,
-			bairro: novoCep.bairro,
-			logradouro: novoCep.logradouro,
+		setForm({...formEmpresa, endereco: {
+				cep: novoCep.cep,
+				estado: novoCep.uf,
+				cidade: novoCep.localidade,
+				bairro: novoCep.bairro,
+				logradouro: novoCep.logradouro,
+			}
 		})
 	}, [novoCep]);
 
+	useEffect(() => {
+		console.log(formEmpresa);
+	}, [formEmpresa])
+ 
 	const RULES = [
 		{
 			required: true,
@@ -90,41 +87,14 @@ const CadastroEmpresa = () => {
 		}
 	}
 
-	useEffect(() =>{
-		console.log(novaEmpresa)
-	}, [novaEmpresa])
-
-	const transferData = async () => {
-		setNovaEmpresa({
-			email: formEmpresa.email,
-			senha: formEmpresa.senha,
-			avatar: "https://dummyimage.com/600x400/000/fff&text=company",
-			razaoSocial: formEmpresa.razaoSocial,
-			nomeFantasia: formEmpresa.nomeFantasia,
-			cnpj: formEmpresa.cnpj,
-			endereco: {
-				cep: formEmpresa.cep,
-				estado: formEmpresa.estado,
-				cidade: formEmpresa.cidade,
-				bairro: formEmpresa.bairro,
-				logradouro: formEmpresa.logradouro,
-				numero: formEmpresa.numero,
-				complemento: formEmpresa.complemento,
-				pontoReferencia: formEmpresa.pontoReferencia
-			}
-		})
-	}
-
 	const criarEmpresa = async () => {
-		await transferData().then(() => {
-			try {
-				postEmpresa(novaEmpresa);
-				// navigate('/');
-			}
-			catch(e) {
-				// navigate('/');
-			}
-		})
+		try {
+			await postEmpresa(formEmpresa);
+			// navigate('/');
+		}
+		catch(e) {
+			// navigate('/');
+		}
 	};
 
 	return (
@@ -193,56 +163,56 @@ const CadastroEmpresa = () => {
 							</Form.Item>
 						</Row>
 						<Row className={styles.formRowCadastro}>
-							<Form.Item>
-								<Form.Item>
-									<span>CEP</span>
-									<Form.Item name="cep" noStyle rules={RULES}>
-										<Input placeholder={"cep"} value={formEmpresa.cep} maxLength={8} onChange={e => getViaCep(e.target.value)}/>
+							<Form.Item name="endereco">
+									<Form.Item>
+										<span>CEP</span>
+										<Form.Item name="cep" noStyle rules={RULES}>
+											<Input placeholder={"cep"} value={formEmpresa.endereco.cep} maxLength={8} onChange={e => getViaCep(e.target.value)}/>
+										</Form.Item>
 									</Form.Item>
-								</Form.Item>
-								<Form.Item>
-									<span>Estado</span>
-									<Form.Item noStyle rules={RULES}>
-										<Input placeholder={"estado"} value={formEmpresa.estado} maxLength={14} />
+									<Form.Item>
+										<span>Estado</span>
+										<Form.Item noStyle rules={RULES}>
+											<Input placeholder={"estado"} value={formEmpresa.endereco.estado} maxLength={14} />
+										</Form.Item>
 									</Form.Item>
-								</Form.Item>
-								<Form.Item>
-									<span>Cidade</span>
-									<Form.Item noStyle rules={RULES}>
-										<Input placeholder={"cidade"} value={formEmpresa.cidade} maxLength={14} />
+									<Form.Item>
+										<span>Cidade</span>
+										<Form.Item noStyle rules={RULES}>
+											<Input placeholder={"cidade"} value={formEmpresa.endereco.cidade} maxLength={14} />
+										</Form.Item>
 									</Form.Item>
-								</Form.Item>
-								<Form.Item>
-									<span>Bairro</span>
-									<Form.Item noStyle rules={RULES}>
-										<Input placeholder={"bairro"} value={formEmpresa.bairro} maxLength={14} />
+									<Form.Item>
+										<span>Bairro</span>
+										<Form.Item noStyle rules={RULES}>
+											<Input placeholder={"bairro"} value={formEmpresa.endereco.bairro} maxLength={14} />
+										</Form.Item>
 									</Form.Item>
-								</Form.Item>
-								<Form.Item>
-									<span>Logradouro</span>
-									<Form.Item noStyle rules={RULES}>
-										<Input placeholder={"logradouro"} value={formEmpresa.logradouro} maxLength={14} />
+									<Form.Item>
+										<span>Logradouro</span>
+										<Form.Item noStyle rules={RULES}>
+											<Input placeholder={"logradouro"} value={formEmpresa.endereco.logradouro} maxLength={14} />
+										</Form.Item>
 									</Form.Item>
-								</Form.Item>
-								<Form.Item>
-									<span>Numero</span>
-									<Form.Item name="numero" noStyle rules={RULES}>
-										<Input placeholder={"numero"} value={formEmpresa.numero} maxLength={14} />
+									<Form.Item>
+										<span>Numero</span>
+										<Form.Item name="numero" noStyle rules={RULES}>
+											<Input placeholder={"numero"} value={formEmpresa.endereco.numero} maxLength={14} />
+										</Form.Item>
 									</Form.Item>
-								</Form.Item>
-								<Form.Item>
-									<span>Complemento</span>
-									<Form.Item name="complemento" noStyle>
-										<Input placeholder={"complemento"} value={formEmpresa.complemento} maxLength={14} />
+									<Form.Item>
+										<span>Complemento</span>
+										<Form.Item name="complemento" noStyle>
+											<Input placeholder={"complemento"} value={formEmpresa.endereco.complemento} maxLength={14} />
+										</Form.Item>
 									</Form.Item>
-								</Form.Item>
-
-								<Form.Item>
-									<span>Ponto de referencia</span>
-									<Form.Item name="pontoReferencia" noStyle>
-										<Input placeholder={"Ponto de referencia"} value={formEmpresa.complemento} maxLength={14} />
+								
+									<Form.Item>
+										<span>Ponto de referencia</span>
+										<Form.Item name="pontoReferencia" noStyle>
+											<Input placeholder={"Ponto de referencia"} value={formEmpresa.endereco.complemento} maxLength={14} />
+										</Form.Item>
 									</Form.Item>
-								</Form.Item>
 							</Form.Item>
 						</Row>	
 					</Row>

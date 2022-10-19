@@ -33,6 +33,7 @@ const CadastroEstudante = () => {
 
 	const salvaEstudante = async () => {
 		console.log(estudante);
+		
 		try {
 			const response = await postEstudante(estudante);
 			navigate("/");
@@ -52,6 +53,7 @@ const CadastroEstudante = () => {
 		}
 
 		salvaEstudante();
+		return null;
 	}
 
 	return (Cadastro());

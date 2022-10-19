@@ -40,7 +40,9 @@ const TerminoCadastro = () => {
 		},
 	];
 
-	
+	useEffect(() => {
+		console.log(novoEstudante)
+	}, [novoEstudante])
 
 	return (
 		<div className={styles.containerGeral}>
@@ -53,9 +55,7 @@ const TerminoCadastro = () => {
 						onFinish={() => {dispatch(negateCadastroetp2())}}
 						name="cadastroEstudante"
 						onValuesChange={(changedValues, allValues) => {
-							dispatch(setState({type:"set", payload: {
-								...allValues,
-								dataNascimento: moment(allValues.dataNascimento).format(dateFormatDto),}}));
+							dispatch(setState({...novoEstudante, ...changedValues}))
 						}}
 						className={styles.containerInput}
 					>
@@ -96,12 +96,12 @@ const TerminoCadastro = () => {
 							</Form.Item>
 						</Form.Item>
 
-						<Form.Item>
+						{/* <Form.Item>
 							<span>{t("education")}</span>
 							<Form.Item name="instEnsino" noStyle>
 								<Input placeholder={t("education")} value={novoEstudante.instEnsino} />
 							</Form.Item>
-						</Form.Item>
+						</Form.Item> */}
 
 						{/* <Form.Item>
 							<span>{t("skills")}</span>

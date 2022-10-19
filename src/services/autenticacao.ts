@@ -1,6 +1,6 @@
 import { TOKEN_KEY, USER_KEY } from './../constants/index';
 import { ENDPOINT_LOGIN } from "@/constants";
-import { LoginType } from "@/types/studentTypes";
+import { LoginType } from "@/types/userTypes";
 import { postResource } from "./utils";
 
 export const postLogin = (body: LoginType) => {
