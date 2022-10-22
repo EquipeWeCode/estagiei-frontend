@@ -111,7 +111,7 @@ const Vagas = () => {
 						<Row justify="center" align="middle" className={styles.searchRow}>
 							<Col className={styles.searchCol}>
 								<Row style={{ marginBottom: "1rem" }} gutter={12} className={styles.searchSecRow}>
-									<Col flex={1} md={isEstudante ? 5 : 8}>
+									<Col flex={1} md={isEstudante ? 8 : 8}>
 										<Input
 											allowClear={true}
 											placeholder={t("type_job_title")}
@@ -130,17 +130,23 @@ const Vagas = () => {
 										/>
 									</Col>
 									{isEstudante && (
-										<Col flex={1} md={7}>
-											<span style={{ marginRight: "5px" }}>{t("only_recommended")}?</span>
-											<Switch
-												checked={filtroVaga.codEstudante !== undefined}
-												onChange={checked => {
-													setFiltroVaga({
-														...filtroVaga,
-														codEstudante: checked ? user?.codEstudante : undefined,
-													});
+										<Col flex={1} md={4}>
+											<span
+												className={styles.toggleRecomendadas}
+												style={{
+													backgroundColor: filtroVaga?.codEstudante
+														? "var(--secondary-color)"
+														: "#FFF",
+													color: filtroVaga?.codEstudante ? "#FFF" : "#000",
 												}}
-											/>
+												onClick={() => {
+													filtroVaga?.codEstudante
+														? setFiltroVaga({ ...filtroVaga, codEstudante: undefined })
+														: setFiltroVaga({ ...filtroVaga, codEstudante: user?.codEstudante });
+												}}
+											>
+												{t("recommended_plural")}
+											</span>
 										</Col>
 									)}
 									<Col flex={1} md={4}>

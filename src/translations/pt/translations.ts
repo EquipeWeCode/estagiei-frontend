@@ -91,5 +91,6 @@ export const TRANSLATIONS_PT = {
 	courses: "Cursos",
 	recommended: "Recomendada",
 	only_recommended: "Apenas recomendadas",
+	recommended_plural: "Recomendadas",
 };
 

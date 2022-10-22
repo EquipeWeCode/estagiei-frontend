@@ -44,3 +44,13 @@
     align-items: center;
     justify-content: center;
 }
+
+.toggle-recomendadas {
+    display: inline-block;
+    border: 1px solid rgba(0, 0, 0, 0.2470588235);
+    font-size: 1.1rem;
+    padding: 5px;
+    border-radius: 25px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}

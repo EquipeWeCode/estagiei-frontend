@@ -135,7 +135,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 									</Tag>
 								)}
 								{vaga?.isCandidatada && (
-									<span style={{ marginLeft: "0.2rem" }}>
+									<span style={{ marginLeft: "0.5rem" }}>
 										<Tag color={"success"}>{t("applied")}</Tag>
 									</span>
 								)}
