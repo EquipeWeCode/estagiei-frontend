@@ -18,7 +18,7 @@ import styles from "./styles.module.css";
 
 const Vagas = () => {
 	const { t } = useTranslation();
-	const { user } = useAuth();
+	const { user, setUserContextAndLocalStorage } = useAuth();
 	const { TabPane } = Tabs;
 	const roles = user?.roles;
 	const isEstudante = roles?.includes(ESTUDANTE);
@@ -45,11 +45,17 @@ const Vagas = () => {
 		fetchVagas(filtroVaga?.page);
 	}, [filtroVaga?.page]);
 
-	useEffect((): void => {
+	useEffect(() => {
 		if (user?.codEstudante) {
 			fetchCandidaturas();
 		}
 	}, [user?.codEstudante]);
+
+	useEffect(() => {
+		if (candidaturas?.length > 0) {
+			setUserContextAndLocalStorage({ ...user, candidaturas });
+		}
+	}, [candidaturas]);
 
 	const fetchCandidaturas = async () => {
 		if (isEstudante) {

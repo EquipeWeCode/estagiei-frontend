@@ -8,13 +8,11 @@ import {
 	cepMask,
 	cpfCnpjMask,
 	dateMask,
-	justDateMask,
 	realMask,
 } from "@/utils/masks";
 import {
 	BulbOutlined,
 	CaretRightOutlined,
-	ClockCircleFilled,
 	ClockCircleOutlined,
 	DollarOutlined,
 	EnvironmentOutlined,
@@ -156,7 +154,7 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 					<Row className={styles.descricaoVaga}>
 						{vaga?.competencias?.map(c => {
 							return (
-								<div style={{ marginRight: "1rem" }}>
+								<div style={{ marginRight: "1rem" }} key={c.codCompetencia}>
 									<CaretRightOutlined /> {capitalizaPriLetraDeCadaPalavra(c.descricaoCompetencia)}
 								</div>
 							);

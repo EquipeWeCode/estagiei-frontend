@@ -1,7 +1,7 @@
 .container-perfil {
   display: flex;
   justify-content: space-between;
-  width: 900px;
+  width: 75vw;
   height: calc(82vh);
   border-radius: 5px;
   border: 1px solid var(--primary-color);

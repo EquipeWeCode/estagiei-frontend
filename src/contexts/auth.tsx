@@ -9,6 +9,11 @@ export const AuthProvider: React.FC = ({ children }) => {
 	const [user, setUser] = React.useState<UserType>({} as UserType);
 	const [userDecoded, setUserDecoded] = React.useState<TokenType>({} as TokenType);
 
+	const setUserContextAndLocalStorage = (user: UserType) => {
+		setUser(user);
+		localStorage.setItem("userDetails", JSON.stringify(user));
+	};
+
 	useEffect(() => {
 		const user = localStorage.getItem("userDetails");
 		if (user) {
@@ -20,7 +25,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 	}, []);
 
 	return (
-		<AuthContext.Provider value={{ user, setUser, userDecoded }}>{children}</AuthContext.Provider>
+		<AuthContext.Provider value={{ user, setUserContextAndLocalStorage, userDecoded }}>{children}</AuthContext.Provider>
 	);
 };
 

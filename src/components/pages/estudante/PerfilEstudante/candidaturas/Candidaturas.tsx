@@ -1,11 +1,16 @@
-import { Row } from "antd";
 import { PerfilEstudanteProps } from "../PerfilEstudante";
 
 const Candidaturas = ({ user }: PerfilEstudanteProps) => {
+	const { candidaturas } = user;
+
 	return (
-		<Row>
-			Candidaturas
-		</Row>
+		<>
+			{candidaturas?.map(candidatura => (
+				<ul key={`${candidatura?.codVaga}_${candidatura?.codEstudante}`}>
+					<li>{candidatura?.codVaga}</li>
+				</ul>
+			))}
+		</>
 	);
 };
 

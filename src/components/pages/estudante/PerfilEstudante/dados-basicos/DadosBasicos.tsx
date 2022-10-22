@@ -1,14 +1,16 @@
+import ImageNotFound from "@/components/common/ImageNotFound";
 import { cpfCnpjMask, cpfMask } from "@/utils/masks";
 import { Col, Row } from "antd";
 import { PerfilEstudanteProps } from "../PerfilEstudante";
 import styles from "./styles.module.css";
 
 const DadosBasicos = ({ user }: PerfilEstudanteProps) => {
+	// Deixei aqui apenas como exemplo
 	return (
 		<Row>
 			<Col sm={2} md={5}>
 				<div className={styles.containerFoto}>
-					<img src={user.avatar} alt="Avatar" />
+					{user.avatar ? <img src={user.avatar} alt="Avatar" /> : <ImageNotFound width={100} />}
 				</div>
 			</Col>
 			<Col sm={15} md={19}>

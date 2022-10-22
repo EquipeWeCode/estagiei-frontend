@@ -1,3 +1,4 @@
+import { CandidaturaType } from '@/types/candidaturaType';
 import { CompetenciaType } from "./competenciaType";
 
 export interface AuditoriaType {
@@ -23,6 +24,7 @@ export type UserType = {
   expProfissional?: string;
   dataNascimento?: string;
   competencias?: CompetenciaType[];
+  candidaturas?: CandidaturaType[];
   roles?: string[];
   auditoria?: AuditoriaType;
 }

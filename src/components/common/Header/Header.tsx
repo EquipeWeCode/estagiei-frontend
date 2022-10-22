@@ -14,7 +14,7 @@ import { EMPRESA, ESTUDANTE } from "@/constants";
 import ImageNotFound from "../ImageNotFound";
 
 const Header = () => {
-	const { user, setUser } = useAuth();
+	const { user, setUserContextAndLocalStorage } = useAuth();
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 
@@ -69,7 +69,7 @@ const Header = () => {
 	const menu = <Menu items={getMenuItems(user?.roles?.at(0))} />;
 
 	const fazLogout = () => {
-		setUser({});
+		setUserContextAndLocalStorage({});
 		logout();
 		navigate("/");
 	};
@@ -86,9 +86,8 @@ const Header = () => {
 				{user?.roles ? (
 					<Row gutter={12} align="middle">
 						<Space>
-							<Col className={styles.translateButton}></Col>
 							<Col className={styles.welcomeTextHeader}>
-								{capitalizaPriLetraDeCadaPalavra(user.nome || user.nomeFantasia)}
+								{capitalizaPriLetraDeCadaPalavra(user.nome?.split(" ")[0] || user.nomeFantasia)}
 							</Col>
 							<Col>
 								<Dropdown

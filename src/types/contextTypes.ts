@@ -3,6 +3,6 @@ import { TokenType } from "./userTypes";
 
 export interface AuthContextData {
   user: UserType;
-  setUser: (user: UserType) => void;
+  setUserContextAndLocalStorage: (user: UserType) => void;
   userDecoded: TokenType;
 }
