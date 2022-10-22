@@ -111,7 +111,7 @@ const Vagas = () => {
 						<Row justify="center" align="middle" className={styles.searchRow}>
 							<Col className={styles.searchCol}>
 								<Row style={{ marginBottom: "1rem" }} gutter={12} className={styles.searchSecRow}>
-									<Col flex={1} md={5}>
+									<Col flex={1} md={isEstudante ? 5 : 8}>
 										<Input
 											allowClear={true}
 											placeholder={t("type_job_title")}
@@ -129,18 +129,20 @@ const Vagas = () => {
 											name="descricao"
 										/>
 									</Col>
-									<Col flex={1} md={7}>
-										<span style={{ marginRight: "5px" }}>{t("only_recommended")}?</span>
-										<Switch
-											checked={filtroVaga.codEstudante !== undefined}
-											onChange={checked => {
-												setFiltroVaga({
-													...filtroVaga,
-													codEstudante: checked ? user?.codEstudante : undefined,
-												});
-											}}
-										/>
-									</Col>
+									{isEstudante && (
+										<Col flex={1} md={7}>
+											<span style={{ marginRight: "5px" }}>{t("only_recommended")}?</span>
+											<Switch
+												checked={filtroVaga.codEstudante !== undefined}
+												onChange={checked => {
+													setFiltroVaga({
+														...filtroVaga,
+														codEstudante: checked ? user?.codEstudante : undefined,
+													});
+												}}
+											/>
+										</Col>
+									)}
 									<Col flex={1} md={4}>
 										<Button secondary onClick={() => fetchVagas()}>
 											{t("search")}

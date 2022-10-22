@@ -35,6 +35,7 @@ export interface DescricaoVagaProps {
 
 const DescricaoVaga = (props: DescricaoVagaProps) => {
 	const { t } = useTranslation();
+	const { competencias } = props.user;
 
 	const { vaga, user, refDrawer, fetchCandidaturas } = props;
 	const { endereco: enderecoVaga } = vaga;
@@ -90,6 +91,10 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 				</Row>
 			</>
 		);
+	};
+
+	const isCompetenciaVagaIgualACompetenciaEstudante = (codCompetenciaVaga: number | undefined) => {
+		return competencias?.some(competencia => competencia.codCompetencia === codCompetenciaVaga);
 	};
 
 	return (
@@ -161,7 +166,14 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 						{vaga?.competencias?.map(c => {
 							return (
 								<div style={{ marginRight: "1rem" }} key={c.codCompetencia}>
-									<CaretRightOutlined /> {capitalizaPriLetraDeCadaPalavra(c.descricaoCompetencia)}
+									<CaretRightOutlined
+										style={{
+											color: isCompetenciaVagaIgualACompetenciaEstudante(c.codCompetencia)
+												? "var(--primary-color)"
+												: "var(--secondary-color)",
+										}}
+									/>{" "}
+									{capitalizaPriLetraDeCadaPalavra(c.descricaoCompetencia)}
 								</div>
 							);
 						})}

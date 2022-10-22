@@ -1,6 +1,7 @@
 import DescricaoVaga from "@/components/common/CardVagas/DescricaoVaga";
 import { useAuth } from "@/contexts/auth";
 import { CandidaturaType } from "@/types/candidaturaType";
+import { CompetenciaType } from "@/types/competenciaType";
 import { VagaType } from "@/types/vagasTypes";
 import {
 	capitalizaPriLetraDeCadaPalavra,
@@ -28,6 +29,20 @@ interface CardVagasProps {
 export interface VagaComCandidaturaType extends VagaType {
 	isCandidatada?: boolean;
 }
+
+export const isVagaRecomendada = (
+	vaga: VagaComCandidaturaType,
+	competenciasEstudante: CompetenciaType[] | undefined
+) => {
+	const { competencias } = vaga;
+	const competenciasVaga = competencias?.map(competencia => competencia.codCompetencia);
+	const competenciasCandidato = competenciasEstudante?.map(
+		competencia => competencia.codCompetencia
+	);
+	return competenciasVaga?.some(competenciaVaga =>
+		competenciasCandidato?.includes(competenciaVaga)
+	);
+};
 
 const CardVagas = (props: CardVagasProps): JSX.Element => {
 	const { user } = useAuth();
@@ -68,17 +83,6 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 				(vaga?.endereco?.estado && "  / " + vaga?.endereco?.estado)
 			);
 		}
-	};
-
-	const isVagaRecomendada = (vaga: VagaComCandidaturaType) => {
-		const { competencias } = vaga;
-		const competenciasVaga = competencias?.map(competencia => competencia.codCompetencia);
-		const competenciasCandidato = competenciasEstudante?.map(
-			competencia => competencia.codCompetencia
-		);
-		return competenciasVaga?.some(competenciaVaga =>
-			competenciasCandidato?.includes(competenciaVaga)
-		);
 	};
 
 	return (
@@ -125,7 +129,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 								<p style={{ fontSize: "1rem", display: "inline-block" }}>
 									{vaga?.salario ? realMask(vaga?.salario) : t("not_informed")}
 								</p>
-								{isVagaRecomendada(vaga) && (
+								{isVagaRecomendada(vaga, competenciasEstudante) && (
 									<Tag color="purple" style={{ marginLeft: "1rem" }}>
 										{t("recommended")}
 									</Tag>
