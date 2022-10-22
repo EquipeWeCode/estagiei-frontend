@@ -80,7 +80,7 @@ const Login = () => {
 				: codEmpresa
 				? navegaProximaPagina("/empresa/meu-perfil")
 				: codEstudante
-				? navegaProximaPagina("/estudante/meu-perfil")
+				? navegaProximaPagina("/vagas")
 				: navegaProximaPagina("/");
 		}
 	};
