@@ -14,6 +14,7 @@ export interface VagaType {
 	cargaHoraria?: number;
 	empresa?: EmpresaType;
 	endereco?: EnderecoType;
+	curso?: string;
 	competencias?: CompetenciaType[];
 	auditoria?: AuditoriaType;
 }
@@ -21,4 +22,14 @@ export interface VagaType {
 export interface FiltroVagaType extends FilterType {
 	titulo?: string;
 	descricao?: string;
+	curso?: string;
+	modalidade?: string;
+	cep?: string;
+	bairro?: string;
+	cidade?: string;
+	estado?: string;
+	nomeEmpresa?: string;
+	codEmpresa?: number;
+	codEstudante?: number | string;
+	indAtivo?: boolean;
 }

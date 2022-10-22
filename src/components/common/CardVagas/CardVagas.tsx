@@ -31,6 +31,7 @@ export interface VagaComCandidaturaType extends VagaType {
 
 const CardVagas = (props: CardVagasProps): JSX.Element => {
 	const { user } = useAuth();
+	const { competencias: competenciasEstudante } = user;
 	const { t } = useTranslation();
 
 	const { vagas = [], candidaturas = [], fetchCandidaturas } = props;
@@ -67,6 +68,17 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 				(vaga?.endereco?.estado && "  / " + vaga?.endereco?.estado)
 			);
 		}
+	};
+
+	const isVagaRecomendada = (vaga: VagaComCandidaturaType) => {
+		const { competencias } = vaga;
+		const competenciasVaga = competencias?.map(competencia => competencia.codCompetencia);
+		const competenciasCandidato = competenciasEstudante?.map(
+			competencia => competencia.codCompetencia
+		);
+		return competenciasVaga?.some(competenciaVaga =>
+			competenciasCandidato?.includes(competenciaVaga)
+		);
 	};
 
 	return (
@@ -113,8 +125,13 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 								<p style={{ fontSize: "1rem", display: "inline-block" }}>
 									{vaga?.salario ? realMask(vaga?.salario) : t("not_informed")}
 								</p>
+								{isVagaRecomendada(vaga) && (
+									<Tag color="purple" style={{ marginLeft: "1rem" }}>
+										{t("recommended")}
+									</Tag>
+								)}
 								{vaga?.isCandidatada && (
-									<span style={{ marginLeft: "1rem" }}>
+									<span style={{ marginLeft: "0.2rem" }}>
 										<Tag color={"success"}>{t("applied")}</Tag>
 									</span>
 								)}

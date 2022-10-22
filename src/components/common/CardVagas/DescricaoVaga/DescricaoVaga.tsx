@@ -17,6 +17,7 @@ import {
 	DollarOutlined,
 	EnvironmentOutlined,
 	HomeOutlined,
+	ReadOutlined,
 } from "@ant-design/icons";
 import { Col, Divider, message, Row, Space, Tabs } from "antd";
 import { useTranslation } from "react-i18next";
@@ -147,6 +148,11 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 			<Tabs defaultActiveKey="1" style={{ width: "95%", alignSelf: "center" }}>
 				<TabPane tab={t("details")} key="1">
 					<p className={styles.descricaoVaga}>{vaga?.descricao}</p>
+					<Divider />
+					<Row className={styles.dadosLista}>
+						<ReadOutlined /> {t("courses")}
+					</Row>
+					<Row>{vaga?.curso || "N/A"}</Row>
 					<Divider />
 					<Row className={styles.dadosLista}>
 						<BulbOutlined /> Soft-skills

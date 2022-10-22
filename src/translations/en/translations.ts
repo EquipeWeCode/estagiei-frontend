@@ -87,4 +87,7 @@ export const TRANSLATIONS_EN = {
 	created_at: "Created at",
 	day: "day",
 	about_company: "About company",
+	courses: "Courses",
+	recommended: "Recommended",
+	only_recommended: "Only recommended",
 };

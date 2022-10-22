@@ -7,7 +7,6 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
 	const [user, setUser] = React.useState<UserType>({} as UserType);
-	const [userDecoded, setUserDecoded] = React.useState<TokenType>({} as TokenType);
 
 	const setUserContextAndLocalStorage = (user: UserType) => {
 		setUser(user);
@@ -19,13 +18,15 @@ export const AuthProvider: React.FC = ({ children }) => {
 		if (user) {
 			setUser(JSON.parse(user));
 		} else {
-      setUser({} as UserType);
+			setUser({} as UserType);
 			logout();
-    }
+		}
 	}, []);
 
 	return (
-		<AuthContext.Provider value={{ user, setUserContextAndLocalStorage, userDecoded }}>{children}</AuthContext.Provider>
+		<AuthContext.Provider value={{ user, setUserContextAndLocalStorage }}>
+			{children}
+		</AuthContext.Provider>
 	);
 };
 
