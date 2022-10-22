@@ -11,6 +11,7 @@ import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
 import { getToken, logout } from "@/services/autenticacao";
 import { useTranslation } from "react-i18next";
 import { EMPRESA, ESTUDANTE } from "@/constants";
+import ImageNotFound from "../ImageNotFound";
 
 const Header = () => {
 	const { user, setUser } = useAuth();
@@ -96,7 +97,11 @@ const Header = () => {
 									placement="bottomRight"
 									trigger={["click"]}
 								>
-									<img className={styles.userImage} src={user.avatar} alt={t("user")} />
+									{user.avatar ? (
+										<img className={styles.userImage} src={user.avatar} alt={t("user")} />
+									) : (
+										<ImageNotFound width={40} className={styles.userImage} />
+									)}
 								</Dropdown>
 							</Col>
 						</Space>
