@@ -1,8 +1,6 @@
-import { UserType } from '@/types/userTypes';
-import { TokenType } from "./userTypes";
+import { UserType } from "@/types/userTypes";
 
 export interface AuthContextData {
-  user: UserType;
-  setUser: (user: UserType) => void;
-  userDecoded: TokenType;
+	user: UserType;
+	setUserContextAndLocalStorage: (user: UserType) => void;
 }

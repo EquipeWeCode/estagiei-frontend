@@ -80,11 +80,18 @@ export const TRANSLATIONS_PT = {
 	not_informed: "Não informado",
 	not_authenticated: "Você não está autenticado, por favor faça login.",
 	applied: "Aplicado",
+	personal_information: "Dados Pessoais",
+	applies: "Candidaturas",
 	success_apply: "Candidatura efetuada com sucesso!",
 	remote: "Remoto",
 	last_modified: "Última alteração",
 	created_at: "Criada em",
 	day: "dia",
 	about_company: "Sobre a empresa",
+	courses: "Cursos",
+	recommended: "Recomendada",
+	only_recommended: "Apenas recomendadas",
+	recommended_plural: "Recomendadas",
+	delete: "Excluir",
 };
 

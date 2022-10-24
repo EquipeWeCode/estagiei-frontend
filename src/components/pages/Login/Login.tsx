@@ -18,11 +18,12 @@ import { getEstudante } from "@/services/estudante";
 import { getUsuario } from "@/services/usuario";
 import { LoginType, UserType } from "@/types/userTypes";
 import jwt from "jwt-decode";
+import { getCandidaturas } from "@/services/candidatura";
 
 const Login = () => {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
-	const { user, setUser } = useAuth();
+	const { user, setUserContextAndLocalStorage } = useAuth();
 	const [login, setLogin] = useState({} as LoginType);
 	const [token, setToken] = useState(getToken());
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -67,13 +68,15 @@ const Login = () => {
 				user = response.data;
 			} else if (codEstudante) {
 				const response = await getEstudante(codEstudante);
+				const candidaturas = await getCandidaturas(codEstudante);
 				user = response.data;
+				user.candidaturas = candidaturas.data;
 			}
 
 			user.roles = roles;
 
-			setUser(user);
-			localStorage.setItem("userDetails", JSON.stringify(user));
+			setUserContextAndLocalStorage(user);
+			// localStorage.setItem("userDetails", JSON.stringify(user));
 
 			next
 				? navegaProximaPagina(next)

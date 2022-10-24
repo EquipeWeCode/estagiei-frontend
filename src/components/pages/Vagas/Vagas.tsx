@@ -10,7 +10,7 @@ import { getCandidaturas } from "@/services/candidatura";
 import { getVagas } from "@/services/vaga";
 import { CandidaturaType } from "@/types/candidaturaType";
 import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
-import { Col, Row, Tabs } from "antd";
+import { Col, Row, Switch, Tabs } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
@@ -18,7 +18,7 @@ import styles from "./styles.module.css";
 
 const Vagas = () => {
 	const { t } = useTranslation();
-	const { user } = useAuth();
+	const { user, setUserContextAndLocalStorage } = useAuth();
 	const { TabPane } = Tabs;
 	const roles = user?.roles;
 	const isEstudante = roles?.includes(ESTUDANTE);
@@ -35,6 +35,7 @@ const Vagas = () => {
 		titulo: titulo || "",
 		descricao: descricao || "",
 		page: 1,
+		codEstudante: undefined,
 		size: PAGINATION_SIZE_DEFAULT,
 	};
 
@@ -45,11 +46,17 @@ const Vagas = () => {
 		fetchVagas(filtroVaga?.page);
 	}, [filtroVaga?.page]);
 
-	useEffect((): void => {
+	useEffect(() => {
 		if (user?.codEstudante) {
 			fetchCandidaturas();
 		}
 	}, [user?.codEstudante]);
+
+	useEffect(() => {
+		if (candidaturas?.length > 0) {
+			setUserContextAndLocalStorage({ ...user, candidaturas });
+		}
+	}, [candidaturas]);
 
 	const fetchCandidaturas = async () => {
 		if (isEstudante) {
@@ -99,12 +106,12 @@ const Vagas = () => {
 			</Row>
 
 			<Row justify="center" align="middle">
-				<Tabs defaultActiveKey="1" style={{ width: "100%" }}>
+				<Tabs defaultActiveKey="1" style={{ width: "70vw" }}>
 					<TabPane tab={t("vacancies")} key="1">
 						<Row justify="center" align="middle" className={styles.searchRow}>
 							<Col className={styles.searchCol}>
 								<Row style={{ marginBottom: "1rem" }} gutter={12} className={styles.searchSecRow}>
-									<Col flex={1} md={10}>
+									<Col flex={1} md={isEstudante ? 8 : 8}>
 										<Input
 											allowClear={true}
 											placeholder={t("type_job_title")}
@@ -113,7 +120,7 @@ const Vagas = () => {
 											name="titulo"
 										/>
 									</Col>
-									<Col flex={1} md={10}>
+									<Col flex={1} md={8}>
 										<Input
 											allowClear={true}
 											placeholder={t("type_job_description")}
@@ -122,6 +129,26 @@ const Vagas = () => {
 											name="descricao"
 										/>
 									</Col>
+									{isEstudante && (
+										<Col flex={1} md={4}>
+											<span
+												className={styles.toggleRecomendadas}
+												style={{
+													backgroundColor: filtroVaga?.codEstudante
+														? "var(--secondary-color)"
+														: "#FFF",
+													color: filtroVaga?.codEstudante ? "#FFF" : "#000",
+												}}
+												onClick={() => {
+													filtroVaga?.codEstudante
+														? setFiltroVaga({ ...filtroVaga, codEstudante: undefined })
+														: setFiltroVaga({ ...filtroVaga, codEstudante: user?.codEstudante });
+												}}
+											>
+												{t("recommended_plural")}
+											</span>
+										</Col>
+									)}
 									<Col flex={1} md={4}>
 										<Button secondary onClick={() => fetchVagas()}>
 											{t("search")}

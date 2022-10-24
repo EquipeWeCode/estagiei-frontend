@@ -5,19 +5,19 @@ import { EnderecoType } from "@/types/enderecoType";
 import { UserType } from "@/types/userTypes";
 import {
 	capitalizaPriLetraDeCadaPalavra,
+	cepMask,
 	cpfCnpjMask,
 	dateMask,
-	justDateMask,
 	realMask,
 } from "@/utils/masks";
 import {
 	BulbOutlined,
 	CaretRightOutlined,
-	ClockCircleFilled,
 	ClockCircleOutlined,
 	DollarOutlined,
 	EnvironmentOutlined,
 	HomeOutlined,
+	ReadOutlined,
 } from "@ant-design/icons";
 import { Col, Divider, message, Row, Space, Tabs } from "antd";
 import { useTranslation } from "react-i18next";
@@ -35,6 +35,7 @@ export interface DescricaoVagaProps {
 
 const DescricaoVaga = (props: DescricaoVagaProps) => {
 	const { t } = useTranslation();
+	const { competencias } = props.user;
 
 	const { vaga, user, refDrawer, fetchCandidaturas } = props;
 	const { endereco: enderecoVaga } = vaga;
@@ -86,10 +87,14 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 				</Row>
 				<Row>
 					{capitalizaPriLetraDeCadaPalavra(endereco?.cidade)} - {endereco?.estado}
-					{endereco?.cep && ", " + endereco?.cep}
+					{endereco?.cep && ", " + cepMask(endereco?.cep)}
 				</Row>
 			</>
 		);
+	};
+
+	const isCompetenciaVagaIgualACompetenciaEstudante = (codCompetenciaVaga: number | undefined) => {
+		return competencias?.some(competencia => competencia.codCompetencia === codCompetenciaVaga);
 	};
 
 	return (
@@ -150,13 +155,25 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 					<p className={styles.descricaoVaga}>{vaga?.descricao}</p>
 					<Divider />
 					<Row className={styles.dadosLista}>
+						<ReadOutlined /> {t("courses")}
+					</Row>
+					<Row>{vaga?.curso || "N/A"}</Row>
+					<Divider />
+					<Row className={styles.dadosLista}>
 						<BulbOutlined /> Soft-skills
 					</Row>
 					<Row className={styles.descricaoVaga}>
 						{vaga?.competencias?.map(c => {
 							return (
-								<div style={{ marginRight: "1rem" }}>
-									<CaretRightOutlined /> {capitalizaPriLetraDeCadaPalavra(c.descricaoCompetencia)}
+								<div style={{ marginRight: "1rem" }} key={c.codCompetencia}>
+									<CaretRightOutlined
+										style={{
+											color: isCompetenciaVagaIgualACompetenciaEstudante(c.codCompetencia)
+												? "var(--primary-color)"
+												: "var(--secondary-color)",
+										}}
+									/>{" "}
+									{capitalizaPriLetraDeCadaPalavra(c.descricaoCompetencia)}
 								</div>
 							);
 						})}
