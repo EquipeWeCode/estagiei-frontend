@@ -21,6 +21,7 @@ const DadosBasicos = ({ user }: PerfilEstudanteProps) => {
 						<div>{cpfCnpjMask(user.cpf)}</div>
 					</span>
 				</div>
+				(Em desenvolvimento)
 			</Col>
 		</Row>
 	);

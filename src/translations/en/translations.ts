@@ -79,7 +79,7 @@ export const TRANSLATIONS_EN = {
 	not_informed: "Not informed",
 	not_authenticated: "You are not authenticated, please login.",
 	applied: "Applied",
-	personal_information: "Personal Information",
+	personal_information: "Personal Info",
 	applies: "Applies",
 	success_apply: "Applied successfully!",
 	remote: "Remote",
@@ -91,4 +91,5 @@ export const TRANSLATIONS_EN = {
 	recommended: "Recommended",
 	only_recommended: "Only recommended",
 	recommended_plural: "Recommended",
+	delete: "Delete",
 };
