@@ -5,6 +5,15 @@ export interface InputCustomProps extends InputProps {
 	label?: string;
 }
 
+export const InputPassword = (props: InputCustomProps) => {
+	return (
+		<>
+			<label className={styles.label}>{props.label}</label>
+			<AntdInput.Password {...props} style={{ borderRadius: "5px" }} allowClear={true} />
+		</>
+	);
+};
+
 const Input = (props: InputCustomProps) => {
 	return (
 		<>

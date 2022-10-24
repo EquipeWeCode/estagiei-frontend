@@ -11,14 +11,15 @@ import { ReactComponent as LogoResumida } from "@/assets/logo-resumida.svg";
 import Button from "@/components/common/Button";
 import ButtonVoltar from "@/components/common/ButtonVoltar";
 import Input from "@/components/common/Input";
+import { InputPassword } from "@/components/common/Input/Input";
 import { TOKEN_KEY, USER_KEY } from "@/constants";
 import { getToken, postLogin } from "@/services/autenticacao";
+import { getCandidaturas } from "@/services/candidatura";
 import { getEmpresa } from "@/services/empresa";
 import { getEstudante } from "@/services/estudante";
 import { getUsuario } from "@/services/usuario";
 import { LoginType, UserType } from "@/types/userTypes";
 import jwt from "jwt-decode";
-import { getCandidaturas } from "@/services/candidatura";
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -107,7 +108,7 @@ const Login = () => {
 								value={login.email}
 								onChange={changeLogin}
 							/>
-							<Input
+							<InputPassword
 								label={t("password")}
 								className={styles.inputLogin}
 								placeholder={t("type_password")}
