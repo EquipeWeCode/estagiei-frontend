@@ -93,5 +93,7 @@ export const TRANSLATIONS_PT = {
 	only_recommended: "Apenas recomendadas",
 	recommended_plural: "Recomendadas",
 	delete: "Excluir",
+	inactive: "Inativa",
+	active: "Ativa",
 };
 

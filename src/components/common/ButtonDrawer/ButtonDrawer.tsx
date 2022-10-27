@@ -42,6 +42,10 @@ class ButtonDrawer extends React.Component<ButtonDrawerProps> {
 		document.body.style.overflow = "initial";
 	}
 
+	componentWillUnmount(): void {
+		document.body.style.overflow = "initial";
+	}
+
 	render() {
 		const {
 			title,

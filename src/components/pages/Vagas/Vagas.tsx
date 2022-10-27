@@ -37,6 +37,7 @@ const Vagas = () => {
 		page: 1,
 		codEstudante: undefined,
 		size: PAGINATION_SIZE_DEFAULT,
+		indAtivo: true
 	};
 
 	const [filtroVaga, setFiltroVaga] = useState<FiltroVagaType>(FILTRO_INICIAL);

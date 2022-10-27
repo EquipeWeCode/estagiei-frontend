@@ -59,7 +59,7 @@ const Candidaturas = ({ user }: PerfilEstudanteProps) => {
 
 	return (
 		<>
-			<Row gutter={20} style={{ marginBottom: "10px" }}>
+			<Row gutter={20} justify="end" style={{ marginBottom: "10px"}}>
 				<Col>
 					<span
 						className={styles.toggleAtivo}
@@ -73,7 +73,7 @@ const Candidaturas = ({ user }: PerfilEstudanteProps) => {
 								: setFiltro({ ...filtro, indAtivo: true });
 						}}
 					>
-						{t("Ativo")}
+						{t("active")}
 					</span>
 				</Col>
 				<Col>
@@ -89,7 +89,7 @@ const Candidaturas = ({ user }: PerfilEstudanteProps) => {
 								: setFiltro({ ...filtro, indAtivo: false });
 						}}
 					>
-						{t("Inativo")}
+						{t("inactive")}
 					</span>
 				</Col>
 				<Col flex={1} md={4}>

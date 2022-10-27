@@ -79,6 +79,8 @@
 }
 
 .span-status {
+  text-align: center;
+  width: 120px;
   padding: 5px 10px;
   border-radius: 5px;
 }
