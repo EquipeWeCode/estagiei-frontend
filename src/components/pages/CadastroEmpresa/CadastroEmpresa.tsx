@@ -163,57 +163,55 @@ const CadastroEmpresa = () => {
 							</Form.Item>
 						</Row>
 						<Row className={styles.formRowCadastro}>
-							{/* <Form.Item name="endereco">
-									<Form.Item>
-										<span>CEP</span>
-										<Form.Item name="cep" noStyle rules={RULES}>
-											<Input placeholder={"cep"} value={formEmpresa.endereco.cep} maxLength={8} onChange={e => getViaCep(e.target.value)}/>
-										</Form.Item>
-									</Form.Item>
-									<Form.Item>
-										<span>Estado</span>
-										<Form.Item name="estado" noStyle rules={RULES}>
-											<Input placeholder={"estado"} value={formEmpresa.endereco.estado} maxLength={14} />
-										</Form.Item>
-									</Form.Item>
-									<Form.Item>
-										<span>Cidade</span>
-										<Form.Item name="cidade" noStyle rules={RULES}>
-											<Input placeholder={"cidade"} value={formEmpresa.endereco.cidade} maxLength={14} />
-										</Form.Item>
-									</Form.Item>
-									<Form.Item>
-										<span>Bairro</span>
-										<Form.Item name="bairro" noStyle rules={RULES}>
-											<Input placeholder={"bairro"} value={formEmpresa.endereco.bairro} maxLength={14} />
-										</Form.Item>
-									</Form.Item>
-									<Form.Item>
-										<span>Logradouro</span>
-										<Form.Item name="logradouro" noStyle rules={RULES}>
-											<Input placeholder={"logradouro"} value={formEmpresa.endereco.logradouro} maxLength={14} />
-										</Form.Item>
-									</Form.Item>
-									<Form.Item>
-										<span>Numero</span>
-										<Form.Item name="numero" noStyle rules={RULES}>
-											<Input placeholder={"numero"} value={formEmpresa.endereco.numero} maxLength={14} />
-										</Form.Item>
-									</Form.Item>
-									<Form.Item>
-										<span>Complemento</span>
-										<Form.Item name="complemento" noStyle>
-											<Input placeholder={"complemento"} value={formEmpresa.endereco.complemento} maxLength={14} />
-										</Form.Item>
-									</Form.Item>
-								
-									<Form.Item>
-										<span>Ponto de referencia</span>
-										<Form.Item name="pontoReferencia" noStyle>
-											<Input placeholder={"Ponto de referencia"} value={formEmpresa.endereco.complemento} maxLength={14} />
-										</Form.Item>
-									</Form.Item>
-							</Form.Item> */}
+							<Form.Item>
+								<span>CEP</span>
+								<Form.Item name={["endereco", "cep"]} noStyle rules={RULES}>
+									<Input placeholder={"cep"} value={formEmpresa.endereco?.cep} maxLength={8} onChange={e => getViaCep(e.target.value)}/>
+								</Form.Item>
+							</Form.Item>
+							<Form.Item>
+								<span>Estado</span>
+								<Form.Item name="estado" noStyle rules={RULES}>
+									<Input placeholder={"estado"} value={formEmpresa.endereco?.estado} maxLength={14} />
+								</Form.Item>
+							</Form.Item>
+							<Form.Item>
+								<span>Cidade</span>
+								<Form.Item name="cidade" noStyle rules={RULES}>
+									<Input placeholder={"cidade"} value={formEmpresa.endereco?.cidade} maxLength={14} />
+								</Form.Item>
+							</Form.Item>
+							<Form.Item>
+								<span>Bairro</span>
+								<Form.Item name="bairro" noStyle rules={RULES}>
+									<Input placeholder={"bairro"} value={formEmpresa.endereco?.bairro} maxLength={14} />
+								</Form.Item>
+							</Form.Item>
+							<Form.Item>
+								<span>Logradouro</span>
+								<Form.Item name="logradouro" noStyle rules={RULES}>
+									<Input placeholder={"logradouro"} value={formEmpresa.endereco?.logradouro} maxLength={14} />
+								</Form.Item>
+							</Form.Item>
+							<Form.Item>
+								<span>Numero</span>
+								<Form.Item name="numero" noStyle rules={RULES}>
+									<Input placeholder={"numero"} value={formEmpresa.endereco?.numero} maxLength={14} />
+								</Form.Item>
+							</Form.Item>
+							<Form.Item>
+								<span>Complemento</span>
+								<Form.Item name="complemento" noStyle>
+									<Input placeholder={"complemento"} value={formEmpresa.endereco?.complemento} maxLength={14} />
+								</Form.Item>
+							</Form.Item>
+						
+							<Form.Item>
+								<span>Ponto de referencia</span>
+								<Form.Item name="pontoReferencia" noStyle>
+									<Input placeholder={"Ponto de referencia"} value={formEmpresa.endereco?.pontoReferencia} maxLength={14} />
+								</Form.Item>
+							</Form.Item>
 						</Row>	
 					</Row>
 						<Form.Item style={{ marginTop: "1rem" }}>
