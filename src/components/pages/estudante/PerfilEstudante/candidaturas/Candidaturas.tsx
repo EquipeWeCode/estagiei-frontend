@@ -3,7 +3,7 @@ import { getTagColor } from "@/components/common/CarouselVagas/CarouselVagas";
 import ImageNotFound from "@/components/common/ImageNotFound";
 import Pagination from "@/components/common/Pagination";
 import { PAGINATION_SIZE_DEFAULT } from "@/constants";
-import { CANCELADO, statusCandidaturaEnum } from "@/constants/enums";
+import { APROVADO, CANCELADO, statusCandidaturaEnum } from "@/constants/enums";
 import { getCandidaturas } from "@/services/candidatura";
 import { CandidaturaType, FiltroCandidaturaType } from "@/types/candidaturaType";
 import { capitalizaPriLetraDeCadaPalavra, dateTimeMask, realMask } from "@/utils/masks";
@@ -18,6 +18,8 @@ export const getStatusColor = (status: string | undefined) => {
 	switch (status) {
 		case CANCELADO:
 			return "#f0b3b3";
+		case APROVADO:
+			return "#b3f0b3";
 		default:
 			return "#aacdee";
 	}
