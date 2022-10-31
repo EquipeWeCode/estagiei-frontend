@@ -22,8 +22,9 @@ import styles from "./styles.module.css";
 
 interface CardVagasProps {
 	vagas: VagaType[];
-	candidaturas: CandidaturaType[];
-	fetchCandidaturas: () => void;
+	candidaturas?: CandidaturaType[];
+	isEmpresa?: boolean;
+	fetchCandidaturas?: () => void;
 }
 
 export interface VagaComCandidaturaType extends VagaType {
@@ -49,7 +50,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 	const { competencias: competenciasEstudante } = user;
 	const { t } = useTranslation();
 
-	const { vagas = [], candidaturas = [], fetchCandidaturas } = props;
+	const { vagas = [], candidaturas = [], fetchCandidaturas, isEmpresa = false } = props;
 
 	const refDrawer = useRef<ButtonDrawer>(null);
 
@@ -91,20 +92,21 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 				vagasComCandidatura?.map((vaga: VagaComCandidaturaType) => (
 					<Row key={vaga.codVaga} className={styles.containerVaga} align="middle">
 						<Col className={styles.colImage}>
-							<Link to={`/empresa/profile/${vaga?.empresa?.codEmpresa}`}>
-								{vaga?.empresa?.avatar ? (
-									<>
-										<img
-											src={vaga?.empresa?.avatar}
-											alt="avatar-company"
-											className={styles.companyImage}
-											width={100}
-											height={100}
-										/>
-									</>
-								) : (
-									<ImageNotFound width={100} height={100} className={styles.companyImage} />
-								)}
+							<Link to={`/empresa/perfil/${vaga?.empresa?.codEmpresa}`}>
+								{!isEmpresa &&
+									(vaga?.empresa?.avatar ? (
+										<>
+											<img
+												src={vaga?.empresa?.avatar}
+												alt="avatar-company"
+												className={styles.companyImage}
+												width={100}
+												height={100}
+											/>
+										</>
+									) : (
+										<ImageNotFound width={100} height={100} className={styles.companyImage} />
+									))}
 							</Link>
 						</Col>
 						<Col className={styles.content}>
@@ -119,7 +121,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 									</span>
 								</div>
 								<div style={{ color: "var(--primary-color)" }}>
-									<Link to={`/empresa/profile/${vaga?.empresa?.codEmpresa}`}>
+									<Link to={`/empresa/perfil/${vaga?.empresa?.codEmpresa}`}>
 										{vaga.empresa && capitalizaPriLetraDeCadaPalavra(vaga.empresa.nomeFantasia)}
 									</Link>
 								</div>
@@ -156,6 +158,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 							title={`${vaga.titulo} - ${vaga?.empresa?.nomeFantasia}`}
 						>
 							<DescricaoVaga
+								isEmpresa={isEmpresa}
 								refDrawer={refDrawer}
 								user={user}
 								vaga={vaga}
@@ -166,7 +169,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 					</Row>
 				))
 			) : (
-				<Empty description="Nenhuma vaga encontrada." />
+				<Empty description={t("empty_vacancies")} />
 			)}
 		</>
 	);

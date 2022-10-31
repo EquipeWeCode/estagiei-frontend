@@ -23,6 +23,7 @@ import { Col, Divider, message, Row, Space, Tabs } from "antd";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Button from "../../Button";
+import CandidatosEmpresa from "../../CandidatosEmpresa";
 import ImageNotFound from "../../ImageNotFound";
 import styles from "./styles.module.css";
 
@@ -30,14 +31,15 @@ export interface DescricaoVagaProps {
 	vaga: VagaComCandidaturaType;
 	user: UserType;
 	refDrawer: any;
-	fetchCandidaturas: () => void;
+	isEmpresa?: boolean;
+	fetchCandidaturas?: () => void;
 }
 
 const DescricaoVaga = (props: DescricaoVagaProps) => {
 	const { t } = useTranslation();
 	const { competencias } = props.user;
 
-	const { vaga, user, refDrawer, fetchCandidaturas } = props;
+	const { vaga, user, refDrawer, fetchCandidaturas, isEmpresa } = props;
 	const { endereco: enderecoVaga } = vaga;
 	const { empresa } = vaga;
 	const navigate = useNavigate();
@@ -72,7 +74,7 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 
 			if (status === 200) {
 				refDrawer?.current?.fechaDrawer();
-				fetchCandidaturas();
+				fetchCandidaturas && fetchCandidaturas();
 				message.success(t("success_apply"));
 			}
 		}
@@ -102,7 +104,7 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 			<Row className={styles.dadosBasicos} justify="space-between" align="middle">
 				<Col className={styles.colTitulo}>
 					<span className={styles.tituloEmpresa}>{vaga?.titulo}</span>
-					<Link to={`/empresa/profile/${empresa?.codEmpresa}`}>
+					<Link to={`/empresa/perfil/${empresa?.codEmpresa}`}>
 						<span>{empresa?.nomeFantasia}</span>
 					</Link>
 					<Row
@@ -190,7 +192,7 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 				</TabPane>
 				<TabPane tab={t("about_company")} key="2">
 					<Col className={styles.dadosEmpresa}>
-						<Link to={`/empresa/profile/${empresa?.codEmpresa}`}>
+						<Link to={`/empresa/perfil/${empresa?.codEmpresa}`}>
 							{empresa?.avatar ? (
 								<>
 									<img
@@ -206,7 +208,7 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 							)}
 						</Link>
 						<span>
-							<Link to={`/empresa/profile/${empresa?.codEmpresa}`}>
+							<Link to={`/empresa/perfil/${empresa?.codEmpresa}`}>
 								<Row className={styles.nomeEmpresa}>
 									{capitalizaPriLetraDeCadaPalavra(empresa?.nomeFantasia)}
 								</Row>
@@ -216,6 +218,11 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 						</span>
 					</Col>
 				</TabPane>
+				{isEmpresa && (
+					<TabPane tab={t("candidates")} key="3">
+						<CandidatosEmpresa codEmpresa={user?.codEmpresa} codVaga={codVaga} />
+					</TabPane>
+				)}
 			</Tabs>
 		</div>
 	);

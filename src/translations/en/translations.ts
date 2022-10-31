@@ -94,4 +94,11 @@ export const TRANSLATIONS_EN = {
 	delete: "Delete",
 	inactive: "Inactive",
 	active: "Active",
+	candidates: "Candidates",
+	empty_vacancies: "No jobs found",
+	empty_candidates: "No candidates found",
+	reject: "Reject",
+	accept: "Accept",
+	contact_by_whatsapp: "Contact by Whatsapp",
+	contact_by_email: "Contact by e-mail",
 };

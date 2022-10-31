@@ -1,3 +1,4 @@
+import { CompetenciaType } from './competenciaType';
 import { FilterType } from './filterTypes';
 import { EmpresaType } from './empresaTypes';
 import { AuditoriaType } from "./userTypes";
@@ -10,10 +11,13 @@ export type CandidaturaType = {
 	salario?: number;
 	status?: string;
 	curso?: string;
+	competenciasEstudante?: CompetenciaType[];
 	empresa?: EmpresaType;
 	auditoria?: AuditoriaType;
 };
 
 export interface FiltroCandidaturaType extends FilterType {
 	indAtivo?: boolean;
+	codEmpresa?: number | string;
+	codVaga?: number | string;
 }

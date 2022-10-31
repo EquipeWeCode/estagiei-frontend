@@ -95,5 +95,12 @@ export const TRANSLATIONS_PT = {
 	delete: "Excluir",
 	inactive: "Inativa",
 	active: "Ativa",
+	candidates: "Candidatos",
+	empty_vacancies: "Nenhuma vaga encontrada",
+	empty_candidates: "Nenhum candidato encontrado",
+	reject: "Rejeitar",
+	accept: "Aceitar",
+	contact_by_whatsapp: "Entrar em contato via WhatsApp",
+	contact_by_email: "Entrar em contato via e-mail",
 };
 
