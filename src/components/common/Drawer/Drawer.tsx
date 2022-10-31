@@ -1,5 +1,5 @@
 import { Drawer as DrawerAntd, DrawerProps } from "antd";
-import { KeyboardEvent, MouseEvent } from "react";
+import { useState } from "react";
 
 export const DEFAULT = "default";
 export const LARGE = "large";
@@ -24,8 +24,17 @@ const Drawer = (props: DrawerCustomProps) => {
 		size = DEFAULT,
 	} = props;
 
+	const [isMobile, setIsMobile] = useState(false);
+
+	window.addEventListener("resize", () => {
+		if (window.innerWidth <= 768) {
+			setIsMobile(true);
+		} else {
+			setIsMobile(false);
+		}
+	});
+
 	const sizeComponent = size === FULLSCREEN ? "95%" : LARGE ? "736px" : "378px";
-	const isMobile = window.innerWidth <= 768;
 
 	return (
 		<DrawerAntd

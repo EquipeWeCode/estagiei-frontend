@@ -1,13 +1,8 @@
 import { useAuth } from "@/contexts/auth";
 import { UserType } from "@/types/userTypes";
-import {
-	DesktopOutlined,
-	PieChartOutlined,
-	ProfileOutlined,
-	UserOutlined,
-} from "@ant-design/icons";
+import { ProfileOutlined, UserOutlined } from "@ant-design/icons";
 import { Menu, MenuProps } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import Candidaturas from "./candidaturas";
@@ -27,6 +22,11 @@ const PerfilEstudante = () => {
 	const tab = searchParams.get("tab");
 
 	const [paginaAtual, setPaginaAtual] = useState(tab || "dados_basicos");
+
+	useEffect(() => {
+		setSearchParams({ tab: paginaAtual });
+	}, [paginaAtual]);
+
 	type MenuItem = Required<MenuProps>["items"][number];
 
 	const getItem = (

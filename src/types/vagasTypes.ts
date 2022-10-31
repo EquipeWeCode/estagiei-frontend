@@ -29,7 +29,7 @@ export interface FiltroVagaType extends FilterType {
 	cidade?: string;
 	estado?: string;
 	nomeEmpresa?: string;
-	codEmpresa?: number;
+	codEmpresa?: number | string;
 	codEstudante?: number | string;
 	indAtivo?: boolean;
 }

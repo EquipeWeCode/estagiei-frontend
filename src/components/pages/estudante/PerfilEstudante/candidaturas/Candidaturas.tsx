@@ -1,23 +1,22 @@
 import Button from "@/components/common/Button";
 import { getTagColor } from "@/components/common/CarouselVagas/CarouselVagas";
 import ImageNotFound from "@/components/common/ImageNotFound";
+import Pagination from "@/components/common/Pagination";
+import { PAGINATION_SIZE_DEFAULT } from "@/constants";
+import { CANCELADO, statusCandidaturaEnum } from "@/constants/enums";
+import { getCandidaturas } from "@/services/candidatura";
 import { CandidaturaType, FiltroCandidaturaType } from "@/types/candidaturaType";
-import { capitalizaPriLetraDeCadaPalavra, dateMask, dateTimeMask, realMask } from "@/utils/masks";
-import { ClockCircleOutlined, EnvironmentOutlined } from "@ant-design/icons";
+import { capitalizaPriLetraDeCadaPalavra, dateTimeMask, realMask } from "@/utils/masks";
 import { Col, Row, Tag } from "antd";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { PerfilEstudanteProps } from "../PerfilEstudante";
-import { useState, useEffect } from "react";
 import styles from "./styles.module.css";
-import { useAuth } from "@/contexts/auth";
-import { getCandidaturas } from "@/services/candidatura";
-import { PAGINATION_SIZE_DEFAULT } from "@/constants";
-import Pagination from "@/components/common/Pagination";
 
 export const getStatusColor = (status: string | undefined) => {
 	switch (status) {
-		case "CANCELADO":
+		case CANCELADO:
 			return "#f0b3b3";
 		default:
 			return "#aacdee";
@@ -59,7 +58,7 @@ const Candidaturas = ({ user }: PerfilEstudanteProps) => {
 
 	return (
 		<>
-			<Row gutter={20} justify="end" style={{ marginBottom: "10px"}}>
+			<Row gutter={20} justify="end" style={{ marginBottom: "10px" }}>
 				<Col>
 					<span
 						className={styles.toggleAtivo}
@@ -101,7 +100,7 @@ const Candidaturas = ({ user }: PerfilEstudanteProps) => {
 			{candidaturas?.map(candidatura => (
 				<Row key={candidatura.codVaga} className={styles.containerVaga} align="middle">
 					<Col className={styles.colImage}>
-						<Link to={`/empresa/profile/${candidatura?.empresa?.codEmpresa}`}>
+						<Link to={`/empresa/perfil/${candidatura?.empresa?.codEmpresa}`}>
 							{candidatura?.empresa?.avatar ? (
 								<>
 									<img
@@ -128,7 +127,7 @@ const Candidaturas = ({ user }: PerfilEstudanteProps) => {
 								</span>
 							</div>
 							<div style={{ color: "var(--primary-color)" }}>
-								<Link to={`/empresa/profile/${candidatura?.empresa?.codEmpresa}`}>
+								<Link to={`/empresa/perfil/${candidatura?.empresa?.codEmpresa}`}>
 									{candidatura.empresa &&
 										capitalizaPriLetraDeCadaPalavra(candidatura.empresa.nomeFantasia)}
 								</Link>
@@ -149,7 +148,7 @@ const Candidaturas = ({ user }: PerfilEstudanteProps) => {
 							backgroundColor: getStatusColor(candidatura?.status),
 						}}
 					>
-						{capitalizaPriLetraDeCadaPalavra(candidatura?.status)}
+						{statusCandidaturaEnum.get(candidatura?.status)}
 					</span>
 				</Row>
 			))}

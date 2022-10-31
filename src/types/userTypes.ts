@@ -19,6 +19,7 @@ export type UserType = {
   cpf?: string;
   rg?: string;
   nome?: string;
+  contatos?: ContatoType[];
   instEnsino?: string;
   nvlEnsino?: string;
   expProfissional?: string;
@@ -26,6 +27,14 @@ export type UserType = {
   competencias?: CompetenciaType[];
   candidaturas?: CandidaturaType[];
   roles?: string[];
+  auditoria?: AuditoriaType;
+}
+
+export type ContatoType = {
+  codContato?: string | number;
+  tipoContato?: string;
+  descContato?: string;
+  valorContato?: string;
   auditoria?: AuditoriaType;
 }
 
