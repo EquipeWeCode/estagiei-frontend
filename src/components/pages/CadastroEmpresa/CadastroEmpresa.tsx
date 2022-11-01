@@ -28,6 +28,7 @@ type FormCadastroEmpresaType = {
 
 const CadastroEmpresa = () => {
 	const navigate = useNavigate();
+	const [form] = Form.useForm();
 	const { t } = useTranslation();
 
 	const [token, setToken] = useState(getToken());
@@ -50,7 +51,12 @@ const CadastroEmpresa = () => {
 				logradouro: novoCep.logradouro,
 			}
 		})
+
 	}, [novoCep]);
+
+	useEffect(() => {
+		form.setFieldsValue(formEmpresa)
+	}, [form, formEmpresa])
 
 	useEffect(() => {
 		console.log(formEmpresa);
@@ -122,6 +128,7 @@ const CadastroEmpresa = () => {
 					</Col>
 				</Row>
 					<Form
+						form={form}
 						onFinish={criarEmpresa}
 						name="cadastroEmpresa"
 						onValuesChange={async (changedValues, allValues) => {
@@ -181,12 +188,12 @@ const CadastroEmpresa = () => {
 								</Form.Item>
 							</Form.Item>
 							<Form.Item>
-								<Form.Item noStyle rules={RULES}>
+								<Form.Item name={["endereco", "estado"]} noStyle rules={RULES}>
 									<InputSelect value={formEmpresa.endereco?.estado} choices={["UF", "SP", "RS"]} label="Estado" change={handleOptionEstado}/>
 								</Form.Item>
 							</Form.Item>
 							<Form.Item>
-								<Form.Item noStyle rules={RULES}>
+								<Form.Item name={["endereco", "cidade"]} noStyle rules={RULES}>
 									<InputSelect value={formEmpresa.endereco?.cidade} choices={["Rio de Janeiro", "São Paulo", "Rio Grande do Sul"]} label="Cidade" change={handleOptionCidade}/>
 								</Form.Item>
 							</Form.Item>
@@ -198,7 +205,7 @@ const CadastroEmpresa = () => {
 							</Form.Item>
 							<Form.Item>
 								<span>Logradouro</span>
-								<Form.Item name="logradouro" noStyle rules={RULES}>
+								<Form.Item name={["endereco", "logradouro"]} noStyle rules={RULES}>
 									<Input placeholder={"logradouro"} value={formEmpresa.endereco?.logradouro} maxLength={14} />
 								</Form.Item>
 							</Form.Item>

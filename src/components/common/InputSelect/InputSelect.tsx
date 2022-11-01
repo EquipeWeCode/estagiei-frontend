@@ -1,4 +1,5 @@
 import { Select } from "antd";
+import { useEffect } from "react";
 import styles from './styles.module.scss';
 
 interface InputSelectProps {
@@ -12,6 +13,10 @@ const InputSelect = (props: InputSelectProps) => {
     const { label } = props;
     const { choices } = props;
     const { value } = props;
+
+    useEffect(() => {
+        
+    }, [value])
 
     return (
         <>
