@@ -133,11 +133,13 @@ const CadastroEmpresa = () => {
 						name="cadastroEmpresa"
 						onValuesChange={async (changedValues, allValues) => {
 							if (changedValues.endereco) {
-								setForm({...formEmpresa, endereco: {...formEmpresa.endereco, ...changedValues.endereco}})
+								setForm({...formEmpresa, endereco: {...formEmpresa.endereco, ...changedValues.endereco}});
+								return
 							}
-							else {
-								setForm({...formEmpresa, ...changedValues});
-							}
+							if (changedValues['repete-senha']) {
+								return
+							}						
+							setForm({...formEmpresa, ...changedValues});
 						}}
 						style={{width:"100%"}}
 					>	
@@ -216,20 +218,20 @@ const CadastroEmpresa = () => {
 							</Form.Item>
 							<Form.Item>
 								<span>Numero</span>
-								<Form.Item name="numero" noStyle rules={RULES}>
+								<Form.Item name={["endereco", "numero"]} noStyle rules={RULES}>
 									<Input placeholder={"numero"} value={formEmpresa.endereco?.numero} maxLength={14} />
 								</Form.Item>
 							</Form.Item>
 							<Form.Item>
 								<span>Complemento</span>
-								<Form.Item name="complemento" noStyle>
+								<Form.Item name={["endereco", "complemento"]} noStyle>
 									<Input placeholder={"complemento"} value={formEmpresa.endereco?.complemento} maxLength={14} />
 								</Form.Item>
 							</Form.Item>
 						
 							<Form.Item>
 								<span>Ponto de referencia</span>
-								<Form.Item name="pontoReferencia" noStyle>
+								<Form.Item name={["endereco", "pontoReferencia"]} noStyle>
 									<Input placeholder={"Ponto de referencia"} value={formEmpresa.endereco?.pontoReferencia} maxLength={14} />
 								</Form.Item>
 							</Form.Item>
