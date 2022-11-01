@@ -9,11 +9,14 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import styles from "./styles.module.css";
 import { putCandidatura } from "@/services/candidatura";
+import { APROVADO, CANCELADO, CANDIDATADO } from "@/constants/enums";
 
 export const getStatusColor = (status: string | undefined) => {
 	switch (status) {
-		case "CANCELADO":
+		case CANCELADO:
 			return "#f0b3b3";
+		case APROVADO:
+			return "#b3f0b3";
 		default:
 			return "#aacdee";
 	}
@@ -24,19 +27,19 @@ const CardCandidatura = ({ candidatura, fetchCandidatura }: CandidaturaProps) =>
 
 	const { t } = useTranslation();
 
-    const retirarCandidatura = () => {
-        const body = { 
-            codEstudante: candidatura.codEstudante,
-            codVaga: candidatura.codVaga,
-            status: "CANCELADO"
-        };
-        putCandidatura(body).then(() => {
-            fetchCandidatura();
-        });
-    }
+	const retirarCandidatura = () => {
+		const body = {
+			codEstudante: candidatura.codEstudante,
+			codVaga: candidatura.codVaga,
+			status: CANCELADO,
+		};
+		putCandidatura(body).then(() => {
+			fetchCandidatura();
+		});
+	};
 
 	const labelStatusCandidatura = (status: string) => {
-		if (status === "CANDIDATADO") {
+		if (status === CANDIDATADO) {
 			return (
 				<Button
 					className={styles.btnRetiraCandidatura}
@@ -71,7 +74,7 @@ const CardCandidatura = ({ candidatura, fetchCandidatura }: CandidaturaProps) =>
 		<>
 			<Row key={candidatura.codVaga} className={styles.containerVaga} align="middle">
 				<Col className={styles.colImage}>
-					<Link to={`/empresa/profile/${candidatura?.empresa?.codEmpresa}`}>
+					<Link to={`/empresa/perfil/${candidatura?.empresa?.codEmpresa}`}>
 						{candidatura?.empresa?.avatar ? (
 							<>
 								<img
@@ -98,7 +101,7 @@ const CardCandidatura = ({ candidatura, fetchCandidatura }: CandidaturaProps) =>
 							</span>
 						</div>
 						<div style={{ color: "var(--primary-color)" }}>
-							<Link to={`/empresa/profile/${candidatura?.empresa?.codEmpresa}`}>
+							<Link to={`/empresa/perfil/${candidatura?.empresa?.codEmpresa}`}>
 								{candidatura.empresa &&
 									capitalizaPriLetraDeCadaPalavra(candidatura.empresa.nomeFantasia)}
 							</Link>
