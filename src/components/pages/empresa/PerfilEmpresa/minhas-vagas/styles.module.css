@@ -27,7 +27,7 @@ height: calc(200px - 1vw);
 
 .search-row {
   display: flex;
-  justify-content: center !important;
+  justify-content: center;
   align-items: center;
 }
 
