@@ -132,7 +132,12 @@ const CadastroEmpresa = () => {
 						onFinish={criarEmpresa}
 						name="cadastroEmpresa"
 						onValuesChange={async (changedValues, allValues) => {
-							setForm({...formEmpresa, ...changedValues});
+							if (changedValues.endereco) {
+								setForm({...formEmpresa, endereco: {...formEmpresa.endereco, ...changedValues.endereco}})
+							}
+							else {
+								setForm({...formEmpresa, ...changedValues});
+							}
 						}}
 						style={{width:"100%"}}
 					>	
@@ -199,7 +204,7 @@ const CadastroEmpresa = () => {
 							</Form.Item>
 							<Form.Item>
 								<span>Bairro</span>
-								<Form.Item noStyle rules={RULES}>
+								<Form.Item name={["endereco", "bairro"]} noStyle rules={RULES}>
 									<Input placeholder={"bairro"} value={formEmpresa.endereco?.bairro} maxLength={14} />
 								</Form.Item>
 							</Form.Item>
