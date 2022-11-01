@@ -1,6 +1,6 @@
 const request = require('supertest');
 const assert = require('assert');
-const ROOT_URL = "https://estagiei.herokuapp.com/api";
+const ROOT_URL = "localhost:3000/api";
 
 const data = {
     email: "teste@gmail.com",
