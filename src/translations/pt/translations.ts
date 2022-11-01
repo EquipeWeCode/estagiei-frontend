@@ -102,5 +102,11 @@ export const TRANSLATIONS_PT = {
 	accept: "Aceitar",
 	contact_by_whatsapp: "Entrar em contato via WhatsApp",
 	contact_by_email: "Entrar em contato via e-mail",
+	select_status: "Selecione o status",
+	no_data: "Nenhum dado encontrado",
+	finish: "Finalizar",
+	title: "Título",
+	state: "Estado",
+	select_state: "Selecione o estado",
 };
 

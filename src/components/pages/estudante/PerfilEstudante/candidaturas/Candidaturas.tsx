@@ -1,21 +1,25 @@
 import Button from "@/components/common/Button";
 import Pagination from "@/components/common/Pagination";
 import { PAGINATION_SIZE_DEFAULT } from "@/constants";
+import { statusCandidaturaEnum } from "@/constants/enums";
 import { getCandidaturas } from "@/services/candidatura";
 import { CandidaturaType, FiltroCandidaturaType } from "@/types/candidaturaType";
-import { Col, Row } from "antd";
+import { getEnumConstant } from "@/utils/selects";
+import { Col, Empty, Row, Select } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { PerfilEstudanteProps } from "../PerfilEstudante";
 import CardCandidatura from "./cardCandidatura";
-import styles from "./styles.module.css";
 
 const Candidaturas = ({ user }: PerfilEstudanteProps) => {
 	const FILTRO_INICIAL: FiltroCandidaturaType = {
 		page: 1,
 		size: PAGINATION_SIZE_DEFAULT,
 		indAtivo: undefined,
+		status: undefined,
 	};
+
+	const optionsStatus = getEnumConstant(statusCandidaturaEnum);
 
 	const [filtro, setFiltro] = useState<FiltroCandidaturaType>(FILTRO_INICIAL);
 	const [quantidadeTotal, setQuantidadeTotal] = useState<number>(0);
@@ -47,36 +51,19 @@ const Candidaturas = ({ user }: PerfilEstudanteProps) => {
 		<>
 			<Row gutter={20} justify="end" style={{ marginBottom: "10px" }}>
 				<Col>
-					<span
-						className={styles.toggleAtivo}
-						style={{
-							backgroundColor: filtro?.indAtivo ? "var(--secondary-color)" : "#FFF",
-							color: filtro?.indAtivo ? "#FFF" : "#000",
-						}}
-						onClick={() => {
-							filtro?.indAtivo
-								? setFiltro({ ...filtro, indAtivo: undefined })
-								: setFiltro({ ...filtro, indAtivo: true });
-						}}
+					<Select
+						allowClear={true}
+						placeholder={t("select_status")}
+						style={{ width: 200 }}
+						onChange={value => setFiltro({ ...filtro, status: value })}
+						value={filtro?.status}
 					>
-						{t("active")}
-					</span>
-				</Col>
-				<Col>
-					<span
-						className={styles.toggleAtivo}
-						style={{
-							backgroundColor: filtro?.indAtivo === false ? "var(--secondary-color)" : "#FFF",
-							color: filtro?.indAtivo === false ? "#FFF" : "#000",
-						}}
-						onClick={() => {
-							filtro?.indAtivo === false
-								? setFiltro({ ...filtro, indAtivo: undefined })
-								: setFiltro({ ...filtro, indAtivo: false });
-						}}
-					>
-						{t("inactive")}
-					</span>
+						{optionsStatus.map(option => (
+							<Select.Option key={option.value} value={option.value}>
+								{option.label}
+							</Select.Option>
+						))}
+					</Select>
 				</Col>
 				<Col flex={1} md={4}>
 					<Button secondary onClick={() => fetchCandidaturas()}>
@@ -84,9 +71,17 @@ const Candidaturas = ({ user }: PerfilEstudanteProps) => {
 					</Button>
 				</Col>
 			</Row>
-			{candidaturas?.map(candidatura => (
-				<CardCandidatura candidatura={candidatura} fetchCandidatura={fetchCandidaturas}/>
-			))}
+			{candidaturas?.length > 0 ? (
+				candidaturas?.map((candidatura, idx) => (
+					<CardCandidatura
+						key={idx}
+						candidatura={candidatura}
+						fetchCandidatura={fetchCandidaturas}
+					/>
+				))
+			) : (
+				<Empty description={t("no_data")} />
+			)}
 			<Row justify="end">
 				<Pagination
 					total={quantidadeTotal}
