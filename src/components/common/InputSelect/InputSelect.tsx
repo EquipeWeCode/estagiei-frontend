@@ -14,14 +14,10 @@ const InputSelect = (props: InputSelectProps) => {
     const { choices } = props;
     const { value } = props;
 
-    useEffect(() => {
-        
-    }, [value])
-
     return (
         <>
             <label className={styles.label}>{label}</label>
-            <Select defaultValue={value} onChange={(value) => {props.change(value)}}>
+            <Select value={value} onChange={(value) => {props.change(value)}}>
                 {choices.map((choice) => {
                     return <Select.Option value={choice}>{choice}</Select.Option>
                 } )}
