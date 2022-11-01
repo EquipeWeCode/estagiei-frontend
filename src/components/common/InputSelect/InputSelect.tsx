@@ -1,22 +1,27 @@
 import { Select } from "antd";
-
-type value = {
-    type?: string;
-    label?: string;
-}
+import styles from './styles.module.scss';
 
 interface InputSelectProps {
-    values: value[];
+    label: string;
+    choices: string[];
+    value?: string;
+    change: (value: string) => void;
 }
 
 const InputSelect = (props: InputSelectProps) => {
-    const { Option } = Select;
+    const { label } = props;
+    const { choices } = props;
+    const { value } = props;
 
     return (
-        <Select defaultValue="Option1">
-            <Option value="Option1">Option1</Option>
-            <Option value="Option2">Option2</Option>
-        </Select>
+        <>
+            <label className={styles.label}>{label}</label>
+            <Select defaultValue={value} onChange={(value) => {props.change(value)}}>
+                {choices.map((choice) => {
+                    return <Select.Option value={choice}>{choice}</Select.Option>
+                } )}
+            </Select>
+        </>
     );
 }
 

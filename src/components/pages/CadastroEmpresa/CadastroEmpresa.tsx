@@ -13,6 +13,9 @@ import {CadastroEmpresaType} from "@/types/empresaTypes";
 import styles from "./styles.module.scss";
 import { ReactComponent as LogoResumida } from "@/assets/logo-resumida.svg";
 import { EnderecoType } from "@/types/enderecoType";
+import InputSelect from "@/components/common/InputSelect/InputSelect";
+import { Select } from "antd";
+import { AlertOutlined } from "@ant-design/icons";
 
 type FormCadastroEmpresaType = {
 	email?: string,
@@ -97,6 +100,14 @@ const CadastroEmpresa = () => {
 		}
 	};
 
+	const handleOptionEstado = (value: string) => {
+		setForm({...formEmpresa, ...{endereco: {...formEmpresa.endereco, estado: value}}})
+	}
+
+	const handleOptionCidade = (value: string) => {
+		setForm({...formEmpresa, ...{endereco: {...formEmpresa.endereco, cidade: value}}})
+	}
+
 	return (
 		<div className={styles.containerGeral}>
 			<Row justify="center" className={styles.boxLogin}>
@@ -170,20 +181,18 @@ const CadastroEmpresa = () => {
 								</Form.Item>
 							</Form.Item>
 							<Form.Item>
-								<span>Estado</span>
-								<Form.Item name="estado" noStyle rules={RULES}>
-									<Input placeholder={"estado"} value={formEmpresa.endereco?.estado} maxLength={14} />
+								<Form.Item noStyle rules={RULES}>
+									<InputSelect value={formEmpresa.endereco?.estado} choices={["UF", "SP", "RS"]} label="Estado" change={handleOptionEstado}/>
 								</Form.Item>
 							</Form.Item>
 							<Form.Item>
-								<span>Cidade</span>
-								<Form.Item name="cidade" noStyle rules={RULES}>
-									<Input placeholder={"cidade"} value={formEmpresa.endereco?.cidade} maxLength={14} />
+								<Form.Item noStyle rules={RULES}>
+									<InputSelect value={formEmpresa.endereco?.cidade} choices={["Rio de Janeiro", "São Paulo", "Rio Grande do Sul"]} label="Cidade" change={handleOptionCidade}/>
 								</Form.Item>
 							</Form.Item>
 							<Form.Item>
 								<span>Bairro</span>
-								<Form.Item name="bairro" noStyle rules={RULES}>
+								<Form.Item noStyle rules={RULES}>
 									<Input placeholder={"bairro"} value={formEmpresa.endereco?.bairro} maxLength={14} />
 								</Form.Item>
 							</Form.Item>
