@@ -5,7 +5,8 @@ export const ENDPOINT_COMPETENCIA = "/competencia";
 export const ENDPOINT_CEP = "/json/"; 
 export const ENDPOINT_USUARIO = "/usuario";
 export const ENDPOINT_EMPRESA = "/empresa";
-export const ENDPOINT_ESTADOS = "/localidades/estados/"
+export const ENDPOINT_ESTADOS = "/localidades/estados";
+export const ENDPOINT_REGIAO_IMEDIATA = "/regioes-imediatas"
 
 export const TOKEN_KEY = "token";
 export const USER_KEY = "userDetails";
