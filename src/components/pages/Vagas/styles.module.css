@@ -25,12 +25,6 @@
     color: #FFF;
 }
 
-.search-row {
-    display: flex;
-    justify-content: center !important;
-    align-items: center;
-}
-
 .search-col {
     display: flex;
     justify-content: center;
@@ -39,9 +33,7 @@
 }
 
 .search-sec-row {
-    display: flex;
     width: 100%;
-    align-items: center;
     justify-content: center;
 }
 

@@ -3,22 +3,25 @@ import {
 	APROVADO,
 	CANCELADO,
 	CANDIDATADO,
+	FINALIZADO,
 	REPROVADO,
-	statusCandidaturaEnum
+	statusCandidaturaEnum,
 } from "@/constants/enums";
 import { getCandidaturas, putCandidatura } from "@/services/candidatura";
 import { getEstudante } from "@/services/estudante";
 import { CandidaturaType, FiltroCandidaturaType } from "@/types/candidaturaType";
 import { ContatoType } from "@/types/userTypes";
 import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
+import { getEnumConstant } from "@/utils/selects";
 import {
 	CaretRightOutlined,
 	CheckOutlined,
+	CheckSquareOutlined,
 	CloseOutlined,
 	MailOutlined,
-	WhatsAppOutlined
+	WhatsAppOutlined,
 } from "@ant-design/icons";
-import { Col, Empty, Row, Tag, Tooltip } from "antd";
+import { Col, Empty, Row, Select, Tag, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -114,49 +117,33 @@ const CandidatosEmpresa = (props: CandidatosEmpresaProps) => {
 		}
 	};
 
+	const optionsStatus = getEnumConstant(statusCandidaturaEnum);
+
 	return (
 		<>
 			<>
-				{/* <Row gutter={20} justify="end" style={{ marginBottom: "10px" }}>
+				<Row gutter={20} justify="end" style={{ marginBottom: "10px" }}>
 					<Col>
-						<span
-							className={styles.toggleAtivo}
-							style={{
-								backgroundColor: filtroCandidatura?.indAtivo ? "var(--secondary-color)" : "#FFF",
-								color: filtroCandidatura?.indAtivo ? "#FFF" : "#000",
-							}}
-							onClick={() => {
-								filtroCandidatura?.indAtivo
-									? setFiltroCandidatura({ ...filtroCandidatura, indAtivo: undefined })
-									: setFiltroCandidatura({ ...filtroCandidatura, indAtivo: true });
-							}}
+						<Select
+							allowClear={true}
+							placeholder={t("select_status")}
+							style={{ width: 200 }}
+							onChange={value => setFiltroCandidatura({ ...filtroCandidatura, status: value })}
+							value={filtroCandidatura?.status}
 						>
-							{t("active")}
-						</span>
-					</Col>
-					<Col>
-						<span
-							className={styles.toggleAtivo}
-							style={{
-								backgroundColor:
-									filtroCandidatura?.indAtivo === false ? "var(--secondary-color)" : "#FFF",
-								color: filtroCandidatura?.indAtivo === false ? "#FFF" : "#000",
-							}}
-							onClick={() => {
-								filtroCandidatura?.indAtivo === false
-									? setFiltroCandidatura({ ...filtroCandidatura, indAtivo: undefined })
-									: setFiltroCandidatura({ ...filtroCandidatura, indAtivo: false });
-							}}
-						>
-							{t("inactive")}
-						</span>
+							{optionsStatus.map(option => (
+								<Select.Option key={option.value} value={option.value}>
+									{option.label}
+								</Select.Option>
+							))}
+						</Select>
 					</Col>
 					<Col flex={1} md={4}>
 						<Button secondary onClick={() => fetchCandidaturas()}>
 							{t("search")}
 						</Button>
 					</Col>
-				</Row> */}
+				</Row>
 				<Row justify="end" style={{ marginBottom: "1rem" }}>
 					<Pagination
 						total={quantidadeTotal}
@@ -191,7 +178,7 @@ const CandidatosEmpresa = (props: CandidatosEmpresaProps) => {
 										})}
 									</Row>
 								</Col>
-								<Col span={3} style={{ marginLeft: "1rem" }}>
+								<Col span={c?.status === APROVADO ? 4 : 3} style={{ marginLeft: "1rem" }}>
 									<Row justify="space-between">
 										{c?.status === APROVADO ? (
 											<>
@@ -209,6 +196,13 @@ const CandidatosEmpresa = (props: CandidatosEmpresaProps) => {
 														disabled={!(c.status === APROVADO)}
 														secondary
 														onClick={() => entrarEmContatoEmail(c.codEstudante)}
+													/>
+												</Tooltip>
+												<Tooltip title={t("finish")}>
+													<Button
+														icon={<CheckOutlined />}
+														disabled={!(c.status === APROVADO)}
+														onClick={() => mudarCandidatura(c.codEstudante, FINALIZADO)}
 													/>
 												</Tooltip>
 											</>

@@ -101,4 +101,10 @@ export const TRANSLATIONS_EN = {
 	accept: "Accept",
 	contact_by_whatsapp: "Contact by Whatsapp",
 	contact_by_email: "Contact by e-mail",
+	select_status: "Select status",
+	no_data: "No data",
+	finish: "Finish",
+	title: "Title",
+	state: "State",
+	select_state: "Select state",
 };

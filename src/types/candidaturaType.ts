@@ -26,4 +26,5 @@ export interface FiltroCandidaturaType extends FilterType {
 	indAtivo?: boolean;
 	codEmpresa?: number | string;
 	codVaga?: number | string;
+	status?: string;
 }

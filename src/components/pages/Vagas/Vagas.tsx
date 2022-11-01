@@ -4,6 +4,7 @@ import Button from "@/components/common/Button";
 import CardVagas from "@/components/common/CardVagas";
 import Input from "@/components/common/Input";
 import Pagination from "@/components/common/Pagination";
+import SelectEstados from "@/components/common/select-estados";
 import { ESTUDANTE, PAGINATION_SIZE_DEFAULT } from "@/constants";
 import { useAuth } from "@/contexts/auth";
 import { getCandidaturas } from "@/services/candidatura";
@@ -37,7 +38,7 @@ const Vagas = () => {
 		page: 1,
 		codEstudante: undefined,
 		size: PAGINATION_SIZE_DEFAULT,
-		indAtivo: true
+		indAtivo: true,
 	};
 
 	const [filtroVaga, setFiltroVaga] = useState<FiltroVagaType>(FILTRO_INICIAL);
@@ -91,6 +92,10 @@ const Vagas = () => {
 		setFiltroVaga({ ...filtroVaga, [name]: value });
 	};
 
+	const changeEstado = (estado: string) => {
+		setFiltroVaga({ ...filtroVaga, estado });
+	};
+
 	const paginar = (page: number) => {
 		setFiltroVaga({ ...filtroVaga, page });
 	};
@@ -111,9 +116,10 @@ const Vagas = () => {
 					<TabPane tab={t("vacancies")} key="1">
 						<Row justify="center" align="middle" className={styles.searchRow}>
 							<Col className={styles.searchCol}>
-								<Row style={{ marginBottom: "1rem" }} gutter={12} className={styles.searchSecRow}>
-									<Col flex={1} md={isEstudante ? 8 : 8}>
+								<Row style={{ marginBottom: "1rem" }} gutter={12} className={styles.searchSecRow} align="bottom">
+									<Col md={5}>
 										<Input
+											label={t("title")}
 											allowClear={true}
 											placeholder={t("type_job_title")}
 											value={filtroVaga.titulo}
@@ -121,8 +127,9 @@ const Vagas = () => {
 											name="titulo"
 										/>
 									</Col>
-									<Col flex={1} md={8}>
+									<Col md={5}>
 										<Input
+											label={t("description")}
 											allowClear={true}
 											placeholder={t("type_job_description")}
 											value={filtroVaga.descricao}
@@ -130,8 +137,16 @@ const Vagas = () => {
 											name="descricao"
 										/>
 									</Col>
+									<Col md={5}>
+										<SelectEstados
+											label={t("state")}
+											name="estado"
+											value={filtroVaga?.estado}
+											onChange={changeEstado}
+										/>
+									</Col>
 									{isEstudante && (
-										<Col flex={1} md={4}>
+										<Col md={4}>
 											<span
 												className={styles.toggleRecomendadas}
 												style={{
@@ -150,7 +165,7 @@ const Vagas = () => {
 											</span>
 										</Col>
 									)}
-									<Col flex={1} md={4}>
+									<Col md={3}>
 										<Button secondary onClick={() => fetchVagas()}>
 											{t("search")}
 										</Button>
