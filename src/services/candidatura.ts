@@ -1,6 +1,6 @@
 import { FiltroCandidaturaType } from "@/types/candidaturaType";
 import { ENDPOINT_CANDIDATURA } from "@/constants";
-import { getResource, postResource, serializeObjectToParam } from "./utils";
+import { getResource, postResource, putResource, serializeObjectToParam } from "./utils";
 
 export const getCandidaturas = (
 	codEstudante: string | number = "",
@@ -12,3 +12,7 @@ export const getCandidaturas = (
 export const postCandidatura = (codEstudante: string = "", codVaga: string | number = "") => {
 	return postResource(`${ENDPOINT_CANDIDATURA}/${codEstudante}/${codVaga}`);
 };
+
+export const putCandidatura = (body: object) => {
+	return putResource(`${ENDPOINT_CANDIDATURA}`, body);
+}
