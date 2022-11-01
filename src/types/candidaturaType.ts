@@ -2,6 +2,12 @@ import { CompetenciaType } from './competenciaType';
 import { FilterType } from './filterTypes';
 import { EmpresaType } from './empresaTypes';
 import { AuditoriaType } from "./userTypes";
+
+export interface CandidaturaProps {
+	candidatura: CandidaturaType;
+	fetchCandidatura: () => any;
+}
+
 export type CandidaturaType = {
 	codEstudante?: string | number;
 	codVaga?: string | number;

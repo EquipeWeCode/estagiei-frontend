@@ -1,29 +1,14 @@
 import Button from "@/components/common/Button";
-import { getTagColor } from "@/components/common/CarouselVagas/CarouselVagas";
-import ImageNotFound from "@/components/common/ImageNotFound";
 import Pagination from "@/components/common/Pagination";
 import { PAGINATION_SIZE_DEFAULT } from "@/constants";
-import { APROVADO, CANCELADO, statusCandidaturaEnum } from "@/constants/enums";
 import { getCandidaturas } from "@/services/candidatura";
 import { CandidaturaType, FiltroCandidaturaType } from "@/types/candidaturaType";
-import { capitalizaPriLetraDeCadaPalavra, dateTimeMask, realMask } from "@/utils/masks";
-import { Col, Row, Tag } from "antd";
+import { Col, Row } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import { PerfilEstudanteProps } from "../PerfilEstudante";
+import CardCandidatura from "./cardCandidatura";
 import styles from "./styles.module.css";
-
-export const getStatusColor = (status: string | undefined) => {
-	switch (status) {
-		case CANCELADO:
-			return "#f0b3b3";
-		case APROVADO:
-			return "#b3f0b3";
-		default:
-			return "#aacdee";
-	}
-};
 
 const Candidaturas = ({ user }: PerfilEstudanteProps) => {
 	const FILTRO_INICIAL: FiltroCandidaturaType = {
@@ -100,59 +85,7 @@ const Candidaturas = ({ user }: PerfilEstudanteProps) => {
 				</Col>
 			</Row>
 			{candidaturas?.map(candidatura => (
-				<Row key={candidatura.codVaga} className={styles.containerVaga} align="middle">
-					<Col className={styles.colImage}>
-						<Link to={`/empresa/perfil/${candidatura?.empresa?.codEmpresa}`}>
-							{candidatura?.empresa?.avatar ? (
-								<>
-									<img
-										src={candidatura?.empresa?.avatar}
-										alt="avatar-company"
-										className={styles.companyImage}
-										width={100}
-										height={100}
-									/>
-								</>
-							) : (
-								<ImageNotFound width={100} height={100} className={styles.companyImage} />
-							)}
-						</Link>
-					</Col>
-					<Col className={styles.content}>
-						<div className={styles.vagaTituloContainer}>
-							<div className={styles.vagaTitulo}>
-								<h3>{candidatura.titulo}</h3>
-								<span>
-									<Tag className={styles.tagModalidade} color={getTagColor(candidatura.modalidade)}>
-										{candidatura.modalidade}
-									</Tag>
-								</span>
-							</div>
-							<div style={{ color: "var(--primary-color)" }}>
-								<Link to={`/empresa/perfil/${candidatura?.empresa?.codEmpresa}`}>
-									{candidatura.empresa &&
-										capitalizaPriLetraDeCadaPalavra(candidatura.empresa.nomeFantasia)}
-								</Link>
-							</div>
-						</div>
-						<div>
-							<p style={{ fontSize: "1rem", display: "inline-block" }}>
-								{candidatura?.salario ? realMask(candidatura?.salario) : t("not_informed")}
-							</p>
-						</div>
-						<div className={styles.locationAuditoria}>
-							<span>Candidatado em: {dateTimeMask(candidatura?.auditoria?.dataInclusao)}</span>
-						</div>
-					</Col>
-					<span
-						className={styles.spanStatus}
-						style={{
-							backgroundColor: getStatusColor(candidatura?.status),
-						}}
-					>
-						{statusCandidaturaEnum.get(candidatura?.status)}
-					</span>
-				</Row>
+				<CardCandidatura candidatura={candidatura} fetchCandidatura={fetchCandidaturas}/>
 			))}
 			<Row justify="end">
 				<Pagination
