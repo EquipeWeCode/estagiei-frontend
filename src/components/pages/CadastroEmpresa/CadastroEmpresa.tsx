@@ -9,13 +9,14 @@ import { postEmpresa } from "@/services/empresa";
 import Notification from "@/components/common/Notification";
 import { CepType } from "@/types/cepType";
 import { getCep } from "@/services/cep";
-import {CadastroEmpresaType} from "@/types/empresaTypes";
 import styles from "./styles.module.scss";
 import { ReactComponent as LogoResumida } from "@/assets/logo-resumida.svg";
 import { EnderecoType } from "@/types/enderecoType";
 import InputSelect from "@/components/common/InputSelect/InputSelect";
-import { Select } from "antd";
-import { AlertOutlined } from "@ant-design/icons";
+import { CidadeType } from "@/types/cidadeType";
+import { EstadoType } from "@/types/estadoType";
+import { getCidades } from "@/services/cidades";
+import { getEstados } from "@/services/estados";
 
 type FormCadastroEmpresaType = {
 	email?: string,
@@ -34,12 +35,22 @@ const CadastroEmpresa = () => {
 	const [token, setToken] = useState(getToken());
 
 	const [formEmpresa, setForm] = useState<FormCadastroEmpresaType>({} as FormCadastroEmpresaType);
+
 	const [novoCep, setCep] = useState<CepType>({} as CepType);
+	const [uf, setUf] = useState<Array<EstadoType>>([]);
+	const [cidades, setCidades] = useState<Array<CidadeType>>([]);
+
+	const [treatedUf, setTreatedEstados] = useState<string[]>([]);
+	const [treatedCidades, setTreatedCidades] = useState<string[]>([]);
 
 	useEffect(() => {
 		if (token) {
 			navigate("/");
 		}
+	}, []);
+
+	useEffect(() => {
+		getUf();
 	}, []);
 
 	useEffect(() => {
@@ -51,17 +62,23 @@ const CadastroEmpresa = () => {
 				logradouro: novoCep.logradouro,
 			}
 		})
-
 	}, [novoCep]);
 
 	useEffect(() => {
 		form.setFieldsValue(formEmpresa)
-	}, [form, formEmpresa])
+	}, [form, formEmpresa]);
 
 	useEffect(() => {
 		console.log(formEmpresa);
-	}, [formEmpresa])
- 
+	}, [formEmpresa]);
+
+	useEffect(() => {
+		const estado = uf.find((estado) => estado.sigla == formEmpresa.endereco.estado);
+		if (estado != undefined) {
+			getCities(estado.id);
+		}
+	}, [formEmpresa.endereco.estado]);
+
 	const RULES = [
 		{
 			required: true,
@@ -94,6 +111,27 @@ const CadastroEmpresa = () => {
 				console.log(e);
 			}
 		}
+	}
+
+	const treatUf = (uf: Array<EstadoType>) => {
+		const treatedEstados = uf.map((estado) => {return estado.sigla});
+		setTreatedEstados([...treatedEstados]);
+	}	
+
+	const treatCities = (cidades: Array<CidadeType>) => {
+		const treatedCidades = cidades.map((cidade) => {return cidade.nome});
+		setTreatedCidades([...treatedCidades]);
+	}
+
+	const getUf = async () => {
+		const estados = await getEstados();
+		setUf(estados.data);
+		treatUf(estados.data);
+	}
+
+	const getCities = async (id: number) => {
+		const cidades = await getCidades(id);
+		treatCities(cidades.data);
 	}
 
 	const criarEmpresa = async () => {
@@ -196,12 +234,12 @@ const CadastroEmpresa = () => {
 							</Form.Item>
 							<Form.Item>
 								<Form.Item name={["endereco", "estado"]} noStyle rules={RULES}>
-									<InputSelect value={formEmpresa.endereco?.estado} choices={["UF", "SP", "RS"]} label="Estado" change={handleOptionEstado}/>
+									<InputSelect value={formEmpresa.endereco?.estado} choices={treatedUf} label="Estado" change={handleOptionEstado}/>
 								</Form.Item>
 							</Form.Item>
 							<Form.Item>
 								<Form.Item name={["endereco", "cidade"]} noStyle rules={RULES}>
-									<InputSelect value={formEmpresa.endereco?.cidade} choices={["Rio de Janeiro", "São Paulo", "Rio Grande do Sul"]} label="Cidade" change={handleOptionCidade}/>
+									<InputSelect value={formEmpresa.endereco?.cidade} choices={treatedCidades} label="Cidade" change={handleOptionCidade}/>
 								</Form.Item>
 							</Form.Item>
 							<Form.Item>

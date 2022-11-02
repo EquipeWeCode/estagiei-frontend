@@ -1,11 +1,11 @@
 export type RegiaoType = {
-    id: string;
+    id: number;
     sigla: string;
     nome: string;
 }
 
 export type EstadoType = {
-    id: string;
+    id: number;
     sigla: string;
     nome: string;
     regiao: RegiaoType;

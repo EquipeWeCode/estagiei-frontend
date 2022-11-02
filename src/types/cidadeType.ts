@@ -6,7 +6,7 @@ export type RegiaoIntermediariaType = {
   UF: EstadoType;
 }
 
-export type cidadeType = {
+export type CidadeType = {
   id: number;
   nome: string;
   "regiao-intermediaria": RegiaoIntermediariaType;

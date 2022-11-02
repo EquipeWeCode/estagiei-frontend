@@ -1,6 +1,6 @@
 import { ENDPOINT_ESTADOS } from "@/constants";
-import { getResource, postResource } from "./utils";
+import { getResource, getResourceIbge, postResource } from "./utils";
 
 export const getEstados = async () => {
-    return await getResource(ENDPOINT_ESTADOS);
+    return await getResourceIbge(ENDPOINT_ESTADOS);
 }

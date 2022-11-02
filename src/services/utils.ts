@@ -8,6 +8,10 @@ const CEP_URL = () => {
 	return import.meta.env.VITE_CEP_URL;
 }
 
+const IBGE_URL = () => {
+	return import.meta.env.VITE_IBGE_URL;
+}
+
 //Resources
 export const getResource = async (resource: string, config: any = null) => {
 	const response = await axios.get(ROOT_URL() + resource, config);
@@ -16,6 +20,11 @@ export const getResource = async (resource: string, config: any = null) => {
 
 export const getResourceCep = async (resource: string, config: any = null) => {
 	const response = await axios.get(CEP_URL() + resource, config);
+	return response; 
+}
+
+export const getResourceIbge = async (resource: string, config: any = null) => {
+	const response = await axios.get(IBGE_URL() + resource, config);
 	return response; 
 }
 
