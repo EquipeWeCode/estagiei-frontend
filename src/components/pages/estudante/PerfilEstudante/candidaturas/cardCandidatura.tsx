@@ -9,11 +9,14 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import styles from "./styles.module.css";
 import { putCandidatura } from "@/services/candidatura";
-import { APROVADO, CANCELADO, CANDIDATADO } from "@/constants/enums";
+import { APROVADO, CANCELADO, CANCELADO_ESTUDANTE, CANDIDATADO, statusCandidaturaEnum } from "@/constants/enums";
+import { useEffect } from "react";
 
 export const getStatusColor = (status: string | undefined) => {
 	switch (status) {
 		case CANCELADO:
+			return "#f0b3b3";
+		case CANCELADO_ESTUDANTE:
 			return "#f0b3b3";
 		case APROVADO:
 			return "#b3f0b3";
@@ -22,8 +25,12 @@ export const getStatusColor = (status: string | undefined) => {
 	}
 };
 
-const CardCandidatura = ({ candidatura, fetchCandidatura }: CandidaturaProps) => {
-	const [statusCandidatura, setStatusCandidatura] = useState<string>("Candidatado");
+const CardCandidatura = ({ candidatura, status, fetchCandidatura }: CandidaturaProps) => {
+	const [statusCandidatura, setStatusCandidatura] = useState<string>(capitalizaPriLetraDeCadaPalavra(statusCandidaturaEnum.get(status)));
+
+	useEffect(() => {
+		setStatusCandidatura(capitalizaPriLetraDeCadaPalavra(statusCandidaturaEnum.get(status)));
+	}, [status]);
 
 	const { t } = useTranslation();
 
@@ -31,23 +38,24 @@ const CardCandidatura = ({ candidatura, fetchCandidatura }: CandidaturaProps) =>
 		const body = {
 			codEstudante: candidatura.codEstudante,
 			codVaga: candidatura.codVaga,
-			status: CANCELADO,
+			status: CANCELADO_ESTUDANTE,
 		};
 		putCandidatura(body).then(() => {
 			fetchCandidatura();
 		});
 	};
 
-	const labelStatusCandidatura = (status: string) => {
-		if (status === CANDIDATADO) {
+	const labelStatusCandidatura = () => {
+		const labelStatus = capitalizaPriLetraDeCadaPalavra(statusCandidaturaEnum.get(status));
+		if (candidatura.status === CANDIDATADO) {
 			return (
 				<Button
 					className={styles.btnRetiraCandidatura}
 					onClick={() => retirarCandidatura()}
 					onMouseOver={() => setStatusCandidatura("Retirar Candidatura")}
-					onMouseLeave={() => setStatusCandidatura("Candidatado")}
+					onMouseLeave={() => setStatusCandidatura(labelStatus)}
 				>
-					{capitalizaPriLetraDeCadaPalavra(statusCandidatura)}
+					{statusCandidatura}
 				</Button>
 			);
 		}
@@ -59,9 +67,9 @@ const CardCandidatura = ({ candidatura, fetchCandidatura }: CandidaturaProps) =>
 					backgroundColor: getStatusColor(candidatura?.status),
 				}}
 				onMouseOver={() => alteraLabelCandidatura("Retirar Candidatura")}
-				onMouseLeave={() => alteraLabelCandidatura("Candidatado")}
+				onMouseLeave={() => alteraLabelCandidatura(labelStatus)}
 			>
-				{capitalizaPriLetraDeCadaPalavra(status)}
+				{labelStatus}
 			</span>
 		);
 	};
@@ -116,7 +124,7 @@ const CardCandidatura = ({ candidatura, fetchCandidatura }: CandidaturaProps) =>
 						<span>Candidatado em: {dateTimeMask(candidatura?.auditoria?.dataInclusao)}</span>
 					</div>
 				</Col>
-				{labelStatusCandidatura(candidatura?.status!)}
+				{labelStatusCandidatura()}
 			</Row>
 		</>
 	);
