@@ -110,5 +110,16 @@ export const TRANSLATIONS_PT = {
 	select_state: "Selecione o estado",
 	edit_job: "Editar vaga",
 	new_job: "Nova vaga",
+	applied_on: "Candidatado em",
+	cancel_application: "Cancelar candidatura",
+	title_required: "O título é obrigatório",
+	salary_required: "O salário é obrigatório",
+	hrs_day: "horas/dia",
+	working_hours: "Horas de trabalho",
+	working_hours_required: "As horas de trabalho são obrigatórias",
+	type: "Tipo",
+	select_type: "Selecione o tipo",
+	course: "Curso",
+	salary: "Salário",
 };
 

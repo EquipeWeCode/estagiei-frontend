@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import styles from "./styles.module.css";
 import { putCandidatura } from "@/services/candidatura";
-import { APROVADO, CANCELADO, CANDIDATADO } from "@/constants/enums";
+import { APROVADO, CANCELADO, CANDIDATADO, FINALIZADO, statusCandidaturaEnum } from "@/constants/enums";
 
 export const getStatusColor = (status: string | undefined) => {
 	switch (status) {
@@ -17,13 +17,15 @@ export const getStatusColor = (status: string | undefined) => {
 			return "#f0b3b3";
 		case APROVADO:
 			return "#b3f0b3";
+		case FINALIZADO: 
+			return "#b3b3f0";
 		default:
 			return "#aacdee";
 	}
 };
 
 const CardCandidatura = ({ candidatura, fetchCandidatura }: CandidaturaProps) => {
-	const [statusCandidatura, setStatusCandidatura] = useState<string>("Candidatado");
+	const [statusCandidatura, setStatusCandidatura] = useState<string>(statusCandidaturaEnum.get(candidatura?.status) || "");
 
 	const { t } = useTranslation();
 
@@ -44,8 +46,8 @@ const CardCandidatura = ({ candidatura, fetchCandidatura }: CandidaturaProps) =>
 				<Button
 					className={styles.btnRetiraCandidatura}
 					onClick={() => retirarCandidatura()}
-					onMouseOver={() => setStatusCandidatura("Retirar Candidatura")}
-					onMouseLeave={() => setStatusCandidatura("Candidatado")}
+					onMouseOver={() => setStatusCandidatura(t("cancel_application"))}
+					onMouseLeave={() => setStatusCandidatura(statusCandidaturaEnum.get(CANDIDATADO))}
 				>
 					{capitalizaPriLetraDeCadaPalavra(statusCandidatura)}
 				</Button>
@@ -58,7 +60,7 @@ const CardCandidatura = ({ candidatura, fetchCandidatura }: CandidaturaProps) =>
 				style={{
 					backgroundColor: getStatusColor(candidatura?.status),
 				}}
-				onMouseOver={() => alteraLabelCandidatura("Retirar Candidatura")}
+				onMouseOver={() => alteraLabelCandidatura(t("cancel_application"))}
 				onMouseLeave={() => alteraLabelCandidatura("Candidatado")}
 			>
 				{capitalizaPriLetraDeCadaPalavra(status)}
@@ -113,7 +115,9 @@ const CardCandidatura = ({ candidatura, fetchCandidatura }: CandidaturaProps) =>
 						</p>
 					</div>
 					<div className={styles.locationAuditoria}>
-						<span>Candidatado em: {dateTimeMask(candidatura?.auditoria?.dataInclusao)}</span>
+						<span>
+							{t("applied_on")}: {dateTimeMask(candidatura?.auditoria?.dataInclusao)}
+						</span>
 					</div>
 				</Col>
 				{labelStatusCandidatura(candidatura?.status!)}
