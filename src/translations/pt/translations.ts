@@ -72,6 +72,16 @@ export const TRANSLATIONS_PT = {
 	back_to_home: "Voltar para início",
 	expired_session: "Sua sessão expirou. Por favor, faça login novamente.",
 	login_home: "Cadastre-se e receba recomendações de vagas de estágio voltadas ao seu perfil.",
-	singup: "Cadastrar-se"
+	singup: "Cadastrar-se",
+	social_purpose: "Razão social",
+	company_name: "Nome fantasia",
+	state: "Estado",
+	city: "Cidade",
+	district: "Bairro",
+	street_name: "Logradouro",
+	number: "Numero",
+	complement: "Complemento",
+	refer_point: "Ponto de referência",
+	zip_code: "Cep"
 };
 

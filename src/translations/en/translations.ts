@@ -71,5 +71,15 @@ export const TRANSLATIONS_EN = {
 	back_to_home: "Back to home",
 	expired_session: "Your session has expired. Please login again.",
 	login_home: "Sing up to receive intership vacancies recommendations matching with your profile.",
-	singup: "Sing up"
+	singup: "Sing up",
+	social_purpose: "Social Purpose",
+	company_name: "Company name",
+	state: "State",
+	city: "City",
+	district: "Disctrict",
+	street_name: "Street name",
+	number: "Number",
+	complement: "Complement",
+	refer_point: "Landmark",
+	zip_code: "Zip code"
 };
