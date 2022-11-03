@@ -70,6 +70,9 @@ const CadastroEstudanteInicio = () => {
 						onFinish={transferDataFinishingForm}
 						name="cadastroEstudante"
 						onValuesChange={(changedValues, allValues) => {
+							if (changedValues['repete-senha']) {
+								return
+							}
 							dispatch(setState({...novoEstudante, ...changedValues}));
 						}}
 						initialValues={novoEstudante}

@@ -18,22 +18,61 @@ import type { DatePickerProps } from "antd";
 import { CepType } from "@/types/cepType";
 import { getCep } from "@/services/cep";
 import { PlusOutlined } from "@ant-design/icons";
+import InputSelect from "@/components/common/InputSelect";
+import { EstadoType } from "@/types/estadoType";
+import { CidadeType } from "@/types/cidadeType";
+import { getEstados } from "@/services/estados";
+import { getCidades } from "@/services/cidades";
+import InputExperienciaProfissional from "@/components/common/InputExperienciaProfissional/InputExperienciaProfissional";
 
 const TerminoCadastro = () => {
-	const { user, setUser } = useAuth();
+	const [form] = Form.useForm();
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const [token, setToken] = useState(getToken());
 
 	const novoEstudante: CadastroEstudanteType = useAppSelector(state => state.cadastro.estudante);
 	const [novoCep, setCep] = useState<CepType>({} as CepType);
+
+	const [uf, setUf] = useState<Array<EstadoType>>([]);
+	const [cidades, setCidades] = useState<Array<CidadeType>>([]);
+
+	const [treatedUf, setTreatedEstados] = useState<string[]>([]);
+	const [treatedCidades, setTreatedCidades] = useState<string[]>([]);
+
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
+		getUf();
+		
 		if (token) {
 			navigate("/");
 		}
 	}, []);
+
+	useEffect(() => {
+		console.log(novoEstudante);
+	}, [novoEstudante]);
+
+	useEffect(() => {
+		dispatch(setState({...novoEstudante, endereco: {
+			estado: novoCep.uf,
+			cidade: novoCep.localidade,
+			bairro: novoCep.bairro,
+			logradouro: novoCep.logradouro,
+		}}))
+	}, [novoCep])
+
+	useEffect(() => {
+		form.setFieldsValue(novoEstudante);
+	}, [form, dispatch]);
+
+	useEffect(() => {
+		const estado = uf.find((estado) => estado.sigla == novoEstudante.endereco?.estado);
+		if (estado != undefined) {
+			getCities(estado.id);
+		}
+	}, [novoEstudante.endereco?.estado]);
 
 	const dateFormat = "DD/MM/YYYY";
 	const dateFormatDto = "YYYY-MM-DD";
@@ -61,18 +100,34 @@ const TerminoCadastro = () => {
 		}
 	}
 
-	useEffect(() => {
-		dispatch(setState({...novoEstudante, endereco: {
-			estado: novoCep.uf,
-			cidade: novoCep.localidade,
-			bairro: novoCep.bairro,
-			logradouro: novoCep.logradouro,
-		}}))
-	}, [novoCep])
+	const treatUf = (uf: Array<EstadoType>) => {
+		const treatedEstados = uf.map((estado) => {return estado.sigla});
+		setTreatedEstados([...treatedEstados]);
+	}	
 
-	useEffect(() => {
-		console.log(novoEstudante)
-	}, [novoEstudante])
+	const treatCities = (cidades: Array<CidadeType>) => {
+		const treatedCidades = cidades.map((cidade) => {return cidade.nome});
+		setTreatedCidades([...treatedCidades]);
+	}
+
+	const getUf = async () => {
+		const estados = await getEstados();
+		setUf(estados.data);
+		treatUf(estados.data);
+	}
+
+	const getCities = async (id: number) => {
+		const cidades = await getCidades(id);
+		treatCities(cidades.data);
+	}
+
+	const handleOptionEstado = (value: string) => {
+		dispatch(setState({...novoEstudante, ...{endereco: {...novoEstudante.endereco, estado: value}}}));
+	}
+
+	const handleOptionCidade = (value: string) => {
+		dispatch(setState({...novoEstudante, ...{endereco: {...novoEstudante.endereco, cidade: value}}}));
+	}
 
 	return (
 		<div className={styles.containerGeral}>
@@ -85,8 +140,15 @@ const TerminoCadastro = () => {
 						onFinish={() => {dispatch(negateCadastroetp2())}}
 						name="cadastroEstudante"
 						onValuesChange={(changedValues, allValues) => {
+							if (changedValues.endereco) {
+								dispatch(setState({...novoEstudante, endereco: {...novoEstudante.endereco, ...changedValues.endereco}}));
+								return
+							}
+							if (changedValues['repete-senha']) {
+								return
+							}
 							if (!changedValues.dataNascimento) {
-								dispatch(setState({...novoEstudante, ...changedValues}))
+								dispatch(setState({...novoEstudante, ...changedValues}));
 							}
 						}}
 						className={styles.containerInput}
@@ -156,62 +218,50 @@ const TerminoCadastro = () => {
 							</Form.Item>
 						</Form.Item> */}
 
-						<Form.Provider>
 							<Form.Item>
-								<span>CEP</span>
-								<Form.Item name={['endereco', 'cep']} noStyle rules={RULES}>
-									<Input placeholder={"cep"} value={novoEstudante.endereco?.cep} maxLength={8} onChange={e => getViaCep(e.target.value)}/>
+								<Form.Item name={["endereco", "cep"]} noStyle rules={RULES}>
+									<Input label={t("zip_code")} placeholder={t("zip_code")} value={novoEstudante.endereco?.cep} maxLength={8} onChange={e => getViaCep(e.target.value)}/>
 								</Form.Item>
 							</Form.Item>
 							<Form.Item>
-								<span>Estado</span>
-								<Form.Item noStyle rules={RULES}>
-									<Input placeholder={"estado"} value={novoEstudante.endereco?.estado} maxLength={14} />
+								<Form.Item name={["endereco", "estado"]} noStyle rules={RULES}>
+									<InputSelect value={novoEstudante.endereco?.estado} choices={treatedUf} label={t("state")} change={handleOptionEstado}/>
 								</Form.Item>
 							</Form.Item>
 							<Form.Item>
-								<span>Cidade</span>
-								<Form.Item noStyle rules={RULES}>
-									<Input placeholder={"cidade"} value={novoEstudante.endereco?.cidade} maxLength={14} />
+								<Form.Item name={["endereco", "cidade"]} noStyle rules={RULES}>
+									<InputSelect value={novoEstudante.endereco?.cidade} choices={treatedCidades} label={t("city")} change={handleOptionCidade}/>
 								</Form.Item>
 							</Form.Item>
 							<Form.Item>
-								<span>Bairro</span>
-								<Form.Item noStyle rules={RULES}>
-									<Input placeholder={"bairro"} value={novoEstudante.endereco?.bairro} maxLength={14} />
+								<Form.Item name={["endereco", "bairro"]} noStyle rules={RULES}>
+									<Input label={t("district")} placeholder={t("district")} value={novoEstudante.endereco?.bairro} maxLength={14} />
 								</Form.Item>
 							</Form.Item>
 							<Form.Item>
-								<span>Logradouro</span>
-								<Form.Item noStyle rules={RULES}>
-									<Input placeholder={"logradouro"} value={novoEstudante.endereco?.logradouro} maxLength={14} />
+								<Form.Item name={["endereco", "logradouro"]} noStyle rules={RULES}>
+									<Input label={t("street_name")} placeholder={t("street_name")} value={novoEstudante.endereco?.logradouro} maxLength={14} />
 								</Form.Item>
 							</Form.Item>
 							<Form.Item>
-								<span>Numero</span>
-								<Form.Item name={['endereco', 'numero']} noStyle rules={RULES}>
-									<Input placeholder={"numero"} value={novoEstudante.endereco?.numero} maxLength={14} />
+								<Form.Item name={["endereco", "numero"]} noStyle rules={RULES}>
+									<Input label={t("number")} placeholder={t("number")} value={novoEstudante.endereco?.numero} maxLength={14} />
 								</Form.Item>
 							</Form.Item>
 							<Form.Item>
-								<span>Complemento</span>
-								<Form.Item name={['endereco', 'complemento']} noStyle>
-									<Input placeholder={"complemento"} value={novoEstudante.endereco?.complemento} maxLength={14} />
+								<Form.Item name={["endereco", "complemento"]} noStyle>
+									<Input label={t("complement")} placeholder={t("complement")} value={novoEstudante.endereco?.complemento} maxLength={14} />
 								</Form.Item>
 							</Form.Item>
 						
 							<Form.Item>
-								<span>Ponto de referencia</span>
-								<Form.Item name={['endereco', 'pontoReferencia']} noStyle>
-									<Input placeholder={"Ponto de referencia"} value={novoEstudante.endereco?.complemento} maxLength={14} />
+								<Form.Item name={["endereco", "pontoReferencia"]} noStyle>
+									<Input label={t("refer_point")} placeholder={t("refer_point")} value={novoEstudante.endereco?.pontoReferencia} maxLength={14} />
 								</Form.Item>
 							</Form.Item>
-						</Form.Provider>
 						
 						<span>Experiência Profissional</span>
-
-
-
+						<InputExperienciaProfissional />
 						<Form.Item>
 							<Button type="dashed" onClick={() => {}} block icon={<PlusOutlined />}>
 								Add sights

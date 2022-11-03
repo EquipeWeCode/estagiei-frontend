@@ -53,7 +53,7 @@ const CadastroEstudante = () => {
 		}
 
 		salvaEstudante();
-		return null;
+		navigate('/')
 	}
 
 	return (Cadastro());
