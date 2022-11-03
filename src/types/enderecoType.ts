@@ -7,5 +7,4 @@ export type EnderecoType = {
   logradouro?: string,
   numero?: string,
   complemento?: string,
-  pontoReferencia?: string
 }

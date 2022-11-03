@@ -55,7 +55,7 @@ export type CadastroEstudanteType = {
   experienciaProfissional?: experienciaProfissionalType[];
   competencias?: CompetenciaCodType[],
   historicoEscolar?: historicoEscolarType[];
-  contatos?: contatosType[]
+  contatos?: contatosType[];
 }
 
 export type LoginType = {

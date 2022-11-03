@@ -56,6 +56,11 @@ const TerminoCadastro = () => {
 	}, [novoEstudante]);
 
 	useEffect(() => {
+		const values = {...novoEstudante, dataNascimento: moment(novoEstudante.dataNascimento)}
+		form.setFieldsValue(values);
+	}, [form, novoEstudante]);
+
+	useEffect(() => {
 		setEstudante({...novoEstudante, ...{endereco: {
 				...novoEstudante.endereco,
 				estado: novoCep.uf,
@@ -84,7 +89,8 @@ const TerminoCadastro = () => {
 	];
 
 	const datePasser: DatePickerProps['onChange'] = (date, dateString) => {
-		dispatch(setState({ ...novoEstudante, ...{dataNascimento: moment(dateString, dateFormat).format(dateFormatDto)}}));
+		console.log(date, dateString);
+		setEstudante({...novoEstudante, ...{dataNascimento: moment(date).format(dateFormatDto)}} );
 	}
 
 	const getViaCep = async (cep: string) => {
@@ -150,18 +156,16 @@ const TerminoCadastro = () => {
 					</Row>
 					<Form
 						onFinish={() => {salvaEstudante()}}
+						form={form}
 						name="cadastroEstudante"
 						initialValues={novoEstudante}
 						onValuesChange={(changedValues, allValues) => {
 							if (changedValues.endereco) {
-								dispatch(setState({...novoEstudante, endereco: {...novoEstudante.endereco, ...changedValues.endereco}}));
-								return
-							}
-							if (changedValues['repete-senha']) {
+								setEstudante({...novoEstudante, endereco: {...novoEstudante.endereco, ...changedValues.endereco}});
 								return
 							}
 							if (!changedValues.dataNascimento) {
-								dispatch(setState({...novoEstudante, ...changedValues}));
+								setEstudante({...novoEstudante, ...changedValues});
 							}
 						}}
 						className={styles.containerInput}
@@ -268,9 +272,25 @@ const TerminoCadastro = () => {
 						</Form.Item>
 						
 						<span>Experiência Profissional</span>
-						<InputExperienciaProfissional />
+						<Form.List name="experienciaProfissional">
+							{(fields, { add, remove }) => (
+							<>
+								{fields.map(({ key, name, ...restField }) => (
+								<Space key={key} style={{ display: 'flex', marginBottom: 8 }} align="baseline">
+									<Form.Item {...restField} name={[name, 'first']} rules={[{ required: true, message: 'Missing first name' }]}>
+										<Input placeholder="First Name" />
+									</Form.Item>
+									<Form.Item {...restField} name={[name, 'last']} rules={[{ required: true, message: 'Missing last name' }]}>
+										<Input placeholder="Last Name" />
+									</Form.Item>
+									<MinusCircleOutlined onClick={() => remove(name)} />
+								</Space>
+								))}
+							</>
+							)}
+						</Form.List>
 						<Form.Item>
-							<Button type="dashed" onClick={() => {}} block icon={<PlusOutlined />}>
+							<Button type="dashed" onClick={() => {add()}} block icon={<PlusOutlined />}>
 								Add sights
 							</Button>
 						</Form.Item>
