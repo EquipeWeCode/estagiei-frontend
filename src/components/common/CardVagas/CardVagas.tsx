@@ -157,7 +157,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 								<SalvarVaga vaga={vaga} />{" "}
 							</span>
 						)}
-						<Tooltip title={t("show_details")}>
+						<Tooltip title={t("show_details")} overlayStyle={{ zIndex: "1" }}>
 							<span>
 								<ButtonDrawer
 									secondary
