@@ -1,8 +1,8 @@
 .switch-div {
     transform: scale(1);
     border-radius: 50%;
-    width: 3rem;
-    height: 3rem;
+    width: 12px;
+    height: 40px;
     position: -webkit-sticky !important; /* Safari */
     position: fixed !important;
     left: 92%;
@@ -15,11 +15,12 @@
     display: none;
 }
 
-@media only screen and (max-width: 600px) {
+@media(max-width: 600px) {
     .switch-div {
-        transform: scale(1.2);
-        position: fixed;
-        left: 80%;
-        top: 90vh;
+        transform: scale(0.8);
+        left: 85%;
+        top: 93vh;
+        width: 24px;
+        height: 44px;
     }    
 }

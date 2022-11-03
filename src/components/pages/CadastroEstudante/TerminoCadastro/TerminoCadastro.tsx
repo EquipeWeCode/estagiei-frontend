@@ -254,12 +254,6 @@ const TerminoCadastro = () => {
 								</Form.Item>
 							</Form.Item>
 						
-							<Form.Item>
-								<Form.Item name={["endereco", "pontoReferencia"]} noStyle>
-									<Input label={t("refer_point")} placeholder={t("refer_point")} value={novoEstudante.endereco?.pontoReferencia} maxLength={14} />
-								</Form.Item>
-							</Form.Item>
-						
 						<span>Experiência Profissional</span>
 						<InputExperienciaProfissional />
 						<Form.Item>

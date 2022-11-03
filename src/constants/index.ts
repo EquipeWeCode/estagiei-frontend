@@ -7,6 +7,7 @@ export const ENDPOINT_USUARIO = "/usuario";
 export const ENDPOINT_EMPRESA = "/empresa";
 export const ENDPOINT_ESTADOS = "/localidades/estados";
 export const ENDPOINT_REGIAO_IMEDIATA = "/regioes-imediatas"
+export const ENDPOINT_CANDIDATURA = "/candidatura";
 
 export const TOKEN_KEY = "token";
 export const USER_KEY = "userDetails";
@@ -17,3 +18,4 @@ export const REPRESENTANTE = "REPRESENTANTE";
 export const ADMINISTRADOR = "ADMINISTRADOR";
 
 export const SIZE_FILTER_DEFAULT = 10;
+export const PAGINATION_SIZE_DEFAULT = 10;

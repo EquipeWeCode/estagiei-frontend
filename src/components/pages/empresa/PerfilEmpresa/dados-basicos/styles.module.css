@@ -1,0 +1,22 @@
+.container-foto {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.container-foto img {
+  object-fit: cover;
+  display: inline;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}
+
+.container-dados {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-left: 1rem;
+}

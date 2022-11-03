@@ -2,7 +2,7 @@ import { ENDPOINT_ESTUDANTE } from "@/constants";
 import { CadastroEstudanteType, UserType } from "@/types/userTypes";
 import { getResource, postResource, putResource } from "./utils";
 
-export const getEstudante = async (id: string = "") => {
+export const getEstudante = async (id: string | number | undefined = "") => {
 	return await getResource(`${ENDPOINT_ESTUDANTE}/${id}`);
 };
 

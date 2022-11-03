@@ -41,10 +41,16 @@ instance.interceptors.response.use(
 		const errors: [] = response?.data?.errors || [];
 		const message = response?.data?.message || "";
 
+		if (error?.response?.status === 401) {
+			logout();
+			window.location.href = "/login?sessionExpired=true";
+		}
+
 		store.dispatch({
 			type: "SHOW_ERROR",
 			payload: errors?.length > 0 ? `${errors}` : message,
 		});
+		
 		return Promise.reject(error);
 	}
 );

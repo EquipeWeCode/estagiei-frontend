@@ -10,8 +10,8 @@ interface InfoUsuarioProps {
 	user: UserType;
 }
 const InfoUsuario = ({ user }: InfoUsuarioProps): JSX.Element => {
-  const { t } = useTranslation();
-  
+	const { t } = useTranslation();
+
 	return (
 		<>
 			<Col className={styles.containerInfoUser} md={15}>
@@ -46,7 +46,7 @@ const InfoUsuario = ({ user }: InfoUsuarioProps): JSX.Element => {
 						<Col md={10}>
 							<span>
 								<strong>{t("birth_date")}: </strong>
-								{t("date_format", { date: new Date(user.dataNascimento+"T00:00") })}
+								{t("date_format", { date: new Date(user.dataNascimento + "T00:00") })}
 							</span>
 						</Col>
 					)}

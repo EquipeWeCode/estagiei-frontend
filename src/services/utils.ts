@@ -30,7 +30,7 @@ export const getResourceIbge = async (resource: string, config: any = null) => {
 
 export async function postResource(
 	resource: string,
-	body: object,
+	body: object = {},
 	config: any = null,
 ) {
 	const response = await axios.post(ROOT_URL() + resource, body, config);
@@ -44,6 +44,14 @@ export async function putResource(resource: string, body: object, config: any = 
 
 export async function deleteResource(resource: string, config: any) {
 	const response = await axios.delete(ROOT_URL() + resource, config);
+	return response;
+}
+
+export async function postCandidaturaResource(
+	resource: string,
+	config: any = null,
+) {
+	const response = await axios.post(ROOT_URL() + resource, config);
 	return response;
 }
 

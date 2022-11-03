@@ -1,21 +1,35 @@
-import { getVagas } from "@/services/vaga";
+import Button from "@/components/common/Button";
 import { SIZE_FILTER_DEFAULT } from "@/constants";
+import { getVagas } from "@/services/vaga";
+import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
+import { capitalizaPriLetraDeCadaPalavra, ellipsisText, realMask } from "@/utils/masks";
+import { CaretLeftOutlined, CaretRightOutlined } from "@ant-design/icons";
+import { Col, Divider, Row, Tag } from "antd";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import C from "react-multi-carousel";
 import carouselStyles from "react-multi-carousel/lib/styles.css";
-import { useEffect, useState } from "react";
-import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
-import styles from "./styles.module.css";
-import { Col, Divider, Row, Tag } from "antd";
-import { capitalizaPriLetraDeCadaPalavra, realMask } from "@/utils/masks";
 import { useNavigate } from "react-router-dom";
-import Button from "@/components/common/Button";
-import { useTranslation } from "react-i18next";
-import { CaretLeftOutlined, CaretRightOutlined, LeftOutlined } from "@ant-design/icons";
+import styles from "./styles.module.css";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const Carousel = C.default ? C.default : C;
+
+
+export const getTagColor = (modalidadeVaga: string = "") => {
+	switch (modalidadeVaga) {
+		case "REMOTO":
+			return "magenta";
+		case "PRESENCIAL":
+			return "blue";
+		case "HIBRIDO":
+			return "purple";
+		default:
+			return "geekblue";
+	}
+};
 
 const CarouselVagas = () => {
 	const FILTRO_INICIAL: FiltroVagaType = {
@@ -24,7 +38,6 @@ const CarouselVagas = () => {
 	};
 
 	const [vagas, setVagas] = useState<VagaType[]>([]);
-	const [filtroVaga, setFiltroVaga] = useState<FiltroVagaType>(FILTRO_INICIAL);
 
 	useEffect((): void => {
 		fetchVagas();
@@ -34,10 +47,14 @@ const CarouselVagas = () => {
 	const { t } = useTranslation();
 
 	const fetchVagas = async () => {
-		const response = await getVagas(filtroVaga);
+		const response = await getVagas(FILTRO_INICIAL);
 		if (response.status === 200) {
 			setVagas(response.data);
 		}
+	};
+
+	const redirecionaPaginaVagas = (titulo: string = "", nomeFantasia: string = "") => {
+		navigate(`/vagas?titulo=${titulo}&empresa=${nomeFantasia}`);
 	};
 
 	const responsive = {
@@ -57,19 +74,6 @@ const CarouselVagas = () => {
 			breakpoint: { max: 1259, min: 0 },
 			items: 1,
 		},
-	};
-
-	const getTagColor = (modalidadeVaga: string = "") => {
-		switch (modalidadeVaga) {
-			case "REMOTO":
-				return "green";
-			case "PRESENCIAL":
-				return "blue";
-			case "HIBRIDO":
-				return "purple";
-			default:
-				return "geekblue";
-		}
 	};
 
 	return (
@@ -96,6 +100,8 @@ const CarouselVagas = () => {
 				containerClass={carouselStyles.carouselContainer}
 			>
 				{vagas?.map(vaga => {
+					const { empresa } = vaga;
+
 					return (
 						<div key={vaga.codVaga} className={styles.vagaCarousel}>
 							<Row justify="center" align="top" style={{ width: "100%", textAlign: "center" }}>
@@ -110,16 +116,19 @@ const CarouselVagas = () => {
 								<Col span={24} className={styles.companyInfo}>
 									<h2 style={{ height: "60px" }}>{vaga?.titulo}</h2>
 									<span className={styles.companyName}>
-										{capitalizaPriLetraDeCadaPalavra(vaga?.empresa?.nomeFantasia)}
+										{capitalizaPriLetraDeCadaPalavra(empresa?.nomeFantasia)}
 									</span>
 								</Col>
 								<Col span={24}>
-									<div className={styles.descricaoVaga}>{vaga?.descricao}</div>
+									<div className={styles.descricaoVaga}>{ellipsisText(vaga?.descricao, 90)}</div>
 								</Col>
 								<Col span={24}>
 									<span className={styles.salarioVaga}>{realMask(vaga?.salario)}</span>
 									<Row justify="center">
-										<Button secondary onClick={() => navigate("/vagas")}>
+										<Button
+											secondary
+											onClick={() => redirecionaPaginaVagas(vaga.titulo, empresa?.nomeFantasia)}
+										>
 											{t("see_more")}
 										</Button>
 									</Row>

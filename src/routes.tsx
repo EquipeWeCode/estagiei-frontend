@@ -17,14 +17,14 @@ import PrivateRoute from "@/components/pages/PrivateRoute";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import Notification from "@/components/common/Notification";
-import CadastroEmpresa from "./components/pages/CadastroEmpresa";
-import DescricaoVaga from "./components/pages/DescricaoVaga";
+import DescricaoVaga from "./components/common/CardVagas/DescricaoVaga";
 import Vagas from "./components/pages/Vagas";
 import { EMPRESA, ESTUDANTE } from "./constants";
 import TraducaoBtn from "./components/common/TraducaoBtn";
+import CadastroEstudante from "./components/pages/CadastroEstudante/CadastroEstudante";
+import CadastroEmpresa from "./components/pages/CadastroEmpresa";
 import PerfilEstudante from "@/components/pages/estudante/PerfilEstudante";
 import PerfilEmpresa from "@/components/pages/empresa/PerfilEmpresa";
-import CadastroEstudante from "./components/pages/CadastroEstudante/CadastroEstudante";
 
 render(
 	<Provider store={store}>

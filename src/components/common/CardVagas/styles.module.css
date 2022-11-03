@@ -8,10 +8,14 @@
 
 .content {
   flex-grow: 1;
+  margin-right: 25px;
 }
 
 .col-image {
   margin-right: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .container-vaga {
@@ -26,22 +30,42 @@
   transition: ease 0.2s;
 }
 
-.container-vaga:hover {
-  background-color: var(--container_hover_color);
-}
-
 .vaga-titulo {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  align-items: center;
 }
 
-.col-desc {
-  display: inline-block;
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden !important;
-  text-overflow: ellipsis;
+.vaga-titulo-container h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0;
+  color: var(--secondary-color);
+}
+
+.company-image {
+  object-fit: cover;
+  transition: ease 0.2s;
+  border-radius: 5px;
+}
+
+.tag-modalidade {
+  width: 100px;
+  text-align: center;
+  margin-left: 2rem;
+}
+
+.company-image:hover {
+  transform: scale(1.1);
+}
+
+.location-auditoria {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  font-size: 1rem;
 }
 
 @media only screen and (max-width: 950px) {

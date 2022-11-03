@@ -7,6 +7,7 @@ export type EmpresaType = {
   avatar?: string,
   nomeFantasia?: string,
   cnpj?: string,
+  endereco?: EnderecoType,
   indAtivo?: boolean,
 }
 

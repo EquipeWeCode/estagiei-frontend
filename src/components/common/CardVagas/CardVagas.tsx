@@ -1,88 +1,175 @@
-import { VagaType } from "@/types/vagasTypes";
-import { Col, Empty, Tag, Space,Button, Row } from "antd";
+import DescricaoVaga from "@/components/common/CardVagas/DescricaoVaga";
+import { useAuth } from "@/contexts/auth";
+import { CandidaturaType } from "@/types/candidaturaType";
 import { CompetenciaType } from "@/types/competenciaType";
-import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
-import { COLORS } from "@/constants/colors";
-import NotFound from "../NotFound";
+import { VagaType } from "@/types/vagasTypes";
+import {
+	capitalizaPriLetraDeCadaPalavra,
+	dateMask,
+	ellipsisText,
+	justDateMask,
+	realMask,
+} from "@/utils/masks";
+import { ClockCircleOutlined, EnvironmentOutlined } from "@ant-design/icons";
+import { Col, Empty, Row, Tag } from "antd";
+import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import ButtonDrawer from "../ButtonDrawer";
+import { getTagColor } from "../CarouselVagas/CarouselVagas";
+import ImageNotFound from "../ImageNotFound";
+import styles from "./styles.module.css";
 
 interface CardVagasProps {
 	vagas: VagaType[];
-	competenciasEstudante: CompetenciaType[];
+	candidaturas?: CandidaturaType[];
+	isEmpresa?: boolean;
+	fetchCandidaturas?: () => void;
 }
 
+export interface VagaComCandidaturaType extends VagaType {
+	isCandidatada?: boolean;
+}
+
+export const isVagaRecomendada = (
+	vaga: VagaComCandidaturaType,
+	competenciasEstudante: CompetenciaType[] | undefined
+) => {
+	const { competencias } = vaga;
+	const competenciasVaga = competencias?.map(competencia => competencia.codCompetencia);
+	const competenciasCandidato = competenciasEstudante?.map(
+		competencia => competencia.codCompetencia
+	);
+	return competenciasVaga?.some(competenciaVaga =>
+		competenciasCandidato?.includes(competenciaVaga)
+	);
+};
+
 const CardVagas = (props: CardVagasProps): JSX.Element => {
-	const retornaCorTag = (competencia: CompetenciaType): string => {
-		return props.competenciasEstudante.find(
-			comp => comp.codCompetencia === competencia.codCompetencia
-		)
-			? COLORS.argb.primary_color
-			: "default";
+	const { user } = useAuth();
+	const { competencias: competenciasEstudante } = user;
+	const { t } = useTranslation();
+
+	const { vagas = [], candidaturas = [], fetchCandidaturas, isEmpresa = false } = props;
+
+	const refDrawer = useRef<ButtonDrawer>(null);
+
+	const fechaDrawer = () => {
+		refDrawer?.current?.fechaDrawer();
+	};
+
+	useEffect(() => {
+		fechaDrawer();
+	}, []);
+
+	const vagasComCandidatura: VagaComCandidaturaType[] = vagas.map(vaga => {
+		const candidatura = candidaturas.find(candidatura => candidatura.codVaga === vaga.codVaga);
+		const isCandidatada = candidatura ? true : false;
+
+		return {
+			...vaga,
+			isCandidatada,
+		};
+	});
+
+	const getLocalVaga = (vaga: VagaComCandidaturaType) => {
+		if (vaga?.modalidade === "REMOTO") {
+			return t("remote");
+		} else if (!vaga?.endereco?.estado) {
+			return t("not_informed");
+		} else {
+			return (
+				capitalizaPriLetraDeCadaPalavra(vaga?.endereco?.cidade) +
+				" " +
+				(vaga?.endereco?.estado && "  / " + vaga?.endereco?.estado)
+			);
+		}
 	};
 
 	return (
 		<>
-			{props?.vagas && props?.vagas?.length > 0 ? (
-				props?.vagas?.map((vaga: VagaType) => (
-					<Row key={vaga.codVaga} className="container-vaga" align="middle">
-						<Link to="/empresa/profile">
-							<Col className="col-image">
-								{vaga?.empresa?.avatar ? (
-									<img
-										src={vaga?.empresa?.avatar}
-										alt="avatar-company"
-										width={100}
-										height={100}
-										style={{ borderRadius: "5px" }}
-									/>
-								) : (
-									<NotFound width={100} height={100} />
-								)}
-							</Col>
-						</Link>
-						<Col className="content">
-							<Link to="/DescricaoVaga">
-								<div className="vaga-titulo">
-									<h3 style={{ display: "inline-block" }}>
-										<strong>{vaga.titulo} </strong>
-									</h3>
-									<span style={{ color: "var(--primary-color)" }}>
-										{vaga.empresa && capitalizaPriLetraDeCadaPalavra(vaga.empresa.nomeFantasia)}
+			{vagasComCandidatura && vagasComCandidatura?.length > 0 ? (
+				vagasComCandidatura?.map((vaga: VagaComCandidaturaType) => (
+					<Row key={vaga.codVaga} className={styles.containerVaga} align="middle">
+						<Col className={styles.colImage}>
+							<Link to={`/empresa/perfil/${vaga?.empresa?.codEmpresa}`}>
+								{!isEmpresa &&
+									(vaga?.empresa?.avatar ? (
+										<>
+											<img
+												src={vaga?.empresa?.avatar}
+												alt="avatar-company"
+												className={styles.companyImage}
+												width={100}
+												height={100}
+											/>
+										</>
+									) : (
+										<ImageNotFound width={100} height={100} className={styles.companyImage} />
+									))}
+							</Link>
+						</Col>
+						<Col className={styles.content}>
+							<div className={styles.vagaTituloContainer}>
+								<div className={styles.vagaTitulo}>
+									<h3>{vaga.titulo}</h3>
+									<span>
+										<Tag className={styles.tagModalidade} color={getTagColor(vaga.modalidade)}>
+											{vaga.modalidade}
+										</Tag>
+										<h4 style={{ display: "inline-block" }}>{vaga.cargaHoraria}h</h4>
 									</span>
 								</div>
-							</Link>
-							<div className="col-desc">
-								<p>{vaga.descricao}</p>
+								<div style={{ color: "var(--primary-color)" }}>
+									<Link to={`/empresa/perfil/${vaga?.empresa?.codEmpresa}`}>
+										{vaga.empresa && capitalizaPriLetraDeCadaPalavra(vaga.empresa.nomeFantasia)}
+									</Link>
+								</div>
 							</div>
-							<p style={{ fontSize: "1rem" }}>
-								R$
-								{vaga.salario.toLocaleString("pt-BR", {
-									maximumFractionDigits: 2,
-									minimumFractionDigits: 2,
-								})}
-							</p>
-							{vaga.competencias &&
-								vaga.competencias.map((competencia: CompetenciaType) => (
-									<Tag
-										style={{
-											borderRadius: "5px",
-											padding: "0.2rem 0.4rem",
-											marginBottom: "0.5rem",
-										}}
-										key={competencia.codCompetencia}
-										color={retornaCorTag(competencia)}
-									>
-										{competencia.descricaoCompetencia}
+							<p className={styles.colDesc}>{ellipsisText(vaga.descricao, 75)}</p>
+							<div>
+								<p style={{ fontSize: "1rem", display: "inline-block" }}>
+									{vaga?.salario ? realMask(vaga?.salario) : t("not_informed")}
+								</p>
+								{isVagaRecomendada(vaga, competenciasEstudante) && (
+									<Tag color="purple" style={{ marginLeft: "1rem" }}>
+										{t("recommended")}
 									</Tag>
-								))}
+								)}
+								{vaga?.isCandidatada && (
+									<span style={{ marginLeft: "0.5rem" }}>
+										<Tag color={"success"}>{t("applied")}</Tag>
+									</span>
+								)}
+							</div>
+							<div className={styles.locationAuditoria}>
+								<span>
+									<EnvironmentOutlined /> {getLocalVaga(vaga)}
+								</span>
+								<span>
+									<ClockCircleOutlined /> {dateMask(vaga?.auditoria?.dataInclusao)}
+								</span>
+							</div>
 						</Col>
-						<Button >
-							<Link to="/detalheVaga">Ver detalhes</Link>
-						</Button>
+						<ButtonDrawer
+							secondary
+							ref={refDrawer}
+							label={t("show_details")}
+							title={`${vaga.titulo} - ${vaga?.empresa?.nomeFantasia}`}
+						>
+							<DescricaoVaga
+								isEmpresa={isEmpresa}
+								refDrawer={refDrawer}
+								user={user}
+								vaga={vaga}
+								key={vaga?.codVaga}
+								fetchCandidaturas={fetchCandidaturas}
+							/>
+						</ButtonDrawer>
 					</Row>
 				))
 			) : (
-				<Empty description="Nenhuma vaga encontrada." />
+				<Empty description={t("empty_vacancies")} />
 			)}
 		</>
 	);

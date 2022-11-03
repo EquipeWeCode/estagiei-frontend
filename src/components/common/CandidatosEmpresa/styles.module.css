@@ -1,0 +1,91 @@
+.container-vagas {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem;
+  text-align: center;
+  gap: 10px;
+}
+
+.content {
+  flex-grow: 1;
+  margin-right: 25px;
+}
+
+.col-image {
+  margin-right: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.container-vaga {
+  width: 100%;
+  padding: 1.5rem;
+  background-color: var(--container-color);
+  text-align: left;
+  border: 0.5px solid var(--primary-color);
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  transition: ease 0.2s;
+}
+
+.vaga-titulo {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.vaga-titulo-container h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0;
+  color: var(--secondary-color);
+}
+
+.company-image {
+  object-fit: cover;
+  transition: ease 0.2s;
+  border-radius: 5px;
+}
+
+.tag-modalidade {
+  width: 100px;
+  text-align: center;
+  margin-left: 2rem;
+}
+
+.company-image:hover {
+  transform: scale(1.1);
+}
+
+.location-auditoria {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  font-size: 1rem;
+}
+
+.span-status {
+  text-align: center;
+  width: 120px;
+  border-radius: 5px;
+}
+
+.toggle-ativo {
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, 0.2470588235);
+  font-size: 1.1rem;
+  padding: 5px;
+  border-radius: 25px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 950px) {
+  .col-image {
+    display: none;
+  }
+}

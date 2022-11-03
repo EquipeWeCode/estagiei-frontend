@@ -1,15 +1,15 @@
+import { ReactComponent as StudentBanner } from "@/assets/fundos/student-banner.svg";
+import Button from "@/components/common/Button";
+import CarouselVagas from "@/components/common/CarouselVagas";
 import { useAuth } from "@/contexts/auth";
-import carouselStyles from "react-multi-carousel/lib/styles.css";
+import { UserType } from "@/types/userTypes";
 import { Col, Row } from "antd";
 import { useTranslation } from "react-i18next";
-import { ReactComponent as StudentBanner } from "@/assets/fundos/student-banner.svg";
+import C from "react-multi-carousel";
+import carouselStyles from "react-multi-carousel/lib/styles.css";
+import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 import TextBanner from "./TextBanner";
-import Button from "@/components/common/Button";
-import { Link } from "react-router-dom";
-import CarouselVagas from "@/components/common/CarouselVagas";
-import C from "react-multi-carousel";
-import { UserType } from "@/types/userTypes";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore// eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -44,10 +44,12 @@ const Banner = (props: BannerProps) => {
 					{type === "student" ? (
 						<StudentBanner className={styles.studentSvg} />
 					) : (
-						<img src="https://res.cloudinary.com/dlkvupjc7/image/upload/v1664977159/company-banner-png_vhreut.png" className={styles.studentSvg} />
+						<img
+							src="https://res.cloudinary.com/dlkvupjc7/image/upload/v1664977159/company-banner-png_vhreut.png"
+							className={styles.studentSvg}
+						/>
 					)}
 				</Col>
-				<Col></Col>
 			</Row>
 		</Row>
 	);
@@ -82,7 +84,7 @@ const HomePage = (): JSX.Element => {
 				autoPlay={true}
 				showDots={true}
 				autoPlaySpeed={6000}
-				removeArrowOnDeviceType={["superLargeDesktop"]}
+				removeArrowOnDeviceType={["superLargeDesktop", "tablet"]}
 				containerClass={carouselStyles.carouselContainer}
 			>
 				<Banner

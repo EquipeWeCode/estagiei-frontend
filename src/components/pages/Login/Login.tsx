@@ -4,37 +4,44 @@ import { useAuth } from "@/contexts/auth";
 import { Col, Row } from "antd";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import styles from "./styles.module.scss";
 
 import { ReactComponent as LogoResumida } from "@/assets/logo-resumida.svg";
 import Button from "@/components/common/Button";
+import ButtonVoltar from "@/components/common/ButtonVoltar";
 import Input from "@/components/common/Input";
-import { LoginType, UserType } from "@/types/userTypes";
-import { getToken, postLogin } from "@/services/autenticacao";
+import { InputPassword } from "@/components/common/Input/Input";
 import { TOKEN_KEY, USER_KEY } from "@/constants";
-import jwt from "jwt-decode";
-import { getUsuario } from "@/services/usuario";
-import { getEstudante } from "@/services/estudante";
+import { getToken, postLogin } from "@/services/autenticacao";
+import { getCandidaturas } from "@/services/candidatura";
 import { getEmpresa } from "@/services/empresa";
+import { getEstudante } from "@/services/estudante";
+import { getUsuario } from "@/services/usuario";
+import { LoginType, UserType } from "@/types/userTypes";
+import jwt from "jwt-decode";
 
 const Login = () => {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
-	const { user, setUser } = useAuth();
+	const { user, setUserContextAndLocalStorage } = useAuth();
 	const [login, setLogin] = useState({} as LoginType);
 	const [token, setToken] = useState(getToken());
 	const [searchParams, setSearchParams] = useSearchParams();
 
-	const expired = searchParams.get("expired");
-
-	const userLocal = localStorage.getItem(USER_KEY);
+	const expired = searchParams.get("sessionExpired");
+	const notAuthenticated = searchParams.get("notAuthenticated");
+	const next = searchParams.get("next");
 
 	useEffect((): void => {
 		if (token !== null && USER_KEY && user?.roles) {
 			navigate("/");
 		}
 	}, []);
+
+	const navegaProximaPagina = (proximaPagina: string) => {
+		navigate(proximaPagina);
+	};
 
 	const changeLogin = (e: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -62,19 +69,23 @@ const Login = () => {
 				user = response.data;
 			} else if (codEstudante) {
 				const response = await getEstudante(codEstudante);
+				const candidaturas = await getCandidaturas(codEstudante);
 				user = response.data;
+				user.candidaturas = candidaturas.data;
 			}
 
 			user.roles = roles;
 
-			setUser(user);
-			localStorage.setItem("userDetails", JSON.stringify(user));
+			setUserContextAndLocalStorage(user);
+			// localStorage.setItem("userDetails", JSON.stringify(user));
 
-			codEmpresa
-				? navigate("/empresa/meu-perfil")
+			next
+				? navegaProximaPagina(next)
+				: codEmpresa
+				? navegaProximaPagina("/empresa/meu-perfil")
 				: codEstudante
-				? navigate("/estudante/meu-perfil")
-				: navigate("/");
+				? navegaProximaPagina("/vagas")
+				: navegaProximaPagina("/");
 		}
 	};
 
@@ -85,11 +96,8 @@ const Login = () => {
 					<Col className={styles.boxLogin}>
 						<LogoResumida width={90} />
 						<h1>{t("signin")}</h1>
-						{expired && (
-							<p className={styles.expired}>
-								{t("expired_session")}
-							</p>
-						)}
+						{expired && <p className={styles.expired}>{t("expired_session")}</p>}
+						{notAuthenticated && <p className={styles.expired}>{t("not_authenticated")}</p>}
 						<Row className={styles.containerInput} justify="center">
 							<Input
 								label={t("email")}
@@ -100,7 +108,7 @@ const Login = () => {
 								value={login.email}
 								onChange={changeLogin}
 							/>
-							<Input
+							<InputPassword
 								label={t("password")}
 								className={styles.inputLogin}
 								placeholder={t("type_password")}
@@ -123,9 +131,7 @@ const Login = () => {
 								{t("dont_have_account")} <Link to="/cadastro/estudante">{t("signup")}</Link>
 							</p>
 							<Row justify="center" align="middle" style={{ width: "100%" }}>
-								<Button secondary onClick={() => navigate("/")}>
-									{t("go_back")}
-								</Button>
+								<ButtonVoltar secondary />
 							</Row>
 						</Row>
 					</Col>
