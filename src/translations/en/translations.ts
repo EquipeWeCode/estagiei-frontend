@@ -107,4 +107,6 @@ export const TRANSLATIONS_EN = {
 	title: "Title",
 	state: "State",
 	select_state: "Select state",
+	edit_job: "Edit job",
+	new_job: "New job",
 };

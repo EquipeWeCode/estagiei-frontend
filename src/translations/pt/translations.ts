@@ -108,5 +108,7 @@ export const TRANSLATIONS_PT = {
 	title: "Título",
 	state: "Estado",
 	select_state: "Selecione o estado",
+	edit_job: "Editar vaga",
+	new_job: "Nova vaga",
 };
 

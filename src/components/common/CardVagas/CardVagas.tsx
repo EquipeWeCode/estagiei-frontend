@@ -1,4 +1,5 @@
 import DescricaoVaga from "@/components/common/CardVagas/DescricaoVaga";
+import SalvarVaga from "@/components/pages/empresa/SalvarVaga";
 import { useAuth } from "@/contexts/auth";
 import { CandidaturaType } from "@/types/candidaturaType";
 import { CompetenciaType } from "@/types/competenciaType";
@@ -10,8 +11,8 @@ import {
 	justDateMask,
 	realMask,
 } from "@/utils/masks";
-import { ClockCircleOutlined, EnvironmentOutlined } from "@ant-design/icons";
-import { Col, Empty, Row, Tag } from "antd";
+import { ClockCircleOutlined, EnvironmentOutlined, SearchOutlined } from "@ant-design/icons";
+import { Col, Empty, Row, Tag, Tooltip } from "antd";
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -151,21 +152,30 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 								</span>
 							</div>
 						</Col>
-						<ButtonDrawer
-							secondary
-							ref={refDrawer}
-							label={t("show_details")}
-							title={`${vaga.titulo} - ${vaga?.empresa?.nomeFantasia}`}
-						>
-							<DescricaoVaga
-								isEmpresa={isEmpresa}
-								refDrawer={refDrawer}
-								user={user}
-								vaga={vaga}
-								key={vaga?.codVaga}
-								fetchCandidaturas={fetchCandidaturas}
-							/>
-						</ButtonDrawer>
+						{isEmpresa && (
+							<span style={{ marginRight: "10px" }}>
+								<SalvarVaga vaga={vaga} />{" "}
+							</span>
+						)}
+						<Tooltip title={t("show_details")}>
+							<span>
+								<ButtonDrawer
+									secondary
+									ref={refDrawer}
+									icon={<SearchOutlined />}
+									titleDrawer={`${vaga.titulo} - ${vaga?.empresa?.nomeFantasia}`}
+								>
+									<DescricaoVaga
+										isEmpresa={isEmpresa}
+										refDrawer={refDrawer}
+										user={user}
+										vaga={vaga}
+										key={vaga?.codVaga}
+										fetchCandidaturas={fetchCandidaturas}
+									/>
+								</ButtonDrawer>
+							</span>
+						</Tooltip>
 					</Row>
 				))
 			) : (

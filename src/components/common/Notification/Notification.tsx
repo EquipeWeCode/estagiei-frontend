@@ -20,7 +20,7 @@ const Notification = (props: NotificationProps): JSX.Element => {
 
 	const showNotification = () => {
 		notificationAntd.open({
-			message: "Erro ao solicitar",
+			message: "Erro ao processar solicitação",
 			placement: "topRight",
 			description: (
 				<>

@@ -32,7 +32,6 @@ export const myWidget = window.cloudinary.createUploadWidget(
 	},
 	(error: any, result: any) => {
 		if (!error && result && result.event === "success") {
-			console.log("Done! Here is the image info: ", result.info);
 			document.getElementById("uploadedimage")?.setAttribute("src", result.info.secure_url);
 		}
 	}
