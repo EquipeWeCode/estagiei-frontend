@@ -120,4 +120,7 @@ export const TRANSLATIONS_EN = {
 	finish: "Finish",
 	title: "Title",
 	select_state: "Select state",
+	am_company: "I am company",
+	singup_as: "Sing up as a",
+	student: "Student"
 };

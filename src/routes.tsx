@@ -39,11 +39,6 @@ render(
 						<Route path="/vagas" element={<Vagas />} />
 						<Route path="/cadastro/empresa" element={<CadastroEmpresa />} />
 						<Route path="/cadastro/estudante" element={<CadastroEstudante />} />
-						<Route path="/detalheVaga" element={
-							<PrivateRoute roles={[ESTUDANTE]}>
-								<DescricaoVaga />
-							</PrivateRoute>
-						} />
 						<Route path="/estudante/meu-perfil" element={
 							<PrivateRoute roles={[ESTUDANTE]}>
 								<PerfilEstudante />

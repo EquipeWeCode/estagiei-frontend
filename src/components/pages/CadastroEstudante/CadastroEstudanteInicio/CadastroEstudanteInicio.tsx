@@ -14,13 +14,13 @@ import { getToken } from "@/services/autenticacao";
 import styles from './styles.module.scss';
 import { useAppDispatch, useAppSelector } from "@/redux/reducers/hooks";
 import { negateCadastroetp1, setState } from "@/redux/reducers/cadastro";
+import { InputPassword } from "@/components/common/Input/Input";
 
 const CadastroEstudanteInicio = () => {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 
 	const [token, setToken] = useState(getToken());
-	const { user, setUser } = useAuth();
 
 	const novoEstudante = useAppSelector(state => state.cadastro.estudante);
 	const dispatch = useAppDispatch();
@@ -86,13 +86,13 @@ const CadastroEstudanteInicio = () => {
 
 						<Form.Item>
 							<Form.Item name="senha" noStyle rules={RULES}>
-								<Input label={t("password")} type={"password"} placeholder={t("type_password")} value={novoEstudante.senha} maxLength={14} minLength={8}/>
+								<InputPassword label={t("password")} type={"password"} placeholder={t("type_password")} value={novoEstudante.senha} maxLength={14} minLength={8}/>
 							</Form.Item>
 						</Form.Item>
 
 						<Form.Item>
 							<Form.Item name="repete-senha" noStyle rules={RULES_PASSWORD} dependencies={['senha']}>
-								<Input label={t("type_repeat_password")} type={"password"} placeholder={t("type_password")} value={novoEstudante.senha} maxLength={14} minLength={8}/>
+								<InputPassword label={t("type_repeat_password")} type={"password"} placeholder={t("type_password")} value={novoEstudante.senha} maxLength={14} minLength={8}/>
 							</Form.Item>
 						</Form.Item>
 
@@ -107,7 +107,7 @@ const CadastroEstudanteInicio = () => {
 						<hr style={{ width: "100%", margin: "1rem 0", border: "0.1px solid var(--primary-color) ", }}/>
 
 						<Row style={{display: "flex", marginBottom: "20px"}}>
-							<span style={{flex:"1"}}>Cadastre-se como <Link to={"/cadastro/empresa"}>empresa</Link></span>
+							<span style={{flex:"1"}}>{t("singup_as")} <Link to={"/cadastro/empresa"}>{t("company")}</Link></span>
 						</Row>
 
 						<Row justify="center" align="middle" style={{ width: "100%" }}>

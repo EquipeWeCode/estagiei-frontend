@@ -31,7 +31,8 @@ const TerminoCadastro = () => {
 	const navigate = useNavigate();
 	const [token, setToken] = useState(getToken());
 
-	const novoEstudante: CadastroEstudanteType = useAppSelector(state => state.cadastro.estudante);
+	const estudanteRedux: CadastroEstudanteType = useAppSelector(state => state.cadastro.estudante);
+	const [novoEstudante, setEstudante] = useState<CadastroEstudanteType>({...estudanteRedux});
 	const [novoCep, setCep] = useState<CepType>({} as CepType);
 
 	const [uf, setUf] = useState<Array<EstadoType>>([]);
@@ -43,11 +44,11 @@ const TerminoCadastro = () => {
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
-		getUf();
-		
 		if (token) {
 			navigate("/");
 		}
+
+		getUf();
 	}, []);
 
 	useEffect(() => {
@@ -55,17 +56,15 @@ const TerminoCadastro = () => {
 	}, [novoEstudante]);
 
 	useEffect(() => {
-		dispatch(setState({...novoEstudante, endereco: {
-			estado: novoCep.uf,
-			cidade: novoCep.localidade,
-			bairro: novoCep.bairro,
-			logradouro: novoCep.logradouro,
-		}}))
+		setEstudante({...novoEstudante, ...{endereco: {
+				...novoEstudante.endereco,
+				estado: novoCep.uf,
+				cidade: novoCep.localidade,
+				bairro: novoCep.bairro,
+				logradouro: novoCep.logradouro,
+			}}
+		});
 	}, [novoCep])
-
-	useEffect(() => {
-		form.setFieldsValue(novoEstudante);
-	}, [form, dispatch]);
 
 	useEffect(() => {
 		const estado = uf.find((estado) => estado.sigla == novoEstudante.endereco?.estado);
@@ -95,7 +94,7 @@ const TerminoCadastro = () => {
 				setCep({...response.data})
 			}
 			catch(e) {
-				console.log(e);
+				dispatch({type: "SHOW_ERROR", payload: e});
 			}
 		}
 	}
@@ -129,6 +128,19 @@ const TerminoCadastro = () => {
 		dispatch(setState({...novoEstudante, ...{endereco: {...novoEstudante.endereco, cidade: value}}}));
 	}
 
+	const salvaEstudante = async () => {
+		console.log(novoEstudante);
+		
+		try {
+			const response = await postEstudante(novoEstudante);
+			navigate("/");
+		}
+		catch (e) {
+			dispatch({type: "SHOW_ERROR", payload: e});
+			dispatch(negateCadastroetp2());
+		}
+	};
+
 	return (
 		<div className={styles.containerGeral}>
 			<Row justify="center" className={styles.boxLogin}>
@@ -137,8 +149,9 @@ const TerminoCadastro = () => {
 						<h2>Precisamos de mais algumas informações para completar seu cadastro</h2>
 					</Row>
 					<Form
-						onFinish={() => {dispatch(negateCadastroetp2())}}
+						onFinish={() => {salvaEstudante()}}
 						name="cadastroEstudante"
+						initialValues={novoEstudante}
 						onValuesChange={(changedValues, allValues) => {
 							if (changedValues.endereco) {
 								dispatch(setState({...novoEstudante, endereco: {...novoEstudante.endereco, ...changedValues.endereco}}));
@@ -218,41 +231,41 @@ const TerminoCadastro = () => {
 							</Form.Item>
 						</Form.Item> */}
 
-							<Form.Item>
-								<Form.Item name={["endereco", "cep"]} noStyle rules={RULES}>
-									<Input label={t("zip_code")} placeholder={t("zip_code")} value={novoEstudante.endereco?.cep} maxLength={8} onChange={e => getViaCep(e.target.value)}/>
-								</Form.Item>
+						<Form.Item>
+							<Form.Item name={["endereco", "cep"]} noStyle rules={RULES}>
+								<Input label={t("zip_code")} placeholder={t("zip_code")} value={novoEstudante.endereco?.cep} maxLength={8} onChange={e => getViaCep(e.target.value)}/>
 							</Form.Item>
-							<Form.Item>
-								<Form.Item name={["endereco", "estado"]} noStyle rules={RULES}>
-									<InputSelect value={novoEstudante.endereco?.estado} choices={treatedUf} label={t("state")} change={handleOptionEstado}/>
-								</Form.Item>
+						</Form.Item>
+						<Form.Item>
+							<Form.Item name={["endereco", "estado"]} noStyle rules={RULES}>
+								<InputSelect value={novoEstudante.endereco?.estado} choices={treatedUf} label={t("state")} change={handleOptionEstado}/>
 							</Form.Item>
-							<Form.Item>
-								<Form.Item name={["endereco", "cidade"]} noStyle rules={RULES}>
-									<InputSelect value={novoEstudante.endereco?.cidade} choices={treatedCidades} label={t("city")} change={handleOptionCidade}/>
-								</Form.Item>
+						</Form.Item>
+						<Form.Item>
+							<Form.Item name={["endereco", "cidade"]} noStyle rules={RULES}>
+								<InputSelect value={novoEstudante.endereco?.cidade} choices={treatedCidades} label={t("city")} change={handleOptionCidade}/>
 							</Form.Item>
-							<Form.Item>
-								<Form.Item name={["endereco", "bairro"]} noStyle rules={RULES}>
-									<Input label={t("district")} placeholder={t("district")} value={novoEstudante.endereco?.bairro} maxLength={14} />
-								</Form.Item>
+						</Form.Item>
+						<Form.Item>
+							<Form.Item name={["endereco", "bairro"]} noStyle rules={RULES}>
+								<Input label={t("district")} placeholder={t("district")} value={novoEstudante.endereco?.bairro} maxLength={14} />
 							</Form.Item>
-							<Form.Item>
-								<Form.Item name={["endereco", "logradouro"]} noStyle rules={RULES}>
-									<Input label={t("street_name")} placeholder={t("street_name")} value={novoEstudante.endereco?.logradouro} maxLength={14} />
-								</Form.Item>
+						</Form.Item>
+						<Form.Item>
+							<Form.Item name={["endereco", "logradouro"]} noStyle rules={RULES}>
+								<Input label={t("street_name")} placeholder={t("street_name")} value={novoEstudante.endereco?.logradouro} maxLength={14} />
 							</Form.Item>
-							<Form.Item>
-								<Form.Item name={["endereco", "numero"]} noStyle rules={RULES}>
-									<Input label={t("number")} placeholder={t("number")} value={novoEstudante.endereco?.numero} maxLength={14} />
-								</Form.Item>
+						</Form.Item>
+						<Form.Item>
+							<Form.Item name={["endereco", "numero"]} noStyle rules={RULES}>
+								<Input label={t("number")} placeholder={t("number")} value={novoEstudante.endereco?.numero} maxLength={14} />
 							</Form.Item>
-							<Form.Item>
-								<Form.Item name={["endereco", "complemento"]} noStyle>
-									<Input label={t("complement")} placeholder={t("complement")} value={novoEstudante.endereco?.complemento} maxLength={14} />
-								</Form.Item>
+						</Form.Item>
+						<Form.Item>
+							<Form.Item name={["endereco", "complemento"]} noStyle>
+								<Input label={t("complement")} placeholder={t("complement")} value={novoEstudante.endereco?.complemento} maxLength={14} />
 							</Form.Item>
+						</Form.Item>
 						
 						<span>Experiência Profissional</span>
 						<InputExperienciaProfissional />

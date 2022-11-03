@@ -13,10 +13,13 @@ import styles from "./styles.module.scss";
 import { ReactComponent as LogoResumida } from "@/assets/logo-resumida.svg";
 import { EnderecoType } from "@/types/enderecoType";
 import InputSelect from "@/components/common/InputSelect/InputSelect";
+import { useSelector } from "react-redux";
 import { CidadeType } from "@/types/cidadeType";
 import { EstadoType } from "@/types/estadoType";
 import { getCidades } from "@/services/cidades";
 import { getEstados } from "@/services/estados";
+import { useDispatch } from "react-redux";
+import { InputPassword } from "@/components/common/Input/Input";
 
 type FormCadastroEmpresaType = {
 	email?: string,
@@ -31,7 +34,8 @@ const CadastroEmpresa = () => {
 	const navigate = useNavigate();
 	const [form] = Form.useForm();
 	const { t } = useTranslation();
-
+	const message = useSelector((state: any) => state.message);
+	const dispatch = useDispatch();
 	const [token, setToken] = useState(getToken());
 
 	const [formEmpresa, setForm] = useState<FormCadastroEmpresaType>({} as FormCadastroEmpresaType);
@@ -102,7 +106,7 @@ const CadastroEmpresa = () => {
 				setCep({...response.data})
 			}
 			catch(e) {
-				console.log(e);
+				dispatch({type: "SHOW_ERROR", payload: e});
 			}
 		}
 	}
@@ -134,7 +138,7 @@ const CadastroEmpresa = () => {
 			navigate('/login');
 		}
 		catch(e) {
-			// navigate('/');
+			dispatch({type: "SHOW_ERROR", payload: e});
 		}
 	};
 
@@ -185,13 +189,13 @@ const CadastroEmpresa = () => {
 
 							<Form.Item>
 								<Form.Item name="senha" noStyle rules={RULES}>
-									<Input label={t("type_password")} type={"password"} placeholder={t("password")} value={formEmpresa.senha} maxLength={14} minLength={8}/>
+									<InputPassword label={t("type_password")} type={"password"} placeholder={t("password")} value={formEmpresa.senha} maxLength={14} minLength={8}/>
 								</Form.Item>
 							</Form.Item>
 
 							<Form.Item>
 								<Form.Item name="repete-senha" noStyle rules={RULES_PASSWORD} dependencies={['senha']}>
-									<Input label={t("type_repeat_password")} type={"password"} placeholder={t("password")} value={formEmpresa.senha} maxLength={14} minLength={8}/>
+									<InputPassword label={t("type_repeat_password")} type={"password"} placeholder={t("password")} value={formEmpresa.senha} maxLength={14} minLength={8}/>
 								</Form.Item>
 							</Form.Item>
 
@@ -249,12 +253,6 @@ const CadastroEmpresa = () => {
 									<Input label={t("complement")} placeholder={t("complement")} value={formEmpresa.endereco?.complemento} maxLength={14} />
 								</Form.Item>
 							</Form.Item>
-						
-							<Form.Item>
-								<Form.Item name={["endereco", "pontoReferencia"]} noStyle>
-									<Input label={t("refer_point")} placeholder={t("refer_point")} value={formEmpresa.endereco?.pontoReferencia} maxLength={14} />
-								</Form.Item>
-							</Form.Item>
 						</Row>	
 					</Row>
 						<Form.Item style={{ marginTop: "1rem" }}>
@@ -266,7 +264,7 @@ const CadastroEmpresa = () => {
 						</Form.Item>
 					</Form>
 					<Row justify="center" align="middle" style={{ width: "100%" }}>
-						<p style={{width: "100%"}}>Cadastre-se como <Link to={"/cadastro/estudante"}>estudante</Link></p>
+						<p style={{width: "100%"}}>{t("singup_as")} <Link to={"/cadastro/estudante"}>{t("student")}</Link></p>
 						<Row justify="center" align="middle" style={{ width: "100%" }}>
 							<Button secondary onClick={() => navigate("/")}>
 								{t("go_back")}

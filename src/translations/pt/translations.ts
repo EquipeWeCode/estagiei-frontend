@@ -121,5 +121,7 @@ export const TRANSLATIONS_PT = {
 	finish: "Finalizar",
 	title: "Título",
 	select_state: "Selecione o estado",
+	am_company: "Sou empresa",
+	singup_as: "Cadastre-se como"
 };
 

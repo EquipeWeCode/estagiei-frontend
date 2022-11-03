@@ -16,6 +16,7 @@ import CadastroEstudanteInicio from "./CadastroEstudanteInicio";
 import TerminoCadastro from "./TerminoCadastro";
 import { useAppSelector, useAppDispatch } from "@/redux/reducers/hooks";
 import { negateCadastroetp1, negateCadastroetp2 } from "@/redux/reducers/cadastro";
+import { useDispatch } from "react-redux";
 
 const CadastroEstudante = () => {
 	const [token, setToken] = useState(getToken());
@@ -23,7 +24,9 @@ const CadastroEstudante = () => {
 
 	const cadastroetp1 = useAppSelector(state => state.cadastro.cadastroetp1);
 	const cadastroetp2 = useAppSelector(state => state.cadastro.cadastroetp2);
+
 	const estudante = useAppSelector(state => state.cadastro.estudante);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (token) {
@@ -31,30 +34,12 @@ const CadastroEstudante = () => {
 		}
 	})
 
-	const salvaEstudante = async () => {
-		console.log(estudante);
-		
-		try {
-			const response = await postEstudante(estudante);
-			navigate("/");
-		}
-		catch (e) {
-			console.log(e);
-			navigate("/");
-		}
-	};
-
 	const Cadastro = () => {
 		if (!cadastroetp1) {
 			return <CadastroEstudanteInicio />
 		}
-		if (!cadastroetp2) {
-			return <TerminoCadastro />
-		}
 
-		salvaEstudante();
-		return null;
-		navigate('/')
+		return <TerminoCadastro />
 	}
 
 	return (

@@ -34,11 +34,16 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  width: 100%;
 }
 
 .form-row-cadastro {
   display: flex;
   flex-direction: column;
+  flex: 1;
+  margin-left: 50px;
+  margin-right: 50px;
+  min-width: 200px;
 }
 
 body .btn-login {
@@ -56,11 +61,16 @@ body .btn-login {
   color: red;
 }
 
-@media(max-width: 480px) {
+@media(max-width: 600px) {
+  .form-row-cadastro {
+    flex: none !important;
+  }
+}
+
+@media(max-width: 1200px) {
   .box-login {
-    width: 100%;
+    width: 90%;
     height: 100%;
-    border-radius: 0;
   }
 }
 
