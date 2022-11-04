@@ -317,6 +317,12 @@ const TerminoCadastro = () => {
 							</Form.Item>
 						</Form.Item>
 
+						<Form.Item>
+							<Form.Item>
+								<InputExperienciaProfissional labelGeral="Experiencia profissional"/>
+							</Form.Item>
+						</Form.Item>
+
 						<Form.Item style={{ marginTop: "1rem" }}>
 							<Button htmlType="submit" type="primary">
 								{t("singup")}
