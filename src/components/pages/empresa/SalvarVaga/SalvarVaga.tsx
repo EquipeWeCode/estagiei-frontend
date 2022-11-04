@@ -48,7 +48,6 @@ const SalvarVaga = ({ vaga, posOperacao }: SalvarVagaProps) => {
 	const getCEPInformacoes = async (cep: string | undefined) => {
 		getCEP(cep)
 			.then(response => {
-				console.log(response);
 				if (response?.status === 200 && !response?.data?.erro) {
 					const { logradouro, bairro, localidade, uf, complemento } = response.data;
 					const endereco = {
@@ -91,8 +90,6 @@ const SalvarVaga = ({ vaga, posOperacao }: SalvarVagaProps) => {
 			...vagaSemNulos,
 			competencias: novasCompetencias,
 		};
-
-		console.log(vagaNovaBody);
 
 		if (isEdicao) {
 			const { status } = await putVaga(codVaga, vagaNovaBody);
