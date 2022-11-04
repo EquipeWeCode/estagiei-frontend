@@ -5,6 +5,7 @@ import { AuditoriaType } from "./userTypes";
 
 export interface CandidaturaProps {
 	candidatura: CandidaturaType;
+	status?: string;
 	fetchCandidatura: () => any;
 }
 
