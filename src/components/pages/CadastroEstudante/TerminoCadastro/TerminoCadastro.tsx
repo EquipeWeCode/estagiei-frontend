@@ -144,20 +144,20 @@ const TerminoCadastro = () => {
 
 	const handleChange = (value: string[]) => {
 		const cdCompetencias = value.map((competencia) => {return {codCompetencia: Number(competencia)}})
-		console.log(cdCompetencias);
 		setEstudante({...novoEstudante, competencias: cdCompetencias});
 	};
 
-	const salvaEstudante = async () => {		
-		try {
-			postEstudante(novoEstudante).then((res) => {
-				dispatch(negateCadastroetp1());
-				navigate("/");
-			})
-		}
-		catch (e) {
-			dispatch({type: "SHOW_ERROR", payload: e});
-		}
+	const salvaEstudante = async (values: any) => {		
+		console.log(values);
+		// try {
+		// 	postEstudante(novoEstudante).then((res) => {
+		// 		dispatch(negateCadastroetp1());
+		// 		navigate("/");
+		// 	})
+		// }
+		// catch (e) {
+		// 	dispatch({type: "SHOW_ERROR", payload: e});
+		// }
 	};
 
 	return (
@@ -168,19 +168,22 @@ const TerminoCadastro = () => {
 						<h2>Precisamos de mais algumas informações para completar seu cadastro</h2>
 					</Row>
 					<Form
-						onFinish={() => {salvaEstudante()}}
+						onFinish={salvaEstudante}
 						form={form}
 						name="cadastroEstudante"
 						initialValues={novoEstudante}
-						onValuesChange={(changedValues, allValues) => {
-							if (changedValues.endereco) {
-								setEstudante({...novoEstudante, endereco: {...novoEstudante.endereco, ...changedValues.endereco}});
-								return
-							}
-							if (!changedValues.dataNascimento) {
-								setEstudante({...novoEstudante, ...changedValues});
-							}
-						}}
+						// onValuesChange={(changedValues, allValues) => {
+						// 	if (changedValues.endereco) {
+						// 		setEstudante({...novoEstudante, endereco: {...novoEstudante.endereco, ...changedValues.endereco}});
+						// 		return
+						// 	}
+						// 	if (changedValues.experienciaProfissional) {
+						// 		setEstudante({...novoEstudante, experienciaProfissional: [...[novoEstudante.experienciaProfissional], ...changedValues.experienciaProfissional]})
+						// 	}
+						// 	if (!changedValues.dataNascimento) {
+						// 		setEstudante({...novoEstudante, ...changedValues});
+						// 	}
+						// }}
 						className={styles.containerInput}
 					>
 						<Form.Item>
@@ -311,6 +314,12 @@ const TerminoCadastro = () => {
 						<Form.Item>
 							<Form.Item name={["competencias"]} noStyle rules={RULES}>
 								<SelectCompetencias label="Competencias" choices={competencias} function={handleChange}/>
+							</Form.Item>
+						</Form.Item>
+
+						<Form.Item>
+							<Form.Item>
+								<InputExperienciaProfissional labelGeral="Experiencia profissional"/>
 							</Form.Item>
 						</Form.Item>
 
