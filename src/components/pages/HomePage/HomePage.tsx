@@ -35,7 +35,7 @@ const Banner = (props: BannerProps) => {
 					<div>
 						{!user.roles && (
 							<Button secondary className={styles.bannerButton}>
-								<Link to="/cadastro">{buttonText}</Link>
+								<Link to="/cadastro/estudante">{buttonText}</Link>
 							</Button>
 						)}
 					</div>

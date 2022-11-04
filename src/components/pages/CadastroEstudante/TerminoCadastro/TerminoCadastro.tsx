@@ -24,6 +24,8 @@ import { CidadeType } from "@/types/cidadeType";
 import { getEstados } from "@/services/estados";
 import { getCidades } from "@/services/cidades";
 import InputExperienciaProfissional from "@/components/common/InputExperienciaProfissional/InputExperienciaProfissional";
+import { SelectProps } from "antd";
+import SelectCompetencias from "@/components/common/SelectCompetencias/SelectCompetencias";
 
 const TerminoCadastro = () => {
 	const [form] = Form.useForm();
@@ -34,6 +36,7 @@ const TerminoCadastro = () => {
 	const estudanteRedux: CadastroEstudanteType = useAppSelector(state => state.cadastro.estudante);
 	const [novoEstudante, setEstudante] = useState<CadastroEstudanteType>({...estudanteRedux});
 	const [novoCep, setCep] = useState<CepType>({} as CepType);
+	const [competencias, setCompetencias] = useState<CompetenciaType[]>([]);
 
 	const [uf, setUf] = useState<Array<EstadoType>>([]);
 	const [cidades, setCidades] = useState<Array<CidadeType>>([]);
@@ -49,6 +52,7 @@ const TerminoCadastro = () => {
 		}
 
 		getUf();
+		fetchCompetencias();
 	}, []);
 
 	useEffect(() => {
@@ -87,6 +91,12 @@ const TerminoCadastro = () => {
 			message: t("required"),
 		},
 	];
+
+	const fetchCompetencias = async () => {
+		const competencias = await getCompetencias();
+		console.log(competencias.data)
+		setCompetencias([...competencias.data]);
+	}
 
 	const datePasser: DatePickerProps['onChange'] = (date, dateString) => {
 		console.log(date, dateString);
@@ -271,7 +281,7 @@ const TerminoCadastro = () => {
 							</Form.Item>
 						</Form.Item>
 						
-						<span>Experiência Profissional</span>
+						{/* <span>Experiência Profissional</span>
 						<Form.List name="experienciaProfissional">
 							{(fields, { add, remove }) => (
 							<>
@@ -293,6 +303,12 @@ const TerminoCadastro = () => {
 							<Button type="dashed" onClick={() => {add()}} block icon={<PlusOutlined />}>
 								Add sights
 							</Button>
+						</Form.Item> */}
+
+						<Form.Item>
+							<Form.Item name={["competencias"]} noStyle rules={RULES}>
+								<SelectCompetencias choices={competencias}/>
+							</Form.Item>
 						</Form.Item>
 
 						<Form.Item style={{ marginTop: "1rem" }}>
