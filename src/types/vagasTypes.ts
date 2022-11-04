@@ -9,7 +9,7 @@ export interface VagaType {
 	titulo?: string;
 	descricao?: string;
 	modalidade?: string;
-	salario: number;
+	salario?: number;
 	indAtivo?: boolean;
 	cargaHoraria?: number;
 	empresa?: EmpresaType;

@@ -115,9 +115,7 @@ export const percentageMask = (value: any) => {
 	return "-";
 };
 
-export const dateMask = (
-	value: string | undefined
-) => {
+export const dateMask = (value: string | undefined) => {
 	if (value != null) {
 		const valueSplit = value?.split(" ")[0];
 		const newValue = valueSplit?.split("-")?.reverse()?.join();
@@ -201,14 +199,14 @@ export const monetaryMask = (value: any, precison = 2) => {
 	return "";
 };
 
-export const monetaryUnmask = (value: string | null) => {
+export const monetaryUnmask = (value: string | undefined) => {
 	if (value != null) {
 		return Number(value.replace(/\./g, "").replace(",", "."));
 	}
 	return "0";
 };
 
-export const realMask = (value: number | null) => {
+export const realMask = (value: number | undefined) => {
 	if (value != null) {
 		return "R$ ".concat(monetaryMask(value));
 	}
@@ -350,4 +348,8 @@ export const ellipsisText = (text: string = "", length: number = 20) => {
 		text.length > length ? text.substring(0, length - 3) + "..." : text.substring(0, length);
 
 	return ellipsisText;
+};
+
+export const removeEmpty = (obj: any) => {
+	return Object.fromEntries(Object.entries(obj).filter(([_, v]) => v != null));
 };

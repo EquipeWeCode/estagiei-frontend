@@ -182,6 +182,7 @@ const Vagas = () => {
 							/>
 						</Row>
 						<CardVagas
+							fetchVagas={fetchVagas}
 							vagas={vagas}
 							candidaturas={candidaturas}
 							fetchCandidaturas={fetchCandidaturas}

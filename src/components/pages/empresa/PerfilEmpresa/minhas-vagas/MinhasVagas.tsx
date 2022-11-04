@@ -92,7 +92,7 @@ const MinhasVagas = ({ user }: PerfilEmpresaProps) => {
 					onChange={paginar}
 				/>
 			</Row>
-			<CardVagas vagas={vagas} isEmpresa={true} />
+			<CardVagas vagas={vagas} isEmpresa={true} fetchVagas={fetchVagas} />
 			<Row justify="end">
 				<Pagination
 					total={quantidadeTotal}

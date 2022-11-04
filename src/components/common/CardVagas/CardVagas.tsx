@@ -7,9 +7,7 @@ import { VagaType } from "@/types/vagasTypes";
 import {
 	capitalizaPriLetraDeCadaPalavra,
 	dateMask,
-	ellipsisText,
-	justDateMask,
-	realMask,
+	ellipsisText, realMask
 } from "@/utils/masks";
 import { ClockCircleOutlined, EnvironmentOutlined, SearchOutlined } from "@ant-design/icons";
 import { Col, Empty, Row, Tag, Tooltip } from "antd";
@@ -26,6 +24,7 @@ interface CardVagasProps {
 	candidaturas?: CandidaturaType[];
 	isEmpresa?: boolean;
 	fetchCandidaturas?: () => void;
+	fetchVagas?: () => void;
 }
 
 export interface VagaComCandidaturaType extends VagaType {
@@ -51,7 +50,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 	const { competencias: competenciasEstudante } = user;
 	const { t } = useTranslation();
 
-	const { vagas = [], candidaturas = [], fetchCandidaturas, isEmpresa = false } = props;
+	const { vagas = [], candidaturas = [], fetchCandidaturas, isEmpresa = false, fetchVagas } = props;
 
 	const refDrawer = useRef<ButtonDrawer>(null);
 
@@ -85,6 +84,11 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 				(vaga?.endereco?.estado && "  / " + vaga?.endereco?.estado)
 			);
 		}
+	};
+
+	const posSalvarVaga = () => {
+		refDrawer?.current?.fechaDrawer();
+		fetchVagas?.();
 	};
 
 	return (
@@ -154,7 +158,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 						</Col>
 						{isEmpresa && (
 							<span style={{ marginRight: "10px" }}>
-								<SalvarVaga vaga={vaga} />{" "}
+								<SalvarVaga vaga={vaga} posOperacao={posSalvarVaga} />
 							</span>
 						)}
 						<Tooltip title={t("show_details")} overlayStyle={{ zIndex: "1" }}>
