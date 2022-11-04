@@ -1,16 +1,15 @@
 import Button from "@/components/common/Button";
 import { getTagColor } from "@/components/common/CarouselVagas/CarouselVagas";
 import ImageNotFound from "@/components/common/ImageNotFound";
+import { APROVADO, CANCELADO, CANCELADO_ESTUDANTE, CANDIDATADO, FINALIZADO, statusCandidaturaEnum } from "@/constants/enums";
+import { putCandidatura } from "@/services/candidatura";
 import { CandidaturaProps } from "@/types/candidaturaType";
 import { capitalizaPriLetraDeCadaPalavra, dateTimeMask, realMask } from "@/utils/masks";
 import { Col, Row, Tag } from "antd";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import styles from "./styles.module.css";
-import { putCandidatura } from "@/services/candidatura";
-import { APROVADO, CANCELADO, CANCELADO_ESTUDANTE, CANDIDATADO, statusCandidaturaEnum } from "@/constants/enums";
-import { useEffect } from "react";
 
 export const getStatusColor = (status: string | undefined) => {
 	switch (status) {
@@ -20,13 +19,15 @@ export const getStatusColor = (status: string | undefined) => {
 			return "#f0b3b3";
 		case APROVADO:
 			return "#b3f0b3";
+		case FINALIZADO: 
+			return "#b3b3f0";
 		default:
 			return "#aacdee";
 	}
 };
 
 const CardCandidatura = ({ candidatura, status, fetchCandidatura }: CandidaturaProps) => {
-	const [statusCandidatura, setStatusCandidatura] = useState<string>(capitalizaPriLetraDeCadaPalavra(statusCandidaturaEnum.get(status)));
+	const [statusCandidatura, setStatusCandidatura] = useState<string>(statusCandidaturaEnum.get(candidatura?.status) || "");
 
 	useEffect(() => {
 		setStatusCandidatura(capitalizaPriLetraDeCadaPalavra(statusCandidaturaEnum.get(status)));
@@ -52,8 +53,9 @@ const CardCandidatura = ({ candidatura, status, fetchCandidatura }: CandidaturaP
 				<Button
 					className={styles.btnRetiraCandidatura}
 					onClick={() => retirarCandidatura()}
-					onMouseOver={() => setStatusCandidatura("Retirar Candidatura")}
-					onMouseLeave={() => setStatusCandidatura(labelStatus)}
+
+					onMouseOver={() => setStatusCandidatura(t("cancel_application"))}
+					onMouseLeave={() => setStatusCandidatura(statusCandidaturaEnum.get(CANDIDATADO))}
 				>
 					{statusCandidatura}
 				</Button>
@@ -66,8 +68,8 @@ const CardCandidatura = ({ candidatura, status, fetchCandidatura }: CandidaturaP
 				style={{
 					backgroundColor: getStatusColor(candidatura?.status),
 				}}
-				onMouseOver={() => alteraLabelCandidatura("Retirar Candidatura")}
-				onMouseLeave={() => alteraLabelCandidatura(labelStatus)}
+				onMouseOver={() => alteraLabelCandidatura(t("cancel_application"))}
+				onMouseLeave={() => alteraLabelCandidatura("Candidatado")}
 			>
 				{labelStatus}
 			</span>
@@ -121,7 +123,9 @@ const CardCandidatura = ({ candidatura, status, fetchCandidatura }: CandidaturaP
 						</p>
 					</div>
 					<div className={styles.locationAuditoria}>
-						<span>Candidatado em: {dateTimeMask(candidatura?.auditoria?.dataInclusao)}</span>
+						<span>
+							{t("applied_on")}: {dateTimeMask(candidatura?.auditoria?.dataInclusao)}
+						</span>
 					</div>
 				</Col>
 				{labelStatusCandidatura()}

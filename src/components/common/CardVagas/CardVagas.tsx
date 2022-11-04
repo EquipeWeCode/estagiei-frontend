@@ -1,4 +1,5 @@
 import DescricaoVaga from "@/components/common/CardVagas/DescricaoVaga";
+import SalvarVaga from "@/components/pages/empresa/SalvarVaga";
 import { useAuth } from "@/contexts/auth";
 import { CandidaturaType } from "@/types/candidaturaType";
 import { CompetenciaType } from "@/types/competenciaType";
@@ -6,12 +7,10 @@ import { VagaType } from "@/types/vagasTypes";
 import {
 	capitalizaPriLetraDeCadaPalavra,
 	dateMask,
-	ellipsisText,
-	justDateMask,
-	realMask,
+	ellipsisText, realMask
 } from "@/utils/masks";
-import { ClockCircleOutlined, EnvironmentOutlined } from "@ant-design/icons";
-import { Col, Empty, Row, Tag } from "antd";
+import { ClockCircleOutlined, EnvironmentOutlined, SearchOutlined } from "@ant-design/icons";
+import { Col, Empty, Row, Tag, Tooltip } from "antd";
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -25,6 +24,7 @@ interface CardVagasProps {
 	candidaturas?: CandidaturaType[];
 	isEmpresa?: boolean;
 	fetchCandidaturas?: () => void;
+	fetchVagas?: () => void;
 }
 
 export interface VagaComCandidaturaType extends VagaType {
@@ -50,7 +50,7 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 	const { competencias: competenciasEstudante } = user;
 	const { t } = useTranslation();
 
-	const { vagas = [], candidaturas = [], fetchCandidaturas, isEmpresa = false } = props;
+	const { vagas = [], candidaturas = [], fetchCandidaturas, isEmpresa = false, fetchVagas } = props;
 
 	const refDrawer = useRef<ButtonDrawer>(null);
 
@@ -84,6 +84,11 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 				(vaga?.endereco?.estado && "  / " + vaga?.endereco?.estado)
 			);
 		}
+	};
+
+	const posSalvarVaga = () => {
+		refDrawer?.current?.fechaDrawer();
+		fetchVagas?.();
 	};
 
 	return (
@@ -151,21 +156,30 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 								</span>
 							</div>
 						</Col>
-						<ButtonDrawer
-							secondary
-							ref={refDrawer}
-							label={t("show_details")}
-							title={`${vaga.titulo} - ${vaga?.empresa?.nomeFantasia}`}
-						>
-							<DescricaoVaga
-								isEmpresa={isEmpresa}
-								refDrawer={refDrawer}
-								user={user}
-								vaga={vaga}
-								key={vaga?.codVaga}
-								fetchCandidaturas={fetchCandidaturas}
-							/>
-						</ButtonDrawer>
+						{isEmpresa && (
+							<span style={{ marginRight: "10px" }}>
+								<SalvarVaga vaga={vaga} posOperacao={posSalvarVaga} />
+							</span>
+						)}
+						<Tooltip title={t("show_details")} overlayStyle={{ zIndex: "1" }}>
+							<span>
+								<ButtonDrawer
+									secondary
+									ref={refDrawer}
+									icon={<SearchOutlined />}
+									titleDrawer={`${vaga.titulo} - ${vaga?.empresa?.nomeFantasia}`}
+								>
+									<DescricaoVaga
+										isEmpresa={isEmpresa}
+										refDrawer={refDrawer}
+										user={user}
+										vaga={vaga}
+										key={vaga?.codVaga}
+										fetchCandidaturas={fetchCandidaturas}
+									/>
+								</ButtonDrawer>
+							</span>
+						</Tooltip>
 					</Row>
 				))
 			) : (

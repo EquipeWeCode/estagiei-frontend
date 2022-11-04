@@ -14,6 +14,8 @@ export const InputPassword = (props: InputCustomProps) => {
 	);
 };
 
+export const { TextArea, Group, Search } = AntdInput;
+
 const Input = (props: InputCustomProps) => {
 	return (
 		<>
