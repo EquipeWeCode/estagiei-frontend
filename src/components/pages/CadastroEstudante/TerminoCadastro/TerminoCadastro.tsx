@@ -150,12 +150,13 @@ const TerminoCadastro = () => {
 
 	const salvaEstudante = async () => {		
 		try {
-			const response = await postEstudante(novoEstudante);
-			navigate("/");
+			postEstudante(novoEstudante).then((res) => {
+				dispatch(negateCadastroetp1());
+				navigate("/");
+			})
 		}
 		catch (e) {
 			dispatch({type: "SHOW_ERROR", payload: e});
-			dispatch(negateCadastroetp2());
 		}
 	};
 

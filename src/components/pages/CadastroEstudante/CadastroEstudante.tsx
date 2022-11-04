@@ -23,10 +23,6 @@ const CadastroEstudante = () => {
 	const navigate = useNavigate();
 
 	const cadastroetp1 = useAppSelector(state => state.cadastro.cadastroetp1);
-	const cadastroetp2 = useAppSelector(state => state.cadastro.cadastroetp2);
-
-	const estudante = useAppSelector(state => state.cadastro.estudante);
-	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (token) {
