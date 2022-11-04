@@ -313,7 +313,7 @@ const TerminoCadastro = () => {
 
 						<Form.Item>
 							<Form.Item name={["competencias"]} noStyle rules={RULES}>
-								<SelectCompetencias choices={competencias} function={handleChange}/>
+								<SelectCompetencias label="Competencias" choices={competencias} function={handleChange}/>
 							</Form.Item>
 						</Form.Item>
 
