@@ -3,6 +3,7 @@ import { SelectProps, Select } from "antd";
 
 interface SelectCompetenciasProps extends SelectProps {
     choices: CompetenciaType[];
+    function: (value: string[]) => void
 }
 
 const SelectCompetencias = (props: SelectCompetenciasProps) => {
@@ -11,13 +12,9 @@ const SelectCompetencias = (props: SelectCompetenciasProps) => {
     props.choices.forEach((choice) => {
         options.push({
             label: choice.descricaoCompetencia,
-            value: choice.descricaoCompetencia
+            value: choice.codCompetencia
         })
     })
-
-    const handleChange = (value: string[]) => {
-		console.log(`selected ${value}`);
-	};
 
     return (
         <Select
@@ -26,7 +23,7 @@ const SelectCompetencias = (props: SelectCompetenciasProps) => {
             style={{ width: '100%' }}
             placeholder="Competencias"
             defaultValue={[]}
-            onChange={handleChange}
+            onChange={props.function}
             options={options}
         />
     );

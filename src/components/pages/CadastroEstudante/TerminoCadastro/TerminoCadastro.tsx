@@ -137,12 +137,18 @@ const TerminoCadastro = () => {
 	}
 
 	const handleOptionEstado = (value: string) => {
-		dispatch(setState({...novoEstudante, ...{endereco: {...novoEstudante.endereco, estado: value}}}));
+		setEstudante({...novoEstudante, ...{endereco: {...novoEstudante.endereco, estado: value}}});
 	}
 
 	const handleOptionCidade = (value: string) => {
-		dispatch(setState({...novoEstudante, ...{endereco: {...novoEstudante.endereco, cidade: value}}}));
+		setEstudante({...novoEstudante, ...{endereco: {...novoEstudante.endereco, cidade: value}}});
 	}
+
+	const handleChange = (value: string[]) => {
+		const cdCompetencias = value.map((competencia) => {return {codCompetencia: Number(competencia)}})
+		console.log(cdCompetencias);
+		setEstudante({...novoEstudante, competencias: cdCompetencias});
+	};
 
 	const salvaEstudante = async () => {
 		console.log(novoEstudante);
@@ -307,7 +313,7 @@ const TerminoCadastro = () => {
 
 						<Form.Item>
 							<Form.Item name={["competencias"]} noStyle rules={RULES}>
-								<SelectCompetencias choices={competencias}/>
+								<SelectCompetencias choices={competencias} function={handleChange}/>
 							</Form.Item>
 						</Form.Item>
 
