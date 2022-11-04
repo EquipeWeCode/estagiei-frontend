@@ -9,8 +9,25 @@
     }
 }
 
+.btn-save {
+  max-width: 50px;
+}
+
 .label {
-    display: block;
-    width: 100%;
-    text-align: start;
+  display: block;
+  width: 100%;
+  text-align: start;
+}
+
+.space-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8; 
+}
+
+.container-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }

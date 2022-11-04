@@ -34,7 +34,7 @@ const Login = () => {
 	const next = searchParams.get("next");
 
 	useEffect((): void => {
-		if (token !== null && USER_KEY && user?.roles) {
+		if (token) {
 			navigate("/");
 		}
 	}, []);

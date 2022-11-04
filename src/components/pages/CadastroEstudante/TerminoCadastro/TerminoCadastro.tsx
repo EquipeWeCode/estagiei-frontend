@@ -94,12 +94,10 @@ const TerminoCadastro = () => {
 
 	const fetchCompetencias = async () => {
 		const competencias = await getCompetencias();
-		console.log(competencias.data)
 		setCompetencias([...competencias.data]);
 	}
 
 	const datePasser: DatePickerProps['onChange'] = (date, dateString) => {
-		console.log(date, dateString);
 		setEstudante({...novoEstudante, ...{dataNascimento: moment(date).format(dateFormatDto)}} );
 	}
 
@@ -150,9 +148,7 @@ const TerminoCadastro = () => {
 		setEstudante({...novoEstudante, competencias: cdCompetencias});
 	};
 
-	const salvaEstudante = async () => {
-		console.log(novoEstudante);
-		
+	const salvaEstudante = async () => {		
 		try {
 			const response = await postEstudante(novoEstudante);
 			navigate("/");
