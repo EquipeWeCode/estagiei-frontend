@@ -95,12 +95,18 @@ const SalvarVaga = ({ vaga, posOperacao }: SalvarVagaProps) => {
 		console.log(vagaNovaBody);
 
 		if (isEdicao) {
-			await putVaga(codVaga, vagaNovaBody);
+			const { status } = await putVaga(codVaga, vagaNovaBody);
+			if (status === 200) {
+				message.success(t("vaga_updated"));
+				posOperacao && posOperacao();
+			}
 		} else {
-			await postVaga(vagaNovaBody);
+			const { status } = await postVaga(vagaNovaBody);
+			if (status === 201) {
+				message.success(t("vaga_created"));
+				posOperacao && posOperacao();
+			}
 		}
-		console.log(posOperacao);
-		posOperacao?.();
 	};
 
 	const mostrarMensagemErro = (errorInfo: any) => {
@@ -171,7 +177,7 @@ const SalvarVaga = ({ vaga, posOperacao }: SalvarVagaProps) => {
 						onValuesChange={(changedValues, allValues) => {
 							onChangeVaga(allValues);
 						}}
-						autoComplete="off" // TODO: Disabled e sem valor quando REMOTO e buscar CEP
+						autoComplete="off"
 					>
 						<Item
 							name="titulo"
@@ -183,10 +189,10 @@ const SalvarVaga = ({ vaga, posOperacao }: SalvarVagaProps) => {
 
 						<Item
 							name="salario"
-							label={t("salary") + " (R$)"}
+							label={t("salary")}
 							rules={[{ required: true, message: t("salary_required") }]}
 						>
-							<InputNumber style={{ width: "150px" }} placeholder={t("salary")} precision={2} />
+							<InputNumber addonBefore={"R$"} style={{ width: "150px" }} placeholder={t("salary")} precision={2} />
 						</Item>
 
 						<Item
@@ -239,7 +245,7 @@ const SalvarVaga = ({ vaga, posOperacao }: SalvarVagaProps) => {
 							</Item>
 							<Item name={["endereco", "cep"]} label={t("cep")} labelCol={{ span: 19 }}>
 								<Search
-									style={{width: "140px"}}
+									style={{ width: "140px" }}
 									minLength={8}
 									maxLength={9}
 									placeholder={t("cep")}
