@@ -1,6 +1,7 @@
-import { CheckOutlined, MinusCircleOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Form, Input, Row, Space, DatePicker, DatePickerProps, FormProps } from 'antd';
+import { CheckOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
+import { Button, Form, Input as InputAntd, Row, Space, DatePicker, DatePickerProps, } from 'antd';
 import { useTranslation } from 'react-i18next';
+import Input from '../Input/Input';
 import styles from './styles.module.scss';
 
 interface InputExperienciaProps {
@@ -9,7 +10,8 @@ interface InputExperienciaProps {
     form?: typeof Form; 
 }
 
-// Todo - colocar os formatos de data em constantes para nao reescrever codigo
+// Todo - Colocar os formatos de data em constantes para nao reescrever codigo
+// Todo - Arrumar os rules de cada item
 
 const InputExperienciaProfissional = (props: InputExperienciaProps) => {
 
@@ -67,9 +69,9 @@ const InputExperienciaProfissional = (props: InputExperienciaProps) => {
                                         <Input placeholder="Cargo" />
                                     </Form.Item>
                                 </Row>
-                                <Row>
+                                <Row style={{width: "100%"}}>
                                     <Form.Item {...restField} name={[name, "descricao"]} rules={[...RULES]} >
-                                        <Input.TextArea />
+                                        <InputAntd.TextArea style={{}}  />
                                     </Form.Item>
                                 </Row>
                                 <Row>

@@ -13,7 +13,7 @@ import Button from "@/components/common/Button";
 import { getToken } from "@/services/autenticacao";
 import styles from './styles.module.scss';
 import { useAppDispatch, useAppSelector } from "@/redux/reducers/hooks";
-import { negateCadastroetp1, negateCadastroetp2, setState } from "@/redux/reducers/cadastro";
+import { negateCadastroetp1, setState } from "@/redux/reducers/cadastro";
 import type { DatePickerProps } from "antd";
 import { CepType } from "@/types/cepType";
 import { getCep } from "@/services/cep";
