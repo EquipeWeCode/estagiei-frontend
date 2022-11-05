@@ -46,7 +46,7 @@ const InputExperienciaProfissional = (props: InputExperienciaProps) => {
                     border: "0.1px solid var(--primary-color)",
                 }}
             />
-            <label className={styles.label}>{labelGeral}</label>
+            <h3 className={styles.label}>{labelGeral}</h3>
             <Form.List name="experienciaProfissional">
                 {(fields, { add, remove }) => (
                 <>

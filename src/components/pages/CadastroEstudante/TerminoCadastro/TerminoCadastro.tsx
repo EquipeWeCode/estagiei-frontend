@@ -26,6 +26,7 @@ import { getCidades } from "@/services/cidades";
 import InputExperienciaProfissional from "@/components/common/InputExperienciaProfissional/InputExperienciaProfissional";
 import { SelectProps } from "antd";
 import SelectCompetencias from "@/components/common/SelectCompetencias/SelectCompetencias";
+import InputHistoricoEscolar from "@/components/common/InputHistoricoEscolar";
 
 const TerminoCadastro = () => {
 	const [form] = Form.useForm();
@@ -172,18 +173,18 @@ const TerminoCadastro = () => {
 						form={form}
 						name="cadastroEstudante"
 						initialValues={novoEstudante}
-						// onValuesChange={(changedValues, allValues) => {
-						// 	if (changedValues.endereco) {
-						// 		setEstudante({...novoEstudante, endereco: {...novoEstudante.endereco, ...changedValues.endereco}});
-						// 		return
-						// 	}
-						// 	if (changedValues.experienciaProfissional) {
-						// 		setEstudante({...novoEstudante, experienciaProfissional: [...[novoEstudante.experienciaProfissional], ...changedValues.experienciaProfissional]})
-						// 	}
-						// 	if (!changedValues.dataNascimento) {
-						// 		setEstudante({...novoEstudante, ...changedValues});
-						// 	}
-						// }}
+						onValuesChange={(changedValues, allValues) => {
+							if (changedValues.endereco) {
+								setEstudante({...novoEstudante, endereco: {...novoEstudante.endereco, ...changedValues.endereco}});
+								return
+							}
+							if (changedValues.experienciaProfissional) {
+								setEstudante({...novoEstudante, experienciaProfissional: [...[novoEstudante.experienciaProfissional], ...changedValues.experienciaProfissional]})
+							}
+							if (!changedValues.dataNascimento) {
+								setEstudante({...novoEstudante, ...changedValues});
+							}
+						}}
 						className={styles.containerInput}
 					>
 						<Form.Item>
@@ -325,7 +326,7 @@ const TerminoCadastro = () => {
 
 						<Form.Item>
 							<Form.Item>
-								<InputExperienciaProfissional labelGeral="Experiencia profissional"/>
+								<InputHistoricoEscolar labelGeral="Histórico escolar"/>
 							</Form.Item>
 						</Form.Item>
 
