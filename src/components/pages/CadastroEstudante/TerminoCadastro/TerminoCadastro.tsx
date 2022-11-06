@@ -174,16 +174,16 @@ const TerminoCadastro = () => {
 						name="cadastroEstudante"
 						initialValues={novoEstudante}
 						onValuesChange={(changedValues, allValues) => {
-							if (changedValues.endereco) {
-								setEstudante({...novoEstudante, endereco: {...novoEstudante.endereco, ...changedValues.endereco}});
-								return
-							}
-							if (changedValues.experienciaProfissional) {
-								setEstudante({...novoEstudante, experienciaProfissional: [...[novoEstudante.experienciaProfissional], ...changedValues.experienciaProfissional]})
-							}
-							if (!changedValues.dataNascimento) {
-								setEstudante({...novoEstudante, ...changedValues});
-							}
+							// if (changedValues.endereco) {
+							// 	setEstudante({...novoEstudante, endereco: {...novoEstudante.endereco, ...changedValues.endereco}});
+							// 	return
+							// }
+							// if (changedValues.experienciaProfissional) {
+							// 	setEstudante({...novoEstudante, experienciaProfissional: [...novoEstudante.experienciaProfissional, ...changedValues.experienciaProfissional]})
+							// }
+							// if (!changedValues.dataNascimento) {
+							// 	setEstudante({...novoEstudante, ...changedValues});
+							// }
 						}}
 						className={styles.containerInput}
 					>

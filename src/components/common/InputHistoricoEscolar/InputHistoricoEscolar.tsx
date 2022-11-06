@@ -48,12 +48,16 @@ const InputHistoricoEscolar = (props: InputExperienciaProps) => {
     const dateFormat = "DD/MM/YYYY";
 	const dateFormatDto = "YYYY-MM-DD";
 
-    const datePasser: DatePickerProps['onChange'] = (date, dateString) => {
+    const datePasserInicio: DatePickerProps['onChange'] = (date, dateString) => {
 		console.log(date, dateString);
 	}
 
-    const handleData = () => {
-        console.log("teste");
+    const datePasserFim: DatePickerProps['onChange'] = (date, dateString) => {
+		console.log(date, dateString);
+	}
+
+    const handleData = (value: string) => {
+        console.log(value);
     }
 
     return (
@@ -112,7 +116,7 @@ const InputHistoricoEscolar = (props: InputExperienciaProps) => {
                                             style={{ width: "100%", marginBottom: "0.4rem", borderRadius: "0.5rem" }}
                                             name="dataInicio"
                                             placeholder={"Inicio"}
-                                            onChange={datePasser}
+                                            onChange={datePasserInicio}
                                             format={dateFormat}
                                         />
                                     </Form.Item>
@@ -121,7 +125,7 @@ const InputHistoricoEscolar = (props: InputExperienciaProps) => {
                                             style={{ width: "100%", marginBottom: "0.4rem", borderRadius: "0.5rem" }}
                                             name="dataFim"
                                             placeholder={"Fim"}
-                                            onChange={datePasser}
+                                            onChange={datePasserFim}
                                             format={dateFormat}
                                         />
                                     </Form.Item>
@@ -133,7 +137,7 @@ const InputHistoricoEscolar = (props: InputExperienciaProps) => {
                         </div>
                     ))}
                     <Form.Item>
-                        <Button htmlType="submit" type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                        <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
                             Adicionar experiencia
                         </Button>
                     </Form.Item>
