@@ -150,5 +150,15 @@ export const TRANSLATIONS_PT = {
 	error_form: "Formulário inválido, verifique os campos",
 	vaga_updated: "Vaga atualizada com sucesso!",
 	vaga_created: "Vaga criada com sucesso!",
+	role: "Cargo",
+	dateStart: "Data do inicio",
+	dateEnd: "Data do fim",
+	addExperience: "Adicionar experiência",
+	addHistoric: "Adicionar histórico",
+	competences: "Competências",
+	institutionName: "Nome da instituição",
+	courseName: "Nome do curso",
+	professionalExp: "Experiência profissional",
+	studentHistoric: "Histórico escolar"
 };
 

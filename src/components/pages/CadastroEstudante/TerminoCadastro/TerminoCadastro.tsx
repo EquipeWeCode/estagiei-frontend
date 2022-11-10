@@ -240,21 +240,19 @@ const TerminoCadastro = () => {
 						</Form.Item>
 
 						<Form.Item>
-							<span>CPF</span>
 							<Form.Item name="cpf" noStyle rules={RULES}>
-								<Input placeholder={"CPF"} value={novoEstudante.cpf} maxLength={14} />
+								<Input label="CPF" placeholder={"CPF"} value={novoEstudante.cpf} maxLength={14} />
 							</Form.Item>
 						</Form.Item>
 
 						<Form.Item>
-							<span>RG</span>
 							<Form.Item name="rg" noStyle rules={RULES}>
-								<Input placeholder={"RG"} value={novoEstudante.rg} maxLength={12} />
+								<Input label="RG" placeholder={"RG"} value={novoEstudante.rg} maxLength={12} />
 							</Form.Item>
 						</Form.Item>
 
 						<Form.Item>
-							<span>{t("birth_date")}</span>
+							<span style={{display: "block", textAlign: "start"}}>{t("birth_date")}</span>
 							<Form.Item name="dataNascimento" noStyle rules={RULES}>
 								<DatePicker
 									style={{ width: "100%", marginBottom: "0.4rem", borderRadius: "0.5rem" }}
@@ -310,13 +308,13 @@ const TerminoCadastro = () => {
 
 						<Form.Item>
 							<Form.Item>
-								<InputExperienciaProfissional labelGeral="Experiencia profissional"/>
+								<InputExperienciaProfissional labelGeral={t("professionalExp")}/>
 							</Form.Item>
 						</Form.Item>
 
 						<Form.Item>
 							<Form.Item>
-								<InputHistoricoEscolar labelGeral="Histórico escolar" estudante={novoEstudante} state={stateSetEstudante} form={form}/>
+								<InputHistoricoEscolar labelGeral={t("studentHistoric")} estudante={novoEstudante} state={stateSetEstudante} form={form}/>
 							</Form.Item>
 						</Form.Item>
 
@@ -327,19 +325,21 @@ const TerminoCadastro = () => {
 						</Form.Item>
 
 						<Form.Item style={{ marginTop: "1rem" }}>
-							<Button htmlType="submit" type="primary">
-								{t("singup")}
-							</Button>
+							<Row style={{display: "flex", flexDirection:"column", justifyContent: "center", alignItems: "center"}}>
+								<Button htmlType="submit" type="primary" className={styles.btnLogin}>
+									{t("singup")}
+								</Button>
+							</Row>
 						</Form.Item>
-
-						<Row justify="center" align="middle" style={{ width: "100%", marginBottom: "20px" }}>
-							<span>Cadastre-se como <Link to={"/cadastro/empresa"}>empresa</Link></span>
-						</Row>
-
-						<Button style={{ marginRight: "2rem", backgroundColor: "#000", color: "#FFF" }} onClick={() => {dispatch(negateCadastroetp1())}}>
-								{t("go_back")}
-						</Button>
 					</Form>
+					<Row justify="center" align="middle" style={{ width: "100%" }}>
+						<p style={{width: "100%"}}>{t("singup_as")} <Link to={"/cadastro/estudante"}>{t("student")}</Link></p>
+						<Row justify="center" align="middle" style={{ width: "100%" }}>
+							<Button secondary onClick={() => navigate("/")}>
+								{t("go_back")}
+							</Button>
+						</Row>
+					</Row>
 				</Row>
 			</Row>
 		</div>

@@ -149,4 +149,14 @@ export const TRANSLATIONS_EN = {
 	error_form: "Invalid form, please check the fields",
 	vaga_updated: "Job updated successfully",
 	vaga_created: "Job created successfully",
+	role: "Role",
+	dateStart: "Date start",
+	dateEnd: "Date End",
+	addExperience: "Adicionar experience",
+	addHistoric: "Adicionar student history",
+	competences: "Competences",
+	institutionName: "Institutions name",
+	courseName: "Course name",
+	professionalExp: "Professional experience",
+	studentHistoric: "Student history"
 };

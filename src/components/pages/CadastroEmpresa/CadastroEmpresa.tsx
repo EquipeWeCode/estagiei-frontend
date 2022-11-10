@@ -179,82 +179,82 @@ const CadastroEmpresa = () => {
 						}}
 						style={{width:"100%"}}
 					>	
-					<Row className={styles.formCadastro}>
-						<Row className={styles.formRowCadastro}>
-							<Form.Item>
-								<Form.Item name="email" noStyle rules={RULES}>
-									<Input label={t("email")} type={"email"} placeholder={t("email")} value={formEmpresa.email}/>
+						<Row className={styles.formCadastro}>
+							<Row className={styles.formRowCadastro}>
+								<Form.Item>
+									<Form.Item name="email" noStyle rules={RULES}>
+										<Input label={t("email")} type={"email"} placeholder={t("email")} value={formEmpresa.email}/>
+									</Form.Item>
 								</Form.Item>
-							</Form.Item>
 
-							<Form.Item>
-								<Form.Item name="senha" noStyle rules={RULES}>
-									<InputPassword label={t("type_password")} type={"password"} placeholder={t("password")} value={formEmpresa.senha} maxLength={14} minLength={8}/>
+								<Form.Item>
+									<Form.Item name="senha" noStyle rules={RULES}>
+										<InputPassword label={t("type_password")} type={"password"} placeholder={t("password")} value={formEmpresa.senha} maxLength={14} minLength={8}/>
+									</Form.Item>
 								</Form.Item>
-							</Form.Item>
 
-							<Form.Item>
-								<Form.Item name="repete-senha" noStyle rules={RULES_PASSWORD} dependencies={['senha']}>
-									<InputPassword label={t("type_repeat_password")} type={"password"} placeholder={t("password")} value={formEmpresa.senha} maxLength={14} minLength={8}/>
+								<Form.Item>
+									<Form.Item name="repete-senha" noStyle rules={RULES_PASSWORD} dependencies={['senha']}>
+										<InputPassword label={t("type_repeat_password")} type={"password"} placeholder={t("password")} value={formEmpresa.senha} maxLength={14} minLength={8}/>
+									</Form.Item>
 								</Form.Item>
-							</Form.Item>
 
-							<Form.Item>
-								<Form.Item name="razaoSocial" noStyle rules={RULES}>
-									<Input label={t("social_purpose")} placeholder={t("name")} value={formEmpresa.razaoSocial} />
+								<Form.Item>
+									<Form.Item name="razaoSocial" noStyle rules={RULES}>
+										<Input label={t("social_purpose")} placeholder={t("name")} value={formEmpresa.razaoSocial} />
+									</Form.Item>
 								</Form.Item>
-							</Form.Item>
 
-							<Form.Item>
-								<Form.Item name="nomeFantasia" noStyle rules={RULES}>
-									<Input label={t("company_name")} placeholder={t("name")} value={formEmpresa.nomeFantasia} />
+								<Form.Item>
+									<Form.Item name="nomeFantasia" noStyle rules={RULES}>
+										<Input label={t("company_name")} placeholder={t("name")} value={formEmpresa.nomeFantasia} />
+									</Form.Item>
 								</Form.Item>
-							</Form.Item>
 
-							<Form.Item>
-								<Form.Item name="cnpj" noStyle rules={RULES}>
-									<Input label={"Cnpj"} placeholder={"Cnpj"} value={formEmpresa.cnpj} maxLength={14} />
+								<Form.Item>
+									<Form.Item name="cnpj" noStyle rules={RULES}>
+										<Input label={"Cnpj"} placeholder={"Cnpj"} value={formEmpresa.cnpj} maxLength={14} />
+									</Form.Item>
 								</Form.Item>
-							</Form.Item>
+							</Row>
+							<Row className={styles.formRowCadastro}>
+								<Form.Item>
+									<Form.Item name={["endereco", "cep"]} noStyle rules={RULES}>
+										<Input label={t("zip_code")} placeholder={t("zip_code")} value={formEmpresa.endereco?.cep} maxLength={8} onChange={e => getViaCep(e.target.value)}/>
+									</Form.Item>
+								</Form.Item>
+								<Form.Item>
+									<Form.Item name={["endereco", "estado"]} noStyle rules={RULES}>
+										<InputSelect value={formEmpresa.endereco?.estado} choices={treatedUf} label={t("state")} change={handleOptionEstado}/>
+									</Form.Item>
+								</Form.Item>
+								<Form.Item>
+									<Form.Item name={["endereco", "cidade"]} noStyle rules={RULES}>
+										<InputSelect value={formEmpresa.endereco?.cidade} choices={treatedCidades} label={t("city")} change={handleOptionCidade}/>
+									</Form.Item>
+								</Form.Item>
+								<Form.Item>
+									<Form.Item name={["endereco", "bairro"]} noStyle rules={RULES}>
+										<Input label={t("district")} placeholder={t("district")} value={formEmpresa.endereco?.bairro} maxLength={14} />
+									</Form.Item>
+								</Form.Item>
+								<Form.Item>
+									<Form.Item name={["endereco", "logradouro"]} noStyle rules={RULES}>
+										<Input label={t("street_name")} placeholder={t("street_name")} value={formEmpresa.endereco?.logradouro} maxLength={14} />
+									</Form.Item>
+								</Form.Item>
+								<Form.Item>
+									<Form.Item name={["endereco", "numero"]} noStyle rules={RULES}>
+										<Input label={t("number")} placeholder={t("number")} value={formEmpresa.endereco?.numero} maxLength={14} />
+									</Form.Item>
+								</Form.Item>
+								<Form.Item>
+									<Form.Item name={["endereco", "complemento"]} noStyle>
+										<Input label={t("complement")} placeholder={t("complement")} value={formEmpresa.endereco?.complemento} maxLength={14} />
+									</Form.Item>
+								</Form.Item>
+							</Row>	
 						</Row>
-						<Row className={styles.formRowCadastro}>
-							<Form.Item>
-								<Form.Item name={["endereco", "cep"]} noStyle rules={RULES}>
-									<Input label={t("zip_code")} placeholder={t("zip_code")} value={formEmpresa.endereco?.cep} maxLength={8} onChange={e => getViaCep(e.target.value)}/>
-								</Form.Item>
-							</Form.Item>
-							<Form.Item>
-								<Form.Item name={["endereco", "estado"]} noStyle rules={RULES}>
-									<InputSelect value={formEmpresa.endereco?.estado} choices={treatedUf} label={t("state")} change={handleOptionEstado}/>
-								</Form.Item>
-							</Form.Item>
-							<Form.Item>
-								<Form.Item name={["endereco", "cidade"]} noStyle rules={RULES}>
-									<InputSelect value={formEmpresa.endereco?.cidade} choices={treatedCidades} label={t("city")} change={handleOptionCidade}/>
-								</Form.Item>
-							</Form.Item>
-							<Form.Item>
-								<Form.Item name={["endereco", "bairro"]} noStyle rules={RULES}>
-									<Input label={t("district")} placeholder={t("district")} value={formEmpresa.endereco?.bairro} maxLength={14} />
-								</Form.Item>
-							</Form.Item>
-							<Form.Item>
-								<Form.Item name={["endereco", "logradouro"]} noStyle rules={RULES}>
-									<Input label={t("street_name")} placeholder={t("street_name")} value={formEmpresa.endereco?.logradouro} maxLength={14} />
-								</Form.Item>
-							</Form.Item>
-							<Form.Item>
-								<Form.Item name={["endereco", "numero"]} noStyle rules={RULES}>
-									<Input label={t("number")} placeholder={t("number")} value={formEmpresa.endereco?.numero} maxLength={14} />
-								</Form.Item>
-							</Form.Item>
-							<Form.Item>
-								<Form.Item name={["endereco", "complemento"]} noStyle>
-									<Input label={t("complement")} placeholder={t("complement")} value={formEmpresa.endereco?.complemento} maxLength={14} />
-								</Form.Item>
-							</Form.Item>
-						</Row>	
-					</Row>
 						<Form.Item style={{ marginTop: "1rem" }}>
 							<Row style={{display: "flex", flexDirection:"column", justifyContent: "center", alignItems: "center"}}>
 								<Button htmlType="submit" type="primary" className={styles.btnLogin}>

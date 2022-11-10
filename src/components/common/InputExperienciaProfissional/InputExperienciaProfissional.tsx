@@ -55,7 +55,7 @@ const InputExperienciaProfissional = (props: InputExperienciaProps) => {
                                         rules={[...RULES]}
                                         style={{flex: "1"}}
                                     >
-                                        <Input placeholder="Nome da empresa" />
+                                        <Input placeholder={t("company_name")}/>
                                     </Form.Item>
                                     <Form.Item
                                         {...restField}
@@ -63,12 +63,12 @@ const InputExperienciaProfissional = (props: InputExperienciaProps) => {
                                         rules={[...RULES]}
                                         style={{flex: "1"}}
                                     >
-                                        <Input placeholder="Cargo" />
+                                        <Input placeholder={t("role")}/>
                                     </Form.Item>
                                 </Row>
                                 <Row style={{display: "flex", flexDirection: "row"}}>
                                     <Form.Item {...restField} name={[name, "descricao"]} rules={[...RULES]} style={{flex: "1"}}>
-                                        <InputAntd.TextArea placeholder='Descrição'/>
+                                        <InputAntd.TextArea placeholder={t("description")}/>
                                     </Form.Item>
                                 </Row>
                                 <Row style={{display: "flex", flexDirection: "row", gap: "10px"}}>
@@ -76,16 +76,16 @@ const InputExperienciaProfissional = (props: InputExperienciaProps) => {
                                         <DatePicker
                                             style={{ width: "100%", marginBottom: "0.4rem", borderRadius: "0.5rem" }}
                                             name="dataInicio"
-                                            placeholder={t("birth_date")}
+                                            placeholder={t("dateStart")}
                                             onChange={datePasser}
                                             format={dateFormat}
                                         />
                                     </Form.Item>
-                                    <Form.Item {...restField} name={[name, "dataFim"]} rules={[...RULES]} style={{flex: "1"}}>
+                                    <Form.Item {...restField} name={[name, "dataFim"]} style={{flex: "1"}}>
                                         <DatePicker
                                             style={{ width: "100%", marginBottom: "0.4rem", borderRadius: "0.5rem" }}
                                             name="dataFim"
-                                            placeholder={t("birth_date")}
+                                            placeholder={t("dateEnd")}
                                             onChange={datePasser}
                                             format={dateFormat}
                                         />
@@ -98,7 +98,7 @@ const InputExperienciaProfissional = (props: InputExperienciaProps) => {
                     ))}
                     <Form.Item>
                         <Button type="primary" onClick={() => add()} block icon={<PlusOutlined />}>
-                            Adicionar experiencia
+                            {t("addExperience")}
                         </Button>
                     </Form.Item>
                 </>

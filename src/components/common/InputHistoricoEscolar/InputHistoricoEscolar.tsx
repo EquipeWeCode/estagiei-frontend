@@ -66,13 +66,13 @@ const InputHistoricoEscolar = (props: InputExperienciaProps) => {
                         <div className={styles.containerDiv} key={key}>
                             <Form.Item>
                                 <Row style={{width: "100%"}}>
-                                    <label className={styles.label}>{"Nivel de escolaridade"}</label>
+                                    <label className={styles.label}>{"Escolaridade"}</label>
                                     <Form.Item {...restField} name={[name, "nvlEscolaridade"]} rules={[...RULES]}>
                                         <Select
                                             key={key}
                                             allowClear
                                             style={{ width: '100%' }}
-                                            placeholder="Competencias"
+                                            placeholder="Escolaridade"
                                             defaultValue={""}
                                         >
                                             {Object.keys(nivelEscolaridadeObject).map((key) => {
@@ -85,10 +85,10 @@ const InputHistoricoEscolar = (props: InputExperienciaProps) => {
                                 </Row>
                                 <Row style={{display: "flex", flexDirection: "column"}}>
                                     <Form.Item style={{flex: "1"}} {...restField} name={[name, 'curso']} rules={[...RULES]}>
-                                        <Input placeholder="Nome do curso" />
+                                        <Input placeholder={t("institutionName")} />
                                     </Form.Item>
                                     <Form.Item style={{flex: "1"}} {...restField} name={[name, 'instEnsino']} rules={[...RULES]}>
-                                        <Input placeholder="Nome da instituiçao" />
+                                        <Input placeholder={t("courseName")} />
                                     </Form.Item>
                                 </Row>
                                 <Row style={{width: "100%"}}>
@@ -98,7 +98,7 @@ const InputHistoricoEscolar = (props: InputExperienciaProps) => {
                                             key={key}
                                             allowClear
                                             style={{ width: '100%' }}
-                                            placeholder="Competencias"
+                                            placeholder={"Status"}
                                             defaultValue={""}
                                         >
                                             {Object.keys(statusHistoricoEscolarObject).map((key) => {
@@ -114,16 +114,16 @@ const InputHistoricoEscolar = (props: InputExperienciaProps) => {
                                         <DatePicker
                                             style={{ width: "100%", marginBottom: "0.4rem", borderRadius: "0.5rem" }}
                                             name="dataInicio"
-                                            placeholder={"Inicio"}
+                                            placeholder={t("dateStart")}
                                             onChange={datePasserInicio}
                                             format={dateFormat}
                                         />
                                     </Form.Item>
-                                    <Form.Item style={{flex: "1"}} {...restField} name={[name, "dataFim"]} rules={[...RULES]} >
+                                    <Form.Item style={{flex: "1"}} {...restField} name={[name, "dataFim"]} >
                                         <DatePicker
                                             style={{ width: "100%", marginBottom: "0.4rem", borderRadius: "0.5rem" }}
                                             name="dataFim"
-                                            placeholder={"Fim"}
+                                            placeholder={t("dateEnd")}
                                             onChange={datePasserFim}
                                             format={dateFormat}
                                         />
@@ -137,7 +137,7 @@ const InputHistoricoEscolar = (props: InputExperienciaProps) => {
                     ))}
                     <Form.Item>
                         <Button type="primary" onClick={() => add()} block icon={<PlusOutlined />}>
-                            Adicionar experiencia
+                            {t("addHistoric")}
                         </Button>
                     </Form.Item>
                 </>
