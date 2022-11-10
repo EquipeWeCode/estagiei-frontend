@@ -1,4 +1,4 @@
-import { CheckOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
+import { CheckOutlined, MinusOutlined, PlusOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { Button, Form, Input as InputAntd, Row, Space, DatePicker, DatePickerProps, } from 'antd';
 import { useTranslation } from 'react-i18next';
 import Input from '../Input/Input';
@@ -33,10 +33,6 @@ const InputExperienciaProfissional = (props: InputExperienciaProps) => {
 		console.log(date, dateString);
 	}
 
-    const handleData = () => {
-        console.log("teste");
-    }
-
     return (
         <>
             <hr
@@ -51,13 +47,13 @@ const InputExperienciaProfissional = (props: InputExperienciaProps) => {
                 {(fields, { add, remove }) => (
                 <>
                     {fields.map(({ key, name, ...restField }) => (
-                        <div className={styles.containerDiv}>
-                            <Space key={key} className={styles.spaceRow} align="baseline">
-                                <Row>
+                        <div className={styles.containerDiv} key={key}>
+                                <Row style={{display: "flex", flexDirection: "row", gap: "10px"}}>
                                     <Form.Item
                                         {...restField}
                                         name={[name, 'nomeEmpresa']}
                                         rules={[...RULES]}
+                                        style={{flex: "1"}}
                                     >
                                         <Input placeholder="Nome da empresa" />
                                     </Form.Item>
@@ -65,17 +61,18 @@ const InputExperienciaProfissional = (props: InputExperienciaProps) => {
                                         {...restField}
                                         name={[name, 'cargo']}
                                         rules={[...RULES]}
+                                        style={{flex: "1"}}
                                     >
                                         <Input placeholder="Cargo" />
                                     </Form.Item>
                                 </Row>
-                                <Row style={{width: "100%"}}>
-                                    <Form.Item {...restField} name={[name, "descricao"]} rules={[...RULES]} >
-                                        <InputAntd.TextArea style={{}}  />
+                                <Row style={{display: "flex", flexDirection: "row"}}>
+                                    <Form.Item {...restField} name={[name, "descricao"]} rules={[...RULES]} style={{flex: "1"}}>
+                                        <InputAntd.TextArea placeholder='Descrição'/>
                                     </Form.Item>
                                 </Row>
-                                <Row>
-                                    <Form.Item {...restField} name={[name, "dataInicio"]} rules={[...RULES]} >
+                                <Row style={{display: "flex", flexDirection: "row", gap: "10px"}}>
+                                    <Form.Item {...restField} name={[name, "dataInicio"]} rules={[...RULES]} style={{flex: "1"}}>
                                         <DatePicker
                                             style={{ width: "100%", marginBottom: "0.4rem", borderRadius: "0.5rem" }}
                                             name="dataInicio"
@@ -84,7 +81,7 @@ const InputExperienciaProfissional = (props: InputExperienciaProps) => {
                                             format={dateFormat}
                                         />
                                     </Form.Item>
-                                    <Form.Item {...restField} name={[name, "dataFim"]} rules={[...RULES]} >
+                                    <Form.Item {...restField} name={[name, "dataFim"]} rules={[...RULES]} style={{flex: "1"}}>
                                         <DatePicker
                                             style={{ width: "100%", marginBottom: "0.4rem", borderRadius: "0.5rem" }}
                                             name="dataFim"
@@ -94,13 +91,13 @@ const InputExperienciaProfissional = (props: InputExperienciaProps) => {
                                         />
                                     </Form.Item>
                                 </Row>
-                            </Space>
-                            <Button type="ghost" onClick={() => remove(name)} block icon={<MinusOutlined />} className={styles.btnSave}/>
-                            <Button type="primary" onClick={() => handleData()} block icon={<CheckOutlined />} className={styles.btnSave}/>
+                            <div style={{display: "flex", flexDirection: "row", marginBottom: "20px"}}>
+                                <Button type="primary" danger onClick={() => remove(name)} block icon={<CloseCircleOutlined />} className={styles.btnSave}/>
+                            </div>
                         </div>
                     ))}
                     <Form.Item>
-                        <Button htmlType="submit" type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                        <Button type="primary" onClick={() => add()} block icon={<PlusOutlined />}>
                             Adicionar experiencia
                         </Button>
                     </Form.Item>

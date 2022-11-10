@@ -5,11 +5,16 @@ import { Button, Form, Input as InputAntd, Row, Space, DatePicker, DatePickerPro
 import { useTranslation } from 'react-i18next';
 import Input from '../Input/Input';
 import styles from './styles.module.scss';
+import { useState } from 'react';
+import { historicoEscolarType } from '@/types/historicoEscolarType';
+import { useForm } from 'antd/lib/form/Form';
 
 interface InputExperienciaProps {
     labels?: string[];
     labelGeral?: string;
-    estudante?: CadastroEstudanteType; 
+    estudante?: CadastroEstudanteType;
+    state?: (value: {}) => void;
+    form: any;
 }
 
 // Todo - Colocar os formatos de data em constantes para nao reescrever codigo
@@ -17,24 +22,12 @@ interface InputExperienciaProps {
 
 const InputHistoricoEscolar = (props: InputExperienciaProps) => {
 
-    const { labels, labelGeral } = props;
-    const { estudante } = props;
-    const status: SelectProps['options'] = [];
-    const escolaridade: SelectProps['options'] = [];
+    const { labels, labelGeral, estudante, state, form } = props;
+    
+    // const [dataInicio, setDataInicio] = useState<string>();
+    // const [dataFim, setDataFim] = useState<string>();
 
-    Object.keys(statusHistoricoEscolarObject).forEach((key) => {
-        status.push({
-            label: statusHistoricoEscolarObject[key].label,
-            value: statusHistoricoEscolarObject[key].value
-        })
-    })
-
-    Object.keys(nivelEscolaridadeObject).forEach((key) => {
-        escolaridade.push({
-            label: nivelEscolaridadeObject[key].label,
-            value: nivelEscolaridadeObject[key].value
-        })
-    })
+    const { Option } = Select;
 
     const RULES = [
         { 
@@ -56,10 +49,6 @@ const InputHistoricoEscolar = (props: InputExperienciaProps) => {
 		console.log(date, dateString);
 	}
 
-    const handleData = (value: string) => {
-        console.log(value);
-    }
-
     return (
         <>
             <hr
@@ -74,44 +63,54 @@ const InputHistoricoEscolar = (props: InputExperienciaProps) => {
                 {(fields, { add, remove }) => (
                 <>
                     {fields.map(({ key, name, ...restField }) => (
-                        <div className={styles.containerDiv}>
-                            <Space key={key} className={styles.spaceRow} align="baseline">
+                        <div className={styles.containerDiv} key={key}>
+                            <Form.Item>
                                 <Row style={{width: "100%"}}>
-                                    <Form.Item {...restField} name={[name, "descricao"]} rules={[...RULES]}>
-                                        <label className={styles.label}>{"Nivel de escolaridade"}</label>
+                                    <label className={styles.label}>{"Nivel de escolaridade"}</label>
+                                    <Form.Item {...restField} name={[name, "nvlEscolaridade"]} rules={[...RULES]}>
                                         <Select
+                                            key={key}
                                             allowClear
                                             style={{ width: '100%' }}
                                             placeholder="Competencias"
-                                            defaultValue={[]}
-                                            onChange={() => {}}
-                                            options={escolaridade}
-                                        />
+                                            defaultValue={""}
+                                        >
+                                            {Object.keys(nivelEscolaridadeObject).map((key) => {
+                                                return (
+                                                    <Option key={key} value={nivelEscolaridadeObject[key].value}>{nivelEscolaridadeObject[key].label}</Option>
+                                                );
+                                            })}
+                                        </Select>
                                     </Form.Item>
                                 </Row>
-                                <Row style={{display: "flex", flexDirection: "row", width: "100%"}}>
-                                    <Form.Item {...restField} name={[name, 'curso']} rules={[...RULES]}>
+                                <Row style={{display: "flex", flexDirection: "column"}}>
+                                    <Form.Item style={{flex: "1"}} {...restField} name={[name, 'curso']} rules={[...RULES]}>
                                         <Input placeholder="Nome do curso" />
                                     </Form.Item>
-                                    <Form.Item {...restField} name={[name, 'instEnsino']} rules={[...RULES]}>
+                                    <Form.Item style={{flex: "1"}} {...restField} name={[name, 'instEnsino']} rules={[...RULES]}>
                                         <Input placeholder="Nome da instituiçao" />
                                     </Form.Item>
                                 </Row>
                                 <Row style={{width: "100%"}}>
-                                    <Form.Item {...restField} name={[name, "descricao"]} rules={[...RULES]}>
-                                        <label className={styles.label}>{"Status"}</label>
+                                    <label className={styles.label}>{"Status"}</label>
+                                    <Form.Item {...restField} name={[name, "status"]} rules={[...RULES]}>
                                         <Select
+                                            key={key}
                                             allowClear
                                             style={{ width: '100%' }}
                                             placeholder="Competencias"
-                                            defaultValue={[]}
-                                            onChange={() => {}}
-                                            options={status}
-                                        />
+                                            defaultValue={""}
+                                        >
+                                            {Object.keys(statusHistoricoEscolarObject).map((key) => {
+                                                return (
+                                                    <Option key={key} value={statusHistoricoEscolarObject[key].value}>{statusHistoricoEscolarObject[key].label}</Option>
+                                                )
+                                            })}
+                                        </Select>
                                     </Form.Item>
                                 </Row>
-                                <Row>
-                                    <Form.Item {...restField} name={[name, "dataInicio"]} rules={[...RULES]}>
+                                <Row style={{display: "flex", flexDirection: "row", gap: "10px"}}>
+                                    <Form.Item style={{flex: "1"}} {...restField} name={[name, "dataInicio"]} rules={[...RULES]}>
                                         <DatePicker
                                             style={{ width: "100%", marginBottom: "0.4rem", borderRadius: "0.5rem" }}
                                             name="dataInicio"
@@ -120,7 +119,7 @@ const InputHistoricoEscolar = (props: InputExperienciaProps) => {
                                             format={dateFormat}
                                         />
                                     </Form.Item>
-                                    <Form.Item {...restField} name={[name, "dataFim"]} rules={[...RULES]} >
+                                    <Form.Item style={{flex: "1"}} {...restField} name={[name, "dataFim"]} rules={[...RULES]} >
                                         <DatePicker
                                             style={{ width: "100%", marginBottom: "0.4rem", borderRadius: "0.5rem" }}
                                             name="dataFim"
@@ -130,14 +129,14 @@ const InputHistoricoEscolar = (props: InputExperienciaProps) => {
                                         />
                                     </Form.Item>
                                 </Row>
-                            </Space>
-                            <div style={{display: "flex", flexDirection: "row"}}>
-                                <Button type="ghost" onClick={() => remove(name)} block icon={<CloseCircleOutlined />} className={styles.btnSave}/>
-                            </div>
+                                <div style={{display: "flex", flexDirection: "row", marginBottom: "20px"}}>
+                                    <Button type="primary" danger onClick={() => remove(name)} block icon={<CloseCircleOutlined />} className={styles.btnSave}/>
+                                </div>
+                            </Form.Item>
                         </div>
                     ))}
                     <Form.Item>
-                        <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                        <Button type="primary" onClick={() => add()} block icon={<PlusOutlined />}>
                             Adicionar experiencia
                         </Button>
                     </Form.Item>

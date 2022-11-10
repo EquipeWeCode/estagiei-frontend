@@ -28,6 +28,7 @@ import { SelectProps } from "antd";
 import SelectCompetencias from "@/components/common/SelectCompetencias/SelectCompetencias";
 import InputHistoricoEscolar from "@/components/common/InputHistoricoEscolar";
 import InputContato from "@/components/common/InputContato/InputContato";
+import { historicoEscolarType } from "@/types/historicoEscolarType";
 
 const TerminoCadastro = () => {
 	const [form] = Form.useForm();
@@ -179,16 +180,38 @@ const TerminoCadastro = () => {
 						name="cadastroEstudante"
 						initialValues={novoEstudante}
 						onValuesChange={(changedValues, allValues) => {
-							// if (changedValues.endereco) {
-							// 	setEstudante({...novoEstudante, endereco: {...novoEstudante.endereco, ...changedValues.endereco}});
-							// 	return
-							// }
-							// if (changedValues.experienciaProfissional) {
-							// 	setEstudante({...novoEstudante, experienciaProfissional: [...novoEstudante.experienciaProfissional, ...changedValues.experienciaProfissional]})
-							// }
-							// if (!changedValues.dataNascimento) {
-							// 	setEstudante({...novoEstudante, ...changedValues});
-							// }
+							if (changedValues.endereco) {
+								setEstudante({...novoEstudante, endereco: {...novoEstudante.endereco, ...changedValues.endereco}});
+								return;
+							}
+							if (changedValues.experienciaProfissional) {
+								if (!novoEstudante.experienciaProfissional) {
+									setEstudante({...novoEstudante, ...changedValues});
+									return;
+								}
+							
+								let newHistorico = novoEstudante.experienciaProfissional;
+								let objectHistorico = newHistorico[changedValues.experienciaProfissional.length - 1]
+								newHistorico[changedValues.experienciaProfissional.length - 1] = {...objectHistorico, ...changedValues.experienciaProfissional[changedValues.experienciaProfissional.length - 1]}
+								setEstudante({...novoEstudante, experienciaProfissional: newHistorico});
+								return;
+							}
+							if (changedValues.historicoEscolar) {
+								if (!novoEstudante.historicoEscolar) {
+									setEstudante({...novoEstudante, ...changedValues});
+									return;
+								}
+							
+								let newHistorico = novoEstudante.historicoEscolar;
+								let objectHistorico = newHistorico[changedValues.historicoEscolar.length - 1]
+								newHistorico[changedValues.historicoEscolar.length - 1] = {...objectHistorico, ...changedValues.historicoEscolar[changedValues.historicoEscolar.length - 1]}
+								setEstudante({...novoEstudante, historicoEscolar: newHistorico});
+								return;
+							}
+
+							if (!changedValues.dataNascimento) {
+								setEstudante({...novoEstudante, ...changedValues});
+							}
 						}}
 						className={styles.containerInput}
 					>
@@ -289,7 +312,7 @@ const TerminoCadastro = () => {
 						</Form.Item>
 						<Form.Item>
 							<Form.Item name={["endereco", "complemento"]} noStyle>
-								<Input label={t("complement")} placeholder={t("complement")} value={novoEstudante.endereco?.complemento} maxLength={14} />
+								<Input label={t("complement")} placeholder={t("complement")} value={novoEstudante.endereco?.complemento} defaultValue={""} maxLength={14} />
 							</Form.Item>
 						</Form.Item>
 						
@@ -331,7 +354,7 @@ const TerminoCadastro = () => {
 
 						<Form.Item>
 							<Form.Item>
-								<InputHistoricoEscolar labelGeral="Histórico escolar"/>
+								<InputHistoricoEscolar labelGeral="Histórico escolar" estudante={novoEstudante} state={stateSetEstudante} form={form}/>
 							</Form.Item>
 						</Form.Item>
 

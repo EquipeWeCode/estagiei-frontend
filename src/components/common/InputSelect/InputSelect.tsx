@@ -10,9 +10,7 @@ interface InputSelectProps {
 }
 
 const InputSelect = (props: InputSelectProps) => {
-    const { label } = props;
-    const { choices } = props;
-    const { value } = props;
+    const { label, choices, value } = props;
 
     return (
         <>
