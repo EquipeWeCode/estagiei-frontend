@@ -27,6 +27,7 @@ import InputExperienciaProfissional from "@/components/common/InputExperienciaPr
 import { SelectProps } from "antd";
 import SelectCompetencias from "@/components/common/SelectCompetencias/SelectCompetencias";
 import InputHistoricoEscolar from "@/components/common/InputHistoricoEscolar";
+import InputContato from "@/components/common/InputContato/InputContato";
 
 const TerminoCadastro = () => {
 	const [form] = Form.useForm();
@@ -327,6 +328,12 @@ const TerminoCadastro = () => {
 						<Form.Item>
 							<Form.Item>
 								<InputHistoricoEscolar labelGeral="Histórico escolar"/>
+							</Form.Item>
+						</Form.Item>
+
+						<Form.Item>
+							<Form.Item>
+								<InputContato />
 							</Form.Item>
 						</Form.Item>
 
