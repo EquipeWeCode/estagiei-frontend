@@ -29,6 +29,7 @@ import SelectCompetencias from "@/components/common/SelectCompetencias/SelectCom
 import InputHistoricoEscolar from "@/components/common/InputHistoricoEscolar";
 import InputContato from "@/components/common/InputContato/InputContato";
 import { historicoEscolarType } from "@/types/historicoEscolarType";
+import { experienciaProfissionalType } from "@/types/experienciaProfissionalType";
 
 const TerminoCadastro = () => {
 	const [form] = Form.useForm();
@@ -101,7 +102,7 @@ const TerminoCadastro = () => {
 	}
 
 	const datePasser: DatePickerProps['onChange'] = (date, dateString) => {
-		setEstudante({...novoEstudante, ...{dataNascimento: moment(date).format(dateFormatDto)}} );
+		setEstudante({...novoEstudante, ...{dataNascimento: moment(date).format(dateFormatDto)}});
 	}
 
 	const getViaCep = async (cep: string) => {
@@ -151,16 +152,33 @@ const TerminoCadastro = () => {
 	};
 
 	const salvaEstudante = async (values: any) => {		
-		console.log(values);
-		// try {
-		// 	postEstudante(novoEstudante).then((res) => {
-		// 		dispatch(negateCadastroetp1());
-		// 		navigate("/");
-		// 	})
-		// }
-		// catch (e) {
-		// 	dispatch({type: "SHOW_ERROR", payload: e});
-		// }
+		let body = {...novoEstudante, ...values, ...{dataNascimento: moment(values.dataNascimento).format(dateFormatDto)}};
+
+		body.experienciaProfissional = body.experienciaProfissional.map((experiencia: experienciaProfissionalType) => {
+			return {
+				...experiencia,
+				dataFim: moment(experiencia.dataFim).format(dateFormatDto),
+				dataInicio: moment(experiencia.dataInicio).format(dateFormatDto)
+			};
+		})
+
+		body.historicoEscolar = body.historicoEscolar.map((historico: historicoEscolarType) => {
+			return {
+				...historico,
+				dataFim: moment(historico.dataFim).format(dateFormatDto),
+				dataInicio: moment(historico.dataInicio).format(dateFormatDto)
+			};
+		})
+
+		try {
+			postEstudante(body).then((res) => {
+				dispatch(negateCadastroetp1());
+				navigate("/");
+			})
+		}
+		catch (e) {
+			dispatch({type: "SHOW_ERROR", payload: e});
+		}
 	};
 
 	const stateSetEstudante = (value: CadastroEstudanteType) => {
@@ -248,38 +266,6 @@ const TerminoCadastro = () => {
 							</Form.Item>
 						</Form.Item>
 
-						{/* <Form.Item>
-							<span>{t("education")}</span>
-							<Form.Item name="instEnsino" noStyle>
-								<Input placeholder={t("education")} value={novoEstudante.instEnsino} />
-							</Form.Item>
-						</Form.Item> */}
-
-						{/* <Form.Item>
-							<span>{t("skills")}</span>
-							<Form.Item noStyle>
-								<Select
-									showArrow
-									mode="multiple"
-									value={novoEstudante.competencias?.map(competencia => competencia.codCompetencia)}
-									placeholder={t("skills")}
-									onChange={(value: (number | undefined)[] | undefined) => {
-										dispatch(setState({type: "set", payload: competencias: value && value.map(codCompetencia => ({ codCompetencia }))});
-									}}
-								>
-									{novoEstudante.competencias &&
-										novoEstudante.competencias.map(competencia => (
-											<Select.Option
-												key={competencia.codCompetencia}
-												value={competencia.codCompetencia}
-											>
-												{undefined}
-											</Select.Option>
-										))}
-								</Select>
-							</Form.Item>
-						</Form.Item> */}
-
 						<Form.Item>
 							<Form.Item name={["endereco", "cep"]} noStyle rules={RULES}>
 								<Input label={t("zip_code")} placeholder={t("zip_code")} value={novoEstudante.endereco?.cep} maxLength={8} onChange={e => getViaCep(e.target.value)}/>
@@ -315,30 +301,6 @@ const TerminoCadastro = () => {
 								<Input label={t("complement")} placeholder={t("complement")} value={novoEstudante.endereco?.complemento} defaultValue={""} maxLength={14} />
 							</Form.Item>
 						</Form.Item>
-						
-						{/* <span>Experiência Profissional</span>
-						<Form.List name="experienciaProfissional">
-							{(fields, { add, remove }) => (
-							<>
-								{fields.map(({ key, name, ...restField }) => (
-								<Space key={key} style={{ display: 'flex', marginBottom: 8 }} align="baseline">
-									<Form.Item {...restField} name={[name, 'first']} rules={[{ required: true, message: 'Missing first name' }]}>
-										<Input placeholder="First Name" />
-									</Form.Item>
-									<Form.Item {...restField} name={[name, 'last']} rules={[{ required: true, message: 'Missing last name' }]}>
-										<Input placeholder="Last Name" />
-									</Form.Item>
-									<MinusCircleOutlined onClick={() => remove(name)} />
-								</Space>
-								))}
-							</>
-							)}
-						</Form.List>
-						<Form.Item>
-							<Button type="dashed" onClick={() => {add()}} block icon={<PlusOutlined />}>
-								Add sights
-							</Button>
-						</Form.Item> */}
 
 						<Form.Item>
 							<Form.Item name={["competencias"]} noStyle rules={RULES}>
