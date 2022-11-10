@@ -17,7 +17,7 @@ const InputSelect = (props: InputSelectProps) => {
             <label className={styles.label}>{label}</label>
             <Select value={value} onChange={(value) => {props.change(value)}}>
                 {choices.map((choice) => {
-                    return <Select.Option value={choice}>{choice}</Select.Option>
+                    return <Select.Option key={choice} value={choice}>{choice}</Select.Option>
                 } )}
             </Select>
         </>

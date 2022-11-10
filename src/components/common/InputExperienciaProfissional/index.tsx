@@ -1,1 +1,1 @@
-export { default } from './InputExperienciaProfissional'
+export { default } from './InputExperienciaProfissional';

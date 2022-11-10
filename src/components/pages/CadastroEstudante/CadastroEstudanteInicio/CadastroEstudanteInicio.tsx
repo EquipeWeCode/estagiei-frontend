@@ -1,13 +1,7 @@
 import Input from "@/components/common/Input";
 import { useEffect, useState } from "react";
-import { useAuth } from "@/contexts/auth";
-import { DatePicker, Form, Row, Select } from "antd";
+import { Form, Row } from "antd";
 import { useTranslation } from "react-i18next";
-import moment, { Moment } from "moment";
-import { getEstudante, postEstudante, putEstudante } from "@/services/estudante";
-import { CadastroEstudanteType, UserType } from "@/types/userTypes";
-import { CompetenciaType } from "@/types/competenciaType";
-import { getCompetencias } from "@/services/competencias";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "@/components/common/Button";
 import { getToken } from "@/services/autenticacao";
