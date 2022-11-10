@@ -71,7 +71,7 @@ export const TRANSLATIONS_EN = {
 	back_to_home: "Back to home",
 	expired_session: "Your session has expired. Please login again.",
 	login_home: "Sing up to receive intership vacancies recommendations matching with your profile.",
-	singup: "Sing up",
+	singup: "Sign up",
 	social_purpose: "Social Purpose",
 	company_name: "Company name",
 	state: "State",
