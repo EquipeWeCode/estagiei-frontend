@@ -70,9 +70,8 @@ const CadastroEstudanteInicio = () => {
 						onFinish={transferDataFinishingForm}
 						name="cadastroEstudante"
 						onValuesChange={(changedValues, allValues) => {
-							if (changedValues['repete-senha']) {
-								return
-							}
+							if (changedValues.repeteSenha) 
+								return;
 							dispatch(setState({...novoEstudante, ...changedValues}));
 						}}
 						initialValues={novoEstudante}
@@ -91,7 +90,7 @@ const CadastroEstudanteInicio = () => {
 						</Form.Item>
 
 						<Form.Item>
-							<Form.Item name="repete-senha" noStyle rules={RULES_PASSWORD} dependencies={['senha']}>
+							<Form.Item name="repeteSenha" noStyle rules={RULES_PASSWORD} dependencies={['senha']}>
 								<InputPassword label={t("type_repeat_password")} type={"password"} placeholder={t("type_password")} value={novoEstudante.senha} maxLength={14} minLength={8}/>
 							</Form.Item>
 						</Form.Item>
