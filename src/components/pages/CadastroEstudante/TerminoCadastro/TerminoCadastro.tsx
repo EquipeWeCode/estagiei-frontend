@@ -162,6 +162,10 @@ const TerminoCadastro = () => {
 		// }
 	};
 
+	const stateSetEstudante = (value: CadastroEstudanteType) => {
+		setEstudante(value);
+	}
+
 	return (
 		<div className={styles.containerGeral}>
 			<Row justify="center" className={styles.boxLogin}>
@@ -333,7 +337,7 @@ const TerminoCadastro = () => {
 
 						<Form.Item>
 							<Form.Item>
-								<InputContato />
+								<InputContato estudante={novoEstudante} state={stateSetEstudante}/>
 							</Form.Item>
 						</Form.Item>
 
