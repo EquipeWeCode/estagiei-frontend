@@ -207,6 +207,11 @@ const TerminoCadastro = () => {
 									setEstudante({...novoEstudante, ...changedValues});
 									return;
 								}
+
+								if (changedValues.experienciaProfissional.length < novoEstudante.experienciaProfissional.length) {
+									setEstudante({...novoEstudante, ...changedValues});
+									return;
+								}
 							
 								let newHistorico = novoEstudante.experienciaProfissional;
 								let objectHistorico = newHistorico[changedValues.experienciaProfissional.length - 1]
@@ -216,6 +221,11 @@ const TerminoCadastro = () => {
 							}
 							if (changedValues.historicoEscolar) {
 								if (!novoEstudante.historicoEscolar) {
+									setEstudante({...novoEstudante, ...changedValues});
+									return;
+								}
+
+								if (changedValues.historicoEscolar.length < novoEstudante.historicoEscolar.length) {
 									setEstudante({...novoEstudante, ...changedValues});
 									return;
 								}
