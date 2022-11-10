@@ -34,7 +34,7 @@ const Login = () => {
 	const next = searchParams.get("next");
 
 	useEffect((): void => {
-		if (token !== null && USER_KEY && user?.roles) {
+		if (token) {
 			navigate("/");
 		}
 	}, []);
@@ -128,7 +128,7 @@ const Login = () => {
 								}}
 							/>
 							<p>
-								{t("dont_have_account")} <Link to="/cadastro">{t("signup")}</Link>
+								{t("dont_have_account")} <Link to="/cadastro/estudante">{t("signup")}</Link>
 							</p>
 							<Row justify="center" align="middle" style={{ width: "100%" }}>
 								<ButtonVoltar secondary />

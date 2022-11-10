@@ -1,5 +1,9 @@
+import { contatosType } from "./contatoType";
+import { EnderecoType } from "./enderecoType";
+import { experienciaProfissionalType } from "./experienciaProfissionalType";
+import { historicoEscolarType } from "./historicoEscolarType";
 import { CandidaturaType } from '@/types/candidaturaType';
-import { CompetenciaType } from "./competenciaType";
+import { CompetenciaType, CompetenciaCodType } from "./competenciaType";
 
 export interface AuditoriaType {
   dataInclusao?: string;
@@ -36,6 +40,22 @@ export type ContatoType = {
   descContato?: string;
   valorContato?: string;
   auditoria?: AuditoriaType;
+}
+
+export type CadastroEstudanteType = {
+  email?: string;
+  senha?: string;
+	nvlEscolaridade?: string;
+  cpf?: string;
+  rg?: string;
+  nome?: string;
+  avatar?: string;
+  dataNascimento?: string;
+  endereco?: EnderecoType;
+  experienciaProfissional?: experienciaProfissionalType[];
+  competencias?: CompetenciaCodType[],
+  historicoEscolar?: historicoEscolarType[];
+  contatos?: contatosType[];
 }
 
 export type LoginType = {

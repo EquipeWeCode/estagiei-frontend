@@ -111,6 +111,9 @@ const Header = () => {
 						<Row gutter={12} align="middle">
 							<Space>
 								<Col>
+									<Link to={"/cadastro/empresa"}>{t("am_company")}</Link>
+								</Col>
+								<Col>
 									<Link to={"/vagas"}>{t("internships")}</Link>
 								</Col>
 								<span className={styles.linkLogin}>

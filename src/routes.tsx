@@ -21,6 +21,8 @@ import DescricaoVaga from "./components/common/CardVagas/DescricaoVaga";
 import Vagas from "./components/pages/Vagas";
 import { EMPRESA, ESTUDANTE } from "./constants";
 import TraducaoBtn from "./components/common/TraducaoBtn";
+import CadastroEstudante from "./components/pages/CadastroEstudante/CadastroEstudante";
+import CadastroEmpresa from "./components/pages/CadastroEmpresa";
 import PerfilEstudante from "@/components/pages/estudante/PerfilEstudante";
 import PerfilEmpresa from "@/components/pages/empresa/PerfilEmpresa";
 
@@ -35,23 +37,18 @@ render(
 						<Route path="/" element={<HomePage />} />
 						<Route path="/login" element={<Login />} />
 						<Route path="/vagas" element={<Vagas />} />
-
-						<Route
-							path="/estudante/meu-perfil"
-							element={
-								<PrivateRoute roles={[ESTUDANTE]}>
-									<PerfilEstudante />
-								</PrivateRoute>
-							}
-						/>
-						<Route
-							path="/empresa/meu-perfil"
-							element={
-								<PrivateRoute roles={[EMPRESA]}>
-									<PerfilEmpresa />
-								</PrivateRoute>
-							}
-						/>
+						<Route path="/cadastro/empresa" element={<CadastroEmpresa />} />
+						<Route path="/cadastro/estudante" element={<CadastroEstudante />} />
+						<Route path="/estudante/meu-perfil" element={
+							<PrivateRoute roles={[ESTUDANTE]}>
+								<PerfilEstudante />
+							</PrivateRoute>
+						} />
+						<Route path="/empresa/meu-perfil" element={
+							<PrivateRoute roles={[EMPRESA]}>
+								<PerfilEmpresa />
+							</PrivateRoute>
+						} />
 						<Route path="*" element={<NotFound />} />
 					</Routes>
 					<Footer />
