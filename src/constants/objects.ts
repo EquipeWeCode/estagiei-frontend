@@ -30,10 +30,6 @@ export const tipoContatoObject: { [key: string]: labelValueObject } = {
     TEL_FIXO: {
         label: 'Telefone fixo',
         value: 'TEL_FIXO'
-    },
-    EMAIL: {
-        label: 'E-mail',
-        value: 'EMAIL'
     }
 }
 

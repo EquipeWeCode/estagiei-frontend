@@ -336,7 +336,7 @@ const TerminoCadastro = () => {
 						</Form.Item>
 
 						<Form.Item>
-							<Form.Item>
+							<Form.Item rules={[...RULES]}>
 								<InputContato estudante={novoEstudante} state={stateSetEstudante}/>
 							</Form.Item>
 						</Form.Item>

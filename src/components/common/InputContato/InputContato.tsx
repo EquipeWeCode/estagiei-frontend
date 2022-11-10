@@ -5,14 +5,8 @@ import Input from "../Input/Input";
 import styles from './styles.module.scss';
 import { useState } from 'react';
 
-type handleChanges = {
-    selectFunc: () => {},
-    inputFunc: () => {}
-}
-
 interface InputContatoProps extends InputProps {
     label?: string;
-    handleChanges?: handleChanges;
     estudante?: CadastroEstudanteType;
     state?: (value: {}) => void;
 }
@@ -31,9 +25,7 @@ const InputContato = (props: InputContatoProps) => {
         })
     })
 
-    const handleSelect = (value: string) => {
-        console.log(value);
-        
+    const handleSelect = (value: string) => {       
         if(!state) 
            return 
 
@@ -45,9 +37,7 @@ const InputContato = (props: InputContatoProps) => {
         }]});
     }
 
-    const handleInput = (value: string) => {
-        console.log(value);
-        
+    const handleInput = (value: string) => {      
         if(!state) 
            return 
 
@@ -73,7 +63,7 @@ const InputContato = (props: InputContatoProps) => {
                     />
                 </Form.Item>
                 <Form.Item style={{flex:"3"}}>
-                    <Input {...props} placeholder="Telefone"/>
+                    <Input {...props} placeholder="Telefone" onChange={(e) => {handleInput(e.target.value)}}/>
                 </Form.Item>
             </Row>
         </>
