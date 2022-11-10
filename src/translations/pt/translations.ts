@@ -159,6 +159,7 @@ export const TRANSLATIONS_PT = {
 	institutionName: "Nome da instituição",
 	courseName: "Nome do curso",
 	professionalExp: "Experiência profissional",
-	studentHistoric: "Histórico escolar"
+	studentHistoric: "Histórico escolar",
+	moreInfo: "Precisamos de mais algumas informações para completar seu cadastro"
 };
 

@@ -190,7 +190,7 @@ const TerminoCadastro = () => {
 			<Row justify="center" className={styles.boxLogin}>
 				<Row style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
 					<Row justify="center">
-						<h2>Precisamos de mais algumas informações para completar seu cadastro</h2>
+						<h2>{t("moreInfo")}</h2>
 					</Row>
 					<Form
 						onFinish={salvaEstudante}
@@ -240,14 +240,14 @@ const TerminoCadastro = () => {
 						</Form.Item>
 
 						<Form.Item>
-							<Form.Item name="cpf" noStyle rules={RULES}>
-								<Input label="CPF" placeholder={"CPF"} value={novoEstudante.cpf} maxLength={14} />
+							<Form.Item name="cpf" noStyle rules={[...RULES, { required: true, pattern: new RegExp(/\d+/g), message: "Apenas numeros permitidos!" } ]}>
+								<Input label="CPF" placeholder={"CPF"} value={novoEstudante.cpf} maxLength={11} />
 							</Form.Item>
 						</Form.Item>
 
 						<Form.Item>
-							<Form.Item name="rg" noStyle rules={RULES}>
-								<Input label="RG" placeholder={"RG"} value={novoEstudante.rg} maxLength={12} />
+							<Form.Item name="rg" noStyle rules={[...RULES, { required: true, pattern: new RegExp(/\d+/g), message: "Apenas numeros permitidos!" } ]}>
+								<Input label="RG" placeholder={"RG"} value={novoEstudante.rg} maxLength={11} />
 							</Form.Item>
 						</Form.Item>
 
@@ -290,7 +290,7 @@ const TerminoCadastro = () => {
 							</Form.Item>
 						</Form.Item>
 						<Form.Item>
-							<Form.Item name={["endereco", "numero"]} noStyle rules={RULES}>
+							<Form.Item name={["endereco", "numero"]} noStyle rules={[...RULES, { required: true, pattern: new RegExp(/\d+/g), message: "Apenas numeros permitidos!" } ]}>
 								<Input label={t("number")} placeholder={t("number")} value={novoEstudante.endereco?.numero} maxLength={14} />
 							</Form.Item>
 						</Form.Item>

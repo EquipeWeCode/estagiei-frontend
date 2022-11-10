@@ -158,5 +158,6 @@ export const TRANSLATIONS_EN = {
 	institutionName: "Institutions name",
 	courseName: "Course name",
 	professionalExp: "Professional experience",
-	studentHistoric: "Student history"
+	studentHistoric: "Student history",
+	moreInfo: "We need more information in order to complete your sing up"
 };
