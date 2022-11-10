@@ -5,7 +5,7 @@ import React from "react";
 import { DEFAULT } from "../Drawer/Drawer";
 
 export interface ButtonDrawerProps extends ButtonProps {
-	title?: string;
+	titleDrawer?: string;
 	placement?: "left" | "right" | "top" | "bottom";
 	sizeDrawer?: "default" | "large" | "fullscreen";
 	children?: React.ReactNode;
@@ -48,7 +48,7 @@ class ButtonDrawer extends React.Component<ButtonDrawerProps> {
 
 	render() {
 		const {
-			title,
+			titleDrawer,
 			disabled,
 			type = undefined,
 			icon = null,
@@ -62,9 +62,11 @@ class ButtonDrawer extends React.Component<ButtonDrawerProps> {
 		return (
 			<>
 				<Button
-					style={style}
+					style={{
+						padding: "5px",
+					}}
 					onClick={this.abreDrawer}
-					title={title}
+					title={titleDrawer}
 					disabled={disabled}
 					ghost={ghost}
 					block={block}
@@ -76,7 +78,7 @@ class ButtonDrawer extends React.Component<ButtonDrawerProps> {
 				<Drawer
 					size={sizeDrawer}
 					visible={this.state.visible}
-					title={title}
+					title={titleDrawer}
 					onClose={this.fechaDrawer}
 				>
 					{this.props.children}

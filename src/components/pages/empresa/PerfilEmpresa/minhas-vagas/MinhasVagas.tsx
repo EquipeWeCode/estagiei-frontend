@@ -5,9 +5,10 @@ import Pagination from "@/components/common/Pagination";
 import { PAGINATION_SIZE_DEFAULT } from "@/constants";
 import { getVagas } from "@/services/vaga";
 import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
-import { Col, Row } from "antd";
+import { Col, Row, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import SalvarVaga from "../../SalvarVaga";
 import { PerfilEmpresaProps } from "../PerfilEmpresa";
 import styles from "./styles.module.css";
 
@@ -52,6 +53,11 @@ const MinhasVagas = ({ user }: PerfilEmpresaProps) => {
 			<Row justify="center" align="middle" className={styles.searchRow}>
 				<Col className={styles.searchCol}>
 					<Row style={{ marginBottom: "1rem" }} gutter={12} className={styles.searchSecRow}>
+						<Col flex={1} md={3}>
+							<span>
+								<SalvarVaga />
+							</span>
+						</Col>
 						<Col flex={1} md={8}>
 							<Input
 								allowClear={true}
@@ -86,7 +92,7 @@ const MinhasVagas = ({ user }: PerfilEmpresaProps) => {
 					onChange={paginar}
 				/>
 			</Row>
-			<CardVagas vagas={vagas} isEmpresa={true} />
+			<CardVagas vagas={vagas} isEmpresa={true} fetchVagas={fetchVagas} />
 			<Row justify="end">
 				<Pagination
 					total={quantidadeTotal}

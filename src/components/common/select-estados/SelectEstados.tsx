@@ -1,5 +1,4 @@
 import { Select } from "antd";
-import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
 export type SelectEstadosProps = {
@@ -7,16 +6,20 @@ export type SelectEstadosProps = {
 	onChange?: (value: string) => void;
 	name?: string;
 	label?: string;
+	disabled?: boolean;
 };
 
-const SelectEstados = ({ onChange, value, label }: SelectEstadosProps) => {
-
-  const { t } = useTranslation();
-
+const SelectEstados = ({ onChange, value, label, disabled }: SelectEstadosProps) => {
 	return (
 		<>
 			<label className={styles.label}>{label}</label>
-			<Select allowClear={true} onChange={onChange} value={value} style={{minWidth: "150px"}}>
+			<Select
+				allowClear={true}
+				onChange={onChange}
+				value={value}
+				style={{ minWidth: "150px" }}
+				disabled={disabled}
+			>
 				<Select.Option value="AC">Acre</Select.Option>
 				<Select.Option value="AL">Alagoas</Select.Option>
 				<Select.Option value="AP">Amapá</Select.Option>

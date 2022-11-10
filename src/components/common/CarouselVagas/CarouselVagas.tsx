@@ -1,5 +1,6 @@
 import Button from "@/components/common/Button";
 import { SIZE_FILTER_DEFAULT } from "@/constants";
+import { HIBRIDO, PRESENCIAL, REMOTO } from "@/constants/enums";
 import { getVagas } from "@/services/vaga";
 import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
 import { capitalizaPriLetraDeCadaPalavra, ellipsisText, realMask } from "@/utils/masks";
@@ -17,14 +18,13 @@ import styles from "./styles.module.css";
 // @ts-ignore
 const Carousel = C.default ? C.default : C;
 
-
 export const getTagColor = (modalidadeVaga: string = "") => {
 	switch (modalidadeVaga) {
-		case "REMOTO":
+		case REMOTO:
 			return "magenta";
-		case "PRESENCIAL":
+		case PRESENCIAL:
 			return "blue";
-		case "HIBRIDO":
+		case HIBRIDO:
 			return "purple";
 		default:
 			return "geekblue";

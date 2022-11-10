@@ -76,6 +76,7 @@ const Candidaturas = ({ user }: PerfilEstudanteProps) => {
 					<CardCandidatura
 						key={idx}
 						candidatura={candidatura}
+						status={candidatura.status}
 						fetchCandidatura={fetchCandidaturas}
 					/>
 				))
