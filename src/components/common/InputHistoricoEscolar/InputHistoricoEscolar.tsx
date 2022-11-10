@@ -73,7 +73,6 @@ const InputHistoricoEscolar = (props: InputExperienciaProps) => {
                                             allowClear
                                             style={{ width: '100%' }}
                                             placeholder="Escolaridade"
-                                            defaultValue={""}
                                         >
                                             {Object.keys(nivelEscolaridadeObject).map((key) => {
                                                 return (
@@ -99,7 +98,6 @@ const InputHistoricoEscolar = (props: InputExperienciaProps) => {
                                             allowClear
                                             style={{ width: '100%' }}
                                             placeholder={"Status"}
-                                            defaultValue={""}
                                         >
                                             {Object.keys(statusHistoricoEscolarObject).map((key) => {
                                                 return (
