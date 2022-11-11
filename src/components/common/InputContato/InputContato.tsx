@@ -61,7 +61,7 @@ const InputContato = (props: InputContatoProps) => {
     return (
         <>
             <h3 className={styles.label} style={{}}>{"Contato"}</h3>
-            <Row className={styles.container}>
+            <Row className={styles.containerInput}>
                 <Form.Item style={{flex: "1"}}>
                     <Select
                         allowClear

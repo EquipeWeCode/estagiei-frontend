@@ -4,6 +4,7 @@ import { useState } from "react";
 export const DEFAULT = "default";
 export const LARGE = "large";
 export const FULLSCREEN = "fullscreen";
+import styles from "./styles.module.scss";
 
 export type DrawerCustomProps = Omit<DrawerProps, "size"> & {
 	size?: "default" | "large" | "fullscreen";
