@@ -57,10 +57,6 @@ const TerminoCadastro = () => {
 	}, []);
 
 	useEffect(() => {
-		console.log(novoEstudante);
-	}, [novoEstudante]);
-
-	useEffect(() => {
 		const values = {...novoEstudante, dataNascimento: moment(novoEstudante.dataNascimento)}
 		form.setFieldsValue(values);
 	}, [form, novoEstudante]);
@@ -151,21 +147,25 @@ const TerminoCadastro = () => {
 	const salvaEstudante = async (values: any) => {		
 		let body = {...novoEstudante, ...values, ...{dataNascimento: moment(values.dataNascimento).format(dateFormatDto)}};
 
-		body.experienciaProfissional = body.experienciaProfissional.map((experiencia: experienciaProfissionalType) => {
-			return {
-				...experiencia,
-				dataFim: moment(experiencia.dataFim).format(dateFormatDto),
-				dataInicio: moment(experiencia.dataInicio).format(dateFormatDto)
-			};
-		})
+		if (body.experienciaProfissional) {
+			body.experienciaProfissional = body.experienciaProfissional.map((experiencia: experienciaProfissionalType) => {
+				return {
+					...experiencia,
+					dataFim: moment(experiencia.dataFim).format(dateFormatDto),
+					dataInicio: moment(experiencia.dataInicio).format(dateFormatDto)
+				};
+			})
+		}
 
-		body.historicoEscolar = body.historicoEscolar.map((historico: historicoEscolarType) => {
-			return {
-				...historico,
-				dataFim: moment(historico.dataFim).format(dateFormatDto),
-				dataInicio: moment(historico.dataInicio).format(dateFormatDto)
-			};
-		})
+		if (body.historicoEscolar) {
+			body.historicoEscolar = body.historicoEscolar.map((historico: historicoEscolarType) => {
+				return {
+					...historico,
+					dataFim: moment(historico.dataFim).format(dateFormatDto),
+					dataInicio: moment(historico.dataInicio).format(dateFormatDto)
+				};
+			})
+		}
 
 		try {
 			postEstudante(body).then((res) => {
