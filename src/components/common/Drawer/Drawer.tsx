@@ -47,6 +47,7 @@ const Drawer = (props: DrawerCustomProps) => {
 			getContainer={getContainer}
 			style={style}
 			width={isMobile ? "100%" : sizeComponent}
+			className={styles.drawer}
 		>
 			{children}
 		</DrawerAntd>

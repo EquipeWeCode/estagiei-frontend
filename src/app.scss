@@ -14,6 +14,10 @@
   width: 100%;
 }
 
+.ant-drawer-mask div {
+  position: absolute !important;
+}
+
 body .ant-tag {
   border-radius: 5px;
 }
