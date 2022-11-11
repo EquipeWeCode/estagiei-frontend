@@ -1,5 +1,5 @@
 import { Drawer as DrawerAntd, DrawerProps } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const DEFAULT = "default";
 export const LARGE = "large";
@@ -26,6 +26,14 @@ const Drawer = (props: DrawerCustomProps) => {
 	} = props;
 
 	const [isMobile, setIsMobile] = useState(false);
+
+	useEffect(() => {
+		if (window.innerWidth <= 768) {
+			setIsMobile(true);
+		} else {
+			setIsMobile(false);
+		}
+	}, []);
 
 	window.addEventListener("resize", () => {
 		if (window.innerWidth <= 768) {
