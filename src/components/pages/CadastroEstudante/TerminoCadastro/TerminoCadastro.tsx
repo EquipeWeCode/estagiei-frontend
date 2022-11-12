@@ -266,6 +266,7 @@ const TerminoCadastro = () => {
 									name="dataNascimento"
 									placeholder={t("birth_date")}
 									onChange={datePasser}
+									defaultValue={novoEstudante.dataNascimento ? moment(novoEstudante.dataNascimento) : moment()}
 									format={dateFormat}
 								/>
 							</Form.Item>
