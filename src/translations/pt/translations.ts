@@ -160,6 +160,10 @@ export const TRANSLATIONS_PT = {
 	courseName: "Nome do curso",
 	professionalExp: "Experiência profissional",
 	studentHistoric: "Histórico escolar",
-	moreInfo: "Precisamos de mais algumas informações para completar seu cadastro"
+	moreInfo: "Precisamos de mais algumas informações para completar seu cadastro",
+	pwd_not_match: "As senhas não conferem",
+	only_numbers: "Apenas números são permitidos",
+	contact: "Contato",
+	success_signup: "Cadastro efetuado com sucesso!",
 };
 

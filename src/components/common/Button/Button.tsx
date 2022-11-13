@@ -4,6 +4,7 @@ import styles from "./styles.module.css";
 export interface ButtonCustomProps extends ButtonProps {
 	secondary?: boolean;
 	label?: string;
+	onClick?: () => void;
 }
 
 const Button = (props: ButtonCustomProps) => {

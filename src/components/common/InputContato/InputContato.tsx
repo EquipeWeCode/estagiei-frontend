@@ -66,12 +66,12 @@ const InputContato = (props: InputContatoProps) => {
                     <Select
                         allowClear
                         style={{ width: '100%' }}
-                        placeholder="Competencias"
+                        placeholder={t("contact")}
                         onChange={handleSelect}
                         options={tipo}
                     />
                 </Form.Item>
-                <Form.Item style={{flex:"3"}} rules={[...RULES, { required: true, pattern: new RegExp(/\d+/g), message: "Apenas numeros permitidos!" } ]}>
+                <Form.Item style={{flex:"3"}} rules={[...RULES, { required: true, pattern: new RegExp(/\d+/g), message: t("only_numbers") } ]}>
                     <Input {...props} placeholder="Telefone" onChange={(e) => {handleInput(e.target.value)}}/>
                 </Form.Item>
             </Row>

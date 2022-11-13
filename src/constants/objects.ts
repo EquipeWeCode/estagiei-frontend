@@ -5,7 +5,7 @@ type labelValueObject = {
 
 export const nivelEscolaridadeObject: { [key: string]: labelValueObject } = {
     TECNICO: {
-        label: 'Tecnico',
+        label: 'Técnico',
         value: 'TECNICO'
     },
     MEDIO: {
@@ -41,5 +41,13 @@ export const statusHistoricoEscolarObject: { [key: string]: labelValueObject } =
     CURSANDO: {
         label: 'Cursando',
         value: 'CURSANDO'
+    },
+    TRANCADO: {
+        label: 'Trancado',
+        value: 'TRANCADO'
+    },
+    DESISTIDO: {
+        label: 'Desistido',
+        value: 'DESISTIDO'
     }
 }

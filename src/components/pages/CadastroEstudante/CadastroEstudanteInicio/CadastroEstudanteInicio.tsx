@@ -9,6 +9,7 @@ import styles from './styles.module.scss';
 import { useAppDispatch, useAppSelector } from "@/redux/reducers/hooks";
 import { negateCadastroetp1, setState } from "@/redux/reducers/cadastro";
 import { InputPassword } from "@/components/common/Input/Input";
+import ButtonVoltar from "@/components/common/ButtonVoltar";
 
 const CadastroEstudanteInicio = () => {
 	const { t } = useTranslation();
@@ -45,7 +46,7 @@ const CadastroEstudanteInicio = () => {
 			if (!value || getFieldValue('senha') === value) {
 			  return Promise.resolve();
 			}
-			return Promise.reject(new Error('The two passwords that you entered do not match!'));
+			return Promise.reject(new Error(t("pwd_not_match")));
 		  },
 		}),
 	];
@@ -104,9 +105,7 @@ const CadastroEstudanteInicio = () => {
 						</Row>
 
 						<Row justify="center" align="middle" style={{ width: "100%" }}>
-							<Button secondary onClick={() => navigate("/login")}>
-								{t("go_back")}
-							</Button>
+							<ButtonVoltar />
 						</Row>
 					</Form>
 			</Row>

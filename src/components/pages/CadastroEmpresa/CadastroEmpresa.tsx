@@ -94,7 +94,7 @@ const CadastroEmpresa = () => {
 			if (!value || getFieldValue('senha') === value) {
 			  return Promise.resolve();
 			}
-			return Promise.reject(new Error('The two passwords that you entered do not match!'));
+			return Promise.reject(new Error(t("pwd_not_match")));
 		  },
 		}),
 	]
