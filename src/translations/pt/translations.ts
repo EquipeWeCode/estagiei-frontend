@@ -165,5 +165,6 @@ export const TRANSLATIONS_PT = {
 	only_numbers: "Apenas números são permitidos",
 	contact: "Contato",
 	success_signup: "Cadastro efetuado com sucesso!",
+	email_already_exists: "E-mail já cadastrado",
 };
 

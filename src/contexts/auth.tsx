@@ -1,6 +1,6 @@
 import { logout } from "@/services/autenticacao";
 import { AuthContextData } from "@/types/contextTypes";
-import { UserType, TokenType } from "@/types/userTypes";
+import { UserType } from "@/types/userTypes";
 import React, { createContext, useEffect } from "react";
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
