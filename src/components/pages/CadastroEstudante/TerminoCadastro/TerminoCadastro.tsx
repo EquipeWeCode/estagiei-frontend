@@ -6,6 +6,7 @@ import InputExperienciaProfissional from "@/components/common/InputExperienciaPr
 import InputHistoricoEscolar from "@/components/common/InputHistoricoEscolar";
 import InputSelect from "@/components/common/InputSelect";
 import SelectCompetencias from "@/components/common/SelectCompetencias/SelectCompetencias";
+import ButtonUpload from "@/components/common/UploadCloudinary/ButtonUpload";
 import { negateCadastroetp1 } from "@/redux/reducers/cadastro";
 import { useAppDispatch, useAppSelector } from "@/redux/reducers/hooks";
 import { getToken } from "@/services/autenticacao";
@@ -21,8 +22,7 @@ import { EstadoType } from "@/types/estadoType";
 import { experienciaProfissionalType } from "@/types/experienciaProfissionalType";
 import { historicoEscolarType } from "@/types/historicoEscolarType";
 import { CadastroEstudanteType } from "@/types/userTypes";
-import type { DatePickerProps } from "antd";
-import { DatePicker, Form, message, Row } from "antd";
+import { DatePicker, DatePickerProps, Form, message, Row } from "antd";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -48,6 +48,11 @@ const TerminoCadastro = () => {
 
 	const dispatch = useAppDispatch();
 
+	const getUrlImagem = () => {
+		const srcImagem = document.querySelector("#uploadedImage")?.getAttribute("src");
+		return srcImagem;
+	};
+
 	useEffect(() => {
 		if (token) {
 			navigate("/");
@@ -58,7 +63,11 @@ const TerminoCadastro = () => {
 	}, []);
 
 	useEffect(() => {
-		const values = { ...novoEstudante, dataNascimento: moment(novoEstudante.dataNascimento) };
+		const values = {
+			...novoEstudante,
+			dataNascimento: moment(novoEstudante.dataNascimento),
+			avatar: getUrlImagem(),
+		};
 		form.setFieldsValue(values);
 	}, [form, novoEstudante]);
 
@@ -165,6 +174,7 @@ const TerminoCadastro = () => {
 			...novoEstudante,
 			...values,
 			...{ dataNascimento: moment(values.dataNascimento).format(dateFormatDto) },
+			avatar: getUrlImagem(),
 		};
 
 		if (body.experienciaProfissional) {
@@ -193,9 +203,9 @@ const TerminoCadastro = () => {
 			postEstudante(body).then(res => {
 				dispatch(negateCadastroetp1());
 
-				if (res.status === 201) {
+				if (res.status === 200) {
 					navigate("/login");
-					message.success(t("success"));
+					message.success(t("success_signup"));
 				}
 			});
 		} catch (e) {
@@ -210,6 +220,7 @@ const TerminoCadastro = () => {
 	return (
 		<div className={styles.containerGeral}>
 			<Row justify="center" className={styles.boxLogin}>
+				<span style={{ display: "none" }} id="auxImage" />
 				<Row
 					style={{
 						display: "flex",
@@ -227,6 +238,10 @@ const TerminoCadastro = () => {
 						name="cadastroEstudante"
 						initialValues={novoEstudante}
 						onValuesChange={(changedValues, allValues) => {
+							setEstudante({
+								...novoEstudante,
+								avatar: getUrlImagem(),
+							});
 							if (changedValues.endereco) {
 								setEstudante({
 									...novoEstudante,
@@ -318,6 +333,8 @@ const TerminoCadastro = () => {
 							</Form.Item>
 						</Form.Item>
 
+						<ButtonUpload />
+
 						<Form.Item>
 							<span style={{ display: "block", textAlign: "start" }}>{t("birth_date")}</span>
 							<Form.Item name="dataNascimento" noStyle rules={RULES}>
@@ -326,7 +343,9 @@ const TerminoCadastro = () => {
 									name="dataNascimento"
 									placeholder={t("birth_date")}
 									onChange={datePasser}
-									defaultValue={novoEstudante.dataNascimento ? moment(novoEstudante.dataNascimento) : moment()}
+									defaultValue={
+										novoEstudante.dataNascimento ? moment(novoEstudante.dataNascimento) : moment()
+									}
 									format={dateFormat}
 								/>
 							</Form.Item>
@@ -461,10 +480,12 @@ const TerminoCadastro = () => {
 					</Form>
 					<Row justify="center" align="middle" style={{ width: "100%" }}>
 						<p style={{ width: "100%" }}>
-							{t("singup_as")} <Link to={"/cadastro/estudante"}>{t("student")}</Link>
+							<span style={{ flex: "1" }}>
+								{t("singup_as")} <Link to={"/cadastro/empresa"}>{t("company")}</Link>
+							</span>
 						</p>
 						<Row justify="center" align="middle" style={{ width: "100%" }}>
-							<ButtonVoltar onClick={() => dispatch(negateCadastroetp1())}/>
+							<ButtonVoltar onClick={() => dispatch(negateCadastroetp1())} />
 						</Row>
 					</Row>
 				</Row>

@@ -49,7 +49,7 @@ export type CadastroEstudanteType = {
   cpf?: string;
   rg?: string;
   nome?: string;
-  avatar?: string;
+  avatar?: string | undefined | null;
   dataNascimento?: string;
   endereco?: EnderecoType;
   experienciaProfissional?: experienciaProfissionalType[];
@@ -68,4 +68,8 @@ export type TokenType = {
   tokenType: string,
   roles: string[],
   expiresIn: number,
+}
+
+export type FiltroUsuarioType = {
+  email?: string;
 }

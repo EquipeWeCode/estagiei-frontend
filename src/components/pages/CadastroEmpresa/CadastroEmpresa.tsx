@@ -20,6 +20,7 @@ import { getCidades } from "@/services/cidades";
 import { getEstados } from "@/services/estados";
 import { useDispatch } from "react-redux";
 import { InputPassword } from "@/components/common/Input/Input";
+import ButtonVoltar from "@/components/common/ButtonVoltar";
 
 type FormCadastroEmpresaType = {
 	email?: string,
@@ -266,9 +267,7 @@ const CadastroEmpresa = () => {
 					<Row justify="center" align="middle" style={{ width: "100%" }}>
 						<p style={{width: "100%"}}>{t("singup_as")} <Link to={"/cadastro/estudante"}>{t("student")}</Link></p>
 						<Row justify="center" align="middle" style={{ width: "100%" }}>
-							<Button secondary onClick={() => navigate("/")}>
-								{t("go_back")}
-							</Button>
+							<ButtonVoltar />
 						</Row>
 					</Row>
 			</Row>

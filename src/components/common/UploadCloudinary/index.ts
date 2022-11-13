@@ -5,6 +5,8 @@ export const myWidget = window.cloudinary.createUploadWidget(
 		multiple: false,
 		defaultSource: "local",
 		sources: ["local", "url"],
+		cropping: true,
+		
 		styles: {
 			palette: {
 				window: "#000000",
@@ -21,18 +23,11 @@ export const myWidget = window.cloudinary.createUploadWidget(
 				textDark: "#000000",
 				textLight: "#FFFFFF",
 			},
-			fonts: {
-				default: null,
-				"'Space Mono', monospace": {
-					url: "https://fonts.googleapis.com/css?family=Space+Mono",
-					active: true,
-				},
-			},
 		},
 	},
 	(error: any, result: any) => {
 		if (!error && result && result.event === "success") {
-			document.getElementById("uploadedimage")?.setAttribute("src", result.info.secure_url);
+			document.getElementById("uploadedImage")?.setAttribute("src", result.info.secure_url);
 		}
 	}
 );
