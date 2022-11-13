@@ -2,4 +2,6 @@
   margin-top: auto;
   text-align: center;
   height: 2rem;
+  background-color: var(--secondary-color);
+  color: #FFF;
 }
