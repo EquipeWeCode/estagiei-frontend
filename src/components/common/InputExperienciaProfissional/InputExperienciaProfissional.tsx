@@ -29,10 +29,6 @@ const InputExperienciaProfissional = (props: InputExperienciaProps) => {
     const dateFormat = "DD/MM/YYYY";
 	const dateFormatDto = "YYYY-MM-DD";
 
-    const datePasser: DatePickerProps['onChange'] = (date, dateString) => {
-		console.log(date, dateString);
-	}
-
     return (
         <>
             <hr
@@ -77,7 +73,6 @@ const InputExperienciaProfissional = (props: InputExperienciaProps) => {
                                             style={{ width: "100%", marginBottom: "0.4rem", borderRadius: "0.5rem" }}
                                             name="dataInicio"
                                             placeholder={t("dateStart")}
-                                            onChange={datePasser}
                                             format={dateFormat}
                                         />
                                     </Form.Item>
@@ -86,7 +81,6 @@ const InputExperienciaProfissional = (props: InputExperienciaProps) => {
                                             style={{ width: "100%", marginBottom: "0.4rem", borderRadius: "0.5rem" }}
                                             name="dataFim"
                                             placeholder={t("dateEnd")}
-                                            onChange={datePasser}
                                             format={dateFormat}
                                         />
                                     </Form.Item>

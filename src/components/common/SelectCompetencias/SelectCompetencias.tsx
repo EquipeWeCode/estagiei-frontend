@@ -25,7 +25,7 @@ const SelectCompetencias = (props: SelectCompetenciasProps) => {
                 mode="multiple"
                 allowClear
                 style={{ width: '100%' }}
-                placeholder="Competencias"
+                placeholder="Soft-skills"
                 defaultValue={[]}
                 onChange={props.function}
                 options={options}

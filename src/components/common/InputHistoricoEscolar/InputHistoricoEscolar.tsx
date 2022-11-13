@@ -41,14 +41,6 @@ const InputHistoricoEscolar = (props: InputExperienciaProps) => {
     const dateFormat = "DD/MM/YYYY";
 	const dateFormatDto = "YYYY-MM-DD";
 
-    const datePasserInicio: DatePickerProps['onChange'] = (date, dateString) => {
-		console.log(date, dateString);
-	}
-
-    const datePasserFim: DatePickerProps['onChange'] = (date, dateString) => {
-		console.log(date, dateString);
-	}
-
     return (
         <>
             <hr
@@ -113,7 +105,6 @@ const InputHistoricoEscolar = (props: InputExperienciaProps) => {
                                             style={{ width: "100%", marginBottom: "0.4rem", borderRadius: "0.5rem" }}
                                             name="dataInicio"
                                             placeholder={t("dateStart")}
-                                            onChange={datePasserInicio}
                                             format={dateFormat}
                                         />
                                     </Form.Item>
@@ -122,7 +113,6 @@ const InputHistoricoEscolar = (props: InputExperienciaProps) => {
                                             style={{ width: "100%", marginBottom: "0.4rem", borderRadius: "0.5rem" }}
                                             name="dataFim"
                                             placeholder={t("dateEnd")}
-                                            onChange={datePasserFim}
                                             format={dateFormat}
                                         />
                                     </Form.Item>
