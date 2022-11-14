@@ -13,16 +13,26 @@ const DadosBasicos = ({ user }: PerfilEmpresaProps) => {
 					{user.avatar ? <img src={user.avatar} alt="Avatar" /> : <ImageNotFound width={100} />}
 				</div>
 			</Col>
-			<Col sm={15} md={19}>
+			<Col sm={7} md={10}>
 				<div className={styles.containerDados}>
 					<span className={styles.containerNome}>
 						<div>CNPJ: {cpfCnpjMask(user.cnpj)}</div>
 						<div>Nome Fantasia: {user.nomeFantasia}</div>
 						<div>Razão social: {user.razaoSocial}</div>
-            <div>Data da inclusão: {user.auditoria?.dataInclusao}</div>
+            			<div>Data da inclusão: {user.auditoria?.dataInclusao}</div>
 					</span>
 				</div>
-				(Em desenvolvimento)
+			</Col>
+			<Col>
+			 	<div className={styles.containerDados}>
+					<span className={styles.containerNome}>
+						<div>{user.endereco?.cidade} - {user.endereco?.estado}</div>
+						<div>Bairro: {user.endereco?.bairro}</div>
+						<div>CEP: {user.endereco?.cep}</div>
+						<div>Logradouro: {user.endereco?.logradouro} {user.endereco?.numero ? user.endereco?.numero : ''}</div>
+						{user.endereco?.complemento && <div>Complemento: {user.endereco?.complemento}</div>}
+					</span>
+				</div>
 			</Col>
 		</Row>
 	);

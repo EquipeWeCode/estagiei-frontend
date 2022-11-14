@@ -1,4 +1,4 @@
-export type EnderecoType = {
+export interface EnderecoType {
   codEndereco?: number,
   cep?: string,
   estado?: string,

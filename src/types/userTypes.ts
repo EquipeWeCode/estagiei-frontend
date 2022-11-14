@@ -32,6 +32,7 @@ export type UserType = {
   candidaturas?: CandidaturaType[];
   roles?: string[];
   auditoria?: AuditoriaType;
+  endereco?: EnderecoType;
 }
 
 export type ContatoType = {
