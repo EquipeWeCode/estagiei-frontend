@@ -41,7 +41,7 @@ export const TRANSLATIONS_EN = {
 	singup_company: "Sign up as a company",
 	vacancy: "Jobs",
 	vacancy_title_header: "Internship vacancies",
-	vacancy_description_header: 
+	vacancy_description_header:
 		"Looking for the so waited experience in your area? Want to be hired with the dream internship? So you are in the right place!",
 	vacancy_btn: "Show interships",
 	not_found_vacancies: "Not found vacancies",
@@ -57,14 +57,16 @@ export const TRANSLATIONS_EN = {
 	im_student: "I'm a student",
 	company: "Company",
 	banner_text: "Search for internships in a simplified way.",
-	banner_subtitle: "No more long and tiring selection processes... Here, with just a few clicks, you can get your dream internship. Come and meet the Estagiei!",
+	banner_subtitle:
+		"No more long and tiring selection processes... Here, with just a few clicks, you can get your dream internship. Come and meet the Estagiei!",
 	internships: "Internships",
 	change_language: "Change language",
 	my_profile: "My profile",
 	see_more: "See more",
 	some_of_our_jobs: "Some of our jobs",
 	banner_text_company: "Publish your internships in a simplified way.",
-	banner_subtitle_company: "Does your company have open internship positions? Come share them on our website and receive students recommendations who are most compatible with the soft skills you are looking for.",
+	banner_subtitle_company:
+		"Does your company have open internship positions? Come share them on our website and receive students recommendations who are most compatible with the soft skills you are looking for.",
 	advertise_my_jobs: "Advertise my jobs",
 	my_jobs: "My jobs",
 	home: "Home",
@@ -76,7 +78,7 @@ export const TRANSLATIONS_EN = {
 	company_name: "Company name",
 	state: "State",
 	city: "City",
-	district: "Disctrict",
+	district: "District",
 	street_name: "Street name",
 	number: "Number",
 	complement: "Complement",
@@ -165,4 +167,5 @@ export const TRANSLATIONS_EN = {
 	contact: "Contact",
 	success_signup: "Sign up successfully",
 	email_already_exists: "E-mail already exists",
+	confirm_pwd: "Please confirm your password!",
 };

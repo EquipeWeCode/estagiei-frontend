@@ -29,6 +29,11 @@ import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
 
+export const getUrlImagem = () => {
+	const srcImagem = document.querySelector("#uploadedImage")?.getAttribute("src");
+	return srcImagem;
+};
+
 const TerminoCadastro = () => {
 	const [form] = Form.useForm();
 	const { t } = useTranslation();
@@ -47,11 +52,6 @@ const TerminoCadastro = () => {
 	const [treatedCidades, setTreatedCidades] = useState<string[]>([]);
 
 	const dispatch = useAppDispatch();
-
-	const getUrlImagem = () => {
-		const srcImagem = document.querySelector("#uploadedImage")?.getAttribute("src");
-		return srcImagem;
-	};
 
 	useEffect(() => {
 		if (token) {
@@ -302,6 +302,8 @@ const TerminoCadastro = () => {
 						}}
 						className={styles.containerInput}
 					>
+						<ButtonUpload />
+
 						<Form.Item>
 							<Form.Item name="nome" noStyle rules={RULES}>
 								<Input label={t("name")} placeholder={t("name")} value={novoEstudante.nome} />
@@ -332,8 +334,6 @@ const TerminoCadastro = () => {
 								<Input label="RG" placeholder={"RG"} value={novoEstudante.rg} maxLength={11} />
 							</Form.Item>
 						</Form.Item>
-
-						<ButtonUpload />
 
 						<Form.Item>
 							<span style={{ display: "block", textAlign: "start" }}>{t("birth_date")}</span>

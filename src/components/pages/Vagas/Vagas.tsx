@@ -187,7 +187,7 @@ const Vagas = () => {
 							candidaturas={candidaturas}
 							fetchCandidaturas={fetchCandidaturas}
 						/>
-						<Row justify="end">
+						<Row justify="end" style={{marginBottom: "1rem"}}>
 							<Pagination
 								total={quantidadeTotal}
 								pageSize={filtroVaga.size}
