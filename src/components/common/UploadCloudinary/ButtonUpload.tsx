@@ -7,9 +7,8 @@ import { myWidget } from "./index";
 const styles = {
 	width: "100px",
 	height: "100px",
-	borderRadius: "5px",
+	borderRadius: "50%",
 	border: "1px solid var(--primary-color)",
-	marginLeft: "1rem",
 };
 
 const ButtonUpload = () => {
@@ -30,8 +29,7 @@ const ButtonUpload = () => {
 	return (
 		<>
 			<Space>
-				<Button secondary id="upload_widget" icon={<UploadOutlined />} label="Upload avatar" />
-
+				<Button secondary id="upload_widget" icon={<UploadOutlined />} label="Avatar" />
 				<img id="uploadedImage" style={styles} />
 				<Button type="primary" danger onClick={removeUrlImagem} icon={<CloseCircleOutlined />} />
 			</Space>

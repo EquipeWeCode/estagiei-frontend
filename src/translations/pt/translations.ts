@@ -166,5 +166,6 @@ export const TRANSLATIONS_PT = {
 	contact: "Contato",
 	success_signup: "Cadastro efetuado com sucesso!",
 	email_already_exists: "E-mail já cadastrado",
+	confirm_pwd: "Confirme sua senha",
 };
 

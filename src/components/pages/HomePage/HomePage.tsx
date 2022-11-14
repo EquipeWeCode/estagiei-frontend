@@ -21,7 +21,7 @@ type BannerProps = {
 	title: string;
 	subtitle: string;
 	buttonText: string;
-	type: "student" | "company";
+	type: "estudante" | "empresa";
 };
 
 const Banner = (props: BannerProps) => {
@@ -35,13 +35,13 @@ const Banner = (props: BannerProps) => {
 					<div>
 						{!user.roles && (
 							<Button secondary className={styles.bannerButton}>
-								<Link to="/cadastro/estudante">{buttonText}</Link>
+								<Link to={`/cadastro/${type}`}>{buttonText}</Link>
 							</Button>
 						)}
 					</div>
 				</Col>
 				<Col className={styles.studentImage} span={12}>
-					{type === "student" ? (
+					{type === "estudante" ? (
 						<StudentBanner className={styles.studentSvg} />
 					) : (
 						<img
@@ -83,12 +83,12 @@ const HomePage = (): JSX.Element => {
 				slidesToSlide={1}
 				autoPlay={true}
 				showDots={true}
-				autoPlaySpeed={6000}
+				autoPlaySpeed={5000}
 				removeArrowOnDeviceType={["superLargeDesktop", "tablet"]}
 				containerClass={carouselStyles.carouselContainer}
 			>
 				<Banner
-					type="student"
+					type="estudante"
 					key={1}
 					buttonText={t("signup")}
 					user={user}
@@ -96,7 +96,7 @@ const HomePage = (): JSX.Element => {
 					subtitle={t("banner_subtitle")}
 				/>
 				<Banner
-					type="company"
+					type="empresa"
 					key={2}
 					buttonText={t("advertise_my_jobs")}
 					user={user}

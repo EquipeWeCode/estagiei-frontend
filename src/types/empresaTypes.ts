@@ -14,7 +14,7 @@ export type EmpresaType = {
 export type CadastroEmpresaType = {
   email?: string,
 	senha?: string,
-	avatar?: string,
+	avatar?: string | null,
 	razaoSocial?: string,
 	nomeFantasia?: string,
 	cnpj?: string,

@@ -40,7 +40,7 @@ const CadastroEstudanteInicio = () => {
 	const RULES_PASSWORD = [
 		{
 			required: true,
-			message: "Please confirm your password!",
+			message: t("confirm_pwd"),
 		},
 		({ getFieldValue }: any) => ({
 			validator(_: any, value: any) {
