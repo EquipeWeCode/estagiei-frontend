@@ -142,7 +142,7 @@ const CadastroEmpresa = () => {
 	const criarEmpresa = async () => {
 		const novoFormEmpresa = { ...formEmpresa, avatar: getUrlImagem() };
 		const { status } = await postEmpresa(novoFormEmpresa);
-		if (status == 200) {
+		if (status == 201) {
 			navigate("/login");
 			message.success(t("success_signup"));
 		}

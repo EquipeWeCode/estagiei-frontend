@@ -72,7 +72,7 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 		} else {
 			const { status } = await postCandidatura(codEstudante, codVaga);
 
-			if (status === 200) {
+			if (status === 201) {
 				refDrawer?.current?.fechaDrawer();
 				fetchCandidaturas && fetchCandidaturas();
 				message.success(t("success_apply"));

@@ -203,7 +203,7 @@ const TerminoCadastro = () => {
 			postEstudante(body).then(res => {
 				dispatch(negateCadastroetp1());
 
-				if (res.status === 200) {
+				if (res.status === 201) {
 					navigate("/login");
 					message.success(t("success_signup"));
 				}
