@@ -154,12 +154,12 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 
 			<Tabs defaultActiveKey="1" style={{ width: "95%", alignSelf: "center" }}>
 				<TabPane tab={t("details")} key="1">
-					<p className={styles.descricaoVaga}>{vaga?.descricao}</p>
+					<p className={styles.descricaoVaga}>{vaga?.descricao || t("not_informed")}</p>
 					<Divider />
 					<Row className={styles.dadosLista}>
 						<ReadOutlined /> {t("courses")}
 					</Row>
-					<Row>{vaga?.curso || "N/A"}</Row>
+					<Row>{vaga?.curso || t("not_informed")}</Row>
 					<Divider />
 					<Row className={styles.dadosLista}>
 						<BulbOutlined /> Soft-skills

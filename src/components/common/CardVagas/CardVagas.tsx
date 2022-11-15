@@ -4,11 +4,7 @@ import { useAuth } from "@/contexts/auth";
 import { CandidaturaType } from "@/types/candidaturaType";
 import { CompetenciaType } from "@/types/competenciaType";
 import { VagaType } from "@/types/vagasTypes";
-import {
-	capitalizaPriLetraDeCadaPalavra,
-	dateMask,
-	ellipsisText, realMask
-} from "@/utils/masks";
+import { capitalizaPriLetraDeCadaPalavra, dateMask, ellipsisText, realMask } from "@/utils/masks";
 import { ClockCircleOutlined, EnvironmentOutlined, SearchOutlined } from "@ant-design/icons";
 import { Col, Empty, Row, Tag, Tooltip } from "antd";
 import { useEffect, useRef } from "react";

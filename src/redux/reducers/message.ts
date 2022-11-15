@@ -1,5 +1,3 @@
-import { AppDispatch } from "../store";
-
 export const SHOW_ERROR = "SHOW_ERROR";
 export const HIDE_MESSAGE = "HIDE_MESSAGE";
 

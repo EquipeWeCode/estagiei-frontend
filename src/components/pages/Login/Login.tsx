@@ -12,7 +12,7 @@ import Button from "@/components/common/Button";
 import ButtonVoltar from "@/components/common/ButtonVoltar";
 import Input from "@/components/common/Input";
 import { InputPassword } from "@/components/common/Input/Input";
-import { TOKEN_KEY, USER_KEY } from "@/constants";
+import { TOKEN_KEY } from "@/constants";
 import { getToken, postLogin } from "@/services/autenticacao";
 import { getCandidaturas } from "@/services/candidatura";
 import { getEmpresa } from "@/services/empresa";

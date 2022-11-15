@@ -21,13 +21,13 @@ const ROOT_URL = "https://estagiei.herokuapp.com/api";
 //     }
 // }
 
-describe('POST /empresa [testando a funcionalidade de criar empresas]', function() {
-    it('Deve retornar 201 OK', function(done) {
-      request(ROOT_URL)
-        .post('/empresa/')
-        .send(data)
-        .set('Accept', 'application/json')
-        .expect('Content-Type', /json/)
-        .expect(201, done);
-    });
+describe('POST /empresa [testando a funcionalidade de criar empresas]', function () {
+  it('Deve retornar 201 OK', function (done) {
+    request(ROOT_URL)
+      .post('/empresa/')
+      .send(data)
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(201, done);
   });
+});

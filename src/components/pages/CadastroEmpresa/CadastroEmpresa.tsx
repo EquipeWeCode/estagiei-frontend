@@ -17,7 +17,7 @@ import { EstadoType } from "@/types/estadoType";
 import { Col, Form, message, Row } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { getUrlImagem } from "../CadastroEstudante/TerminoCadastro/TerminoCadastro";
 import styles from "./styles.module.scss";

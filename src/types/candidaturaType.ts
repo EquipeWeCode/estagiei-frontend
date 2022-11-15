@@ -1,6 +1,6 @@
-import { CompetenciaType } from './competenciaType';
-import { FilterType } from './filterTypes';
-import { EmpresaType } from './empresaTypes';
+import { CompetenciaType } from "./competenciaType";
+import { EmpresaType } from "./empresaTypes";
+import { FilterType } from "./filterTypes";
 import { AuditoriaType } from "./userTypes";
 
 export interface CandidaturaProps {

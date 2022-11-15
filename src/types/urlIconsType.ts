@@ -1,3 +1,3 @@
 export type urlIconsType = {
-    [key: string]: typeof import("*.svg");
-}
+	[key: string]: typeof import("*.svg");
+};

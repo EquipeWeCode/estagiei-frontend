@@ -11,7 +11,7 @@ import { getCandidaturas } from "@/services/candidatura";
 import { getVagas } from "@/services/vaga";
 import { CandidaturaType } from "@/types/candidaturaType";
 import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
-import { Col, Row, Switch, Tabs } from "antd";
+import { Col, Row, Tabs } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
@@ -116,7 +116,12 @@ const Vagas = () => {
 					<TabPane tab={t("vacancies")} key="1">
 						<Row justify="center" align="middle" className={styles.searchRow}>
 							<Col className={styles.searchCol}>
-								<Row style={{ marginBottom: "1rem" }} gutter={12} className={styles.searchSecRow} align="bottom">
+								<Row
+									style={{ marginBottom: "1rem" }}
+									gutter={12}
+									className={styles.searchSecRow}
+									align="bottom"
+								>
 									<Col md={5}>
 										<Input
 											label={t("title")}
@@ -187,7 +192,7 @@ const Vagas = () => {
 							candidaturas={candidaturas}
 							fetchCandidaturas={fetchCandidaturas}
 						/>
-						<Row justify="end" style={{marginBottom: "1rem"}}>
+						<Row justify="end" style={{ marginBottom: "1rem" }}>
 							<Pagination
 								total={quantidadeTotal}
 								pageSize={filtroVaga.size}

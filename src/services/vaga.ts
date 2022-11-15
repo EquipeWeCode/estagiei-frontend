@@ -1,6 +1,5 @@
 import { ENDPOINT_VAGA } from "@/constants";
 import { FiltroVagaType } from "@/types/vagasTypes";
-import { VagaType } from "./../types/vagasTypes";
 import { getResource, postResource, putResource, serializeObjectToParam } from "./utils";
 
 export const getVaga = (codVaga: string | number | undefined) => {

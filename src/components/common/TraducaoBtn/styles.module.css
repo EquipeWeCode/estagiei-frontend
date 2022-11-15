@@ -6,7 +6,7 @@
     position: -webkit-sticky !important; /* Safari */
     position: fixed !important;
     left: 92%;
-    top: 90vh;
+    top: 88vh;
     z-index: 1000;
     transition: top 1s linear;
 }

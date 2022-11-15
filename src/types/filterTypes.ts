@@ -1,4 +1,4 @@
 export type FilterType = {
-  size?: number,
-  page?: number,
-}
+	size?: number;
+	page?: number;
+};
