@@ -2,8 +2,6 @@ import { Pagination as PaginationAntd, PaginationProps } from "antd";
 import styles from "./styles.module.scss";
 
 const Pagination = (props: PaginationProps) => {
-	const { total, pageSize, current, onChange } = props;
-
 	return (
 		<PaginationAntd
 			{...props}

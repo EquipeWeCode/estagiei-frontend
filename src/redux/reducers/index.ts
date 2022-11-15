@@ -1,10 +1,10 @@
-import { combineReducers } from '@reduxjs/toolkit'
-import { showErrorReducer } from './message';
-import cadastroReducer from './cadastro';
+import { combineReducers } from "@reduxjs/toolkit";
+import cadastroReducer from "./cadastro";
+import { showErrorReducer } from "./message";
 
 export const rootReducer = combineReducers({
-  message: showErrorReducer,
-  cadastro: cadastroReducer
-})
+	message: showErrorReducer,
+	cadastro: cadastroReducer,
+});
 
-export type RootState = ReturnType<typeof rootReducer>
+export type RootState = ReturnType<typeof rootReducer>;

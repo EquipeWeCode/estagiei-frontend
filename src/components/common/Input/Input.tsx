@@ -1,4 +1,9 @@
-import { Input as AntdInput, InputNumber as AntdInputNumber, InputNumberProps, InputProps } from "antd";
+import {
+	Input as AntdInput,
+	InputNumber as AntdInputNumber,
+	InputNumberProps,
+	InputProps,
+} from "antd";
 import styles from "./styles.module.scss";
 
 export interface InputCustomProps extends InputProps {

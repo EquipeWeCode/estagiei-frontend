@@ -11,8 +11,8 @@ export const putEstudante = async (id: string = "", body: UserType = {}) => {
 };
 
 export const postEstudante = async (body: CadastroEstudanteType = {}) => {
-	return await postResource(ENDPOINT_ESTUDANTE, body)
-}
+	return await postResource(ENDPOINT_ESTUDANTE, body);
+};
 
 export const getVagasRecomendadas = async (id: string = "") => {
 	return await getResource(`${ENDPOINT_ESTUDANTE}/${id}/recomendacao`);

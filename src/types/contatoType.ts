@@ -1,5 +1,5 @@
 export type contatosType = {
-    tipoContato?: string,
-    descContato?: string,
-    valorContato?: string
-}
+	tipoContato?: string;
+	descContato?: string;
+	valorContato?: string;
+};

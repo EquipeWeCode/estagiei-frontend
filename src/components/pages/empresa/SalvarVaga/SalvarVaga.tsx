@@ -1,4 +1,3 @@
-import { Button } from "antd";
 import ButtonDrawer from "@/components/common/ButtonDrawer";
 import Input from "@/components/common/Input";
 import { Group, Search, TextArea } from "@/components/common/Input/Input";
@@ -11,8 +10,8 @@ import { CompetenciaType } from "@/types/competenciaType";
 import { VagaType } from "@/types/vagasTypes";
 import { removeEmpty } from "@/utils/masks";
 import { getEnumConstant } from "@/utils/selects";
-import { EditFilled, PlusOutlined, SearchOutlined } from "@ant-design/icons";
-import { Form, InputNumber, message, Select, Tooltip } from "antd";
+import { EditFilled, PlusOutlined } from "@ant-design/icons";
+import { Button, Form, InputNumber, message, Select, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -189,7 +188,12 @@ const SalvarVaga = ({ vaga, posOperacao }: SalvarVagaProps) => {
 							label={t("salary")}
 							rules={[{ required: true, message: t("salary_required") }]}
 						>
-							<InputNumber addonBefore={"R$"} style={{ width: "150px" }} placeholder={t("salary")} precision={2} />
+							<InputNumber
+								addonBefore={"R$"}
+								style={{ width: "150px" }}
+								placeholder={t("salary")}
+								precision={2}
+							/>
 						</Item>
 
 						<Item

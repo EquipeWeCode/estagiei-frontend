@@ -1,6 +1,6 @@
-import { EnderecoType } from "./enderecoType";
 import { CompetenciaType } from "./competenciaType";
 import { EmpresaType } from "./empresaTypes";
+import { EnderecoType } from "./enderecoType";
 import { FilterType } from "./filterTypes";
 import { AuditoriaType } from "./userTypes";
 

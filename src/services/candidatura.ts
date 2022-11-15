@@ -1,5 +1,5 @@
-import { CandidaturaType, FiltroCandidaturaType } from "@/types/candidaturaType";
 import { ENDPOINT_CANDIDATURA } from "@/constants";
+import { CandidaturaType, FiltroCandidaturaType } from "@/types/candidaturaType";
 import { getResource, postResource, putResource, serializeObjectToParam } from "./utils";
 
 export const getCandidaturas = (

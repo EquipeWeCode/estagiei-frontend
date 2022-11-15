@@ -60,7 +60,7 @@ export const TRANSLATIONS_EN = {
 	banner_subtitle:
 		"No more long and tiring selection processes... Here, with just a few clicks, you can get your dream internship. Come and meet the Estagiei!",
 	internships: "Internships",
-	change_language: "Change language",
+	change_language: "Alterar idioma",
 	my_profile: "My profile",
 	see_more: "See more",
 	some_of_our_jobs: "Some of our jobs",

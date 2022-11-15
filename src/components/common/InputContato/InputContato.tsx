@@ -1,82 +1,104 @@
 import { tipoContatoObject } from "@/constants/objects";
 import { CadastroEstudanteType } from "@/types/userTypes";
 import { Form, InputProps, Row, Select, SelectProps } from "antd";
-import Input from "../Input/Input";
-import styles from './styles.module.scss';
-import { useState } from 'react';
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import Input from "../Input/Input";
+import styles from "./styles.module.scss";
 
 interface InputContatoProps extends InputProps {
-    label?: string;
-    estudante?: CadastroEstudanteType;
-    state?: (value: {}) => void;
+	label?: string;
+	estudante?: CadastroEstudanteType;
+	state?: (value: {}) => void;
 }
 
 const InputContato = (props: InputContatoProps) => {
-    const { estudante, state } = props;
-    const tipo: SelectProps['options'] = [];
-    const { t } = useTranslation();
+	const { estudante, state } = props;
+	const tipo: SelectProps["options"] = [];
+	const { t } = useTranslation();
 
-    const [valorContato, setValorContato] = useState<string>("");
-    const [tipoContato, setTipoContato] = useState<string>("");
+	const [valorContato, setValorContato] = useState<string>("");
+	const [tipoContato, setTipoContato] = useState<string>("");
 
-    const RULES = [
+	const RULES = [
 		{
 			required: true,
 			message: t("required"),
 		},
 	];
 
-    Object.keys(tipoContatoObject).forEach((key) => {
-        tipo.push({
-            label: tipoContatoObject[key].label,
-            value: tipoContatoObject[key].value
-        })
-    })
+	Object.keys(tipoContatoObject).forEach(key => {
+		tipo.push({
+			label: tipoContatoObject[key].label,
+			value: tipoContatoObject[key].value,
+		});
+	});
 
-    const handleSelect = (value: string) => {       
-        if(!state) 
-           return 
+	const handleSelect = (value: string) => {
+		if (!state) return;
 
-        setTipoContato(value);
-        state({...estudante, contatos: [{
-            valorContato: valorContato,
-            tipoContato: value,
-            descContato: ""
-        }]});
-    }
+		setTipoContato(value);
+		state({
+			...estudante,
+			contatos: [
+				{
+					valorContato: valorContato,
+					tipoContato: value,
+					descContato: "",
+				},
+			],
+		});
+	};
 
-    const handleInput = (value: string) => {      
-        if(!state) 
-           return 
+	const handleInput = (value: string) => {
+		if (!state) return;
 
-        setValorContato(value);
-        state({...estudante, contatos: [{
-            valorContato: value,
-            tipoContato: tipoContato,
-            descContato: ""
-        }]});
-    }
+		setValorContato(value);
+		state({
+			...estudante,
+			contatos: [
+				{
+					valorContato: value,
+					tipoContato: tipoContato,
+					descContato: "",
+				},
+			],
+		});
+	};
 
-    return (
-        <>
-            <h3 className={styles.label} style={{}}>{"Contato"}</h3>
-            <Row className={styles.containerInput}>
-                <Form.Item style={{flex: "1"}}>
-                    <Select
-                        allowClear
-                        style={{ width: '100%' }}
-                        placeholder={t("contact")}
-                        onChange={handleSelect}
-                        options={tipo}
-                    />
-                </Form.Item>
-                <Form.Item style={{flex:"3"}} rules={[...RULES, { required: true, pattern: new RegExp(/\d+/g), message: t("only_numbers") } ]}>
-                    <Input {...props} placeholder="Telefone" onChange={(e) => {handleInput(e.target.value)}}/>
-                </Form.Item>
-            </Row>
-        </>
-    );
-}
+	return (
+		<>
+			<h3 className={styles.label} style={{}}>
+				{"Contato"}
+			</h3>
+			<Row className={styles.containerInput}>
+				<Form.Item style={{ flex: "1" }}>
+					<Select
+						allowClear
+						style={{ width: "100%" }}
+						placeholder={t("contact")}
+						onChange={handleSelect}
+						options={tipo}
+					/>
+				</Form.Item>
+				<Form.Item
+					style={{ flex: "3" }}
+					rules={[
+						...RULES,
+						{ required: true, pattern: new RegExp(/\d+/g), message: t("only_numbers") },
+					]}
+				>
+					<Input
+						{...props}
+						placeholder="Telefone"
+						onChange={e => {
+							handleInput(e.target.value);
+						}}
+					/>
+				</Form.Item>
+			</Row>
+		</>
+	);
+};
 
-export default InputContato
+export default InputContato;

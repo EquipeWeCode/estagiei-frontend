@@ -1,11 +1,10 @@
 import ImageNotFound from "@/components/common/ImageNotFound";
-import { cpfCnpjMask, cpfMask } from "@/utils/masks";
+import { cpfCnpjMask } from "@/utils/masks";
 import { Col, Row } from "antd";
 import { PerfilEstudanteProps } from "../PerfilEstudante";
 import styles from "./styles.module.css";
 
-const DadosBasicos = ({ user }: PerfilEstudanteProps) => {
-	// Deixei aqui apenas como exemplo
+const DadosBasicos = ({ user, isVisualizacao }: PerfilEstudanteProps) => {
 	return (
 		<Row>
 			<Col sm={2} md={5}>

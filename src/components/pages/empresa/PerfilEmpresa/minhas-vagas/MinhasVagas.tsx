@@ -5,7 +5,7 @@ import Pagination from "@/components/common/Pagination";
 import { PAGINATION_SIZE_DEFAULT } from "@/constants";
 import { getVagas } from "@/services/vaga";
 import { FiltroVagaType, VagaType } from "@/types/vagasTypes";
-import { Col, Row, Tooltip } from "antd";
+import { Col, Row } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import SalvarVaga from "../../SalvarVaga";

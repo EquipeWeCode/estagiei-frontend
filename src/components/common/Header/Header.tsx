@@ -1,16 +1,16 @@
 /// <reference types="vite-plugin-svgr/client" />
 
-import { Col, Dropdown, Menu, Row, Space } from "antd";
-import styles from "./styles.module.scss";
 import { useAuth } from "@/contexts/auth";
+import { Col, Dropdown, Menu, Row, Space } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import TraducaoBtn from "../TraducaoBtn";
+import styles from "./styles.module.scss";
 
 import { ReactComponent as Logo } from "@/assets/logo.svg";
-import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
-import { getToken, logout } from "@/services/autenticacao";
-import { useTranslation } from "react-i18next";
 import { EMPRESA, ESTUDANTE } from "@/constants";
+import { logout } from "@/services/autenticacao";
+import { capitalizaPriLetraDeCadaPalavra } from "@/utils/masks";
+import { useTranslation } from "react-i18next";
 import ImageNotFound from "../ImageNotFound";
 
 const Header = () => {

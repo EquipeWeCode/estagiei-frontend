@@ -11,11 +11,17 @@ import styles from "./styles.module.css";
 
 export interface PerfilEstudanteProps {
 	user: UserType;
+	isVisualizacao?: boolean;
 }
 
-const PerfilEstudante = () => {
+type PerfilmenuProps = {
+	isVisualizacao?: boolean;
+};
+
+const PerfilEstudante = (props: PerfilmenuProps) => {
 	const { user } = useAuth();
 	const { t } = useTranslation();
+	const { isVisualizacao = false } = props;
 
 	const [searchParams, setSearchParams] = useSearchParams();
 
@@ -45,10 +51,11 @@ const PerfilEstudante = () => {
 		} as MenuItem;
 	};
 
-	const items: MenuItem[] = [
-		getItem(t("personal_information"), "dados_basicos", <UserOutlined />),
-		getItem(t("applies"), "candidaturas", <ProfileOutlined />),
-	];
+	const items: MenuItem[] = [getItem(t("personal_information"), "dados_basicos", <UserOutlined />)];
+
+	if (!isVisualizacao) {
+		items.push(getItem(t("applies"), "candidaturas", <ProfileOutlined />));
+	}
 
 	const setaPagina = (e: any) => {
 		setPaginaAtual(e.key);
@@ -57,11 +64,11 @@ const PerfilEstudante = () => {
 	const getPaginaAtual = () => {
 		switch (paginaAtual) {
 			case "dados_basicos":
-				return <DadosBasicos user={user} />;
+				return <DadosBasicos user={user} isVisualizacao={isVisualizacao} />;
 			case "candidaturas":
 				return <Candidaturas user={user} />;
 			default:
-			// return <DadosBasicos />;
+				return <DadosBasicos user={user} isVisualizacao={isVisualizacao} />;
 		}
 	};
 
