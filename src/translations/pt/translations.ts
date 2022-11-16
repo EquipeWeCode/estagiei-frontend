@@ -79,7 +79,7 @@ export const TRANSLATIONS_PT = {
 	city: "Cidade",
 	district: "Bairro",
 	street_name: "Logradouro",
-	number: "Numero",
+	number: "Número",
 	complement: "Complemento",
 	refer_point: "Ponto de referência",
 	zip_code: "Cep",

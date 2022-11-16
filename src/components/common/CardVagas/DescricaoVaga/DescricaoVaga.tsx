@@ -30,7 +30,7 @@ import styles from "./styles.module.css";
 export interface DescricaoVagaProps {
 	vaga: VagaComCandidaturaType;
 	user: UserType;
-	refDrawer: any;
+	refDrawer?: any;
 	isEmpresa?: boolean;
 	fetchCandidaturas?: () => void;
 }
@@ -39,7 +39,7 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 	const { t } = useTranslation();
 	const { competencias } = props.user;
 
-	const { vaga, user, refDrawer, fetchCandidaturas, isEmpresa } = props;
+	const { vaga, user, fetchCandidaturas, isEmpresa, refDrawer } = props;
 	const { endereco: enderecoVaga } = vaga;
 	const { empresa } = vaga;
 	const navigate = useNavigate();

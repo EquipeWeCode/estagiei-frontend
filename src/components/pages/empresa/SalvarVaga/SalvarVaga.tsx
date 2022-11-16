@@ -12,21 +12,22 @@ import { removeEmpty } from "@/utils/masks";
 import { getEnumConstant } from "@/utils/selects";
 import { EditFilled, PlusOutlined } from "@ant-design/icons";
 import { Button, Form, InputNumber, message, Select, Tooltip } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export type SalvarVagaProps = {
 	vaga?: VagaType;
-	posOperacao?: () => void;
+	fetchVagas?: () => void;
 };
 
-const SalvarVaga = ({ vaga, posOperacao }: SalvarVagaProps) => {
+const SalvarVaga = ({ vaga, fetchVagas }: SalvarVagaProps) => {
 	const isEdicao = vaga?.codVaga !== undefined;
 	const codVaga = vaga?.codVaga;
 	const { t } = useTranslation();
 	const [vagaNova, setVagaNova] = useState<any>({});
 	const [competencias, setCompetencias] = useState<CompetenciaType[]>([]);
 	const [cidades, setCidades] = useState<any[]>([]);
+	const refDrawer = useRef<ButtonDrawer>(null);
 
 	const fetchVaga = async () => {
 		if (codVaga) {
@@ -69,6 +70,11 @@ const SalvarVaga = ({ vaga, posOperacao }: SalvarVagaProps) => {
 			});
 	};
 
+	const posSalvarVaga = () => {
+		refDrawer?.current?.fechaDrawer();
+		fetchVagas?.();
+	};
+
 	const { Item } = Form;
 	const [form] = Form.useForm();
 
@@ -94,13 +100,13 @@ const SalvarVaga = ({ vaga, posOperacao }: SalvarVagaProps) => {
 			const { status } = await putVaga(codVaga, vagaNovaBody);
 			if (status === 200) {
 				message.success(t("vaga_updated"));
-				posOperacao && posOperacao();
+				posSalvarVaga?.();
 			}
 		} else {
 			const { status } = await postVaga(vagaNovaBody);
 			if (status === 201) {
 				message.success(t("vaga_created"));
-				posOperacao && posOperacao();
+				posSalvarVaga?.();
 			}
 		}
 	};
@@ -157,6 +163,7 @@ const SalvarVaga = ({ vaga, posOperacao }: SalvarVagaProps) => {
 		>
 			<span>
 				<ButtonDrawer
+					ref={refDrawer}
 					onOpen={() => {
 						fetchVaga();
 						fetchCompetencias();

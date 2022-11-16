@@ -55,7 +55,7 @@ const MinhasVagas = ({ user }: PerfilEmpresaProps) => {
 					<Row style={{ marginBottom: "1rem" }} gutter={12} className={styles.searchSecRow}>
 						<Col flex={1} md={3}>
 							<span>
-								<SalvarVaga />
+								<SalvarVaga fetchVagas={fetchVagas} />
 							</span>
 						</Col>
 						<Col flex={1} md={8}>

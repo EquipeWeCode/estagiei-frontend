@@ -94,10 +94,8 @@ const CadastroEmpresa = () => {
 		({ getFieldValue }: any) => ({
 			validator(_: any, value: any) {
 				if (!value || getFieldValue("senha") === value) {
-					console.log("teste");
 					return Promise.resolve();
 				}
-				console.log("passou 2");
 				return Promise.reject(new Error(t("pwd_not_match")));
 			},
 		}),
