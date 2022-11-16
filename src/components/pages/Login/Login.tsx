@@ -12,7 +12,7 @@ import Button from "@/components/common/Button";
 import ButtonVoltar from "@/components/common/ButtonVoltar";
 import Input from "@/components/common/Input";
 import { InputPassword } from "@/components/common/Input/Input";
-import { TOKEN_KEY } from "@/constants";
+import { EXPIRES_IN_KEY, TOKEN_KEY } from "@/constants";
 import { getToken, postLogin } from "@/services/autenticacao";
 import { getCandidaturas } from "@/services/candidatura";
 import { getEmpresa } from "@/services/empresa";
@@ -53,7 +53,10 @@ const Login = () => {
 		if (status == 200) {
 			const token = data?.accessToken;
 			const roles = data?.roles;
+			const expiresIn = data?.expiresIn;
+			
 			localStorage.setItem(TOKEN_KEY, token);
+			localStorage.setItem(EXPIRES_IN_KEY, expiresIn);
 
 			const decoded = jwt(token) as any;
 
@@ -77,12 +80,11 @@ const Login = () => {
 			user.roles = roles;
 
 			setUserContextAndLocalStorage(user);
-			// localStorage.setItem("userDetails", JSON.stringify(user));
 
 			next
 				? navegaProximaPagina(next)
 				: codEmpresa
-				? navegaProximaPagina("/empresa/meu-perfil")
+				? navegaProximaPagina("/empresa/meu-perfil?tab=my_jobs")
 				: codEstudante
 				? navegaProximaPagina("/vagas")
 				: navegaProximaPagina("/");

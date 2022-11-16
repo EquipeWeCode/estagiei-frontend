@@ -1,4 +1,5 @@
 import { logout } from "@/services/autenticacao";
+import { verificaToken } from "@/services/token";
 import { AuthContextData } from "@/types/contextTypes";
 import { UserType } from "@/types/userTypes";
 import React, { createContext, useEffect } from "react";
@@ -15,8 +16,10 @@ export const AuthProvider: React.FC = ({ children }) => {
 
 	useEffect(() => {
 		const user = localStorage.getItem("userDetails");
+		const userParseado = user ? JSON.parse(user) : {} as UserType;
+
 		if (user) {
-			setUser(JSON.parse(user));
+			setUser(userParseado);
 		} else {
 			setUser({} as UserType);
 			logout();

@@ -1,4 +1,5 @@
 import axios from "@/axios";
+import { EXPIRES_IN_KEY } from "@/constants";
 
 const ROOT_URL = () => {
 	return import.meta.env.VITE_SERVER_URL;
@@ -62,3 +63,11 @@ export function serializeObjectToParam(filtro: Record<string, any>, first: boole
 	}
 	return params;
 }
+
+export const isTokenExpirado = () => {
+	const expiraEm = localStorage.getItem(EXPIRES_IN_KEY);
+	if (expiraEm && parseInt(expiraEm) < new Date().getTime()) {
+		return true;
+	}
+	return false;
+};

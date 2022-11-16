@@ -8,8 +8,10 @@ export const ENDPOINT_EMPRESA = "/empresa";
 export const ENDPOINT_ESTADOS = "/localidades/estados";
 export const ENDPOINT_REGIAO_IMEDIATA = "/regioes-imediatas";
 export const ENDPOINT_CANDIDATURA = "/candidatura";
+export const ENDPOINT_TOKEN = "/token";
 
 export const TOKEN_KEY = "token";
+export const EXPIRES_IN_KEY = "expiresIn";
 export const USER_KEY = "userDetails";
 
 export const ESTUDANTE = "ESTUDANTE";
