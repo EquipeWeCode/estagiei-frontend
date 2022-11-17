@@ -156,7 +156,7 @@ const CandidatosEmpresa = (props: CandidatosEmpresaProps) => {
 					{candidaturas && candidaturas?.length > 0 ? (
 						candidaturas?.map((c: CandidaturaType) => (
 							<Row key={c.codEstudante} className={styles.containerVaga} align="middle">
-								<Col span={19}>
+								<Col span={c?.status === APROVADO ? 18 : 19}>
 									<Row style={{ width: "100%" }} justify="space-between">
 										<Link to={`/estudante/perfil/${c?.codEstudante}`}>
 											{capitalizaPriLetraDeCadaPalavra(c?.nomeEstudante)}
@@ -178,7 +178,7 @@ const CandidatosEmpresa = (props: CandidatosEmpresaProps) => {
 										})}
 									</Row>
 								</Col>
-								<Col span={c?.status === APROVADO ? 4 : 3} style={{ marginLeft: "1rem" }}>
+								<Col span={c?.status === APROVADO ? 5 : 3} style={{ marginLeft: "1rem" }}>
 									<Row justify="space-between">
 										{c?.status === APROVADO ? (
 											<>
