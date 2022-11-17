@@ -5,8 +5,9 @@ statusCandidaturaEnum.set("APROVADO", "Aprovado(a)");
 statusCandidaturaEnum.set("REPROVADO", "Reprovado(a)");
 statusCandidaturaEnum.set("FINALIZADO", "Finalizada");
 statusCandidaturaEnum.set("CANCELADO_ESTUDANTE", "Cancelada por Candidato(a)");
+statusCandidaturaEnum.set("DESATIVADO", "Desativada");
 
-export const [CANDIDATADO, CANCELADO, APROVADO, REPROVADO, FINALIZADO, CANCELADO_ESTUDANTE] =
+export const [CANDIDATADO, CANCELADO, APROVADO, REPROVADO, FINALIZADO, CANCELADO_ESTUDANTE, DESATIVADO] =
 	statusCandidaturaEnum.keys();
 
 export const modalidadeEnum = new Map();
