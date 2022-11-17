@@ -1,6 +1,7 @@
 import { VagaComCandidaturaType } from "@/components/common/CardVagas/CardVagas";
 import { ESTUDANTE } from "@/constants";
-import { postCandidatura } from "@/services/candidatura";
+import { CANDIDATADO } from "@/constants/enums";
+import { postCandidatura, putCandidatura } from "@/services/candidatura";
 import { EnderecoType } from "@/types/enderecoType";
 import { UserType } from "@/types/userTypes";
 import {
@@ -30,7 +31,6 @@ import styles from "./styles.module.css";
 export interface DescricaoVagaProps {
 	vaga: VagaComCandidaturaType;
 	user: UserType;
-	refDrawer?: any;
 	isEmpresa?: boolean;
 	fetchCandidaturas?: () => void;
 }
@@ -39,7 +39,7 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 	const { t } = useTranslation();
 	const { competencias } = props.user;
 
-	const { vaga, user, fetchCandidaturas, isEmpresa, refDrawer } = props;
+	const { vaga, user, fetchCandidaturas, isEmpresa } = props;
 	const { endereco: enderecoVaga } = vaga;
 	const { empresa } = vaga;
 	const navigate = useNavigate();
@@ -65,17 +65,35 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 		}
 	};
 
+	const atualizaCandidatura = async () => {
+		const body = {
+			codVaga,
+			codEstudante,
+			status: CANDIDATADO,
+		};
+		const { status } = await putCandidatura(body);
+		if (status === 200) {
+			fetchCandidaturas && fetchCandidaturas();
+			message.success(t("success_apply"));
+		}
+	};
+
+	const novaCandidatura = async () => {
+		const { status } = await postCandidatura(codEstudante, codVaga);
+		if (status === 201) {
+			fetchCandidaturas && fetchCandidaturas();
+			message.success(t("success_apply"));
+		}
+	};
+
 	const fazCandidatura = async () => {
 		if (!roles) {
-			refDrawer?.current?.fechaDrawer();
 			navigate(`/login?notAuthenticated=true&next=${location?.pathname}${location?.search || ""}`);
 		} else {
-			const { status } = await postCandidatura(codEstudante, codVaga);
-
-			if (status === 201) {
-				refDrawer?.current?.fechaDrawer();
-				fetchCandidaturas && fetchCandidaturas();
-				message.success(t("success_apply"));
+			if (vaga?.existeCandidatura) {
+				await atualizaCandidatura();
+			} else {
+				await novaCandidatura();
 			}
 		}
 	};

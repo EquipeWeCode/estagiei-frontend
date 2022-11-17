@@ -1,7 +1,15 @@
 import Button from "@/components/common/Button";
 import { getTagColor } from "@/components/common/CarouselVagas/CarouselVagas";
 import ImageNotFound from "@/components/common/ImageNotFound";
-import { APROVADO, CANCELADO, CANCELADO_ESTUDANTE, CANDIDATADO, FINALIZADO, statusCandidaturaEnum } from "@/constants/enums";
+import {
+	APROVADO,
+	CANCELADO,
+	CANCELADO_ESTUDANTE,
+	CANDIDATADO,
+	FINALIZADO,
+	REPROVADO,
+	statusCandidaturaEnum,
+} from "@/constants/enums";
 import { putCandidatura } from "@/services/candidatura";
 import { CandidaturaProps } from "@/types/candidaturaType";
 import { capitalizaPriLetraDeCadaPalavra, dateTimeMask, realMask } from "@/utils/masks";
@@ -14,12 +22,14 @@ import styles from "./styles.module.css";
 export const getStatusColor = (status: string | undefined) => {
 	switch (status) {
 		case CANCELADO:
-			return "#f0b3b3";
+			return "#e69292";
+		case REPROVADO:
+			return "#cdb6e0";
 		case CANCELADO_ESTUDANTE:
 			return "#f0b3b3";
 		case APROVADO:
 			return "#b3f0b3";
-		case FINALIZADO: 
+		case FINALIZADO:
 			return "#b3b3f0";
 		default:
 			return "#aacdee";
@@ -27,7 +37,9 @@ export const getStatusColor = (status: string | undefined) => {
 };
 
 const CardCandidatura = ({ candidatura, status, fetchCandidatura }: CandidaturaProps) => {
-	const [statusCandidatura, setStatusCandidatura] = useState<string>(statusCandidaturaEnum.get(candidatura?.status) || "");
+	const [statusCandidatura, setStatusCandidatura] = useState<string>(
+		statusCandidaturaEnum.get(candidatura?.status) || ""
+	);
 
 	useEffect(() => {
 		setStatusCandidatura(capitalizaPriLetraDeCadaPalavra(statusCandidaturaEnum.get(status)));
@@ -53,7 +65,6 @@ const CardCandidatura = ({ candidatura, status, fetchCandidatura }: CandidaturaP
 				<Button
 					className={styles.btnRetiraCandidatura}
 					onClick={() => retirarCandidatura()}
-
 					onMouseOver={() => setStatusCandidatura(t("cancel_application"))}
 					onMouseLeave={() => setStatusCandidatura(statusCandidaturaEnum.get(CANDIDATADO))}
 				>

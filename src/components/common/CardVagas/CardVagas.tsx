@@ -1,5 +1,6 @@
 import DescricaoVaga from "@/components/common/CardVagas/DescricaoVaga";
 import SalvarVaga from "@/components/pages/empresa/SalvarVaga";
+import { CANCELADO_ESTUDANTE } from "@/constants/enums";
 import { useAuth } from "@/contexts/auth";
 import { CandidaturaType } from "@/types/candidaturaType";
 import { CompetenciaType } from "@/types/competenciaType";
@@ -24,6 +25,7 @@ interface CardVagasProps {
 
 export interface VagaComCandidaturaType extends VagaType {
 	isCandidatada?: boolean;
+	existeCandidatura?: boolean;
 }
 
 export const isVagaRecomendada = (
@@ -49,11 +51,12 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 
 	const vagasComCandidatura: VagaComCandidaturaType[] = vagas?.map(vaga => {
 		const candidatura = candidaturas.find(candidatura => candidatura.codVaga === vaga.codVaga);
-		const isCandidatada = candidatura ? true : false;
-
+		const isCandidatada = candidatura && ![CANCELADO_ESTUDANTE].includes(candidatura?.status);
+		const existeCandidatura = candidatura ? true : false;
 		return {
 			...vaga,
 			isCandidatada,
+			existeCandidatura,
 		};
 	});
 
