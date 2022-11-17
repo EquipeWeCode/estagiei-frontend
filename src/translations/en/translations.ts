@@ -168,4 +168,6 @@ export const TRANSLATIONS_EN = {
 	success_signup: "Sign up successfully",
 	email_already_exists: "E-mail already exists",
 	confirm_pwd: "Please confirm your password!",
+	yes: "Yes",
+	no: "No",
 };

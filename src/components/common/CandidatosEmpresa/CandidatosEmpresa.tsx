@@ -44,7 +44,6 @@ const CandidatosEmpresa = (props: CandidatosEmpresaProps) => {
 		codEmpresa,
 		codVaga,
 		size: PAGINATION_SIZE_DEFAULT,
-		// indAtivo: true,
 	};
 
 	const statusModificaveis = [CANDIDATADO];

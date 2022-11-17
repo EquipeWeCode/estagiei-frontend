@@ -1,17 +1,18 @@
 import ImageNotFound from "@/components/common/ImageNotFound";
+import Row from "@/components/common/Row";
 import { cpfCnpjMask } from "@/utils/masks";
-import { Col, Row } from "antd";
+import { Col } from "antd";
 import { PerfilEstudanteProps } from "../PerfilEstudante";
 import styles from "./styles.module.css";
 
 const DadosBasicos = ({ user, isVisualizacao }: PerfilEstudanteProps) => {
 	return (
-		<Row>
-			<Col sm={2} md={5}>
-				<div className={styles.containerFoto}>
+		<>
+			<Row justify="center" align="middle">
+				<span className={styles.containerFoto}>
 					{user.avatar ? <img src={user.avatar} alt="Avatar" /> : <ImageNotFound width={100} />}
-				</div>
-			</Col>
+				</span>
+			</Row>
 			<Col sm={15} md={19}>
 				<div className={styles.containerDados}>
 					<span className={styles.containerNome}>
@@ -22,7 +23,7 @@ const DadosBasicos = ({ user, isVisualizacao }: PerfilEstudanteProps) => {
 				</div>
 				(Em desenvolvimento)
 			</Col>
-		</Row>
+		</>
 	);
 };
 

@@ -66,7 +66,7 @@ const PerfilEstudante = (props: PerfilmenuProps) => {
 			case "dados_basicos":
 				return <DadosBasicos user={user} isVisualizacao={isVisualizacao} />;
 			case "candidaturas":
-				return <Candidaturas user={user} />;
+				return !isVisualizacao && <Candidaturas user={user} />;
 			default:
 				return <DadosBasicos user={user} isVisualizacao={isVisualizacao} />;
 		}
