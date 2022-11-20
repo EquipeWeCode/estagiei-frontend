@@ -13,6 +13,7 @@ export interface AuditoriaType {
 export type UserType = {
 	codEstudante?: string;
 	codEmpresa?: string;
+	nvlEscolaridade?: string;
 	tipoUsuario?: string;
 	nomeFantasia?: string;
 	razaoSocial?: string;
@@ -26,8 +27,9 @@ export type UserType = {
 	contatos?: ContatoType[];
 	instEnsino?: string;
 	nvlEnsino?: string;
-	expProfissional?: string;
+	experienciaProfissional?: experienciaProfissionalType[];
 	dataNascimento?: string;
+	historicoEscolar?: historicoEscolarType[];
 	competencias?: CompetenciaType[];
 	candidaturas?: CandidaturaType[];
 	roles?: string[];

@@ -11,7 +11,7 @@ import { VagaType } from "@/types/vagasTypes";
 import { removeEmpty } from "@/utils/masks";
 import { getEnumConstant } from "@/utils/selects";
 import { EditFilled, PlusOutlined } from "@ant-design/icons";
-import { Button, Form, InputNumber, message, Select, Tooltip } from "antd";
+import { Button, Form, InputNumber, message, Select, Switch, Tooltip } from "antd";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -324,6 +324,14 @@ const SalvarVaga = ({ vaga, fetchVagas }: SalvarVagaProps) => {
 								/>
 							</Item>
 						</Group>
+
+						<Item name="indAtivo" label={t("active")}>
+							<Switch
+								checkedChildren={t("yes")}
+								unCheckedChildren={t("no")}
+								checked={vagaNova?.indAtivo}
+							/>
+						</Item>
 
 						<Item name="descricao" label={t("description")}>
 							<TextArea name="descricao" value={vagaNova?.descricao} />

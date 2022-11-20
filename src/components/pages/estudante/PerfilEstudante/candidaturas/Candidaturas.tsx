@@ -15,7 +15,6 @@ const Candidaturas = ({ user }: PerfilEstudanteProps) => {
 	const FILTRO_INICIAL: FiltroCandidaturaType = {
 		page: 1,
 		size: PAGINATION_SIZE_DEFAULT,
-		indAtivo: undefined,
 		status: undefined,
 	};
 

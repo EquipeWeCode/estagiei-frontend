@@ -50,7 +50,7 @@ const InputExperienciaProfissional = (props: InputExperienciaProps) => {
 										rules={[...RULES]}
 										style={{ flex: "1" }}
 									>
-										<Input placeholder={t("company_name")} />
+										<Input placeholder={t("company")} />
 									</Form.Item>
 									<Form.Item
 										{...restField}

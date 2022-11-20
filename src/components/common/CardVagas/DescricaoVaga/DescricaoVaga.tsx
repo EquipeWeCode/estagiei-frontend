@@ -9,7 +9,7 @@ import {
 	cepMask,
 	cpfCnpjMask,
 	dateMask,
-	realMask,
+	realMask
 } from "@/utils/masks";
 import {
 	BulbOutlined,
@@ -18,7 +18,7 @@ import {
 	DollarOutlined,
 	EnvironmentOutlined,
 	HomeOutlined,
-	ReadOutlined,
+	ReadOutlined
 } from "@ant-design/icons";
 import { Col, Divider, message, Row, Space, Tabs } from "antd";
 import { useTranslation } from "react-i18next";
@@ -34,6 +34,28 @@ export interface DescricaoVagaProps {
 	isEmpresa?: boolean;
 	fetchCandidaturas?: () => void;
 }
+
+export const getEndereco = (endereco: EnderecoType | undefined, singleLine: boolean = false) => {
+	return singleLine ? (
+		<span>
+			{capitalizaPriLetraDeCadaPalavra(endereco?.logradouro)}, {endereco?.numero} -{" "}
+			{capitalizaPriLetraDeCadaPalavra(endereco?.bairro)} -{" "}
+			{capitalizaPriLetraDeCadaPalavra(endereco?.cidade)} - {endereco?.estado}
+			{endereco?.cep && ", " + cepMask(endereco?.cep)}
+		</span>
+	) : (
+		<>
+			<Row>
+				{capitalizaPriLetraDeCadaPalavra(endereco?.logradouro)}, {endereco?.numero} -{" "}
+				{capitalizaPriLetraDeCadaPalavra(endereco?.bairro)}
+			</Row>
+			<Row>
+				{capitalizaPriLetraDeCadaPalavra(endereco?.cidade)} - {endereco?.estado}
+				{endereco?.cep && ", " + cepMask(endereco?.cep)}
+			</Row>
+		</>
+	);
+};
 
 const DescricaoVaga = (props: DescricaoVagaProps) => {
 	const { t } = useTranslation();
@@ -96,21 +118,6 @@ const DescricaoVaga = (props: DescricaoVagaProps) => {
 				await novaCandidatura();
 			}
 		}
-	};
-
-	const getEndereco = (endereco: EnderecoType | undefined) => {
-		return (
-			<>
-				<Row>
-					{capitalizaPriLetraDeCadaPalavra(endereco?.logradouro)}, {endereco?.numero} -{" "}
-					{capitalizaPriLetraDeCadaPalavra(endereco?.bairro)}
-				</Row>
-				<Row>
-					{capitalizaPriLetraDeCadaPalavra(endereco?.cidade)} - {endereco?.estado}
-					{endereco?.cep && ", " + cepMask(endereco?.cep)}
-				</Row>
-			</>
-		);
 	};
 
 	const isCompetenciaVagaIgualACompetenciaEstudante = (codCompetenciaVaga: number | undefined) => {

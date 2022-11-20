@@ -1,7 +1,7 @@
 .container-foto {
   width: 100px;
   height: 100px;
-  position: relative;
+  /* position: relative; */
   overflow: hidden;
   border-radius: 50%;
 }

@@ -134,9 +134,14 @@ const CardCandidatura = ({ candidatura, status, fetchCandidatura }: CandidaturaP
 						</p>
 					</div>
 					<div className={styles.locationAuditoria}>
-						<span>
+						<div>
 							{t("applied_on")}: {dateTimeMask(candidatura?.auditoria?.dataInclusao)}
-						</span>
+						</div>
+						{candidatura?.auditoria?.dataAlteracao && (
+							<span>
+								{t("last_modified")}: {dateTimeMask(candidatura?.auditoria?.dataAlteracao)}
+							</span>
+						)}
 					</div>
 				</Col>
 				{labelStatusCandidatura()}

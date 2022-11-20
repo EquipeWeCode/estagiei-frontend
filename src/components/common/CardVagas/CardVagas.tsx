@@ -1,6 +1,6 @@
 import DescricaoVaga from "@/components/common/CardVagas/DescricaoVaga";
 import SalvarVaga from "@/components/pages/empresa/SalvarVaga";
-import { CANCELADO_ESTUDANTE } from "@/constants/enums";
+import { CANCELADO_ESTUDANTE, DESATIVADO } from "@/constants/enums";
 import { useAuth } from "@/contexts/auth";
 import { CandidaturaType } from "@/types/candidaturaType";
 import { CompetenciaType } from "@/types/competenciaType";
@@ -51,7 +51,8 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 
 	const vagasComCandidatura: VagaComCandidaturaType[] = vagas?.map(vaga => {
 		const candidatura = candidaturas.find(candidatura => candidatura.codVaga === vaga.codVaga);
-		const isCandidatada = candidatura && ![CANCELADO_ESTUDANTE].includes(candidatura?.status);
+		const isCandidatada =
+			candidatura && ![CANCELADO_ESTUDANTE, DESATIVADO].includes(candidatura?.status);
 		const existeCandidatura = candidatura ? true : false;
 		return {
 			...vaga,
@@ -127,6 +128,11 @@ const CardVagas = (props: CardVagasProps): JSX.Element => {
 								{vaga?.isCandidatada && (
 									<span style={{ marginLeft: "0.5rem" }}>
 										<Tag color={"success"}>{t("applied")}</Tag>
+									</span>
+								)}
+								{isEmpresa && !vaga.indAtivo && (
+									<span style={{ marginLeft: "0.5rem" }}>
+										<Tag color={"error"}>{t("inactive")}</Tag>
 									</span>
 								)}
 							</div>
