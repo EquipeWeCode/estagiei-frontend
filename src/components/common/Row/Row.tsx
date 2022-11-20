@@ -1,15 +1,24 @@
-import { Row as RowAntd, RowProps } from "antd";
+import { Col, Row as RowAntd, RowProps } from "antd";
 
-const Row = (props: RowProps) => {
+interface RowPropsCustom extends RowProps {
+	rowTitle?: string;
+}
+
+const Row = (props: RowPropsCustom) => {
+	const { rowTitle, children } = props;
+
 	return (
 		<RowAntd
-      {...props}
+			{...props}
 			style={{
+				...props.style,
 				width: "100%",
-        border: "1px solid red",
 			}}
 		>
-			{props.children}
+			<Col span={24} style={{ textAlign: "center" }}>
+				{rowTitle && <h2>{rowTitle}</h2>}
+			</Col>
+			{children}
 		</RowAntd>
 	);
 };

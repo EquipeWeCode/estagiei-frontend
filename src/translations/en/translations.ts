@@ -170,4 +170,6 @@ export const TRANSLATIONS_EN = {
 	confirm_pwd: "Please confirm your password!",
 	yes: "Yes",
 	no: "No",
+	value: "Value",
+	contacts: "Contacts",
 };

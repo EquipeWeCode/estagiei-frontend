@@ -1,5 +1,4 @@
 import { logout } from "@/services/autenticacao";
-import { verificaToken } from "@/services/token";
 import { AuthContextData } from "@/types/contextTypes";
 import { UserType } from "@/types/userTypes";
 import React, { createContext, useEffect } from "react";

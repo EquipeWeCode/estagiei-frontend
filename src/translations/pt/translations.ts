@@ -169,5 +169,7 @@ export const TRANSLATIONS_PT = {
 	confirm_pwd: "Confirme sua senha",
 	yes: "Sim",
 	no: "Não",
+	value: "Valor",
+	contacts: "Contatos",
 };
 
