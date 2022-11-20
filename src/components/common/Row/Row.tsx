@@ -1,11 +1,12 @@
 import { Col, Row as RowAntd, RowProps } from "antd";
 
 interface RowPropsCustom extends RowProps {
-	rowTitle?: string;
+	rowtitle?: string;
+	titleAlign?: "left" | "center" | "right";
 }
 
 const Row = (props: RowPropsCustom) => {
-	const { rowTitle, children } = props;
+	const { rowtitle, children, titleAlign } = props;
 
 	return (
 		<RowAntd
@@ -15,8 +16,8 @@ const Row = (props: RowPropsCustom) => {
 				width: "100%",
 			}}
 		>
-			<Col span={24} style={{ textAlign: "center" }}>
-				{rowTitle && <h2>{rowTitle}</h2>}
+			<Col span={24} style={{ textAlign: titleAlign || "center" }}>
+				{rowtitle && <h2>{rowtitle}</h2>}
 			</Col>
 			{children}
 		</RowAntd>

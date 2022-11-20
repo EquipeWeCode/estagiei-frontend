@@ -3,15 +3,34 @@ import DetailsItem from "@/components/common/DetailsItem";
 import ImageNotFound from "@/components/common/ImageNotFound";
 import Row from "@/components/common/Row";
 import TabelaContatos from "@/components/common/TabelaContatos";
+import TabelaExpProfissional from "@/components/common/TabelaExpProfissional";
+import TabelaHistEscolar from "@/components/common/TabelaHistEscolar";
 import { nvlEscolaridadeEnum } from "@/constants/enums";
+import { getEstudante } from "@/services/estudante";
+import { UserType } from "@/types/userTypes";
 import { cpfCnpjMask, dateMask } from "@/utils/masks";
 import { Col, Tag } from "antd";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { PerfilEstudanteProps } from "../PerfilEstudante";
 import styles from "./styles.module.css";
 
-const DadosBasicos = ({ user, isVisualizacao }: PerfilEstudanteProps) => {
+const DadosBasicos = ({ codEstudante, isVisualizacao }: PerfilEstudanteProps) => {
 	const { t } = useTranslation();
+	const [user, setUser] = useState({} as UserType);
+
+	const fetchEstudante = async () => {
+		const { data, status } = await getEstudante(codEstudante);
+		if (status === 200) {
+			setUser(data);
+		}
+	};
+
+	useEffect(() => {
+		if (codEstudante) {
+			fetchEstudante();
+		}
+	}, [codEstudante]);
 
 	return (
 		<>
@@ -46,9 +65,21 @@ const DadosBasicos = ({ user, isVisualizacao }: PerfilEstudanteProps) => {
 				/>
 			</Row>
 
-			<Row rowTitle={t("contacts")} justify="center" style={{ marginTop: "10px" }}>
+			<Row rowtitle={t("contacts")} justify="center" style={{ margin: "16px 0" }}>
 				<Col span={12} style={{ textAlign: "center" }}>
 					<TabelaContatos contatos={user.contatos} />
+				</Col>
+			</Row>
+
+			<Row rowtitle={t("student_experience")} justify="center" style={{ margin: "16px 0" }}>
+				<Col span={20} style={{ textAlign: "center" }}>
+					<TabelaExpProfissional experiencias={user.experienciaProfissional} />
+				</Col>
+			</Row>
+
+			<Row rowtitle={t("studentHistoric")} justify="center" style={{ margin: "16px 0" }}>
+				<Col span={20} style={{ textAlign: "center" }}>
+					<TabelaHistEscolar historico={user.historicoEscolar} />
 				</Col>
 			</Row>
 		</>

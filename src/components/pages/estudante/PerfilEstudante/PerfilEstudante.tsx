@@ -4,13 +4,14 @@ import { ProfileOutlined, UserOutlined } from "@ant-design/icons";
 import { Menu, MenuProps } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import Candidaturas from "./candidaturas";
 import DadosBasicos from "./dados-basicos";
 import styles from "./styles.module.css";
 
 export interface PerfilEstudanteProps {
 	user: UserType;
+	codEstudante?: string | number;
 	isVisualizacao?: boolean;
 }
 
@@ -22,6 +23,8 @@ const PerfilEstudante = (props: PerfilmenuProps) => {
 	const { user } = useAuth();
 	const { t } = useTranslation();
 	const { isVisualizacao = false } = props;
+
+	let { id } = useParams();
 
 	const [searchParams, setSearchParams] = useSearchParams();
 
@@ -64,11 +67,11 @@ const PerfilEstudante = (props: PerfilmenuProps) => {
 	const getPaginaAtual = () => {
 		switch (paginaAtual) {
 			case "dados_basicos":
-				return <DadosBasicos user={user} isVisualizacao={isVisualizacao} />;
+				return <DadosBasicos codEstudante={user?.codEstudante || id} user={user} isVisualizacao={isVisualizacao} />;
 			case "candidaturas":
 				return !isVisualizacao && <Candidaturas user={user} />;
 			default:
-				return <DadosBasicos user={user} isVisualizacao={isVisualizacao} />;
+				return <DadosBasicos codEstudante={user?.codEstudante || id} user={user} isVisualizacao={isVisualizacao} />;
 		}
 	};
 

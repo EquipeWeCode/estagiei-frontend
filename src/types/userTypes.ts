@@ -27,8 +27,9 @@ export type UserType = {
 	contatos?: ContatoType[];
 	instEnsino?: string;
 	nvlEnsino?: string;
-	expProfissional?: string;
+	experienciaProfissional?: experienciaProfissionalType[];
 	dataNascimento?: string;
+	historicoEscolar?: historicoEscolarType[];
 	competencias?: CompetenciaType[];
 	candidaturas?: CandidaturaType[];
 	roles?: string[];
