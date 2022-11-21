@@ -174,5 +174,6 @@ export const TRANSLATIONS_EN = {
 	contacts: "Contacts",
 	trading_name: "Trading Name",
 	inclusion_date: "Date of Inclusion",
-	cancel: "Cancel"
+	cancel: "Cancel",
+	company_updated: "Company Updated"
 };

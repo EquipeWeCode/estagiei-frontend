@@ -173,6 +173,7 @@ export const TRANSLATIONS_PT = {
 	contacts: "Contatos",
 	trading_name: "Nome Fantasia",
 	inclusion_date: "Data de Inclusão",
-	cancel: "Cancelar"
+	cancel: "Cancelar",
+	company_updated: "Empresa Atualizada"
 };
 
