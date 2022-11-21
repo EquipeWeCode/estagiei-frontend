@@ -172,4 +172,7 @@ export const TRANSLATIONS_EN = {
 	no: "No",
 	value: "Value",
 	contacts: "Contacts",
+	trading_name: "Trading Name",
+	inclusion_date: "Date of Inclusion",
+	cancel: "Cancel"
 };
