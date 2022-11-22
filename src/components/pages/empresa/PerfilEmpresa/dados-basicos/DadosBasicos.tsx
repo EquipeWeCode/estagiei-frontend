@@ -38,10 +38,10 @@ const DadosBasicos = ({ user }: PerfilEmpresaProps) => {
 	}
 
 	const salvarEmpresa = async () => {
-		const { status } = await putEmpresa(empresa.codEmpresa, empresa);
+		const { status, data } = await putEmpresa(empresa.codEmpresa, empresa);
 		if (status === 200) {
 			message.success(t("company_updated"));
-			setUserContextAndLocalStorage(empresa);
+			setUserContextAndLocalStorage({ ...user, ...data });
 			isEdicao(false);
 		}
 	}
