@@ -20,3 +20,28 @@
   height: 100%;
   margin-left: 1rem;
 }
+
+.btnCancelar {
+  color: #17202A;
+  background-color: #FF876E;
+  margin-right: 7px;
+}
+
+.btnCancelar:hover,
+.btnCancelar:focus,
+.btnCancelar:active {
+  color: #17202A;
+  background-color: #FF876E;
+}
+
+.btnSalvar {
+  color: #17202A;
+  background-color: #85C1E9;
+}
+
+.btnSalvar:hover,
+.btnSalvar:focus,
+.btnSalvar:active {
+  color: #17202A;
+  background-color: #85C1E9;
+}
