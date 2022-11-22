@@ -157,7 +157,7 @@ export const TRANSLATIONS_EN = {
 	addExperience: "Add experience",
 	addHistoric: "Add student history",
 	competences: "Competences",
-	institutionName: "Institutions name",
+	institutionName: "Institution name",
 	courseName: "Course name",
 	professionalExp: "Professional experience",
 	studentHistoric: "Student history",
@@ -175,5 +175,7 @@ export const TRANSLATIONS_EN = {
 	trading_name: "Trading Name",
 	inclusion_date: "Date of Inclusion",
 	cancel: "Cancel",
+	edit: "Edit",
+	student_updated: "Student updated successfully",
 	company_updated: "Company Updated"
 };

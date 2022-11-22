@@ -174,6 +174,8 @@ export const TRANSLATIONS_PT = {
 	trading_name: "Nome Fantasia",
 	inclusion_date: "Data de Inclusão",
 	cancel: "Cancelar",
+	edit: "Editar",
+	student_updated: "Estudante atualizado com sucesso!",
 	company_updated: "Empresa Atualizada"
 };
 

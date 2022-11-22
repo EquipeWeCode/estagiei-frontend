@@ -8,9 +8,9 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 export const AuthProvider: React.FC = ({ children }) => {
 	const [user, setUser] = React.useState<UserType>({} as UserType);
 
-	const setUserContextAndLocalStorage = (user: UserType) => {
-		setUser(user);
-		localStorage.setItem("userDetails", JSON.stringify(user));
+	const setUserContextAndLocalStorage = (userNovo: UserType) => {
+		setUser(userNovo);
+		localStorage.setItem("userDetails", JSON.stringify(userNovo));
 	};
 
 	useEffect(() => {
