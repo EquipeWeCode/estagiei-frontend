@@ -12,11 +12,13 @@ import { getEndereco } from "@/components/common/CardVagas/DescricaoVaga/Descric
 import { message } from "antd";
 import { putEmpresa } from "@/services/empresa";
 import styles from "./styles.module.css";
+import { useAuth } from "@/contexts/auth";
 
 const DadosBasicos = ({ user }: PerfilEmpresaProps) => {
 	const { t } = useTranslation();
 	const [edicao, isEdicao] = useState<boolean>(false);
 	const [empresa, setEmpresa] = useState<UserType>(user);
+	const { setUserContextAndLocalStorage } = useAuth();
 
 	const editarPerfil = () => {
 		if (!edicao) { 
@@ -36,9 +38,11 @@ const DadosBasicos = ({ user }: PerfilEmpresaProps) => {
 	}
 
 	const salvarEmpresa = async () => {
-		const { status } = await putEmpresa(empresa.codEmpresa, empresa);
+		const { status, data } = await putEmpresa(empresa.codEmpresa, empresa);
 		if (status === 200) {
 			message.success(t("company_updated"));
+			setUserContextAndLocalStorage({ ...user, ...data });
+			isEdicao(false);
 		}
 	}
 

@@ -176,5 +176,6 @@ export const TRANSLATIONS_PT = {
 	cancel: "Cancelar",
 	edit: "Editar",
 	student_updated: "Estudante atualizado com sucesso!",
+	company_updated: "Empresa Atualizada"
 };
 
