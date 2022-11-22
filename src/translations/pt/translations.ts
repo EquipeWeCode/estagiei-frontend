@@ -171,5 +171,10 @@ export const TRANSLATIONS_PT = {
 	no: "Não",
 	value: "Valor",
 	contacts: "Contatos",
+	trading_name: "Nome Fantasia",
+	inclusion_date: "Data de Inclusão",
+	cancel: "Cancelar",
+	edit: "Editar",
+	student_updated: "Estudante atualizado com sucesso!",
 };
 
