@@ -39,7 +39,6 @@ const DadosBasicos = ({ codEstudante, isVisualizacao }: PerfilEstudanteProps) =>
 		if (codEstudante) {
 			fetchEstudante();
 		}
-		
 	}, [codEstudante]);
 
 	return (
@@ -60,7 +59,6 @@ const DadosBasicos = ({ codEstudante, isVisualizacao }: PerfilEstudanteProps) =>
 						<Col>
 							<Space>
 								<Button icon={<CloseOutlined />} onClick={() => setIsEdicao(!isEdicao)} />
-								<Button icon={<CheckOutlined />} secondary onClick={() => console.log("salvar")} />
 							</Space>
 						</Col>
 					)
