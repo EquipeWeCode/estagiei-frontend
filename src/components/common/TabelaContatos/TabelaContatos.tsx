@@ -45,7 +45,7 @@ const TabelaContatos = (props: TabelaContatosProps) => {
 		};
 	});
 
-	return (
+	return contatosDS && contatosDS?.length > 0 ? (
 		<Table
 			bordered={true}
 			size={"small"}
@@ -53,6 +53,8 @@ const TabelaContatos = (props: TabelaContatosProps) => {
 			dataSource={contatosDS}
 			pagination={false}
 		/>
+	) : (
+		<p>{t("not_informed")}</p>
 	);
 };
 

@@ -33,7 +33,6 @@ const DadosBasicos = ({ user }: PerfilEmpresaProps) => {
 			...empresa,
 			[name]: value
 		}
-		console.log(name, value);
 		setEmpresa(empresaAlterada);
 	}
 

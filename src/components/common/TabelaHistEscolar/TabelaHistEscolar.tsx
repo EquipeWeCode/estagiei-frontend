@@ -1,4 +1,4 @@
-import { statusHistEscolarEnum } from "@/constants/enums";
+import { nvlEscolaridadeCursoEnum, statusHistEscolarEnum } from "@/constants/enums";
 import { historicoEscolarType } from "@/types/historicoEscolarType";
 import { dateMask } from "@/utils/masks";
 import { Table } from "antd";
@@ -20,6 +20,9 @@ const TabelaHistEscolar = (props: TabelaHistEscolarProps) => {
 		{
 			title: t("student_level"),
 			dataIndex: "nvlEscolaridade",
+			render: (text: string) => {
+				return text ? nvlEscolaridadeCursoEnum.get(text) : " - ";
+			},
 		},
 		{
 			title: t("institutionName"),
@@ -58,7 +61,7 @@ const TabelaHistEscolar = (props: TabelaHistEscolarProps) => {
 		};
 	});
 
-	return (
+	return historicoDS && historicoDS?.length > 0 ? (
 		<Table
 			bordered={true}
 			size={"small"}
@@ -70,6 +73,8 @@ const TabelaHistEscolar = (props: TabelaHistEscolarProps) => {
 				hideOnSinglePage: true,
 			}}
 		/>
+	) : (
+		<p>{t("not_informed")}</p>
 	);
 };
 export default TabelaHistEscolar;

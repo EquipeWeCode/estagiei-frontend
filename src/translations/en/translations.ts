@@ -177,5 +177,6 @@ export const TRANSLATIONS_EN = {
 	cancel: "Cancel",
 	edit: "Edit",
 	student_updated: "Student updated successfully",
-	company_updated: "Company Updated"
+	company_updated: "Company Updated",
+	add_contact: "Add contact",
 };

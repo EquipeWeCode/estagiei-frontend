@@ -1,9 +1,9 @@
 import { experienciaProfissionalType } from "@/types/experienciaProfissionalType";
 import { dateMask } from "@/utils/masks";
 import { Table } from "antd";
+import { AlignType } from "rc-table/lib/interface";
 import { useTranslation } from "react-i18next";
 import { TextArea } from "../Input/Input";
-import { AlignType } from 'rc-table/lib/interface';
 
 type TabelaExpProfissionalProps = {
 	experiencias: experienciaProfissionalType[] | undefined;
@@ -31,7 +31,7 @@ const TabelaExpProfissional = (props: TabelaExpProfissionalProps) => {
 		{
 			title: t("dateStart"),
 			dataIndex: "dataInicio",
-      align: "center" as AlignType,
+			align: "center" as AlignType,
 			render: (text: string) => {
 				return text ? dateMask(text) : "-";
 			},
@@ -39,7 +39,7 @@ const TabelaExpProfissional = (props: TabelaExpProfissionalProps) => {
 		{
 			title: t("dateEnd"),
 			dataIndex: "dataFim",
-      align: "center" as AlignType,
+			align: "center" as AlignType,
 			render: (text: string) => {
 				return text ? dateMask(text) : "-";
 			},
@@ -53,7 +53,7 @@ const TabelaExpProfissional = (props: TabelaExpProfissionalProps) => {
 		};
 	});
 
-	return (
+	return experienciasDS && experienciasDS?.length > 0 ? (
 		<Table
 			bordered={true}
 			size={"small"}
@@ -65,6 +65,8 @@ const TabelaExpProfissional = (props: TabelaExpProfissionalProps) => {
 				hideOnSinglePage: true,
 			}}
 		/>
+	) : (
+		<p>{t("not_informed")}</p>
 	);
 };
 export default TabelaExpProfissional;
