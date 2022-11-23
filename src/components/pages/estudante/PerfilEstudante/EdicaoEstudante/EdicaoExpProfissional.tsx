@@ -1,41 +1,39 @@
 import Input from "@/components/common/Input";
-import { tipoContatoEnum } from "@/constants/enums";
-import { getEnumConstant } from "@/utils/selects";
 import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
-import { Button, Divider, Form, Select } from "antd";
+import { Button, DatePicker, Divider, Form } from "antd";
 import { useTranslation } from "react-i18next";
 
-const EdicaoContatos = () => {
+const EdicaoExpProfissional = () => {
 	const { Item } = Form;
 	const { t } = useTranslation();
-	const optionsTipoContato = getEnumConstant(tipoContatoEnum);
+	const dateFormat = "DD/MM/YYYY";
 
 	const RULES = [{ required: true, message: t("required") }];
 
 	return (
-		<Form.List name="contatos">
+		<Form.List name="experienciaProfissional">
 			{(fields, { add, remove }) => {
 				return (
 					<div>
 						{fields?.map((field, index) => (
 							<div key={field.key}>
-								<Item name={[index, "codContato"]} hidden={true}>
+								<Item name={[index, "codExpProfissional"]} hidden={true}>
 									<Input />
 								</Item>
-								<Item name={[index, "tipoContato"]} label={t("type")} rules={RULES}>
-									<Select>
-										{optionsTipoContato.map(option => (
-											<Select.Option key={option.value} value={option.value}>
-												{option.label}
-											</Select.Option>
-										))}
-									</Select>
+								<Item name={[index, "nomeEmpresa"]} label={t("company")} rules={RULES}>
+									<Input placeholder={t("company")} />
 								</Item>
-								<Item label={t("value")} name={[index, "valorContato"]} rules={RULES}>
-									<Input placeholder={t("value")} />
+								<Item name={[index, "cargo"]} label={t("role")} rules={RULES}>
+									<Input placeholder={t("role")} />
 								</Item>
-								<Item label={t("description")} name={[index, "descContato"]}>
+								<Item name={[index, "descricao"]} label={t("description")}>
 									<Input placeholder={t("description")} />
+								</Item>
+								<Item name={[index, "dataInicio"]} label={t("dateStart")} rules={RULES}>
+									<DatePicker format={dateFormat} />
+								</Item>
+								<Item name={[index, "dataFim"]} label={t("dateEnd")}>
+									<DatePicker format={dateFormat} />
 								</Item>
 
 								{fields.length > 0 ? (
@@ -59,4 +57,4 @@ const EdicaoContatos = () => {
 	);
 };
 
-export default EdicaoContatos;
+export default EdicaoExpProfissional;

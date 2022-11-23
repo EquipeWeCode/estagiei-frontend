@@ -15,10 +15,21 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import EdicaoContatos from "./EdicaoContatos";
+import EdicaoExpProfissional from "./EdicaoExpProfissional";
 
 type EdicaoEstudanteProps = {
 	user: UserType;
 	posSalvarEstudante: () => void;
+};
+
+export const tratarData = (data: any) => {
+	const dateFormatDto = "YYYY-MM-DD";
+	return data ? moment(data, dateFormatDto) : undefined;
+};
+
+export const tratarDataDTO = (data: any) => {
+	const dateFormatDto = "YYYY-MM-DD";
+	return data ? data.format(dateFormatDto) : undefined;
 };
 
 const EdicaoEstudante = (props: EdicaoEstudanteProps) => {
@@ -31,15 +42,28 @@ const EdicaoEstudante = (props: EdicaoEstudanteProps) => {
 	const [competencias, setCompetencias] = useState<CompetenciaType[]>([]);
 	const [estudanteNovo, setEstudanteNovo] = useState<any>(user);
 	const dateFormat = "DD/MM/YYYY";
-	const dateFormatDto = "YYYY-MM-DD";
 	const { user: userLocal } = useAuth();
 
 	useEffect(() => {
 		if (estudanteNovo) {
 			form.setFieldsValue({
 				...estudanteNovo,
-				dataNascimento: moment(estudanteNovo.dataNascimento, dateFormatDto),
+				dataNascimento: tratarData(estudanteNovo?.dataNascimento),
 				competencias: estudanteNovo.competencias?.map((c: CompetenciaType) => c.codCompetencia),
+				experienciaProfissional: estudanteNovo.experienciaProfissional?.map((e: any) => {
+					return {
+						...e,
+						dataInicio: tratarData(e?.dataInicio),
+						dataFim: tratarData(e?.dataFim),
+					};
+				}),
+				historicoEscolar: estudanteNovo.historicoEscolar?.map((h: any) => {
+					return {
+						...h,
+						dataInicio: tratarData(h?.dataInicio),
+						dataFim: tratarData(h?.dataFim),
+					};
+				}),
 			});
 		}
 	}, [estudanteNovo]);
@@ -64,7 +88,7 @@ const EdicaoEstudante = (props: EdicaoEstudanteProps) => {
 
 	const retornaObjetosValidos = (objeto: Array<any>) => {
 		return objeto.filter(obj => obj === undefined || possuiAlgumCampoPreenchido(obj));
-	}
+	};
 
 	const possuiAlgumCampoPreenchido = (objeto: any) => {
 		const keys = Object.keys(objeto);
@@ -72,14 +96,16 @@ const EdicaoEstudante = (props: EdicaoEstudanteProps) => {
 			return objeto[key] !== undefined && objeto[key] !== null && objeto[key] !== "";
 		});
 		return possuiAlgumCampoPreenchido;
-	}
+	};
 
 	const onChangeEstudante = (estud: any) => {
 		const contatosValidos = retornaObjetosValidos(estud?.contatos);
+		const expValidas = retornaObjetosValidos(estud?.experienciaProfissional);
 
 		setEstudanteNovo({
 			...estud,
 			contatos: contatosValidos,
+			experienciaProfissional: expValidas,
 			competencias: trataCompetencias(estud.competencias),
 		});
 	};
@@ -136,7 +162,21 @@ const EdicaoEstudante = (props: EdicaoEstudanteProps) => {
 			...user,
 			...estudanteSalvar,
 			competencias: trataCompetencias(estudanteSalvar.competencias),
-			dataNascimento: estudanteSalvar.dataNascimento.format(dateFormatDto),
+			dataNascimento: tratarDataDTO(estudanteSalvar?.dataNascimento),
+			experienciaProfissional: estudanteSalvar.experienciaProfissional?.map((e: any) => {
+				return {
+					...e,
+					dataInicio: tratarDataDTO(e?.dataInicio),
+					dataFim: tratarDataDTO(e?.dataFim),
+				};
+			}),
+			// historicoEscolar: estudanteSalvar.historicoEscolar?.map((h: any) => {
+			// 	return {
+			// 		...h,
+			// 		dataInicio: tratarDataDTO(h.dataInicio),
+			// 		dataFim: tratarDataDTO(h.dataFim),
+			// 	};
+			// }),
 		};
 
 		const { status } = await putEstudante(user?.codEstudante, body);
@@ -298,7 +338,10 @@ const EdicaoEstudante = (props: EdicaoEstudanteProps) => {
 				<Divider>{t("contacts")}</Divider>
 				<EdicaoContatos />
 
-				<Item wrapperCol={{ offset: 10, span: 16 }}>
+				<Divider>{t("student_experience")}</Divider>
+				<EdicaoExpProfissional />
+
+				<Item wrapperCol={{ offset: 11, span: 16 }}>
 					<Button type="primary" htmlType="submit">
 						{t("save")}
 					</Button>
