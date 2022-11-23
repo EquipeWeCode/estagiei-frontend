@@ -56,3 +56,11 @@ statusHistEscolarEnum.set("CURSANDO", "Cursando");
 statusHistEscolarEnum.set("TRANCADO", "Trancado");
 statusHistEscolarEnum.set("DESISTIDO", "Desistido");
 export const [CONCLUIDO, CURSANDO, TRANCADO, DESISTIDO] = statusHistEscolarEnum.keys();
+
+export const nvlEscolaridadeCursoEnum = new Map();
+nvlEscolaridadeCursoEnum.set("TECNICO", "Técnico");
+nvlEscolaridadeCursoEnum.set("FUNDAMENTAL", "Fundamental");
+nvlEscolaridadeCursoEnum.set("MEDIO", "Médio");
+nvlEscolaridadeCursoEnum.set("SUPERIOR", "Superior");
+
+export const [TECNICO, FUNDAMENTAL, MEDIO, SUPERIOR] = nvlEscolaridadeCursoEnum.keys();

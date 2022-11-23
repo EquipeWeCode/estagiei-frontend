@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import EdicaoContatos from "./EdicaoContatos";
 import EdicaoExpProfissional from "./EdicaoExpProfissional";
+import EdicaoHistoricoEscolar from "./EdicaoHistoricoEscolar";
 
 type EdicaoEstudanteProps = {
 	user: UserType;
@@ -170,13 +171,13 @@ const EdicaoEstudante = (props: EdicaoEstudanteProps) => {
 					dataFim: tratarDataDTO(e?.dataFim),
 				};
 			}),
-			// historicoEscolar: estudanteSalvar.historicoEscolar?.map((h: any) => {
-			// 	return {
-			// 		...h,
-			// 		dataInicio: tratarDataDTO(h.dataInicio),
-			// 		dataFim: tratarDataDTO(h.dataFim),
-			// 	};
-			// }),
+			historicoEscolar: estudanteSalvar.historicoEscolar?.map((h: any) => {
+				return {
+					...h,
+					dataInicio: tratarDataDTO(h.dataInicio),
+					dataFim: tratarDataDTO(h.dataFim),
+				};
+			}),
 		};
 
 		const { status } = await putEstudante(user?.codEstudante, body);
@@ -340,6 +341,9 @@ const EdicaoEstudante = (props: EdicaoEstudanteProps) => {
 
 				<Divider>{t("student_experience")}</Divider>
 				<EdicaoExpProfissional />
+
+				<Divider>{t("studentHistoric")}</Divider>
+				<EdicaoHistoricoEscolar />
 
 				<Item wrapperCol={{ offset: 11, span: 16 }}>
 					<Button type="primary" htmlType="submit">

@@ -23,7 +23,7 @@ const EdicaoContatos = () => {
 									<Input />
 								</Item>
 								<Item name={[index, "tipoContato"]} label={t("type")} rules={RULES}>
-									<Select>
+									<Select placeholder={t("type")}>
 										{optionsTipoContato.map(option => (
 											<Select.Option key={option.value} value={option.value}>
 												{option.label}
