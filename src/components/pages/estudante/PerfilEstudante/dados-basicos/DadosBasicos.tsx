@@ -10,7 +10,7 @@ import { nvlEscolaridadeEnum } from "@/constants/enums";
 import { getEstudante } from "@/services/estudante";
 import { UserType } from "@/types/userTypes";
 import { cpfCnpjMask, dateMask } from "@/utils/masks";
-import { CheckOutlined, CloseOutlined, EditFilled } from "@ant-design/icons";
+import { CloseOutlined, EditFilled } from "@ant-design/icons";
 import { Col, Space, Tag } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";

@@ -58,7 +58,7 @@ const TabelaHistEscolar = (props: TabelaHistEscolarProps) => {
 		};
 	});
 
-	return (
+	return historicoDS && historicoDS?.length > 0 ? (
 		<Table
 			bordered={true}
 			size={"small"}
@@ -70,6 +70,8 @@ const TabelaHistEscolar = (props: TabelaHistEscolarProps) => {
 				hideOnSinglePage: true,
 			}}
 		/>
+	) : (
+		<p>{t("not_informed")}</p>
 	);
 };
 export default TabelaHistEscolar;

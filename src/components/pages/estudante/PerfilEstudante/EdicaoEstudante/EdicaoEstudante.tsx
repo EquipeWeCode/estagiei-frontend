@@ -14,6 +14,7 @@ import { DatePicker, Divider, Form, message, Select } from "antd";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import EdicaoContatos from "./EdicaoContatos";
 
 type EdicaoEstudanteProps = {
 	user: UserType;
@@ -61,14 +62,27 @@ const EdicaoEstudante = (props: EdicaoEstudanteProps) => {
 		return novasCompetencias;
 	};
 
+	const retornaObjetosValidos = (objeto: Array<any>) => {
+		return objeto.filter(obj => obj === undefined || possuiAlgumCampoPreenchido(obj));
+	}
+
+	const possuiAlgumCampoPreenchido = (objeto: any) => {
+		const keys = Object.keys(objeto);
+		const possuiAlgumCampoPreenchido = keys.some(key => {
+			return objeto[key] !== undefined && objeto[key] !== null && objeto[key] !== "";
+		});
+		return possuiAlgumCampoPreenchido;
+	}
+
 	const onChangeEstudante = (estud: any) => {
+		const contatosValidos = retornaObjetosValidos(estud?.contatos);
+
 		setEstudanteNovo({
 			...estud,
+			contatos: contatosValidos,
 			competencias: trataCompetencias(estud.competencias),
 		});
 	};
-
-	console.log(estudanteNovo);
 
 	const optionsNvlEscolaridade = getEnumConstant(nvlEscolaridadeEnum);
 
@@ -134,11 +148,9 @@ const EdicaoEstudante = (props: EdicaoEstudanteProps) => {
 
 		if (status === 200) {
 			message.success(t("student_updated"));
-			console.log(userLocalStorage);
 			setUserContextAndLocalStorage(userLocalStorage);
 			posSalvarEstudante?.();
 		}
-
 	};
 
 	return (
@@ -282,6 +294,9 @@ const EdicaoEstudante = (props: EdicaoEstudanteProps) => {
 						<Input style={{ width: "150px" }} placeholder={t("complement")} />
 					</Item>
 				</Group>
+
+				<Divider>{t("contacts")}</Divider>
+				<EdicaoContatos />
 
 				<Item wrapperCol={{ offset: 10, span: 16 }}>
 					<Button type="primary" htmlType="submit">
