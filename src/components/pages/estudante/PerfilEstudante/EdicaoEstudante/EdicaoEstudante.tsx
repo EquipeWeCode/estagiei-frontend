@@ -102,11 +102,13 @@ const EdicaoEstudante = (props: EdicaoEstudanteProps) => {
 	const onChangeEstudante = (estud: any) => {
 		const contatosValidos = retornaObjetosValidos(estud?.contatos);
 		const expValidas = retornaObjetosValidos(estud?.experienciaProfissional);
+		const historicosValidos = retornaObjetosValidos(estud?.historicoEscolar);
 
 		setEstudanteNovo({
 			...estud,
 			contatos: contatosValidos,
 			experienciaProfissional: expValidas,
+			historicoEscolar: historicosValidos,
 			competencias: trataCompetencias(estud.competencias),
 		});
 	};

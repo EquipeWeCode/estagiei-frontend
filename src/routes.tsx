@@ -24,7 +24,6 @@ import CadastroEstudante from "./components/pages/CadastroEstudante/CadastroEstu
 import Vagas from "./components/pages/Vagas";
 import { EMPRESA, ESTUDANTE } from "./constants";
 import { store } from "./redux/store";
-import DadosBasicos from "@/components/pages/estudante/PerfilEstudante/dados-basicos";
 
 render(
 	<Provider store={store}>
@@ -63,6 +62,7 @@ render(
 								</PrivateRoute>
 							}
 						/>
+						<Route path="/empresa/perfil/:id" element={<PerfilEmpresa isVisualizacao={true} />} />
 						<Route path="*" element={<NotFound />} />
 					</Routes>
 					<Footer />

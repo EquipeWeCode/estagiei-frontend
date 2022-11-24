@@ -6,17 +6,25 @@ import { ProfileOutlined, UserOutlined } from "@ant-design/icons";
 import { Menu, MenuProps } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import DadosBasicos from "./dados-basicos";
 import MinhasVagas from "./minhas-vagas";
 
 export interface PerfilEmpresaProps {
 	user: UserType;
+	isVisualizacao?: boolean;
+	codEmpresa?: string | number;
 }
 
-const PerfilEmpresa = () => {
+type PerfilmenuProps = {
+	isVisualizacao?: boolean;
+};
+
+const PerfilEmpresa = ({ isVisualizacao }: PerfilmenuProps) => {
 	const { user } = useAuth();
 	const { t } = useTranslation();
+
+	let { id } = useParams();
 
 	const [searchParams, setSearchParams] = useSearchParams();
 
@@ -46,10 +54,11 @@ const PerfilEmpresa = () => {
 		} as MenuItem;
 	};
 
-	const items: MenuItem[] = [
-		getItem(t("personal_information"), "dados_basicos", <UserOutlined />),
-		getItem(t("my_jobs"), "my_jobs", <ProfileOutlined />),
-	];
+	const items: MenuItem[] = [getItem(t("personal_information"), "dados_basicos", <UserOutlined />)];
+
+	if (!isVisualizacao) {
+		items.push(getItem(t("my_jobs"), "my_jobs", <ProfileOutlined />));
+	}
 
 	const setaPagina = (e: any) => {
 		setPaginaAtual(e.key);
@@ -58,11 +67,23 @@ const PerfilEmpresa = () => {
 	const getPaginaAtual = () => {
 		switch (paginaAtual) {
 			case "dados_basicos":
-				return <DadosBasicos user={user} />;
+				return (
+					<DadosBasicos
+						isVisualizacao={isVisualizacao}
+						codEmpresa={user?.codEmpresa || id}
+						user={user}
+					/>
+				);
 			case "my_jobs":
-				return <MinhasVagas user={user} />;
+				return !isVisualizacao && <MinhasVagas user={user} />;
 			default:
-				return <DadosBasicos user={user} />;
+				return (
+					<DadosBasicos
+						isVisualizacao={isVisualizacao}
+						user={user}
+						codEmpresa={user?.codEmpresa || id}
+					/>
+				);
 		}
 	};
 

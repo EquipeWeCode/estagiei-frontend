@@ -6,7 +6,7 @@ export const postEmpresa = async (body: CadastroEmpresaType = {}) => {
 	return await postResource(ENDPOINT_EMPRESA, body);
 };
 
-export const getEmpresa = async (id: string = "") => {
+export const getEmpresa = async (id: string | number | null  = "") => {
 	return await getResource(`${ENDPOINT_EMPRESA}/${id}`);
 };
 

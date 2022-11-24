@@ -1,4 +1,5 @@
 import Button from "@/components/common/Button";
+import ButtonVoltar from "@/components/common/ButtonVoltar";
 import { getEndereco } from "@/components/common/CardVagas/DescricaoVaga/DescricaoVaga";
 import DetailsItem from "@/components/common/DetailsItem";
 import ImageNotFound from "@/components/common/ImageNotFound";
@@ -63,6 +64,7 @@ const DadosBasicos = ({ codEstudante, isVisualizacao }: PerfilEstudanteProps) =>
 						</Col>
 					)
 				)}
+				{isVisualizacao && <ButtonVoltar />}
 			</Row>
 
 			{!isEdicao ? (
